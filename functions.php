@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'lava', 'linolee', 'compact_service');
+$conn = mysqli_connect('localhost', 'username', 'password', 'master_data');
 
 function query($query){
     global $conn;
