@@ -1,6 +1,6 @@
 body{
 	font-family: sans-serif;
-	background: #6ba588;
+	background: #d9dad9;
 }
 
 h1{
@@ -11,11 +11,12 @@ h1{
 .tulisan_login{
 	text-align: center;
 	text-transform: uppercase;
+	color: #d9dad9;
 }
 
 .kotak_login{
 	width: 350px;
-	background: white;
+	background: rgb(66, 64, 64);
 	margin: 100px auto;
 	padding: 30px 20px;
 	border-radius: 5px;
@@ -23,6 +24,7 @@ h1{
 
 label{
 	font-size: 11pt;
+	color: #d9dad9;
 }
 
 .form_login{
@@ -31,16 +33,22 @@ label{
 	padding: 10px;
 	font-size: 11pt;
 	margin-bottom: 20px;
+	background-color: rgb(54, 54, 54);
+	color: #d9dad9;
 }
 
 .tombol_login{
-	background: #363f36;
+	background: #3161a0;
 	color: white;
 	font-size: 11pt;
 	width: 100%;
 	border: none;
 	border-radius: 3px;
 	padding: 10px 20px;
+}
+
+.tombol_login:hover{
+	background: #1c375c;
 }
 
 .link{

@@ -16,16 +16,22 @@ require "../functions.php";
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../layout/plugins/fontawesome-free/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../sweetalert2/dist/sweetalert2.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../layout/plugins/toastr/toastr.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="../layout/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../layout/dist/css/adminlte.min.css">
     <!-- icon tab -->
     <link rel="shortcut icon" href="../layout/dist/img/pdam-logo.png">
+    
 
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+<script src="../sweetalert2/dist/sweetalert2.min.js"></script>
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar right-->
@@ -33,7 +39,7 @@ require "../functions.php";
             <!-- Left navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="login/logout.php" class="nav-link"><i class="bi bi-box-arrow-right mr-1"></i>Logout</a>
+                    <a href="../login/logout.php" class="nav-link"><i class="bi bi-box-arrow-right mr-1"></i>Logout</a>
                 </li>
             </ul>
         </nav>
@@ -43,8 +49,8 @@ require "../functions.php";
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="../layout/dist/img/pdam-logo.png" alt="PDAM Balangan Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="../layout/dist/img/pdam-logo.png" alt="PDAM Balangan Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light text-secondary"><b>PELAYANAN</b></span>
             </a>
 
@@ -68,7 +74,7 @@ require "../functions.php";
                         <li class="nav-header mt-2">MENU PELAYANAN</li>
                             <!-- pendaftaran -->
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="../pendaftaran/index.php" class="nav-link">
                                     <i class="nav-icon fas fa-marker"></i>
                                     <p>
                                         Pendaftaran
@@ -105,9 +111,9 @@ require "../functions.php";
                             <!-- pemasangan -->
                             <li class="nav-item mt-2">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-wrench"></i>
+                                <i class="nav-icon fas fa-wrench"></i>
                                     <p>
-                                        Pemasangan
+                                        Pemasangan   
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -139,29 +145,29 @@ require "../functions.php";
                                 </ul>
                             </li>
                             <!-- buka tutup -->
-                            <li class="nav-item menu-open mt-2">
-                                <a href="#" class="nav-link active">
-                                    <h4>
-                                        <i class="nav-icon fas fa-toggle-on"></i>
-                                        Buka & Tutup   
-                                    </h4>
-                                    <i class="right fas fa-angle-left"></i>
+                            <li class="nav-item mt-2">
+                                <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-toggle-on"></i>
+                                    <p>
+                                        Buka & Tutup
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="index.php" class="nav-link">
+                                        <a href="../bukatutup/index.php" class="nav-link">
                                             <i class="bi bi-menu-app ml-4 mr-2"></i>
-                                            <p>Input & Cek Data</p>
+                                            <p>Input & Cek Status</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="surat.php?cari=" class="nav-link active">
+                                        <a href="../bukatutup/surat.php?cari=#" class="nav-link">
                                             <i class="bi bi-printer ml-4 mr-2"></i>
                                             <p>Cetak Surat</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="report/report-bukatutup.php" class="nav-link" target="_blank">
+                                        <a href="../bukatutup/report/report-bukatutup.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
                                         </a>
@@ -199,29 +205,29 @@ require "../functions.php";
                                 </ul>
                             </li>
                             <!-- keluhan pelanggan -->
-                            <li class="nav-item mt-2 mb-5">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-exclamation-circle"></i>
-                                    <p>
+                            <li class="nav-item menu-open mt-2 mb-5">
+                                <a href="#" class="nav-link active">
+                                    <p class="d-inline-block" style="font-size:17px;">
+                                        <i class="nav-icon fas fa-exclamation-circle"></i>
                                         Keluhan Pelanggan
-                                        <i class="right fas fa-angle-left"></i>
                                     </p>
+                                    <i class="right fas fa-angle-left"></i>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="../keluhan/index.php" class="nav-link">
+                                        <a href="index.php" class="nav-link active">
                                             <i class="bi bi-menu-app ml-4 mr-2"></i>
                                             <p>Input Keluhan</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                        <a href="cari.php?cari=" class="nav-link">
                                             <i class="bi bi-search ml-4 mr-2"></i>
                                             <p>Cari Data</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
+                                        <a href="report/report-baliknama.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
                                         </a>
@@ -242,12 +248,12 @@ require "../functions.php";
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
-                            <h1 class="d-inline mr-4">Cetak Surat</h1>
+                            <h1>Input Data Keluhan</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Buka & Tutup</li>
-                                <li class="breadcrumb-item">Cetak Surat</li>
+                                <li class="breadcrumb-item active">Keluhan</li>
+                                <li class="breadcrumb-item">Input Keluhan</li>
                             </ol>
                         </div>
                     </div>
@@ -256,104 +262,130 @@ require "../functions.php";
 
             <!-- Main content -->
             <section class="content">
-
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <!-- Default box -->
                             <div class="card">
-                                <div class="card-body ml-2 mt-3">
-                                    <!-- di sini pencarian pendaftaran -->
-                                    <form method="get" action="surat.php">
-                                        <div class="form-group col-12">
-                                          <div class="form-inline mt-2">
-                                            <div class="input-group">
-                                                <input class="form-control" type="text" name="cari" placeholder="cari nomor ds">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary btn-sidebar" type="submit" value="cari">
-                                                        <i class="fas fa-search fa-fw"></i>
-                                                    </button>
-                                                </div>
+                                <div class="card-body ml-5 mt-2">
+                                    <!-- di sini form buka tutup -->
+                                    <form action="" method="post">
+                                        <div class="form-group row mt-2">
+                                            <label for="no_ds" class="col-sm-2 col-form-label">Nomor DS</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" onkeyup="autofill()">
                                             </div>
                                         </div>
-                                    </form>  
+                                        <div class="form-group row">
+                                            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_hp" name="no_hp" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="tgl_keluhan" class="col-sm-2 col-form-label">Tanggal Keluhan</label>
+                                            <div class="col-sm-4">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_keluhan" name="tgl_keluhan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="keluhan" class="col-sm-2 col-form-label">Keluhan</label>
+                                            <div class="col-sm-4">
+                                                <textarea class="form-control form-control-sm border-secondary" id="keluhan" name="keluhan" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer col-6 text-right">
+                                            <button type="submit" name="submit" class="btn btn-dark float-right ml-3">SIMPAN</button>
+                                        </div>
+                                    </form>
+
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                                    <script type="text/javascript">
+                                        function autofill(){
+                                            var no_ds = $("#no_ds").val();
+                                            $.ajax({
+                                                url: 'getData.php',
+                                                data:"no_ds="+no_ds ,
+                                            }).success(function (data) {
+                                                var json = data,
+                                                obj = JSON.parse(json);
+                                                $('#nama').val(obj.nama);
+                                                $('#alamat').val(obj.alamat);
+                                                $('#no_hp').val(obj.no_hp);
+                                            });
+                                        }
+                                    </script>
+
                                     <?php 
-                                    if(isset($_GET['cari'])){
-                                        $cari = $_GET['cari'];
-                                        echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
-                                    }
+                                    if(isset($_POST["submit"])){
+                                        $ds = $_POST["no_ds"];
+                                        $nama = $_POST["nama"];
+                                        $alamat = $_POST["alamat"];
+                                        $hp = $_POST["no_hp"];
+                                        $tgl = $_POST["tgl_keluhan"];
+                                        $keluhan = $_POST["keluhan"];   
+                                
+                                        $query = "INSERT INTO keluhan
+                                                    VALUES
+                                                    ('$ds', '$nama', '$alamat', '$hp', '$tgl', '$keluhan')";
+                                
+                                        $mysqlKeluhan = mysqli_query($conn, $query);
+
+                                        if($mysqlKeluhan == true){
+                                            echo "<script>
+                                            Swal.fire({
+                                                position: 'center',
+                                                icon: 'success',
+                                                title: 'Input Keluhan Berhasil!',
+                                                showConfirmButton: true
+                                            })
+                                            </script>";
+                                        }else{
+                                            echo "<script>
+                                            Swal.fire({
+                                                position: 'center',
+                                                icon: 'error',
+                                                title: 'Input Keluhan Gagal!',
+                                                showConfirmButton: true
+                                            })
+                                            </script>";
+                                        }
+                                     }
                                     ?>
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-hover table-bordered mt-3">
-                                            <thead class="text-center">
-                                                <tr>
-                                                    <th scope="row">Actions</th>
-                                                    <th scope="col">Nomor Sambungan</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Alamat</th>
-                                                    <th scope="col">Nomor HP</th>
-                                                </tr>
-                                            </thead>
-                                            
-                                            <?php 
-
-                                            if(isset($_GET['cari'])){
-                                                $cari = $_GET['cari'];
-                                                $sql = "SELECT * FROM pelanggan WHERE no_ds LIKE '%".$cari."%'";
-                                                $result = $conn->query($sql);	
-                                                // $data = $result->fetch_all();
-
-                                                // print_r($data);
-                                            }
-                                            
-                                            while($data = $result->fetch_assoc()){
-                                                $no = $data['no_ds'];
-                                            ?>
-                                            <tbody>
-                                                <tr>
-                                                    <td align="center">
-                                                        <?php 
-                                                        if($data['status_ket'] == "TERBUKA"){
-                                                            echo "<a href='report/surat-pembukaan.php?no_ds=$no' target='_blank'>Surat Perintah</a>";
-                                                        }elseif($data['status_ket'] == "TERTUTUP"){
-                                                            echo "<a href='report/surat-penutupan.php?no_ds=$no' target='_blank'>Surat Perintah</a>";
-                                                        }else{
-                                                            echo "";
-                                                        }
-                                                        ?>
-                                                        <!-- <a href="report/surat-terpasang.php?no_ds=" target="_blank">Surat Pernyataan Terpasang</a> -->
-                                                    </td>
-                                                    <td><?php echo $data['no_ds']; ?></td>
-                                                    <td><?php echo $data['status_ket']; ?></td>
-                                                    <td><?php echo $data['nama']; ?></td>
-                                                    <td><?php echo $data['alamat']; ?></td>
-                                                    <td><?php echo $data['no_hp']; ?></td>
-                                                </tr>
-                                            </tbody>
-                                            <?php } ?>
-                                            
-                                        </table>
-                                    </div>
-                                    
-                                </div>  
+                                </div>
                             </div>
-                            <!-- /.card -->
                         </div>
+                        <!-- /.card -->
                     </div>
                 </div>
             </section>
             <!-- end of content -->
         </div>
-        <!-- end of content-wrapper -->
-
     </div>
-    <!-- end of main wrapper -->
+    <!-- end of content-wrapper -->
 
-    <!-- jQuery -->
-    <script src="../layout/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery .. jquery bawaan adminlte dicomment karena bentrok dengan ajax untuk fungsi autofill -->
+    <!-- <script src="../layout/plugins/jquery/jquery.min.js"></script> -->
     <!-- Bootstrap 4 -->
     <script src="../layout/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../layout/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../layout/plugins/toastr/toastr.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="../layout/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../layout/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->

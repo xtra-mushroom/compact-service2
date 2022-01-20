@@ -47,7 +47,7 @@ $html .= "<table>
     <tr>
         <td>Uang Sejumlah</td>
         <td class='ddots'>:</td>
-        <td><div style='background-color:grey; text-align:center;'><b>DUA PULU RIBU</b></div></td>
+        <td><div style='background-color:grey; text-align:center;'><b>DUA PULU RIBU RUPIAH</b></div></td>
     </tr>
     <tr>
         <td>Pembayaran</td>

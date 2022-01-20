@@ -4,7 +4,7 @@ require "../../dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-$query = mysqli_query($conn,"SELECT * FROM pendaftaran");
+$query = mysqli_query($conn,"SELECT * FROM keluhan");
 // $dompdf->set_base_path("../layout/dist/css/style.css");
 // $html = file_get_contents("konten-pdfnya.html");
 $html = "<html><head><style>

@@ -101,18 +101,23 @@ $html .= "<table>
     </tbody>
 </table>";
 
-$html .= "<p>Dengan Surat Pernyataan ini saya buat dengan penuh kesadaran dan rasa tanggung jawab yang dalam agar dapat dipergunakan sebagaimana mestinya.</p>";
+$html .= "<p>Dengan Surat Pernyataan ini saya buat dengan penuh kesadaran dan rasa tanggung jawab yang dalam agar dapat dipergunakan sebagaimana mestinya.</p><br>";
 
 $html .= "<table style='padding:0px 30px;'>
 <tbody>
     <tr>
+        <td></td>
+        <td><div style='color:rgb(0,0,0,0.0);'>_______________________________________</div></td>
+        <td valign='top' align='center'> Paringin, " . tgl_indo(date('Y-m-d')) . "</td>
+    </tr>
+    <tr>
         <td valign='top' align='center'>Mengetahui,<br/>Plt. Direktur,<br/><br/><br/><br/><br/></td>
-        <td><div style='color:rgb(0,0,0,0.0);'>__________________________________________</div></td>
+        <td><div style='color:rgb(0,0,0,0.0);'>_______________________________________</div></td>
         <td valign='bottom' align='center'>Pembuat Pernyataan<br/><br/><br/><br/><br/></td>
     </tr>
     <tr>
         <td valign='top' align='center'><b><u>MURJANI</u></b><br/>NIK. 63 08 044</td>
-        <td><div style='color:rgb(0,0,0,0.0);'>__________________________________________</div></td>
+        <td><div style='color:rgb(0,0,0,0.0);'>_______________________________________</div></td>
         <td valign='top' align='center' style='text-decoration:underline; font-weight:bold;'>" . $data['nama'] . "</td>
     </tr>
 </tbody>

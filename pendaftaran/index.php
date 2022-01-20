@@ -1,6 +1,5 @@
 <?php 
 require "../functions.php";
-$pendaftaran = query("SELECT * FROM pendaftaran");
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +28,8 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-<script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar right-->
@@ -195,13 +195,37 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="bi bi-printer ml-4 mr-2"></i>
-                                            <p>Cetak Surat</p>
+                                        <a href="#" class="nav-link" target="_blank">
+                                            <i class="bi bi-archive ml-4 mr-2"></i>
+                                            <p>Cetak Report</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- keluhan pelanggan -->
+                            <li class="nav-item mt-2 mb-5">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                                    <p>
+                                        Keluhan Pelanggan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../keluhan/index.php" class="nav-link">
+                                            <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                            <p>Input Keluhan</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link" target="_blank">
+                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                            <i class="bi bi-search ml-4 mr-2"></i>
+                                            <p>Cari Data</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
                                         </a>
@@ -254,7 +278,7 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                         <div class="form-group row">
                                             <label for="tgl_daftar" class="col-sm-2 col-form-label">Tanggal Pendaftaran</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_daftar" name="tgl_daftar">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_daftar" name="tgl_daftar">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -270,6 +294,17 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel"
+                                                    name="jenis_kel">
+                                                    <option class="text-secondary" selected>---</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Alamat</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat">
@@ -282,16 +317,11 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                                     name="kecamatan">
                                                     <option class="text-secondary" value="">---</option>
                                                     <?php
-                                                    // Load file koneksi.php
-                                                    require_once "../functions.php";
-                                                    
-                                                    // Buat query untuk menampilkan semua data siswa
                                                     $sql = "SELECT * FROM kecamatan";
                                                     $result = $conn->query($sql); 
                                                     // var_dump($result);
-                                                    // var_dump($result->fetch_assoc());
                                                     
-                                                    while($data = $result->fetch_assoc()){ // Ambil semua data dari hasil eksekusi $sql
+                                                    while($data = $result->fetch_assoc()){
                                                         echo "<option value='".$data['id']."'>".$data['nama']."</option>";
                                                     }
                                                     ?>
@@ -335,11 +365,12 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                     </form>
                                     <?php 
                                     if(isset($_POST["submit"])){
-                                        //nomor pendaftaran auto_increment
-                                        $no_ds = "";
+                                        // nomor pendaftaran auto_increment
+                                        $no_ds = ""; // nomor sambungan hanya akan digenerate saat pemasangan
                                         $tgl = $_POST['tgl_daftar'];
                                         $ktp = $_POST['no_ktp'];
                                         $nama = $_POST['nama'];
+                                        $jenisKel = $_POST['jenis_kel'];
                                         $alamat = $_POST['alamat'];
                                         $kec = $_POST['kecamatan'];
                                         $desa = $_POST['desa'];
@@ -348,7 +379,7 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                     
                                         $query = "INSERT INTO pendaftaran
                                                     VALUES
-                                                    (null, '$no_ds', '$tgl', '$ktp', '$nama', '$alamat', '$kec', '$desa', '$hp', '$wilayah');";
+                                                    (null, '$no_ds', '$tgl', '$ktp', '$nama', '$jenisKel', '$alamat', '$kec', '$desa', '$hp', '$wilayah');";
                                     
                                         $mysqlPendaftaran = mysqli_query($conn, $query);
                                         // var_dump(mysqli_error($conn));
@@ -390,7 +421,7 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
     </div>
     <!-- end of main wrapper -->
 
-    <script src="index.js"></script>
+    <script src="script.js"></script>
 
     <!-- jQuery -->
     <script src="../layout/plugins/jquery/jquery.min.js"></script>

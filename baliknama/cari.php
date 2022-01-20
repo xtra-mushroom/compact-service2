@@ -191,12 +191,6 @@ require "../functions.php";
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="surat.php?no_ds=" class="nav-link">
-                                            <i class="bi bi-printer ml-4 mr-2"></i>
-                                            <p>Cetak Surat</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a href="report/report-baliknama.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
@@ -204,6 +198,36 @@ require "../functions.php";
                                     </li>
                                 </ul>
                             </li>
+                            <!-- keluhan pelanggan -->
+                            <li class="nav-item mt-2 mb-5">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                                    <p>
+                                        Keluhan Pelanggan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../keluhan/index.php" class="nav-link">
+                                            <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                            <p>Input Keluhan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                            <i class="bi bi-search ml-4 mr-2"></i>
+                                            <p>Cari Data</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
+                                            <i class="bi bi-archive ml-4 mr-2"></i>
+                                            <p>Cetak Report</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li> 
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -275,7 +299,8 @@ require "../functions.php";
 
                                             if(isset($_GET['cari'])){
                                                 $cari = $_GET['cari'];
-                                                $sql = "SELECT * FROM baliknama where no_ds like '%".$cari."%'";
+                                                $wildcard = "%$cari%";
+                                                $sql = "SELECT * FROM baliknama where nama_asal like '$wildcard' OR nama_baru like '$wildcard'"; //'%".$cari."%'
                                                 $result = $conn->query($sql);	
                                             }
                                             

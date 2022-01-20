@@ -199,13 +199,37 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="bi bi-printer ml-4 mr-2"></i>
-                                            <p>Cetak Surat</p>
+                                        <a href="#" class="nav-link" target="_blank">
+                                            <i class="bi bi-archive ml-4 mr-2"></i>
+                                            <p>Cetak Report</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- keluhan pelanggan -->
+                            <li class="nav-item mt-2 mb-5">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                                    <p>
+                                        Keluhan Pelanggan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../keluhan/index.php" class="nav-link">
+                                            <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                            <p>Input Keluhan</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link" target="_blank">
+                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                            <i class="bi bi-search ml-4 mr-2"></i>
+                                            <p>Cari Data</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
                                         </a>
@@ -249,6 +273,13 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                 <div class="card-body ml-5 mt-3">
                                     <!-- di sini form pemasangan -->
                                     <form action="" method="post">
+                                        <div class="form-group row">
+                                            <label for="tgl_pasang" class="col-sm-2 col-form-label">Tanggal</label>
+                                            <div class="col-sm-4">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_pasang"
+                                                name="tgl_pasang">
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label for="no_ktp" class="col-sm-2 col-form-label">Nomor KTP</label>
                                             <div class="col-sm-4">
@@ -416,8 +447,8 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                     if(isset($_POST["submit"])){
                                         // var_dump($_POST);
                                         $ktp = $_POST["no_ktp"];
-                                        // $ds = $_POST["cabang"];
-                                        $tgl = "";
+                                        $tgl_pasang = $_POST['tgl_pasang']; // tanggal ketika pelanggan melakukan pembayaran biaya instalasi
+                                        $tgl_install = "0000-00-00"; // tanggal ketika instalasi pipa dilakukan oleh petugas lapangan
                                         $nama = $_POST["nama"];
                                         $jenisKel = $_POST["jenis_kel"];
                                         $tmpLahir = $_POST["tmpt_lahir"];
@@ -433,7 +464,7 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                         $gol = $_POST["gol_tarif"];
                                         $biaya = $_POST["biaya"];
                                         $status = "TERBUKA";
-                                        $id_tarif = "";
+                                        $id_tarif = $_POST['gol_tarif'];
 
                                         $sql = "SELECT * FROM pelanggan ORDER BY no_ds LIMIT 1;";
                                         $result = mysqli_query($conn, $sql);
@@ -445,13 +476,12 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                             $split_last_ds = substr($last_ds,2); // 1001
                                             $split_new_ds = $split_last_ds + 1;
 
-                                            for($i =1; $i < 4; $i++){
+                                            for($i=1; $i<4; $i++){
                                                 $nol = "0";
                                                 if(strlen($split_new_ds) == $i){
                                                     $split_new_ds = $nol . (string) $split_new_ds;
                                                 }
                                             }
-
                                             $generate_ds = $cabang . $split_new_ds;
                                         }else{
                                             $generate_ds = $cabang . "0001";
@@ -459,20 +489,21 @@ $pemasangan = query("SELECT * FROM pemasangan");
 
                                         $query = "INSERT INTO pemasangan
                                                     VALUES
-                                                    ('$ktp', '$generate_ds', '$tgl', '$nama', '$jenisKel', '$tmpLahir', '$tglLahir', '$statusRumah', '$jmlhJiwa', '$pln', '$alamat', '$kec', '$desa', '$hp', '$cabang', '$gol', '$biaya');";
+                                                    ('$generate_ds', '$ktp', '$tgl_pasang', '$tgl_install', '$nama', '$jenisKel', '$tmpLahir', '$tglLahir', '$statusRumah', '$jmlhJiwa', '$pln', '$alamat', '$kec', '$desa', '$hp', '$cabang', '$gol', '$biaya');";
                                         
-                                        //otomatis juga memasukkan data ke tabel pelanggan
+                                        // otomatis juga memasukkan data ke tabel pelanggan
                                         $query .= "INSERT INTO pelanggan
                                                     VALUES
-                                                    ('$generate_ds', '$status', '$id_tarif', '$nama', '$alamat', '$hp');";
+                                                    ('$generate_ds', '$status', '$id_tarif', '$nama', '$jenisKel', '$alamat', '$hp');";
 
-                                        //update nomor sambungan di tabel pendaftaran
+                                        // update nomor sambungan di tabel pendaftaran
                                         $query .= "UPDATE pendaftaran
                                                     SET
                                                     no_ds='$generate_ds' WHERE no_ktp='$ktp'";
 
                                         $mysqlPemasangan = mysqli_multi_query($conn, $query);
-                                        // var_dump($query);
+
+                                        var_dump($mysqlPemasangan);
 
                                         if($mysqlPemasangan == true){
                                             echo "<script>
@@ -514,8 +545,6 @@ $pemasangan = query("SELECT * FROM pemasangan");
     </div>
     <!-- end of main wrapper -->
     
-   
-
     <!-- jQuery -->
     <!-- <script src="../layout/plugins/jquery/jquery.min.js"></script> -->
     <!-- Bootstrap 4 -->
@@ -525,7 +554,7 @@ $pemasangan = query("SELECT * FROM pemasangan");
     <!-- Toastr -->
     <script src="../layout/plugins/toastr/toastr.min.js"></script>
     <!-- overlayScrollbars -->
-    <script src="../layout/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- <script src="../layout/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> -->
     <!-- AdminLTE App -->
     <script src="../layout/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->

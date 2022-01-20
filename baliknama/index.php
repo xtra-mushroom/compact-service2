@@ -197,12 +197,6 @@ require "../functions.php";
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="surat.php?no_ds=" class="nav-link">
-                                            <i class="bi bi-printer ml-4 mr-2"></i>
-                                            <p>Cetak Surat</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a href="report/report-baliknama.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
@@ -210,6 +204,36 @@ require "../functions.php";
                                     </li>
                                 </ul>
                             </li>
+                            <!-- keluhan pelanggan -->
+                            <li class="nav-item mt-2 mb-5">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                                    <p>
+                                        Keluhan Pelanggan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../keluhan/index.php" class="nav-link">
+                                            <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                            <p>Input Keluhan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                            <i class="bi bi-search ml-4 mr-2"></i>
+                                            <p>Cari Data</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
+                                            <i class="bi bi-archive ml-4 mr-2"></i>
+                                            <p>Cetak Report</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li> 
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -289,6 +313,17 @@ require "../functions.php";
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel"
+                                                    name="jenis_kel">
+                                                    <option class="text-secondary" selected>---</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="hp_baru" class="col-sm-2 col-form-label">Nomor HP Baru</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="hp_baru" name="hp_baru">
@@ -311,7 +346,7 @@ require "../functions.php";
                                             var no_ds = $("#no_ds").val();
                                             $.ajax({
                                                 url: 'getData.php',
-                                                data:"no_ds="+no_ds ,
+                                                data:"no_ds="+no_ds,
                                             }).success(function (data) {
                                                 var json = data,
                                                 obj = JSON.parse(json);
@@ -333,6 +368,7 @@ require "../functions.php";
                                         $nama = $_POST["nama_asal"];
                                         $nama_baru = $_POST["nama_baru"];
                                         $nik_baru = $_POST["nik_baru"];
+                                        $jenisKel = $_POST["jenis_kel"];
                                         $hp_baru = $_POST["hp_baru"];
                                         $tgl = $_POST["tanggal"];
                                 
@@ -342,7 +378,7 @@ require "../functions.php";
                                 
                                         $query .= "UPDATE pelanggan
                                                     SET
-                                                    nama='$nama_baru', no_hp='$hp_baru' WHERE no_ds='$ds';";
+                                                    nama='$nama_baru', jenis_kel='$jenisKel', no_hp='$hp_baru' WHERE no_ds='$ds';";
                                 
                                         $mysqlBaliknama = mysqli_multi_query($conn, $query);
 

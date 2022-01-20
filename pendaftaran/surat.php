@@ -27,12 +27,11 @@ require "../functions.php";
     <link rel="stylesheet" href="../layout/dist/css/adminlte.min.css">
     <!-- icon tab -->
     <link rel="shortcut icon" href="../layout/dist/img/pdam-logo.png">
-    <!-- sweet alert -->
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-<script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar right-->
@@ -186,25 +185,49 @@ require "../functions.php";
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="../baliknama/index.php" class="nav-link">
                                             <i class="bi bi-menu-app ml-4 mr-2"></i>
                                             <p>Input Data</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="../baliknama/cari.php?cari=" class="nav-link">
                                             <i class="bi bi-search ml-4 mr-2"></i>
                                             <p>Cari Data</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="bi bi-printer ml-4 mr-2"></i>
-                                            <p>Cetak Surat</p>
+                                        <a href="../baliknama/report/report-baliknama.php" class="nav-link" target="_blank">
+                                            <i class="bi bi-archive ml-4 mr-2"></i>
+                                            <p>Cetak Report</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- keluhan pelanggan -->
+                            <li class="nav-item mt-2 mb-5">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                                    <p>
+                                        Keluhan Pelanggan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../keluhan/index.php" class="nav-link">
+                                            <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                            <p>Input Keluhan</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link" target="_blank">
+                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                            <i class="bi bi-search ml-4 mr-2"></i>
+                                            <p>Cari Data</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
                                         </a>
@@ -286,8 +309,8 @@ require "../functions.php";
                                                 $sql = "SELECT * FROM pendaftaran WHERE nama LIKE '%".$cari."%' ORDER BY no_pend DESC";
                                                 $result = $conn->query($sql);	
                                                 // $data = $result->fetch_all();
+                                                // var_dump($data);
 
-                                                // print_r($data);
                                             }
                                             
                                             while($data = $result->fetch_assoc()){
@@ -298,11 +321,11 @@ require "../functions.php";
                                                     <td align="center">
                                                         <a href="report/kwitansi.php?no_pend=<?php echo $no; ?>" target="_blank">Cetak Kwitansi</a>
                                                     </td>
-                                                    <td><?php echo $data['no_pend']; ?></td>
+                                                    <td align="center"><?php echo $data['no_pend']; ?></td>
                                                     <td><?php echo $data['nama']; ?></td>
                                                     <td><?php echo $data['alamat']; ?></td>
                                                     <td><?php echo $data['no_hp']; ?></td>
-                                                    <td><?php echo $data['wil']; ?></td>
+                                                    <td align="center"><?php echo $data['wil']; ?></td>
                                                 </tr>
                                             </tbody>
                                             <?php } ?>
@@ -323,11 +346,6 @@ require "../functions.php";
 
     </div>
     <!-- end of main wrapper -->
-
-    <!-- sweet alert -->
-    <!-- <script>
-    swal('Good job!', 'You clicked the button!', 'success');
-    </script> -->
 
     <!-- jQuery -->
     <script src="../layout/plugins/jquery/jquery.min.js"></script>

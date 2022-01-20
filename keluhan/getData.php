@@ -5,7 +5,7 @@ require "../functions.php";
 $no_ds = $_GET['no_ds'];
 
 //mengambil data dari tabel palanggan, tabel pelanggan mengambil data saat input data pemasangan
-$query = mysqli_query($conn, "SELECT * FROM pendaftaran where no_ds='$no_ds'");
+$query = mysqli_query($conn, "SELECT * FROM pelanggan where no_ds='$no_ds'");
 $data = mysqli_fetch_assoc($query);
 
 echo json_encode($data);

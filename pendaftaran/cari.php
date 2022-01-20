@@ -182,25 +182,49 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="../baliknama/index.php" class="nav-link">
                                             <i class="bi bi-menu-app ml-4 mr-2"></i>
                                             <p>Input Data</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="../baliknama/cari.php?cari=" class="nav-link">
                                             <i class="bi bi-search ml-4 mr-2"></i>
                                             <p>Cari Data</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="bi bi-printer ml-4 mr-2"></i>
-                                            <p>Cetak Surat</p>
+                                        <a href="#" class="nav-link" target="_blank">
+                                            <i class="bi bi-archive ml-4 mr-2"></i>
+                                            <p>Cetak Report</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- keluhan pelanggan -->
+                            <li class="nav-item mt-2 mb-5">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                                    <p>
+                                        Keluhan Pelanggan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../keluhan/index.php" class="nav-link">
+                                            <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                            <p>Input Keluhan</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link" target="_blank">
+                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                            <i class="bi bi-search ml-4 mr-2"></i>
+                                            <p>Cari Data</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
                                         </a>
@@ -274,6 +298,7 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                                             echo "<th>Tanggal Daftar</th>";
                                                             echo "<th>Nomor KTP</th>";
                                                             echo "<th>Nama</th>";
+                                                            echo "<th>Jenis Kelamin</th>";
                                                             echo "<th>Alamat</th>";
                                                             echo "<th>Kecamatan</th>";
                                                             echo "<th>Desa</th>";
@@ -289,6 +314,8 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                                 $result = $conn->query($sql);	
                                                     
                                             }
+
+                                            
                                                 
                                             while($data = $result->fetch_assoc()){
                                                 $no = $data['no_pend'];
@@ -301,10 +328,30 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
                                                 echo "<td align='center'>".$data['tgl_daftar']."</td>";
                                                 echo "<td>".$data['no_ktp']."</td>";
                                                 echo "<td>".$data['nama']."</td>";
+                                                echo "<td>".$data['jenis_kel']."</td>";
                                                 echo "<td>".$data['alamat']."</td>";
-                                                echo "<td>".$data['kecamatan']."</td>";
-                                                echo "<td>".$data['desa']."</td>";
-                                                echo "<td>".$data['no_hp']."</td>";
+                                                
+                                                // agar yang tampil adalah nama kecamatannya
+                                                $valueKec = $data['kecamatan'];
+                                                $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
+                                                $resultKec = $conn->query($queryKec);
+                                                $dataKec = $resultKec->fetch_assoc();
+                                                if($data['kecamatan'] == $dataKec['id']){
+                                                    $namaKec = $dataKec['nama'];
+                                                    echo "<td align='center'>".$namaKec."</td>";
+                                                }
+
+                                                // agar yang tampil adalah nama desanya
+                                                $valueDesa = $data['desa'];
+                                                $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
+                                                $resultDesa = $conn->query($queryDesa);
+                                                $dataDesa = $resultDesa->fetch_assoc();
+                                                if($data['desa'] == $dataDesa['id']){
+                                                    $namaDesa = $dataDesa['nama'];
+                                                    echo "<td align='center'>".$namaDesa."</td>";
+                                                }
+                                                
+                                                echo "<td align='center'>".$data['no_hp']."</td>";
                                                 echo "<td align='center'>".$data['wil']."</td>";
                                                 echo "</tr>";
 
@@ -327,11 +374,6 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
 
     </div>
     <!-- end of main wrapper -->
-
-    <!-- sweet alert -->
-    <!-- <script>
-    swal('Good job!', 'You clicked the button!', 'success');
-    </script> -->
 
     <!-- jQuery -->
     <script src="../layout/plugins/jquery/jquery.min.js"></script>

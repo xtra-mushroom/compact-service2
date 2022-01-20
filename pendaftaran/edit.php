@@ -27,11 +27,11 @@ $pendaftaran = $conn->query($sql)->fetch_assoc();
     <link rel="stylesheet" href="../layout/dist/css/adminlte.min.css">
     <!-- icon tab -->
     <link rel="shortcut icon" href="../layout/dist/img/pdam-logo.png">
-    <!-- sweet alert -->
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar right-->
@@ -197,19 +197,44 @@ $pendaftaran = $conn->query($sql)->fetch_assoc();
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="bi bi-printer ml-4 mr-2"></i>
-                                            <p>Cetak Surat</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a href="#" class="nav-link" target="_blank">
                                             <i class="bi bi-archive ml-4 mr-2"></i>
                                             <p>Cetak Report</p>
                                         </a>
                                     </li>
                                 </ul>
-                            </li> 
+                            </li>
+                            <!-- keluhan pelanggan -->
+                            <li class="nav-item mt-2 mb-5">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                                    <p>
+                                        Keluhan Pelanggan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../keluhan/index.php" class="nav-link">
+                                            <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                            <p>Input Keluhan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/cari.php?cari=" class="nav-link">
+                                            <i class="bi bi-search ml-4 mr-2"></i>
+                                            <p>Cari Data</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../keluhan/report/report-baliknama.php" class="nav-link" target="_blank">
+                                            <i class="bi bi-archive ml-4 mr-2"></i>
+                                            <p>Cetak Report</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                             
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -265,7 +290,7 @@ $pendaftaran = $conn->query($sql)->fetch_assoc();
                                         <div class="form-group row">
                                             <label for="tgl_daftar" class="col-sm-2 col-form-label">Tanggal Pendaftaran</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_daftar" name="tgl_daftar" value="<?php echo $data['tgl_daftar']; ?>">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_daftar" name="tgl_daftar" value="<?php echo $data['tgl_daftar']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -401,12 +426,7 @@ $pendaftaran = $conn->query($sql)->fetch_assoc();
     </div>
     <!-- end of main wrapper -->
 
-    <!-- sweet alert -->
-    <!-- <script>
-    swal('Good job!', 'You clicked the button!', 'success');
-    </script> -->
-
-    <script src="index.js"></script>
+    <script src="script.js"></script>
 
     <!-- jQuery -->
     <script src="../layout/plugins/jquery/jquery.min.js"></script>

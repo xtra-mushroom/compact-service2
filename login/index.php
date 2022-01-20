@@ -61,10 +61,10 @@ if(isset($_POST['login'])){
 
 		<form id="loginform" method="post" role="form">
 			<label for="username">Username</label>
-            <input id="login-username" type="text" class="form-control form-control-lg form_login border-primary" name="username" value="<?php echo $username ?>" placeholder="Username atau Email">
+            <input id="login-username" type="text" class="form-control form-control-dark form-control-lg form_login border-primary" name="username" value="<?php echo $username ?>" placeholder="Username atau Email">
 
 			<label for="password">Password</label>
-            <input id="login-password" type="password" class="form-control form-control-lg form_login border-primary" name="password" placeholder="Password">
+            <input id="login-password" type="password" class="form-control form-control-dark form-control-lg form_login border-primary" name="password" placeholder="Password">
 
 			<input type="submit" name="login" class="tombol_login mb-3" value="Login">
 

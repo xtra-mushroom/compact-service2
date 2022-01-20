@@ -78,16 +78,21 @@ $html .= "<table>
 
 $html .= "<p>Dengan Surat Pernyataan ini saya buat dengan penuh kesadaran dan rasa tanggung jawab yang dalam agar dapat dipergunakan sebagaimana mestinya.</p><br/>";
 
-$html .= "<table style='padding:20px;'>
+$html .= "<table style='padding:0px 20px;'>
 <tbody>
     <tr>
-        <td valign='top' align='center'>PETUGAS<br/><br/><br/><br/><br/></td>
-        <td><div style='color:rgb(0,0,0,0.0);'>_____________________________________</div></td>
-        <td valign='top' align='center'>Pembuat Pernyataan<br/><br/><br/><br/><br/></td>
+        <td></td>
+        <td><div style='color:rgb(0,0,0,0.0);'>_________________________</div></td>
+        <td valign='top' align='center'> Paringin, " . tgl_indo(date('Y-m-d')) . "</td>
+    </tr>
+    <tr>
+        <td valign='top' align='center' style='padding-top: 15px;'>PETUGAS<br/><br/><br/><br/><br/><br/></td>
+        <td><div style='color:rgb(0,0,0,0.0);'>_________________________</div></td>
+        <td valign='top' align='center' style='padding-top: 15px;'>Pembuat Pernyataan<br/><br/><br/><br/><br/><br/></td>
     </tr>
     <tr>
         <td valign='top'><b>______________________</b></td>
-        <td><div style='color:rgb(0,0,0,0.0);'>_____________________________________</div></td>
+        <td><div style='color:rgb(0,0,0,0.0);'>_________________________</div></td>
         <td valign='top' align='center' style='text-decoration:underline; font-weight:bold;'>" . $data['nama'] . "</td>
     </tr>
 </tbody>

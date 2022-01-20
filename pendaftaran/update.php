@@ -1,7 +1,6 @@
 <?php 
 require "../functions.php";
 $pendaftaran = query("SELECT * FROM pendaftaran");
-    // var_dump($_POST);
     $no = $_POST['no_pend'];
     $tgl = $_POST['tgl_daftar'];
     $ktp = $_POST['no_ktp'];
@@ -20,8 +19,11 @@ $pendaftaran = query("SELECT * FROM pendaftaran");
     if(!$mysqlUpdate){
         alertWindow("Gagal mengubah data!");   
     }else{
+        // session_start();
+        // $_SESSION["show_alert"] = alertWindow('Data Berhasil Diubah!');
+        // echo $_SESSION["show_alert"];
+        echo "<script> alert('berhasil') </script>";
         header("location:cari.php?cari=$nama");   
     };
-
-
+    
 ?>
