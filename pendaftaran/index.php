@@ -343,19 +343,19 @@ require "../functions.php";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="wil" class="col-sm-2 col-form-label">Wilayah</label>
+                                            <label for="wil" class="col-sm-2 col-form-label">Wilayah / Cabang</label>
                                             <div class="col-sm-4">
                                                 <select class="form-control form-control-sm border-secondary" id="wil" name="wil">
                                                     <option class="text-secondary" value="">---</option>
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                    <option value="03">03</option>
-                                                    <option value="04">04</option>
-                                                    <option value="05">05</option>
-                                                    <option value="06">06</option>
-                                                    <option value="07">07</option>
-                                                    <option value="08">08</option>
-                                                    <option value="09">09</option>
+                                                    <option value="Paringin 1">01 Paringin 1</option>
+                                                    <option value="Paringin 2">02 Paringin 2</option>
+                                                    <option value="Awayan">03 Awayan</option>
+                                                    <option value="Lampihong">04 Lampihong</option>
+                                                    <option value="Halong">05 Halong</option>
+                                                    <option value="Juai">06 Juai</option>
+                                                    <option value="Batumandi">07 Batumandi</option>
+                                                    <option value="Paringin Selatan">08 Paringin Selatan</option>
+                                                    <option value="Tebing Tinggi">09 Tebing Tinggi</option>
                                                 </select>
                                             </div>
                                         </div>

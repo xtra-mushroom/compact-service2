@@ -1,10 +1,19 @@
 <?php
-require "../../functions.php";
-require "../../dompdf/autoload.inc.php";
+require ("../../functions.php");
+require ("../../dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-$query = mysqli_query($conn,"SELECT * FROM pendaftaran");
+$query = mysqli_query($conn,"SELECT wil, COUNT(*) as jumlah_pendaftaran from pendaftaran GROUP BY wil");
+
+foreach($rows as $row) {
+    $item_array = array(
+        'wil'   =>  $row['wil'], 
+        'jumlah_pendaftaran'         =>  $row['jumlah_pendaftaran'],
+        'color'         =>  '#'.rand(100000, 999999).''
+    );
+    array_push($rows,$item_array);
+}
 // $dompdf->set_base_path("../layout/dist/css/style.css");
 // $html = file_get_contents("konten-pdfnya.html");
 $html = "<html><head><style>
@@ -20,30 +29,18 @@ img { object-fit:cover; }
 
 $html .= "<body><img src='../../layout/dist/img/kop-surat.png' width='1025px' style='margin-bottom:5px;'><hr/>";
 
-$html .= "<body><h3>Laporan Data Permohonan Langganan Baru</h3>";
+$html .= "<body><h3>Laporan Jumlah Data Pendaftaran </h3>";
 $html .= '<table border="1" width="100%">
  <tr>
- <th>No Pendaftaran</th>
- <th>Tanggal Daftar</th>
- <th>Nomor KTP</th>
- <th>Nama</th>
- <th>Jenis Kelamin</th>
- <th>Alamat</th>
- <th>Nomor HP</th>
  <th>Wilayah</th>
+ <th>Jumlah Pendaftaran Percabang Wilayah</th>
  </tr>';
 $no = 1;
 while($row = mysqli_fetch_array($query))
 {
  $html .= "<tr>
- <td style='text-align:center;'>".$no++."</td>
- <td>".$row['tgl_daftar']."</td>
- <td>".$row['no_ktp']."</td>
- <td>".$row['nama']."</td>
- <td>".$row['jenis_kel']."</td>
- <td>".$row['alamat']."</td>
- <td>".$row['no_hp']."</td>
- <td align='center'>".$row['wil']."</td>
+ <td style='text-align:center;'>".$row['wil']."</td>
+ <td>".$row['jumlah_pendaftaran']."</td>
  </tr>";
 }
 

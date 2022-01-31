@@ -415,7 +415,7 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                         <div class="form-group row">
                                             <label for="biaya" class="col-sm-2 col-form-label">Biaya</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="biaya"
+                                                <input type="number" class="form-control form-control-sm border-secondary" id="biaya"
                                                 name="biaya">
                                             </div>
                                         </div>
@@ -447,7 +447,7 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                     if(isset($_POST["submit"])){
                                         // var_dump($_POST);
                                         $ktp = $_POST["no_ktp"];
-                                        $tgl_pasang = $_POST['tgl_pasang']; // tanggal ketika pelanggan melakukan pembayaran biaya instalasi
+                                        $tgl_pasang = $_POST["tgl_pasang"]; // tanggal ketika pelanggan melakukan pembayaran biaya instalasi
                                         $tgl_install = "0000-00-00"; // tanggal ketika instalasi pipa dilakukan oleh petugas lapangan
                                         $nama = $_POST["nama"];
                                         $jenisKel = $_POST["jenis_kel"];
@@ -464,7 +464,7 @@ $pemasangan = query("SELECT * FROM pemasangan");
                                         $gol = $_POST["gol_tarif"];
                                         $biaya = $_POST["biaya"];
                                         $status = "TERBUKA";
-                                        $id_tarif = $_POST['gol_tarif'];
+                                        $id_tarif = $_POST["gol_tarif"];
 
                                         $sql = "SELECT * FROM pelanggan ORDER BY no_ds LIMIT 1;";
                                         $result = mysqli_query($conn, $sql);
@@ -489,7 +489,7 @@ $pemasangan = query("SELECT * FROM pemasangan");
 
                                         $query = "INSERT INTO pemasangan
                                                     VALUES
-                                                    ('$generate_ds', '$ktp', '$tgl_pasang', '$tgl_install', '$nama', '$jenisKel', '$tmpLahir', '$tglLahir', '$statusRumah', '$jmlhJiwa', '$pln', '$alamat', '$kec', '$desa', '$hp', '$cabang', '$gol', '$biaya');";
+                                                    ('$generate_ds', '$ktp', '$tgl_pasang', '$tgl_install', '$nama', '$jenisKel', '$tmpLahir', '$tglLahir', '$statusRumah', '$jmlhJiwa', '$pln', '$alamat', '$kec', '$desa', '$hp', '$cabang', '$gol', $biaya);";
                                         
                                         // otomatis juga memasukkan data ke tabel pelanggan
                                         $query .= "INSERT INTO pelanggan

@@ -170,7 +170,7 @@ CREATE TABLE `pelanggan` (
 
 LOCK TABLES `pelanggan` WRITE;
 /*!40000 ALTER TABLE `pelanggan` DISABLE KEYS */;
-INSERT INTO `pelanggan` VALUES ('080001','TERTUTUP','R2','Suhendar','Laki-Laki','Batu Piring RT.2','087796963213');
+INSERT INTO `pelanggan` VALUES ('080001','TERBUKA','R2','Ayu Kumala Sari Rahayu','Perempuan','Batu Piring RT.2','08218948213'),('070002','TERBUKA','R2','Lily Syifa','Perempuan','Jalan Pemangkasan','08218948444'),('080003','TERBUKA','R2','Anisa','Perempuan','Gampa RT.12','08218948213');
 /*!40000 ALTER TABLE `pelanggan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +199,7 @@ CREATE TABLE `pemasangan` (
   `no_hp` varchar(20) NOT NULL,
   `cabang` varchar(50) NOT NULL,
   `gol_tarif` varchar(10) NOT NULL,
-  `biaya` varchar(50) NOT NULL
+  `biaya` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,7 +209,7 @@ CREATE TABLE `pemasangan` (
 
 LOCK TABLES `pemasangan` WRITE;
 /*!40000 ALTER TABLE `pemasangan` DISABLE KEYS */;
-INSERT INTO `pemasangan` VALUES ('080001','160239823959','2022-01-20','0000-00-00','Ayu Kumala Sari Rahayu','Perempuan','Amuntai','20/07/1886','Milik keluarga','4','01019','Batu Piring RT.2','2','130','08218948213','08','R2','1.400.000');
+INSERT INTO `pemasangan` VALUES ('080001','160239823959','2022-01-31','0000-00-00','Ayu Kumala Sari Rahayu','Perempuan','Amuntai','20/07/1886','Milik keluarga','4','010183','Batu Piring RT.2','2','130','08218948213','08','R2',1400000),('070002','160239823958','2022-01-31','0000-00-00','Lily Syifa','Perempuan','Paringin','28/06/1997','Milik keluarga','5','010188','Jalan Pemangkasan','3','13','08218948444','07','R2',1500000),('080003','160239823922','2022-01-31','0000-00-00','Anisa','Perempuan','Paringin','20/07/1887','Sewa','4','010193','Gampa RT.12','2','130','08218948213','08','R2',1400000);
 /*!40000 ALTER TABLE `pemasangan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +259,7 @@ CREATE TABLE `pendaftaran` (
   `no_hp` varchar(15) NOT NULL,
   `wil` varchar(50) NOT NULL,
   PRIMARY KEY (`no_pend`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +268,7 @@ CREATE TABLE `pendaftaran` (
 
 LOCK TABLES `pendaftaran` WRITE;
 /*!40000 ALTER TABLE `pendaftaran` DISABLE KEYS */;
-INSERT INTO `pendaftaran` VALUES (10,'','2022-01-18','160239823958','Lily Syifa','Perempuan','Jalan Pemangkasan','3','13','08218948444','03'),(11,'080001','2022-01-19','160239823959','Ayu Kumala Sari Rahayu','Perempuan','Batu Piring RT.2','2','130','08218948213','02');
+INSERT INTO `pendaftaran` VALUES (10,'070002','2022-01-18','160239823958','Lily Syifa','Perempuan','Jalan Pemangkasan','3','13','08218948444','03'),(11,'080001','2022-01-19','160239823959','Ayu Kumala Sari Rahayu','Perempuan','Batu Piring RT.2','2','130','08218948213','02'),(12,'080003','2022-01-31','160239823922','Anisa','Perempuan','Gampa RT.12','2','130','08218948213','02'),(13,'','2022-01-31','160239826965','Amrullah','Laki-Laki','Rica Rt.10','1','125','08218948444','01'),(14,'','2022-01-31','160239823909','Suhendar Abidin','Laki-Laki','Komplek Selawi RT.05','1','125','082189482131','01'),(15,'','2022-01-31','1602398239099','Listiya Putri','Perempuan','Komplek Muhibin','4','34','08218948213','07'),(16,'','2022-01-31','160239823444','Kusnandar','Laki-Laki','Balida RT.09','1','114','08218948434','Paringin 2');
 /*!40000 ALTER TABLE `pendaftaran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-20 22:00:20
+-- Dump completed on 2022-01-31 22:35:36
