@@ -10,7 +10,7 @@ $activePasang = "active"; $activeInputPasang = "active";
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-<script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
         <!-- Navbar right-->
@@ -47,80 +47,78 @@ $activePasang = "active"; $activeInputPasang = "active";
                                     <!-- di sini form pemasangan -->
                                     <form action="" method="post">
                                         <div class="form-group row">
-                                            <label for="tgl_pasang" class="col-sm-2 col-form-label">Tanggal</label>
+                                            <label for="tgl_pasang" class="col-sm-3 col-form-label">Tanggal</label>
                                             <div class="col-sm-4">
                                                 <input type="date" class="form-control form-control-sm border-secondary" id="tgl_pasang"
                                                 name="tgl_pasang">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="no_ktp" class="col-sm-2 col-form-label">Nomor KTP</label>
+                                            <label for="no_pend" class="col-sm-3 col-form-label">Nomor Pendaftaran</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp"
-                                                name="no_ktp" onkeyup="autofill()">
+                                                <input type="number" class="form-control form-control-sm border-secondary" id="no_pend"
+                                                name="no_pend" onkeyup="autofill()">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                                            <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="nama"
                                                 name="nama" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                                            <label for="no_ktp" class="col-sm-3 col-form-label">Nomor KTP</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp"
+                                                name="no_ktp" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="alamat"
                                                 name="alamat" readonly>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="kecamatan" class="col-sm-2 col-form-label">Kecamatan</label>
-                                            <div class="col-sm-4">
+                                        <!-- <div class="form-group row">
+                                            <label for="kecamatan" class="col-sm-3 col-form-label">Kecamatan & Desa</label>
+                                            <div class="col-sm-2">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="kecamatan"
                                                 name="kecamatan" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="desa" class="col-sm-2 col-form-label">Desa</label>
-                                            <div class="col-sm-4">
+                                            </div> 
+                                            <div class="col-sm-2">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="desa"
                                                 name="desa" readonly>
                                             </div>
-                                        </div>
+                                        </div> -->
+                                        
                                         <div class="form-group row">
-                                            <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
+                                            <label for="no_hp" class="col-sm-3 col-form-label">Nomor HP</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="no_hp"
                                                 name="no_hp" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <label for="jenis_kel" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel"
-                                                    name="jenis_kel">
-                                                    <option class="text-secondary" selected>---</option>
-                                                    <option value="Laki-Laki">Laki-Laki</option>
-                                                    <option value="Perempuan">Perempuan</option>
-                                                </select>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="jenis_kel"
+                                                name="jenis_kel" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="tmpt_lahir" class="col-sm-2 col-form-label">Tempat Lahir</label>
-                                            <div class="col-sm-4">
+                                            <label for="tmpt_lahir" class="col-sm-3 col-form-label">Tempat & Tanggal Lahir</label>
+                                            <div class="col-sm-2">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="tmpt_lahir"
-                                                name="tmpt_lahir">
+                                                name="tmpt_lahir" placeholder="Tempat Lahir">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir" name="tgl_lahir" placeholder="dd-mm-yyyy">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="tgl_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir" name="tgl_lahir" placeholder="hh/bb/tttt">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="status_kep_rumah" class="col-sm-2 col-form-label">Kepemilikan Rumah</label>
+                                            <label for="status_kep_rumah" class="col-sm-3 col-form-label">Kepemilikan Rumah</label>
                                             <div class="col-sm-4">
                                                 <select class="form-control form-control-sm border-secondary" id="status_kep_rumah"
                                                     name="status_kep_rumah">
@@ -133,14 +131,14 @@ $activePasang = "active"; $activeInputPasang = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="jumlah_jiwa" class="col-sm-2 col-form-label">Jumlah Jiwa</label>
+                                            <label for="jumlah_jiwa" class="col-sm-3 col-form-label">Jumlah Jiwa</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="jumlah_jiwa"
                                                 name="jumlah_jiwa">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="pln"  class="col-sm-2 col-form-label">PLN</label>
+                                            <label for="pln"  class="col-sm-3 col-form-label">PLN</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln">
                                             </div>
@@ -148,24 +146,13 @@ $activePasang = "active"; $activeInputPasang = "active";
                                         <hr>
                                         <h5 class=" mb-3">Cabang & Biaya</h5>
                                         <div class="form-group row">
-                                            <label for="cabang" class="col-sm-2 col-form-label">Cabang</label>
+                                            <label for="cabang" class="col-sm-3 col-form-label">Cabang</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="cabang" name="cabang">
-                                                    <option class="text-secondary" value="">---</option>
-                                                    <option value="01">Paringin 1</option>
-                                                    <option value="02">Paringin 2</option>
-                                                    <option value="03">Awayan</option>
-                                                    <option value="04">Lampihong</option>
-                                                    <option value="05">Halong</option>
-                                                    <option value="06">Juai</option>
-                                                    <option value="07">Batumandi</option>
-                                                    <option value="08">Paringin Selatan</option>
-                                                    <option value="09">Tebing Tinggi</option>
-                                                </select>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="cabang" name="cabang" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="gol_tarif" class="col-sm-2 col-form-label">Golongan Tarif</label>
+                                            <label for="gol_tarif" class="col-sm-3 col-form-label">Golongan Tarif</label>
                                             <div class="col-sm-4">
                                                 <select class="form-control form-control-sm border-secondary" id="gol_tarif"
                                                     name="gol_tarif">
@@ -184,7 +171,7 @@ $activePasang = "active"; $activeInputPasang = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="biaya" class="col-sm-2 col-form-label">Biaya</label>
+                                            <label for="biaya" class="col-sm-3 col-form-label">Biaya</label>
                                             <div class="col-sm-4">
                                                 <input type="number" class="form-control form-control-sm border-secondary" id="biaya"
                                                 name="biaya">
@@ -198,18 +185,19 @@ $activePasang = "active"; $activeInputPasang = "active";
                                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
                                     <script type="text/javascript">
                                         function autofill(){
-                                            var no_ktp = $("#no_ktp").val();
+                                            var no_pend = $("#no_pend").val();
                                             $.ajax({
                                                 url: 'getData.php',
-                                                data:"no_ktp="+no_ktp ,
+                                                data:'no_pend='+no_pend ,
                                             }).success(function (data) {
                                                 var json = data,
                                                 obj = JSON.parse(json);
                                                 $('#nama').val(obj.nama);
+                                                $('#no_ktp').val(obj.no_ktp);
                                                 $('#alamat').val(obj.alamat);
-                                                $('#kecamatan').val(obj.kecamatan);
-                                                $('#desa').val(obj.desa);
                                                 $('#no_hp').val(obj.no_hp); 
+                                                $('#jenis_kel').val(obj.jenis_kel); 
+                                                $('#cabang').val(obj.id_wil); 
                                             });
                                         }
                                     </script>
@@ -217,19 +205,15 @@ $activePasang = "active"; $activeInputPasang = "active";
                                     <?php 
                                     if(isset($_POST["submit"])){
                                         // var_dump($_POST);
-                                        $ktp = $_POST["no_ktp"];
-                                        $tgl_pasang = $_POST["tgl_pasang"]; // tanggal ketika pelanggan melakukan pembayaran biaya instalasi
-                                        $tgl_install = "0000-00-00"; // tanggal ketika instalasi pipa dilakukan oleh petugas lapangan
+                                        $no_pend = $_POST["no_pend"];
+                                        $tgl_pasang = $_POST["tgl_pasang"];
                                         $nama = $_POST["nama"];
+                                        $ttl = $_POST["tmpt_lahir"] . ", " . $_POST["tgl_lahir"];
                                         $jenisKel = $_POST["jenis_kel"];
-                                        $tmpLahir = $_POST["tmpt_lahir"];
-                                        $tglLahir = $_POST["tgl_lahir"];
                                         $statusRumah = $_POST["status_kep_rumah"];
                                         $jmlhJiwa = $_POST["jumlah_jiwa"];
                                         $pln = $_POST["pln"];
                                         $alamat = $_POST["alamat"];
-                                        $kec = $_POST["kecamatan"];
-                                        $desa = $_POST["desa"];
                                         $hp = $_POST["no_hp"];
                                         $cabang = $_POST["cabang"];
                                         $gol = $_POST["gol_tarif"];
@@ -237,6 +221,7 @@ $activePasang = "active"; $activeInputPasang = "active";
                                         $status = "TERBUKA";
                                         $id_tarif = $_POST["gol_tarif"];
 
+                                        // generate nomor sambungan
                                         $sql = "SELECT * FROM pelanggan ORDER BY no_ds LIMIT 1;";
                                         $result = mysqli_query($conn, $sql);
 
@@ -260,17 +245,17 @@ $activePasang = "active"; $activeInputPasang = "active";
 
                                         $query = "INSERT INTO pemasangan
                                                     VALUES
-                                                    ('$generate_ds', '$ktp', '$tgl_pasang', '$tgl_install', '$nama', '$jenisKel', '$tmpLahir', '$tglLahir', '$statusRumah', '$jmlhJiwa', '$pln', '$alamat', '$kec', '$desa', '$hp', '$cabang', '$gol', $biaya);";
+                                                    ('$generate_ds', '$no_pend', '$tgl_pasang', '$statusRumah', '$jmlhJiwa', '$pln', '$cabang', '$gol', $biaya);";
                                         
                                         // otomatis juga memasukkan data ke tabel pelanggan
                                         $query .= "INSERT INTO pelanggan
                                                     VALUES
-                                                    ('$generate_ds', '$status', '$id_tarif', '$nama', '$jenisKel', '$alamat', '$hp');";
+                                                    ('$generate_ds', '$status', '$id_tarif', '$nama', '$ttl', '$jenisKel', '$alamat', '$hp');";
 
                                         // update nomor sambungan di tabel pendaftaran
                                         $query .= "UPDATE pendaftaran
                                                     SET
-                                                    no_ds='$generate_ds' WHERE no_ktp='$ktp'";
+                                                    no_ds='$generate_ds' WHERE no_pend='$no_pend'";
 
                                         $mysqlPemasangan = mysqli_multi_query($conn, $query);
 

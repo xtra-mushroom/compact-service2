@@ -6,8 +6,12 @@ $activeBukaTutup = "active"; $activeSuratBukaTutup = "active";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials/head.php") ?>
+    <?php
+    include_once ("../partials/head.php");
+    include_once ("../partials/cssdatatables.php");
+    ?>
 </head>
+<?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -22,10 +26,10 @@ $activeBukaTutup = "active"; $activeSuratBukaTutup = "active";
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-1">
-                        <div class="col-sm-6">
-                            <h1 class="d-inline mr-4">Cetak Surat</h1>
+                        <div class="col-sm-8">
+                            <h1 class="d-inline mr-4">Cetak Surat Perintah Pembukaan / Penutupan</h1>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">Buka & Tutup</li>
                                 <li class="breadcrumb-item">Cetak Surat</li>
@@ -41,32 +45,10 @@ $activeBukaTutup = "active"; $activeSuratBukaTutup = "active";
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body ml-2 mt-3">
-                                    <!-- di sini pencarian pendaftaran -->
-                                    <form method="get" action="surat.php">
-                                        <div class="form-group col-12">
-                                          <div class="form-inline mt-2">
-                                            <div class="input-group">
-                                                <input class="form-control" type="text" name="cari" placeholder="cari nomor ds">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary btn-sidebar" type="submit" value="cari">
-                                                        <i class="fas fa-search fa-fw"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>  
-
-                                    <?php 
-                                    if(isset($_GET['cari'])){
-                                        $cari = $_GET['cari'];
-                                        echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
-                                    }
-                                    ?>
-
+                                <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover table-bordered mt-3">
-                                            <thead class="text-center">
+                                        <table id="myTable" class="table table-sm table-hover table-bordered mt-3">
+                                            <thead>
                                                 <tr>
                                                     <th scope="row">Actions</th>
                                                     <th scope="col">Nomor Sambungan</th>
@@ -76,21 +58,21 @@ $activeBukaTutup = "active"; $activeSuratBukaTutup = "active";
                                                     <th scope="col">Nomor HP</th>
                                                 </tr>
                                             </thead>
-                                            
-                                            <?php 
-                                            if(isset($_GET['cari'])){
-                                                $cari = $_GET['cari'];
-                                                $sql = "SELECT * FROM pelanggan WHERE no_ds LIKE '%".$cari."%'";
-                                                $result = $conn->query($sql);	
-                                                // $data = $result->fetch_all();
-                                                // print_r($data);
-                                            }
-                                            
-                                            while($data = $result->fetch_assoc()){
-                                                $no = $data['no_ds'];
-                                            ?>
 
                                             <tbody>
+                                                <?php
+                                                $database = new Database();
+                                                $db = $database->getConnection();
+
+                                                $sqlBukaTutup = "SELECT * FROM pelanggan";
+                                                $resultBukaTutup = $db->prepare($sqlBukaTutup);
+                                                $resultBukaTutup->execute();
+
+                                                
+                                                while ($data = $resultBukaTutup->fetch(PDO::FETCH_ASSOC)) {
+                                                    $no = $data['no_ds'];
+                                                ?>
+
                                                 <tr>
                                                     <td align="center">
                                                         <?php 
@@ -110,7 +92,7 @@ $activeBukaTutup = "active"; $activeSuratBukaTutup = "active";
                                                     <td><?php echo $data['no_hp']; ?></td>
                                                 </tr>
                                             </tbody>
-                                            <?php } ?>    
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>  
@@ -122,6 +104,10 @@ $activeBukaTutup = "active"; $activeSuratBukaTutup = "active";
         </div>
     </div>
     
-    <?php include_once ("../partials/importjs.php") ?>
+    <?php
+    include_once ("../partials/importjs.php");
+    include_once ("../partials/scriptsdatatables.php");
+    ?>
+
 </body>
 </html>

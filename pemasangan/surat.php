@@ -4,11 +4,16 @@ $pemasangan = query("SELECT * FROM pemasangan");
 $openPasang = "menu-open";
 $activePasang = "active"; $activeSuratPasang = "active";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials/head.php") ?>
+    <?php
+    include_once ("../partials/head.php");
+    include_once ("../partials/cssdatatables.php");
+    ?>
 </head>
+<?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -42,68 +47,74 @@ $activePasang = "active"; $activeSuratPasang = "active";
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body ml-2 mt-3">
-                                    <!-- di sini pencarian pendaftaran -->
-                                    <form method="get" action="surat.php">
-                                        <div class="form-group col-12">
-                                          <div class="form-inline mt-2">
-                                            <div class="input-group">
-                                                <input class="form-control" type="text" name="cari" placeholder="cari nomor ds">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary btn-sidebar" type="submit" value="cari">
-                                                        <i class="fas fa-search fa-fw"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>  
-                                    <?php 
-                                    if(isset($_GET['cari'])){
-                                        $cari = $_GET['cari'];
-                                        echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
-                                    }
-                                    ?>
+                                <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover table-bordered mt-3">
+                                        <table id="myTable" class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
-                                                    <th scope="row">Actions</th>
-                                                    <th scope="col">Nomor Sambungan</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Alamat</th>
-                                                    <th scope="col">Nomor HP</th>
-                                                    <th scope="col">Biaya</th>
+                                                    <th>Actions</th>
+                                                    <th>Nomor Sambungan</th>
+                                                    <th>Tanggal Pemasangan</th>
+                                                    <th>Nama</th>
+                                                    <th>Alamat</th>
+                                                    <th>Nomor HP</th>
+                                                    <th>Golongan Tarif</th>
+                                                    <th>Biaya</th>
                                                 </tr>
                                             </thead>
-                                            
-                                            <?php 
-                                            if(isset($_GET['cari'])){
-                                                $cari = $_GET['cari'];
-                                                $sql = "SELECT * FROM pemasangan WHERE no_ds LIKE '%".$cari."%'";
-                                                $result = $conn->query($sql);	
-                                                // $data = $result->fetch_all();
 
-                                                // print_r($data);
-                                            }
-                                            
-                                            while($data = $result->fetch_assoc()){
-                                                $no = $data['no_ds'];
-                                            ?>
                                             <tbody>
+                                                <?php
+                                                $database = new Database();
+                                                $db = $database->getConnection();
+
+                                                $sqlPasang = "SELECT pemasangan.*, pendaftaran.nama, pendaftaran.alamat, pendaftaran.no_hp, pendaftaran.kecamatan, pendaftaran.desa
+                                                                from pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds";
+                                                $resultPasang = $db->prepare($sqlPasang);
+                                                $resultPasang->execute();
+
+                                                
+                                                while ($data = $resultPasang->fetch(PDO::FETCH_ASSOC)) {
+                                                    $no = $data['no_ds'];
+                                                ?>
+
                                                 <tr>
                                                     <td align="center">
-                                                        <a href="report/surat-terpasang.php?no_ds=<?php echo $no; ?>" target="_blank">Surat Pernyataan Terpasang</a>
-                                                        <br/>
-                                                        <a href="report/surat-pelanggan.php?no_ds=<?php echo $no; ?>" target="_blank">Surat Pernyataan Pelanggan</a>
+                                                        <a href="report/surat-pelanggan.php?no_ds=<?= $no ?>" target="_blank">Pernyataan Pelanggan</a>
+                                                        <a href="report/surat-terpasang.php?no_ds=<?= $no ?>" target="_blank">Pernyataan Terpasang</a>
                                                     </td>
-                                                    <td><?php echo $data['no_ds']; ?></td>
-                                                    <td><?php echo $data['nama']; ?></td>
-                                                    <td><?php echo $data['alamat']; ?></td>
+                                                    <td align="center"><?= $data['no_ds']; ?></td>
+                                                    <td><?= $data['tgl_pasang']; ?></td>
+                                                    <td><?= $data['nama']; ?></td>
+
+                                                    <?php 
+                                                    // agar yang tampil adalah nama kecamatannya
+                                                    $valueKec = $data['kecamatan'];
+                                                    $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
+                                                    $resultKec = $conn->query($queryKec);
+                                                    $dataKec = $resultKec->fetch_assoc();
+                                                    if($data['kecamatan'] == $dataKec['id']){
+                                                        $namaKec = $dataKec['nama'];
+                                                    }
+
+                                                    // agar yang tampil adalah nama desanya
+                                                    $valueDesa = $data['desa'];
+                                                    $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
+                                                    $resultDesa = $conn->query($queryDesa);
+                                                    $dataDesa = $resultDesa->fetch_assoc();
+                                                    if($data['desa'] == $dataDesa['id']){
+                                                        $namaDesa = $dataDesa['nama'];
+                                                    }
+                                                    ?>
+
+                                                    <td><?= $data['alamat'] . ', ' .  $namaDesa . ', ' . $namaKec ?></td>
                                                     <td><?php echo $data['no_hp']; ?></td>
+                                                    <td align="center"><?php echo $data['gol_tarif']; ?></td>
                                                     <td><?php echo $data['biaya']; ?></td>
                                                 </tr>
+                                                <?php } ?>
                                             </tbody>
-                                            <?php } ?>    
+                                            
                                         </table>
                                     </div>
                                 </div>  
@@ -115,7 +126,10 @@ $activePasang = "active"; $activeSuratPasang = "active";
         </div>
     </div>
 
-    <?php include_once ("../partials/importjs.php") ?>
-</body>
+    <?php
+    include_once ("../partials/importjs.php");
+    include_once ("../partials/scriptsdatatables.php");
+    ?>
 
+</body>
 </html>

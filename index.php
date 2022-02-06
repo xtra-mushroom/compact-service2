@@ -15,7 +15,7 @@
 <head>
     <?php include_once ("partials/head.php") ?>
 
-    <script src="chartjs/Chart.js"></script>
+    <script src="libraries/chartjs/Chart.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -28,7 +28,7 @@
 
         <!-- Content -->
         <div class="content-wrapper">
-            <section class="content-header">
+            <!-- <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
@@ -41,21 +41,25 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
 
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body mx-auto mt-lg-5 text-center">
-                                    <h5>Statistik Data Pelayanan</h5>
-
+                                <div class="jumbotron bg-white" style="border-radius:0; height:200px; padding-top:20px;">
+                                    <h1 class="display-6 text-center">Selamat Datang!</h1>
+                                    <p class="lead text-center">Compact Service PDAM Kabupaten Balangan mencakup seluruh rangkaian pelayanan dalam satu aplikasi</p>
+                                    <hr class="my-4">
+                                    <p class="text-secondary ml-3">Pertama kali menggunakan Compact Service?</p>
+                                    <a class="btn btn-primary text-secondary ml-3" href="#" role="button">Pelajari Panduan</a>
+                                </div>
+                                <div class="card-body mx-auto text-center">
+                                    <h4>Statistik Data Pelayanan</h4>
                                     <div style="width: 500px; height: 300px;">
                                         <canvas id="myChart"></canvas>
                                     </div>
-
                                     <script>
                                         var ctx = document.getElementById("myChart").getContext('2d');
                                         var myChart = new Chart(ctx, {
@@ -116,7 +120,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
         </div>
     </div>

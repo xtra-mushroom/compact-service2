@@ -7,8 +7,12 @@ $activePasang = "active"; $activeCariPasang = "active";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials/head.php") ?>
+    <?php
+    include_once ("../partials/head.php");
+    include_once ("../partials/cssdatatables.php");
+    ?>
 </head>
+<?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -16,7 +20,9 @@ $activePasang = "active"; $activeCariPasang = "active";
         <?php include_once ("../partials/navbar.php") ?>
 
         <!-- Sidebar -->
-        <?php include_once ("../partials/sidebar.php") ?>
+        <?php
+        include_once ("../partials/sidebar.php");
+        ?>
 
         <!-- Content -->
         <div class="content-wrapper">
@@ -38,84 +44,60 @@ $activePasang = "active"; $activeCariPasang = "active";
 
             <!-- Main content -->
             <section class="content">
-
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body ml-2 mt-3">
-                                    <!-- di sini pencarian pendaftaran -->
-                                    <form method="get" action="cari.php">
-                                        <div class="form-group col-12">
-                                          <div class="form-inline mt-2">
-                                            <div class="input-group">
-                                                <input class="form-control" type="text" name="cari" placeholder="cari ds, nama, alamat">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary btn-sidebar" type="submit" value="cari">
-                                                        <i class="fas fa-search fa-fw"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>  
-                                    <?php 
-                                    if(isset($_GET['cari'])){
-                                        $cari = $_GET['cari'];
-                                        echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
-                                    }
-                                    ?>
+                                <div class="card-body"> 
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover table-bordered mt-3">
-                                            <thead class="text-center">
+                                        <table id="myTable" class="table table-sm table-hover table-bordered">
+                                            <thead align="center">
                                                 <tr>
-                                                    <th scope="row">Actions</th>
-                                                    <th scope="col">Nomor Sambungan</th>
-                                                    <th scope="col">Tanggal Pemasangan</th>
-                                                    <th scope="col">Nomor KTP</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Jenis Kelamin</th>
-                                                    <th scope="col">Tempat Lahir</th>
-                                                    <th scope="col">Tanggal Lahir</th>
-                                                    <th scope="col">Alamat</th>
-                                                    <th scope="col">Status Kepemilikan Rumah</th>
-                                                    <th scope="col">Jumlah Jiwa</th>
-                                                    <th scope="col">Kecamatan</th>
-                                                    <th scope="col">Desa</th>
-                                                    <th scope="col">Nomor HP</th>
-                                                    <th scope="col">Cabang</th>
-                                                    <th scope="col">Golongan Tarif</th>
-                                                    <th scope="col">Biaya</th>
-
+                                                    <th>Actions</th>
+                                                    <th>Nomor Sambungan</th>
+                                                    <th>Tanggal Pemasangan</th>
+                                                    <th>Nomor KTP</th>
+                                                    <th>Nama</th>
+                                                    <th>Alamat</th>
+                                                    <th>Tempat Tanggal Lahir</th>
+                                                    <th>Jenis Kelamin</th>
+                                                    <th>Nomor HP</th>
+                                                    <th>Status Kepemilikan Rumah</th>
+                                                    <th>Jumlah Jiwa</th>
+                                                    <th>Nomor PLN</th>
+                                                    <th>Cabang</th>
+                                                    <th>Golongan Tarif</th>
+                                                    <th>Biaya</th>
                                                 </tr>
                                             </thead>
-                                            
-                                            <?php 
-                                            if(isset($_GET['cari'])){
-                                                $cari = $_GET['cari'];
-                                                $wildcard = "%$cari%";
-                                                $sql = "SELECT * FROM pemasangan where nama like '$wildcard' OR alamat like '$wildcard' OR no_ds like '$wildcard'";
-                                                $result = $conn->query($sql);	
-                                                // $data = $result->fetch_all();
-                                                // print_r($data);
-                                            }
-                                            
-                                            while($data = $result->fetch_assoc()){
-                                                $no = $data['no_ds'];
-                                            ?>
 
                                             <tbody>
+                                                <?php
+                                                $database = new Database();
+                                                $db = $database->getConnection();
+
+                                                $sqlPasang = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pemasangan.status_kep_rumah, pemasangan.jumlah_jiwa, pemasangan.pln, pemasangan.cabang, pemasangan.gol_tarif, pemasangan.biaya,
+                                                                pendaftaran.nama, pendaftaran.no_ktp, pendaftaran.jenis_kel, pendaftaran.alamat, pendaftaran.no_hp, pendaftaran.kecamatan, pendaftaran.desa,
+                                                                pelanggan.ttl
+                                                                FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds
+                                                                INNER JOIN pelanggan ON pelanggan.no_ds = pemasangan.no_ds;";
+                                                $resultPasang = $db->prepare($sqlPasang);
+                                                $resultPasang->execute();
+
+                                                while ($data = $resultPasang->fetch(PDO::FETCH_ASSOC)) {
+                                                    $no = $data['no_ds'];
+                                                ?>
+
                                                 <tr>
-                                                    <td align="center"><a href="edit.php?no_ds=<?php echo $no; ?>"><i class="bi bi-pencil-square"></i></a></td>
-                                                    <td><?php echo $data['no_ds']; ?></td>
-                                                    <td><?php echo $data['tgl_pasang']; ?></td>
-                                                    <td><?php echo $data['no_ktp']; ?></td>
-                                                    <td><?php echo $data['nama']; ?></td>
-                                                    <td><?php echo $data['jenis_kel']; ?></td>
-                                                    <td><?php echo $data['tmpt_lahir']; ?></td>
-                                                    <td><?php echo $data['tgl_lahir']; ?></td>
-                                                    <td><?php echo $data['alamat']; ?></td>
-                                                    <td><?php echo $data['status_kep_rumah']; ?></td>
-                                                    <td><?php echo $data['jumlah_jiwa']; ?></td>
+                                                    <td align="center">
+                                                        <a href="edit.php?no_ds=<?= $no; ?>" class="btn btn-sm btn-success">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td align="center"><?= $data['no_ds']; ?></td>
+                                                    <td><?= $data['tgl_pasang']; ?></td>
+                                                    <td><?= $data['no_ktp']; ?></td>
+                                                    <td><?= $data['nama']; ?></td>
 
                                                     <?php 
                                                     // agar yang tampil adalah nama kecamatannya
@@ -125,7 +107,6 @@ $activePasang = "active"; $activeCariPasang = "active";
                                                     $dataKec = $resultKec->fetch_assoc();
                                                     if($data['kecamatan'] == $dataKec['id']){
                                                         $namaKec = $dataKec['nama'];
-                                                        echo "<td align='center'>".$namaKec."</td>";
                                                     }
 
                                                     // agar yang tampil adalah nama desanya
@@ -135,17 +116,22 @@ $activePasang = "active"; $activeCariPasang = "active";
                                                     $dataDesa = $resultDesa->fetch_assoc();
                                                     if($data['desa'] == $dataDesa['id']){
                                                         $namaDesa = $dataDesa['nama'];
-                                                        echo "<td align='center'>".$namaDesa."</td>";
                                                     }
                                                     ?>
-                                                    
-                                                    <td><?php echo $data['no_hp']; ?></td>
-                                                    <td><?php echo $data['cabang']; ?></td>
-                                                    <td><?php echo $data['gol_tarif']; ?></td>
-                                                    <td><?php echo $data['biaya']; ?></td>
+
+                                                    <td><?= $data['alamat'] . ', ' .  $namaDesa . ', ' . $namaKec; ?></td>
+                                                    <td><?= $data['ttl']; ?></td>
+                                                    <td><?= $data['jenis_kel']; ?></td>
+                                                    <td><?= $data['no_hp']; ?></td>
+                                                    <td align="center"><?= $data['status_kep_rumah']; ?></td>
+                                                    <td align="center"><?= $data['jumlah_jiwa']; ?></td>
+                                                    <td align="center"><?= $data['pln']; ?></td>
+                                                    <td align="center"><?= $data['cabang']; ?></td>
+                                                    <td align="center"><?= $data['gol_tarif']; ?></td>
+                                                    <td><?= $data['biaya']; ?></td>
                                                 </tr>
+                                                <?php } ?>
                                             </tbody>
-                                            <?php } ?>
                                         </table>
                                     </div> 
                                 </div>  
@@ -157,7 +143,10 @@ $activePasang = "active"; $activeCariPasang = "active";
         </div>
     </div>
     
-    <?php include_once ("../partials/importjs.php") ?>
-</body>
+    <?php
+    include_once ("../partials/importjs.php");
+    include_once ("../partials/scriptsdatatables.php");
+    ?>
 
+</body>
 </html>

@@ -7,8 +7,12 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials/head.php") ?>
+    <?php
+    include_once ("../partials/head.php");
+    include_once ("../partials/cssdatatables.php");
+    ?>
 </head>
+<?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -43,31 +47,9 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body ml-2 mt-2">
-                                    <!-- di sini form buka tutup -->
-                                    <form method="get" action="cari.php">
-                                        <div class="form-group col-12">
-                                          <div class="form-inline mt-2">
-                                            <div class="input-group">
-                                                <input class="form-control" type="text" name="cari" placeholder="cari nama">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary btn-sidebar" type="submit" value="cari">
-                                                        <i class="fas fa-search fa-fw"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>  
-
-                                    <?php 
-                                    if(isset($_GET['cari'])){
-                                        $cari = $_GET['cari'];
-                                        echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
-                                    }
-                                    ?>
-
+                                <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover table-bordered mt-3">
+                                        <table id="myTable" class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
                                                     <th scope="col">Nomor Sambungan</th>
@@ -78,29 +60,31 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                                                     <th scope="col">Wilayah</th>
                                                 </tr>
                                             </thead>
-                                            
-                                            <?php 
-
-                                            if(isset($_GET['cari'])){
-                                                $cari = $_GET['cari'];
-                                                $wildcard = "%$cari%";
-                                                $sql = "SELECT * FROM baliknama where nama_asal like '$wildcard' OR nama_baru like '$wildcard'"; //'%".$cari."%'
-                                                $result = $conn->query($sql);	
-                                            }
-                                            
-                                            while($data = $result->fetch_assoc()){
-                                            ?>
 
                                             <tbody>
+                                                <?php
+                                                $database = new Database();
+                                                $db = $database->getConnection();
+
+                                                $sqlBaliknama = "SELECT * FROM baliknama";
+                                                $resultBaliknama = $db->prepare($sqlBaliknama);
+                                                $resultBaliknama->execute();
+
+                                                
+                                                while ($data = $resultBaliknama->fetch(PDO::FETCH_ASSOC)) {
+                                                    $no = $data['no_ds'];
+                                                ?>
+
                                                 <tr>
-                                                    <td><?php echo $data['no_ds']; ?></td>
-                                                    <td><?php echo $data['tanggal']; ?></td>
+                                                    <td align="center"><?php echo $data['no_ds']; ?></td>
+                                                    <td align="center"><?php echo $data['tanggal']; ?></td>
                                                     <td><?php echo $data['nama_asal']; ?></td>
                                                     <td><?php echo $data['nama_baru']; ?></td>
                                                     <td><?php echo $data['alamat']; ?></td>
-                                                    <td><?php echo $data['wilayah']; ?></td>
+                                                    <td align="center"><?php echo $data['wilayah']; ?></td>
+                                                </tr>
                                             </tbody>
-                                            <?php } ?>  
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>
@@ -112,7 +96,10 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
         </div>
     </div>
 
-    <?php include_once ("../partials/importjs.php") ?>
+    <?php
+    include_once ("../partials/importjs.php");
+    include_once ("../partials/scriptsdatatables.php");
+    ?>
 
 </body>
 </html>

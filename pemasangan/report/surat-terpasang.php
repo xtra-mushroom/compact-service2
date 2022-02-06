@@ -1,15 +1,33 @@
 <?php
 require "../../functions.php";
-require "../../dompdf/autoload.inc.php";
+require "../../libraries/dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-$cari = $_GET['no_ds'];
-$sql = "SELECT * FROM pemasangan where no_ds=$cari";
-$result = $conn->query($sql);
-$data = $result->fetch_assoc();
-// $dompdf->set_base_path("../layout/dist/css/style.css");
-// $html = file_get_contents("konten-pdfnya.html");
+$ds = $_GET['no_ds'];
+$sql = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pendaftaran.nama, pendaftaran.alamat, pendaftaran.no_hp, pendaftaran.kecamatan, pendaftaran.desa
+        FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds WHERE pemasangan.no_ds='$ds'";
+$result = mysqli_query($conn, $sql);
+$data = mysqli_fetch_array($result);
+
+// agar yang tampil adalah nama kecamatannya
+$valueKec = $data['kecamatan'];
+$queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
+$resultKec = $conn->query($queryKec);
+$dataKec = $resultKec->fetch_assoc();
+if($data['kecamatan'] == $dataKec['id']){
+    $namaKec = $dataKec['nama'];
+}
+
+// agar yang tampil adalah nama desanya
+$valueDesa = $data['desa'];
+$queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
+$resultDesa = $conn->query($queryDesa);
+$dataDesa = $resultDesa->fetch_assoc();
+if($data['desa'] == $dataDesa['id']){
+    $namaDesa = $dataDesa['nama'];
+}
+
 $html = "<html><head><style>
 body { font-family:Times New Roman, Times, serif;
         margin: -10px 45px; font-size: 0.9em; }
@@ -29,27 +47,27 @@ $html .= "<table>
     <tr>
         <td>Nama</td>
         <td class='ddots'>:</td>
-        <td><b>" . $data['nama'] . "</b></td>
+        <td style='text-transform:capitalize;'><b>" . $data['nama'] . "</b></td>
     </tr>
     <tr>
         <td>Alamat</td>
         <td class='ddots'>:</td>
-        <td><b>" . $data['alamat'] . "</b></td>
+        <td style='text-transform:capitalize;' width='450px'><b>" . $data['alamat'] . ', ' . $namaDesa . ', ' . $namaKec . "</b></td>
     </tr>
     <tr>
         <td>No. Hp</td>
         <td class='ddots'>:</td>
-        <td><b>" . $data['no_hp'] . "</b></td>
+        <td style='text-transform:capitalize;'><b>" . $data['no_hp'] . "</b></td>
     </tr>
     <tr>
         <td>No. DS</td>
         <td class='ddots'>:</td>
-        <td><b>" . $data['no_ds'] . "</b></td>
+        <td style='text-transform:capitalize;'><b>" . $data['no_ds'] . "</b></td>
     </tr>
     <tr>
         <td>Tanggal Terpasang</td>
         <td class='ddots'>:</td>
-        <td><b>...........................</b></td>
+        <td><b>" . tgl_indo(date('Y-m-d')) . "</b></td>
     </tr>
 </tbody>
 </table>";

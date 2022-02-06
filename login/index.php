@@ -14,17 +14,18 @@ if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
     if($username == '' || $password == ''){
-        echo "Data tidak bisa kosong!";
+        $message = "Data tidak bisa kosong!";
     }else{
         $query = "SELECT * FROM login WHERE username ='$username'";
         $sql1 = mysqli_query($conn, $query);
         $result = mysqli_fetch_array($sql1);
 
         if($result['username'] == ''){
-            echo "username tidak terdaftar!";
+            $message = "Username tidak terdaftar!";
         } elseif($result['password'] != md5($password)){
-            echo "password tidak terdaftar atau salah!";
+            $message = "Password tidak terdaftar atau salah!";
         } else {
+            $message = "";
             $_SESSION['username'] = $username;
             $_SESSION['password'] = md5($password);
             header("location: ../index.php");
@@ -58,7 +59,7 @@ if(isset($_POST['login'])){
 <body>
 	<div class="kotak_login">
 		<p class="tulisan_login">Login Pelayanan</p>
-
+        <p class="text-danger"><?= $message ?></p>
 		<form id="loginform" method="post" role="form">
 			<label for="username">Username</label>
             <input id="login-username" type="text" class="form-control form-control-dark form-control-lg form_login border-primary" name="username" value="<?php echo $username ?>" placeholder="Username atau Email">

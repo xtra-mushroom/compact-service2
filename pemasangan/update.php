@@ -1,12 +1,12 @@
 <?php 
 require "../functions.php";
-$pendaftaran = query("SELECT * FROM pemasangan");
 
 if(isset($_POST["submit"])){
     // var_dump($_POST);
     $ktp = $_POST["no_ktp"];
-    $ds = $_POST['no_ds'];
-    $tgl = $_POST['tgl_pasang'];
+    $no_pend = $_POST["no_pend"];
+    $ds = $_POST["no_ds"];
+    $tgl = $_POST["tgl_pasang"];
     $nama = $_POST["nama"];
     $jenisKel = $_POST["jenis_kel"];
     $tmpLahir = $_POST["tmpt_lahir"];
@@ -21,21 +21,25 @@ if(isset($_POST["submit"])){
     $cabang = $_POST["cabang"];
     $gol = $_POST["gol_tarif"];
     $biaya = $_POST["biaya"];
+    $ttl = $_POST["ttl"];
 
     $query = "UPDATE pemasangan
                 SET
-                no_ktp='$ktp', no_ds='$ds', tgl_pasang='$tgl', nama='$nama', jenis_kel='$jenisKel', tmpt_lahir='$tmpLahir', tgl_lahir='$tglLahir', status_kep_rumah='$statusRumah', jumlah_jiwa='$jmlhJiwa', pln='$pln', alamat='$alamat', kecamatan='$kec', desa='$desa', no_hp='$hp', cabang='$cabang', gol_tarif='$gol', biaya='$biaya'
-                WHERE no_ds='$ds'";
-
-    mysqli_query($conn, $query);
-    // var_dump($query);
-
-    // alertWindow("Data berhasil terdaftar!");  
-     
+                tgl_pasang='$tgl', status_kep_rumah='$statusRumah', jumlah_jiwa='$jmlhJiwa', pln='$pln', cabang='$cabang', gol_tarif='$gol', biaya=$biaya
+                WHERE no_ds='$ds';";
     
-    header('Location:cari.php?cari=');
+    $query .= "UPDATE pendaftaran
+                SET
+                no_ktp='$ktp', nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', no_hp='$hp'
+                WHERE no_ds='$ds';";
+    
+    $query .= "UPDATE pelanggan
+                SET ttl='$ttl' WHERE no_ds='$ds';";
 
-    alertWindow("Data berhasil terdaftar"); 
+    mysqli_multi_query($conn, $query);
+    // var_dump($query); 
+     
+    header('Location:cari.php?cari=');
 
 }
 

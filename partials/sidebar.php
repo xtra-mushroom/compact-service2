@@ -5,6 +5,16 @@
         <span class="brand-text font-weight-light"><b>COMPACT SERVICE</b></span>
     </a>
 
+    <?php
+    // $activeHome = ""; $activeDaftar = ""; $activePasang = ""; $activeBukaTutup = ""; $activeBaliknama = ""; $activeKeluhan = "";
+    // $openDaftar = ""; $openPasang = ""; $openBukaTutup = ""; $openBaliknama = ""; $openKeluhan = "";
+    // $activeInputDaftar = ""; $activeCariDaftar = ""; $activeReportDaftar = "";
+    // $activeInputPasang = ""; $activeCariPasang = ""; $activeSuratPasang = ""; $activeReportPasang = "";
+    // $activeInputBukaTutup = ""; $activeSuratBukaTutup = ""; $activeReportBukaTutup = "";
+    // $activeInputBaliknama = ""; $activeCariBaliknama = ""; $activeReportBaliknama = "";
+    // $activeInputKeluhan = ""; $activeCariKeluhan = ""; $activeReportKeluhan = "";
+    ?>
+
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -34,21 +44,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../pendaftaran/cari.php?cari=" class="nav-link <?= $activeCariDaftar ?>">
+                            <a href="../pendaftaran/cari.php" class="nav-link <?= $activeCariDaftar ?>">
                                 <i class="bi bi-search ml-4 mr-2"></i>
-                                <p>Cari Data</p>
+                                <p>Cari & Cetak</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../pendaftaran/surat.php?cari=" class="nav-link <?= $activeSuratDaftar ?>">
-                                <i class="bi bi-printer ml-4 mr-2"></i>
-                                <p>Cetak Surat</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../pendaftaran/report/report-pendaftaran.php" class="nav-link <?= $activeReportDaftar ?>" target="_blank">
+                            <a href="../pendaftaran/cetakreport.php" class="nav-link <?= $activeReportDaftar ?>">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
-                                <p>Cetak Report</p>
+                                <p>Cetak Laporan</p>
                             </a>
                         </li>
                     </ul>
@@ -70,13 +74,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../pemasangan/cari.php?cari=" class="nav-link <?= $activeCariPasang ?>">
+                            <a href="../pemasangan/cari.php" class="nav-link <?= $activeCariPasang ?>">
                                 <i class="bi bi-search ml-4 mr-2"></i>
                                 <p>Cari Data</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../pemasangan/surat.php?cari=" class="nav-link <?= $activeSuratPasang ?>">
+                            <a href="../pemasangan/surat.php" class="nav-link <?= $activeSuratPasang ?>">
                                 <i class="bi bi-printer ml-4 mr-2"></i>
                                 <p>Cetak Surat</p>
                             </a>
@@ -84,7 +88,7 @@
                         <li class="nav-item">
                             <a href="../pemasangan/report/report-pemasangan.php" class="nav-link <?= $activeReportPasang ?>" target="_blank">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
-                                <p>Cetak Report</p>
+                                <p>Cetak Laporan</p>
                             </a>
                         </li>
                     </ul>
@@ -107,7 +111,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../bukatutup/surat.php?cari=" class="nav-link <?= $activeSuratBukaTutup ?>">
+                            <a href="../bukatutup/surat.php" class="nav-link <?= $activeSuratBukaTutup ?>">
                                 <i class="bi bi-printer ml-4 mr-2"></i>
                                 <p>Cetak Surat</p>
                             </a>
@@ -115,7 +119,7 @@
                         <li class="nav-item">
                             <a href="../bukatutup/report/report-bukatutup.php" class="nav-link <?= $activeReportBukaTutup ?>" target="_blank">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
-                                <p>Cetak Report</p>
+                                <p>Cetak Laporan</p>
                             </a>
                         </li>
                     </ul>
@@ -137,7 +141,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../baliknama/cari.php?cari=" class="nav-link <?= $activeCariBaliknama ?>">
+                            <a href="../baliknama/cari.php" class="nav-link <?= $activeCariBaliknama ?>">
                                 <i class="bi bi-search ml-4 mr-2"></i>
                                 <p>Cari Data</p>
                             </a>
@@ -145,7 +149,7 @@
                         <li class="nav-item">
                             <a href="../baliknama/report/report-baliknama.php" class="nav-link <?= $activeReportBaliknama ?>" target="_blank">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
-                                <p>Cetak Report</p>
+                                <p>Cetak Laporan</p>
                             </a>
                         </li>
                     </ul>
@@ -167,7 +171,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../keluhan/cari.php?cari=" class="nav-link <?= $activeCariKeluhan ?>">
+                            <a href="../keluhan/cari.php" class="nav-link <?= $activeCariKeluhan ?>">
                                 <i class="bi bi-search ml-4 mr-2"></i>
                                 <p>Cari Data</p>
                             </a>
@@ -175,7 +179,7 @@
                         <li class="nav-item">
                             <a href="../keluhan/report/report-baliknama.php" class="nav-link <?= $activeReportKeluhan ?>" target="_blank">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
-                                <p>Cetak Report</p>
+                                <p>Cetak Laporan</p>
                             </a>
                         </li>
                     </ul>

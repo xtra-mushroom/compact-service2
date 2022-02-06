@@ -7,7 +7,7 @@
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- SweetAlert2 -->
-<link rel="stylesheet" href="../sweetalert2/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="../libraries/sweetalert2/dist/sweetalert2.min.css">
 <!-- Toastr -->
 <link rel="stylesheet" href="../layout/plugins/toastr/toastr.min.css">
 <!-- Font Awesome -->

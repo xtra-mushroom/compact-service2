@@ -11,7 +11,7 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-<script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
         <!-- Navbar -->

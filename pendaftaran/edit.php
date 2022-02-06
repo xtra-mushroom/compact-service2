@@ -16,7 +16,7 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
         <!-- Navbar right-->
@@ -65,7 +65,7 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                         <div class="form-group row mt-3">
                                             <label for="no_pend" class="col-sm-2 col-form-label">Nomor Pendaftaran</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_pend" name="no_pend" value="<?php echo $data['no_pend']; ?>" readonly>
+                                                <input type="number" class="form-control form-control-sm border-secondary" id="no_pend" name="no_pend" value="<?php echo $data['no_pend']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -84,6 +84,24 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" value="<?php echo $data['nama']; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel"
+                                                    name="jenis_kel">
+                                                    <option class="text-secondary" selected>---</option>
+                                                    <?php
+                                                    if($pendaftaran['jenis_kel'] == "Laki-Laki"){
+                                                        $laki = "selected";
+                                                    }elseif($pendaftaran['jenis_kel'] == "Perempuan"){
+                                                        $perem = "selected";
+                                                    }
+                                                    ?>
+                                                    <option value="Laki-Laki"<?= ' ' . $laki ?>>Laki-Laki</option>
+                                                    <option value="Perempuan"<?= ' ' . $perem ?>>Perempuan</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -141,7 +159,7 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="wil" class="col-sm-2 col-form-label">Wilayah</label>
+                                            <label for="wil" class="col-sm-2 col-form-label">Wilayah / Cabang</label>
                                             <div class="col-sm-4">
                                                 <select class="form-control form-control-sm border-secondary" id="wil" name="wil" value="">
                                                     <option class="text-secondary" value="">---</option>
@@ -156,35 +174,35 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                                     $wil8 = "";
                                                     $wil9 = "";
 
-                                                    if ($pendaftaran['wil'] == "01") {
+                                                    if ($pendaftaran['wil'] == "Paringin 1") {
                                                         $wil1 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "02") {
+                                                    } elseif ($pendaftaran['wil'] == "Paringin 2") {
                                                         $wil2 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "03") {
+                                                    } elseif ($pendaftaran['wil'] == "Awayan") {
                                                         $wil3 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "04") {
+                                                    } elseif ($pendaftaran['wil'] == "Lampihong") {
                                                         $wil4 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "05") {
+                                                    } elseif ($pendaftaran['wil'] == "Halong") {
                                                         $wil5 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "06") {
+                                                    } elseif ($pendaftaran['wil'] == "Juai") {
                                                         $wil6 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "07") {
+                                                    } elseif ($pendaftaran['wil'] == "Batumandi") {
                                                         $wil7 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "08") {
+                                                    } elseif ($pendaftaran['wil'] == "Paringin Selatan") {
                                                         $wil8 = "selected";
-                                                    } elseif ($pendaftaran['wil'] == "09") {
+                                                    } elseif ($pendaftaran['wil'] == "Tebing Tinggi") {
                                                         $wil9 = "selected";
                                                     }
                                                     ?>
-                                                    <option value="01" <?php echo " " . $wil1 ?>>01</option>
-                                                    <option value="02" <?php echo " " . $wil2 ?>>02</option>
-                                                    <option value="03" <?php echo " " . $wil3 ?>>03</option>
-                                                    <option value="04" <?php echo " " . $wil4 ?>>04</option>
-                                                    <option value="05" <?php echo " " . $wil5 ?>>05</option>
-                                                    <option value="06" <?php echo " " . $wil6 ?>>06</option>
-                                                    <option value="07" <?php echo " " . $wil7 ?>>07</option>
-                                                    <option value="08" <?php echo " " . $wil8 ?>>08</option>
-                                                    <option value="09" <?php echo " " . $wil9 ?>>09</option>
+                                                    <option value="Paringin 1"<?= " " . $wil1 ?>>01 Paringin 1</option>
+                                                    <option value="Paringin 2"<?= " " . $wil2 ?>>02 Paringin 2</option>
+                                                    <option value="Awayan"<?= " " . $wil3 ?>>03 Awayan</option>
+                                                    <option value="Lampihong"<?= " " . $wil4 ?>>04 Lampihong</option>
+                                                    <option value="Halong"<?= " " . $wil5 ?>>05 Halong</option>
+                                                    <option value="Juai"<?= " " . $wil6 ?>>06 Juai</option>
+                                                    <option value="Batumandi"<?= " " . $wil7 ?>>07 Batumandi</option>
+                                                    <option value="Paringin Selatan"<?= " " . $wil8 ?>>08 Paringin Selatan</option>
+                                                    <option value="Tebing Tinggi"<?= " " . $wil9 ?>>09 Tebing Tinggi</option>
                                                 </select>
                                             </div>
                                         </div>

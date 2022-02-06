@@ -1,6 +1,6 @@
 <?php
 require "../../functions.php";
-require "../../dompdf/autoload.inc.php";
+require "../../libraries/dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
@@ -8,8 +8,25 @@ $cari = $_GET['no_pend'];
 $sql = "SELECT * FROM pendaftaran where no_pend=$cari";
 $result = $conn->query($sql);
 $data = $result->fetch_assoc();
-// $dompdf->set_base_path("../layout/dist/css/style.css");
-// $html = file_get_contents("konten-pdfnya.html");
+
+// agar yang tampil adalah nama kecamatannya
+$valueKec = $data['kecamatan'];
+$queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
+$resultKec = $conn->query($queryKec);
+$dataKec = $resultKec->fetch_assoc();
+if($data['kecamatan'] == $dataKec['id']){
+    $namaKec = $dataKec['nama'];
+}
+
+// agar yang tampil adalah nama desanya
+$valueDesa = $data['desa'];
+$queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
+$resultDesa = $conn->query($queryDesa);
+$dataDesa = $resultDesa->fetch_assoc();
+if($data['desa'] == $dataDesa['id']){
+    $namaDesa = $dataDesa['nama'];
+}
+
 $html = "<html><head><style>
 body { font-family:Times New Roman, Times, serif;
         margin: -15px 45px; font-size: 0.9em; }
@@ -27,7 +44,7 @@ $html .= "<table>
     <tr>
         <td>No. Pendaftaran</td>
         <td class='ddots'>:</td>
-        <td width=460px><b><span style='border-style:solid; border-width:2px; padding:3px; margin-right:3px;'>" . $data['no_pend'] . "</span>/Pend/PDAM/10/2021/01</b></td>
+        <td width=460px><b><span style='border-style:solid; border-width:2px; padding:3px; margin-right:3px;'>" . $data['no_pend'] . "</span>/Pend/PDAM/10/2022/01</b></td>
     </tr>
     <tr>
         <td>Terima Dari</td>
@@ -37,7 +54,7 @@ $html .= "<table>
     <tr>
         <td></td>
         <td class='ddots'></td>
-        <td style='text-transform: uppercase;'><b>" . $data['alamat'] . "</b></td>
+        <td style='text-transform: capitalize;'><b>" . $data['alamat'] . ', ' . $namaDesa . ', Kec. ' . $namaKec . "</b></td>
     </tr>
 </tbody>
 </table><br/>";
@@ -47,7 +64,7 @@ $html .= "<table>
     <tr>
         <td>Uang Sejumlah</td>
         <td class='ddots'>:</td>
-        <td><div style='background-color:grey; text-align:center;'><b>DUA PULU RIBU RUPIAH</b></div></td>
+        <td><div style='background-color:grey; text-align:center;'><b>DUA PULUH RIBU RUPIAH</b></div></td>
     </tr>
     <tr>
         <td>Pembayaran</td>
@@ -92,6 +109,6 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A5', 'landscape');
 // Rendering dari HTML Ke PDF
 $dompdf->render();
-// Melakukan output file Pdf, attachment = 0 pdf akan di buka sebelum di download
+// Melakukan output file Pdf, attachment = 0 pdf akan dibuka sebelum didownload
 $dompdf->stream("Surat Pernyataan Pelanggan",array("Attachment"=>0));
 ?>

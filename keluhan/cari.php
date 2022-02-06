@@ -7,8 +7,12 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials/head.php") ?>
+    <?php
+    include_once ("../partials/head.php");
+    include_once ("../partials/cssdatatables.php");
+    ?>
 </head>
+<?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -44,8 +48,7 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-2 mt-2">
-                                    <!-- di sini form buka tutup -->
-                                    <form method="get" action="cari.php">
+                                    <!-- <form method="get" action="cari.php">
                                         <div class="form-group col-12">
                                           <div class="form-inline mt-2">
                                             <div class="input-group">
@@ -57,17 +60,17 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>  
+                                    </form>   -->
 
                                     <?php 
-                                    if(isset($_GET['cari'])){
-                                        $cari = $_GET['cari'];
-                                        echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
-                                    }
+                                    // if(isset($_GET['cari'])){
+                                    //     $cari = $_GET['cari'];
+                                    //     echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
+                                    // }
                                     ?>
 
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover table-bordered mt-3">
+                                        <table id="myTable" class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
                                                     <th scope="col">Nomor Sambungan</th>
@@ -78,19 +81,21 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                                                     <th scope="col">Isi Keluhan</th>
                                                 </tr>
                                             </thead>
-                                            
-                                            <?php 
-                                            if(isset($_GET['cari'])){
-                                                $cari = $_GET['cari'];
-                                                $wildcard = "%$cari%";
-                                                $sql = "SELECT * FROM keluhan where no_ds like '$wildcard' OR nama like '$wildcard'"; //'%".$cari."%'
-                                                $result = $conn->query($sql);	
-                                            }
-                                            
-                                            while($data = $result->fetch_assoc()){
-                                            ?>
 
                                             <tbody>
+                                                <?php
+                                                $database = new Database();
+                                                $db = $database->getConnection();
+
+                                                $sqlKeluhan = "SELECT * FROM keluhan";
+                                                $resultKeluhan = $db->prepare($sqlKeluhan);
+                                                $resultKeluhan->execute();
+
+                                                
+                                                while ($data = $resultKeluhan->fetch(PDO::FETCH_ASSOC)) {
+                                                    $no = $data['no_ds'];
+                                                ?>
+
                                                 <tr>
                                                     <td><?php echo $data['no_ds']; ?></td>
                                                     <td><?php echo $data['nama']; ?></td>
@@ -98,6 +103,7 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                                                     <td><?php echo $data['no_hp']; ?></td>
                                                     <td><?php echo $data['tgl_keluhan']; ?></td>
                                                     <td><?php echo $data['keluhan']; ?></td>
+                                                </tr>
                                             </tbody>
                                             <?php } ?>
                                         </table>
@@ -111,7 +117,10 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
         </div>
     </div>
 
-    <?php include_once ("../partials/importjs.php") ?>
+    <?php
+    include_once ("../partials/importjs.php");
+    include_once ("../partials/scriptsdatatables.php");
+    ?>
 
 </body>
 </html>

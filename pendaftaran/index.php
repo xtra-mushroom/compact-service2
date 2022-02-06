@@ -10,7 +10,7 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
         <!-- Navbar right-->
@@ -136,6 +136,27 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                                     </form>
                                     <?php 
                                     if(isset($_POST["submit"])){
+
+                                        if($_POST["wil"] == "Paringin 1"){
+                                            $idWil = "01";
+                                        }elseif($_POST["wil"] == "Paringin 2"){
+                                            $idWil = "02";
+                                        }elseif($_POST["wil"] == "Awayan"){
+                                            $idWil = "03";
+                                        }elseif($_POST["wil"] == "Lampihong"){
+                                            $idWil = "04";
+                                        }elseif($_POST["wil"] == "Halong"){
+                                            $idWil = "05";
+                                        }elseif($_POST["wil"] == "Juai"){
+                                            $idWil = "06";
+                                        }elseif($_POST["wil"] == "Batumandi"){
+                                            $idWil = "07";
+                                        }elseif($_POST["wil"] == "Paringin Selatan"){
+                                            $idWil = "08";
+                                        }elseif($_POST["wil"] == "Tebing Tinggi"){
+                                            $idWil = "09";
+                                        }
+
                                         // nomor pendaftaran auto_increment
                                         $no_ds = ""; // nomor sambungan hanya akan digenerate saat pemasangan
                                         $tgl = $_POST['tgl_daftar'];
@@ -146,11 +167,12 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                                         $kec = $_POST['kecamatan'];
                                         $desa = $_POST['desa'];
                                         $hp = $_POST["no_hp"];
+                                        $idWilayah = $idWil;
                                         $wilayah = $_POST["wil"];
                                     
                                         $query = "INSERT INTO pendaftaran
                                                     VALUES
-                                                    (null, '$no_ds', '$tgl', '$ktp', '$nama', '$jenisKel', '$alamat', '$kec', '$desa', '$hp', '$wilayah');";
+                                                    (null, '$no_ds', '$tgl', '$ktp', '$nama', '$jenisKel', '$alamat', '$kec', '$desa', '$hp', '$idWilayah', '$wilayah', 20000);";
                                     
                                         $mysqlPendaftaran = mysqli_query($conn, $query);
                                         // var_dump(mysqli_error($conn));
@@ -170,8 +192,8 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                                             Swal.fire({
                                                 position: 'center',
                                                 icon: 'error',
-                                                title: 'Data Gagal Tersimpan! Nomor Pendaftaran Sudah Terdaftar',
-                                                showConfirmButton: false,
+                                                title: 'Data Gagal Tersimpan! Nomor KTP Sudah Terdaftar',
+                                                showConfirmButton: true,
                                                 timer: 1700
                                             });
                                             </script>";

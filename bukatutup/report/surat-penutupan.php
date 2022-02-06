@@ -1,6 +1,6 @@
 <?php
 require "../../functions.php";
-require "../../dompdf/autoload.inc.php";
+require "../../libraries/dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
