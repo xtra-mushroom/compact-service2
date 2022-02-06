@@ -5,16 +5,6 @@
         <span class="brand-text font-weight-light"><b>COMPACT SERVICE</b></span>
     </a>
 
-    <?php
-    // $activeHome = ""; $activeDaftar = ""; $activePasang = ""; $activeBukaTutup = ""; $activeBaliknama = ""; $activeKeluhan = "";
-    // $openDaftar = ""; $openPasang = ""; $openBukaTutup = ""; $openBaliknama = ""; $openKeluhan = "";
-    // $activeInputDaftar = ""; $activeCariDaftar = ""; $activeReportDaftar = "";
-    // $activeInputPasang = ""; $activeCariPasang = ""; $activeSuratPasang = ""; $activeReportPasang = "";
-    // $activeInputBukaTutup = ""; $activeSuratBukaTutup = ""; $activeReportBukaTutup = "";
-    // $activeInputBaliknama = ""; $activeCariBaliknama = ""; $activeReportBaliknama = "";
-    // $activeInputKeluhan = ""; $activeCariKeluhan = ""; $activeReportKeluhan = "";
-    ?>
-
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
