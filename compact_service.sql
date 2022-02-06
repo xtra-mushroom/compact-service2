@@ -184,7 +184,7 @@ DROP TABLE IF EXISTS `pemasangan`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pemasangan` (
   `no_ds` char(6) NOT NULL,
-  `no_pend` varchar(10) NOT NULL,
+  `no_pend` char(6) NOT NULL,
   `tgl_pasang` date NOT NULL,
   `status_kep_rumah` varchar(50) NOT NULL,
   `jumlah_jiwa` varchar(10) NOT NULL,
@@ -192,7 +192,8 @@ CREATE TABLE `pemasangan` (
   `cabang` varchar(50) NOT NULL,
   `gol_tarif` varchar(10) NOT NULL,
   `biaya` double NOT NULL,
-  PRIMARY KEY (`no_ds`)
+  PRIMARY KEY (`no_ds`),
+  UNIQUE KEY `no_pend` (`no_pend`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -255,7 +256,7 @@ CREATE TABLE `pendaftaran` (
   `biaya` int(11) NOT NULL,
   PRIMARY KEY (`no_pend`),
   UNIQUE KEY `no_ktp` (`no_ktp`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-06 11:39:34
+-- Dump completed on 2022-02-06 17:55:44

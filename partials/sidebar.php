@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../pemasangan/report/report-pemasangan.php" class="nav-link <?= $activeReportPasang ?>" target="_blank">
+                            <a href="../pemasangan/cetakreport.php" class="nav-link <?= $activeReportPasang ?>">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
                                 <p>Cetak Laporan</p>
                             </a>

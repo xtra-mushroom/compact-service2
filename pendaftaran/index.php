@@ -193,8 +193,7 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                                                 position: 'center',
                                                 icon: 'error',
                                                 title: 'Data Gagal Tersimpan! Nomor KTP Sudah Terdaftar',
-                                                showConfirmButton: true,
-                                                timer: 1700
+                                                showConfirmButton: true
                                             });
                                             </script>";
                                         }

@@ -1,7 +1,7 @@
 <?php 
 require "../functions.php";
-$openDaftar = "menu-open";
-$activeDaftar = "active"; $activeReportDaftar = "active";
+$openPasang = "menu-open";
+$activePasang = "active"; $activeReportPasang = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,8 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">Pendaftaran</li>
-                                <li class="breadcrumb-item">Cetak Laporan</li>
+                                <li class="breadcrumb-item active">Cetak Laporan</li>
+                                <li class="breadcrumb-item">Report Biaya Per Golongan</li>
                             </ol>
                         </div>
                     </div>
@@ -47,11 +48,11 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-3">
-                                    <h3 align="center">Laporan Jumlah Biaya Pendaftaran Per-Cabang</h3>
-                                    <form method="get" action="report-jumlah-biaya.php">
+                                    <h5 align="center">Laporan Jumlah Biaya Pemasangan Baru Per-Golongan Tarif</h5>
+                                    <form method="get" action="report-jumlah-biaya-pergolongan.php">
                                         <div class="row">
                                             <div class="col-6">
-                                                <div class="form-group mb-2">
+                                                <div class="form-group my-2">
                                                     <label>Filter Tanggal</label><p class="d-inline mr-2 text-secondary"> : yyyy-mm-dd</p>
                                                     <div class="input-group">
                                                         <input type="text" name="tgl_awal" value="<?= @$_GET['tgl_awal'] ?>" class="form-control text-center tgl_awal" placeholder="Tanggal Awal">
@@ -65,7 +66,7 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                         
                                         <?php
                                         if(isset($_GET['filter']))
-                                            echo '<a href="report-jumlah-biaya.php" class="btn btn-sm btn-default">RESET</a>';
+                                            echo '<a href="report-jumlah-biaya-pasba.php" class="btn btn-sm btn-default">RESET</a>';
                                         ?>
 
                                     </form>  
@@ -73,12 +74,12 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT id_wil, wil, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran from pendaftaran GROUP BY wil ORDER BY id_wil ASC";
-                                        $url_cetak = "report/report-jumlah-biaya-pendaftaran.php";
+                                        $query = "SELECT gol_tarif, SUM(biaya) as total_pasba, COUNT(gol_tarif) as total_data FROM pemasangan GROUP BY gol_tarif ORDER BY total_data DESC";
+                                        $url_cetak = "report/report-jumlah-biaya-pergolongan-tarif.php";
                                         $label = "Semua Data Pendaftaran";
                                     }else{  
-                                        $query = "SELECT id_wil, wil, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran from pendaftaran WHERE (tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY wil ORDER BY id_wil ASC";
-                                        $url_cetak = "report/report-jumlah-biaya-pendaftaran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+                                        $query = "SELECT gol_tarif, SUM(biaya) as total_pasba, COUNT(gol_tarif) as total_data FROM pemasangan WHERE (tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY gol_tarif ORDER BY total_data DESC";
+                                        $url_cetak = "report/report-jumlah-biaya-pergolongan-tarif.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
                                         $label = 'Periode Tanggal <b>'.$tgl_awal.'</b> s/d <b>'.$tgl_akhir.'</b>';
@@ -96,10 +97,9 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                         <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
-                                                    <th scope="col">ID Wilayah</th>
-                                                    <th scope="col">Wilayah / Cabang</th>
-                                                    <th scope="col">Jumlah Pendaftaran</th>
-                                                    <th scope="col">Total Biaya Masuk</th>
+                                                    <th scope="col">Golongan Tarif</th>
+                                                    <th scope="col">Jumlah Biaya Pemasangan Baru</th>
+                                                    <th scope="col">Total Pemasangan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -112,10 +112,9 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?php echo $data['id_wil']; ?></td>
-                                                    <td align="center"><?php echo $data['wil']; ?></td>
-                                                    <td align="center"><?php echo $data['jumlah_pendaftaran']; ?></td>
-                                                    <td align="center"><?php echo $data['total_biaya']; ?></td>
+                                                    <td align="center"><?php echo $data['gol_tarif']; ?></td>
+                                                    <td align="center"><?php echo $data['total_pasba']; ?></td>
+                                                    <td align="center"><?php echo $data['total_data']; ?></td>
                                                 </tr>
                                             <?php }
                                             }else{

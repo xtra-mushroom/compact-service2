@@ -1,7 +1,7 @@
 <?php 
 require "../functions.php";
-$openDaftar = "menu-open";
-$activeDaftar = "active"; $activeReportDaftar = "active";
+$openPasang = "menu-open";
+$activePasang = "active"; $activeReportPasang = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +32,7 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Pendaftaran</li>
+                                <li class="breadcrumb-item active">Pemasangan</li>
                                 <li class="breadcrumb-item">Cetak Laporan</li>
                             </ol>
                         </div>
@@ -47,23 +47,23 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-5 mt-3 d-flex justify-content-between">
-                                    <a href="report-jumlah-biaya-daftar.php">
-                                        <div class="card text-white bg-info mb-3" style="max-width: 28rem;">
+                                    <a href="report-jumlah-biaya-pasba.php">
+                                        <div class="card text-white bg-info mb-3" style="max-width: 25rem;">
                                             <div class="card-header">
-                                                <h5>Laporan Jumlah Biaya Pendaftaran Per-Cabang</h5>
+                                                <h5>Laporan Jumlah Biaya Pemasangan Baru Per-Cabang</h5>
                                             </div>
                                             <div class="card-body">
-                                                <p class="card-text">Lihat total biaya pendaftaran yang masuk per-cabang, sesuai periode waktu tertentu</p>
+                                                <p class="card-text">Lihat total biaya pemasangan baru yang masuk per-cabang, sesuai periode waktu tertentu</p>
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="report-tanpa-pasang.php" class="">
-                                        <div class="card text-white bg-info mb-3" style="max-width: 28rem;">
+                                    <a href="report-jumlah-biaya-pergolongan.php" class="">
+                                        <div class="card text-white bg-info mb-3" style="max-width: 25rem;">
                                             <div class="card-header">
-                                                <h5>Laporan Rincian Data Pendaftaran Tanpa Pemasangan</h5>
+                                                <h5>Laporan Jumlah Biaya Pemasangan Baru Per-Golongan Tarif</h5>
                                             </div>
                                             <div class="card-body">
-                                                <p class="card-text">Lihat rincian data pendaftaran yang belum melalui proses pemasangan, sesuai periode waktu tertentu</p>
+                                                <p class="card-text">Lihat total biaya dan jumlah pemasangan per-golongan tarif, sesuai periode waktu tertentu</p>
                                             </div>
                                         </div>
                                     </a>

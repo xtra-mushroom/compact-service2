@@ -62,7 +62,7 @@ if(isset($_POST['login'])){
         <p class="text-danger"><?= $message ?></p>
 		<form id="loginform" method="post" role="form">
 			<label for="username">Username</label>
-            <input id="login-username" type="text" class="form-control form-control-dark form-control-lg form_login border-primary" name="username" value="<?php echo $username ?>" placeholder="Username atau Email">
+            <input id="login-username" type="text" class="form-control form-control-dark form-control-lg form_login border-primary" name="username" value="<?php echo $username ?>" placeholder="Username">
 
 			<label for="password">Password</label>
             <input id="login-password" type="password" class="form-control form-control-dark form-control-lg form_login border-primary" name="password" placeholder="Password">

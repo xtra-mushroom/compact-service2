@@ -276,9 +276,8 @@ $activePasang = "active"; $activeInputPasang = "active";
                                             Swal.fire({
                                                 position: 'center',
                                                 icon: 'error',
-                                                title: 'Data Gagal Tersimpan!',
-                                                showConfirmButton: false,
-                                                timer: 1600
+                                                title: 'Data Gagal Tersimpan! Duplicate Entry -> Nomor Pendaftaran',
+                                                showConfirmButton: true
                                             })
                                             </script>";
                                         }
