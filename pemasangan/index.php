@@ -177,7 +177,7 @@ $activePasang = "active"; $activeInputPasang = "active";
                                                 name="biaya">
                                             </div>
                                         </div>
-                                        <div class="card-footer col-6 text-right">
+                                        <div class="card-footer col-7 text-right">
                                             <button type="submit" name="submit" class="btn btn-dark">SIMPAN</button>
                                         </div>
                                     </form>
@@ -245,7 +245,7 @@ $activePasang = "active"; $activeInputPasang = "active";
 
                                         $query = "INSERT INTO pemasangan
                                                     VALUES
-                                                    ('$generate_ds', '$no_pend', '$tgl_pasang', '$statusRumah', '$jmlhJiwa', '$pln', '$cabang', '$gol', $biaya);";
+                                                    ('$generate_ds', '$tgl_pasang', '$statusRumah', '$jmlhJiwa', '$pln', '$cabang', '$gol', $biaya);";
                                         
                                         // otomatis juga memasukkan data ke tabel pelanggan
                                         $query .= "INSERT INTO pelanggan
@@ -258,8 +258,6 @@ $activePasang = "active"; $activeInputPasang = "active";
                                                     no_ds='$generate_ds' WHERE no_pend='$no_pend'";
 
                                         $mysqlPemasangan = mysqli_multi_query($conn, $query);
-
-                                        var_dump($mysqlPemasangan);
 
                                         if($mysqlPemasangan == true){
                                             echo "<script>

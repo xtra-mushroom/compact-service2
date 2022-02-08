@@ -104,8 +104,8 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                                                     <td><?php echo $data['tgl_keluhan']; ?></td>
                                                     <td><?php echo $data['keluhan']; ?></td>
                                                 </tr>
+                                                <?php } ?>
                                             </tbody>
-                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>

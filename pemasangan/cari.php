@@ -30,7 +30,12 @@ $activePasang = "active"; $activeCariPasang = "active";
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
-                            <h1 class="d-inline mr-4">Cari Data Pemasangan</h1>
+                            <h1 class="d-inline mr-4">
+                                Cari Data Pemasangan
+                                <button type="button" class="btn btn-sm btn-danger rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom" data-content='Data yang ditampilkan bukan data pelanggan secara real-time, cari data pelanggan di menu "Data Pelanggan"'>
+                                    <i class="bi bi-exclamation-diamond-fill"></i>
+                                </button>
+                            </h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -147,6 +152,12 @@ $activePasang = "active"; $activeCariPasang = "active";
     include_once ("../partials/importjs.php");
     include_once ("../partials/scriptsdatatables.php");
     ?>
+
+    <script>
+        $(function () {
+        $('[data-toggle="popover"]').popover()
+        })
+    </script>
 
 </body>
 </html>

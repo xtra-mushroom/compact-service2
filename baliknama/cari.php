@@ -81,7 +81,7 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                                                     <td><?php echo $data['nama_asal']; ?></td>
                                                     <td><?php echo $data['nama_baru']; ?></td>
                                                     <td><?php echo $data['alamat']; ?></td>
-                                                    <td align="center"><?php echo $data['wilayah']; ?></td>
+                                                    <td align="center"><?php echo $data['id_wilayah']; ?></td>
                                                 </tr>
                                             </tbody>
                                             <?php } ?>

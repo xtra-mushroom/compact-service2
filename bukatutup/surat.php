@@ -91,8 +91,8 @@ $activeBukaTutup = "active"; $activeSuratBukaTutup = "active";
                                                     <td><?php echo $data['alamat']; ?></td>
                                                     <td><?php echo $data['no_hp']; ?></td>
                                                 </tr>
+                                                <?php } ?>
                                             </tbody>
-                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>  

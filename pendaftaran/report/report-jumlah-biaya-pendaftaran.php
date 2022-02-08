@@ -4,7 +4,9 @@ require ("../../libraries/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-$html = "<html><head><style>
+$html = "<html><head>";
+
+$html ="<style>
 body { font-family:Arial, Helvetica, sans-serif;
         text-transform: capitalize;
         margin : -25px 0 }
@@ -13,7 +15,8 @@ table, th, td{ border-collapse: collapse; }
 th { text-align:center; }
 th, td{ padding:5px; }
 img { object-fit:cover; }
-</style>";
+</style>
+</head>";
 
 $html .= "<body><img src='../../layout/dist/img/kop-surat.png' width='700px' style='margin-bottom:5px;'><hr/>";
 

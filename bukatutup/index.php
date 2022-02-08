@@ -79,6 +79,12 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="id_wil" class="col-sm-2 col-form-label">ID Wilayah</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="id_wil" name="id_wil" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="no_hp" name="no_hp" readonly>
@@ -93,7 +99,13 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                         <div class="form-group row">
                                             <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="keterangan" name="keterangan">
+                                            <select class="form-control form-control-sm border-secondary" id="keterangan"
+                                                    name="keterangan">
+                                                    <option class="text-secondary" selected>---</option>
+                                                    <option value="1">Permintaan Penutupan</option>
+                                                    <option value="2">Permintaan Pembukaan</option>
+                                                    <option value="3">Penutupan Otomatis</option>
+                                                </select>
                                             </div>
                                         </div>
                                         
@@ -115,6 +127,7 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                                 $('#status').val(obj.status_ket);
                                                 $('#nama').val(obj.nama);
                                                 $('#alamat').val(obj.alamat);
+                                                $('#id_wil').val(obj.id_wil);
                                                 $('#no_hp').val(obj.no_hp); 
                                             });
                                         }
@@ -126,15 +139,15 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                             $ds = $_POST["no_ds"];
                                             $nama = $_POST["nama"];
                                             $alamat = $_POST["alamat"];
+                                            $id_wil = $_POST["id_wil"];
                                             $hp = $_POST["no_hp"];
                                             $tgl = $_POST["tgl"];
-                                            $ket = $_POST["keterangan"];
                                             $sValue = $_POST["menu"];
                                             $status = "TERBUKA";
                                     
                                             $query = "INSERT INTO pembukaan
                                                         VALUES
-                                                        ('$tgl', '$ds', '$nama', '$alamat', '$hp', '$ket');";
+                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', 'Permintaan Pembukaan', 20000);";
                                     
                                             $query .= "UPDATE pelanggan
                                                         SET
@@ -148,7 +161,8 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                                     position: 'center',
                                                     icon: 'success',
                                                     title: 'Pembukaan Berhasil!',
-                                                    showConfirmButton: true
+                                                    showConfirmButton: false,
+                                                    timer: 1600
                                                 });
                                                 </script>";
                                             }else{
@@ -163,18 +177,27 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                             }
                                     
                                         }elseif($_POST["menu"] == "0"){
+                                            $keterangan = "";
+                                            if($_POST['keterangan'] == '1'){
+                                                $keterangan = "Permintaan Penutupan";
+                                                $biaya = 20000;
+                                            }elseif($_POST['keterangan'] == '3'){
+                                                $keterangan = "Penutupan Otomatis";
+                                                $biaya = "null";
+                                            }
+
                                             $ds = $_POST["no_ds"];
                                             $nama = $_POST["nama"];
                                             $alamat = $_POST["alamat"];
+                                            $id_wil = $_POST["id_wil"];
                                             $hp = $_POST["no_hp"];
                                             $tgl = $_POST["tgl"];
-                                            $ket = $_POST["keterangan"];
                                             $sValue = $_POST["menu"];
                                             $status = "TERTUTUP";
                                         
                                             $query = "INSERT INTO penutupan
                                                         VALUES
-                                                        ('$ds', '$tgl', '$nama', '$alamat', '$hp', '$ket');";
+                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', '$keterangan', $biaya);";
                                     
                                             $query .= "UPDATE pelanggan
                                                         SET
@@ -188,7 +211,8 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                                     position: 'center',
                                                     icon: 'success',
                                                     title: 'Penutupan Berhasil!',
-                                                    showConfirmButton: true
+                                                    showConfirmButton: false,
+                                                    timer: 1600
                                                 });
                                                 </script>";
                                             }else{
@@ -210,8 +234,8 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                                     showConfirmButton: true
                                                 });
                                                 </script>";
+                                            }
                                         }
-                                    }
                                     ?>
                                 </div>
                             </div>

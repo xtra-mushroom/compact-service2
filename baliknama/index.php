@@ -66,9 +66,27 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="hp_asal" class="col-sm-2 col-form-label">Nomor HP</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="hp_asal" name="hp_asal" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="jenis_kel" name="jenis_kel" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="ttl_asal" class="col-sm-2 col-form-label">TLL</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="ttl_asal" name="ttl_asal" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -90,10 +108,20 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <label for="tmpt_lahir" class="col-sm-2 col-form-label">TTL Baru</label>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="tmpt_lahir"
+                                                name="tmpt_lahir" placeholder="Tempat Lahir">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir" name="tgl_lahir" placeholder="dd-mm-yyyy">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="jenis_kel_baru" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel"
-                                                    name="jenis_kel">
+                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel_baru"
+                                                    name="jenis_kel_baru">
                                                     <option class="text-secondary" selected>---</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -127,11 +155,13 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                             }).success(function (data) {
                                                 var json = data,
                                                 obj = JSON.parse(json);
-                                                $('#wil').val(obj.wil);
-                                                $('#nik_asal').val(obj.no_ktp);
+                                                $('#wil').val(obj.id_wil);
                                                 $('#alamat').val(obj.alamat);
+                                                $('#nik_asal').val(obj.nik);
                                                 $('#nama_asal').val(obj.nama);
-                                                $('#no_hp').val(obj.no_hp); 
+                                                $('#hp_asal').val(obj.no_hp); 
+                                                $('#jenis_kel').val(obj.jenis_kel); 
+                                                $('#ttl_asal').val(obj.ttl); 
                                             });
                                         }
                                     </script>
@@ -141,21 +171,25 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                         $ds = $_POST["no_ds"];
                                         $wil = $_POST["wil"];
                                         $nik = $_POST["nik_asal"];
+                                        $hp = $_POST["hp_asal"];
+                                        $jenisKel = $_POST["jenis_kel"];
+                                        $ttl = $_POST["ttl_asal"];
                                         $alamat = $_POST["alamat"];
                                         $nama = $_POST["nama_asal"];
                                         $nama_baru = $_POST["nama_baru"];
                                         $nik_baru = $_POST["nik_baru"];
-                                        $jenisKel = $_POST["jenis_kel"];
+                                        $ttl_baru = $_POST["tmpt_lahir"] . ', ' . $_POST["tgl_lahir"];
+                                        $jenisKel_baru = $_POST["jenis_kel_baru"];
                                         $hp_baru = $_POST["hp_baru"];
                                         $tgl = $_POST["tanggal"];
                                 
-                                        $query .= "INSERT INTO baliknama
+                                        $query = "INSERT INTO baliknama
                                                     VALUES
-                                                    ('$ds', '$wil', '$alamat', '$nik', '$nama', '$nama_baru', '$nik_baru', '$hp_baru', '$tgl');";
+                                                    ('$ds', '$wil', '$alamat', '$nik', '$ttl', '$hp', '$jenisKel', '$nama', '$nama_baru', '$jenisKel_baru', '$ttl_baru', '$nik_baru', '$hp_baru', '$tgl');";
                                 
                                         $query .= "UPDATE pelanggan
                                                     SET
-                                                    nama='$nama_baru', jenis_kel='$jenisKel', no_hp='$hp_baru' WHERE no_ds='$ds';";
+                                                    nama='$nama_baru', nik='$nik_baru', ttl='$ttl_baru', jenis_kel='$jenisKel_baru', no_hp='$hp_baru' WHERE no_ds='$ds';";
                                 
                                         $mysqlBaliknama = mysqli_multi_query($conn, $query);
 
@@ -165,7 +199,8 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                                 position: 'center',
                                                 icon: 'success',
                                                 title: 'Balik Nama Berhasil!',
-                                                showConfirmButton: true
+                                                showConfirmButton: false,
+                                                timer : 1600
                                             })
                                             </script>";
                                         }else{

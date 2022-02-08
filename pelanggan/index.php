@@ -1,7 +1,6 @@
 <?php 
 require "../functions.php";
-$openDaftar = "menu-open";
-$activeDaftar = "active"; $activeCariDaftar = "active";
+$activePelanggan = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,17 +28,13 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                     <div class="row mb-1">
                         <div class="col-sm-7">
                             <h1 class="mr-4">
-                                Cari Data & Cetak Kwitansi Pendaftaran
-                                <button type="button" class="btn btn-sm btn-danger rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom" data-content='Data yang ditampilkan bukan data pelanggan secara real-time, cari data pelanggan di menu "Data Pelanggan"'>
-                                    <i class="bi bi-exclamation-diamond-fill"></i>
-                                </button>
+                                Cari Data Pelanggan
                             </h1>
                             
                         </div>
                         <div class="col-sm-5">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Pendaftaran</li>
-                                <li class="breadcrumb-item">Cari & Cetak</li>
+                                <li class="breadcrumb-item active">Data Pelanggan /</li>
                             </ol>
                         </div>
                     </div>
@@ -57,15 +52,17 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                         <table id="myTable" class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
-                                                    <th>Actions</th>
                                                     <th>Nomor Pendaftaran</th>
                                                     <th>Nomor Sambungan</th>
-                                                    <th>Tanggal Daftar</th>
-                                                    <th>Nomor KTP</th>
+                                                    <th>Status Sambungan</th>
+                                                    <th>Golongan Tarif</th>
                                                     <th>Nama</th>
+                                                    <th>NIK</th>
+                                                    <th>TTL</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Alamat</th>
                                                     <th>Nomor HP</th>
+                                                    <th>ID Wilayah</th>
                                                     <th>Wilayah</th>
                                                 </tr>
                                             </thead>
@@ -75,28 +72,21 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlDaftar = "SELECT * FROM pendaftaran";
+                                                $sqlDaftar = "SELECT pelanggan.*, pendaftaran.no_pend, pendaftaran.id_wil, pendaftaran.wil, pendaftaran.desa, pendaftaran.kecamatan FROM pelanggan INNER JOIN pendaftaran ON pelanggan.no_ds = pendaftaran.no_ds ORDER BY pendaftaran.id_wil ASC";
                                                 $resultDaftar = $db->prepare($sqlDaftar);
                                                 $resultDaftar->execute();
                                                 
                                                 while ($data = $resultDaftar->fetch(PDO::FETCH_ASSOC)) {
-                                                    $no = $data['no_pend'];
                                                 ?>
 
                                                 <tr>
-                                                    <td align="center">
-                                                        <a href="edit.php?no_pend=<?= $no ?>" class="btn btn-sm btn-success">
-                                                            <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                        <a href="report/kwitansi.php?no_pend=<?= $no ?>" class="btn btn-sm btn-warning" target="_blank">
-                                                            <i class="bi bi-printer"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td align="center"><?= $no ?></td>
+                                                    <td align="center"><?= $data['no_pend'] ?></td>
                                                     <td><?= $data['no_ds'] ?></td>
-                                                    <td align='center'><?= $data['tgl_daftar'] ?></td>
-                                                    <td><?= $data['no_ktp'] ?></td>
+                                                    <td align="center"><?= $data['status_ket'] ?></td>
+                                                    <td align='center'><?= $data['id_tarif'] ?></td>
                                                     <td><?= $data['nama'] ?></td>
+                                                    <td><?= $data['nik'] ?></td>
+                                                    <td><?= $data['ttl'] ?></td>
                                                     <td><?= $data['jenis_kel'] ?></td>
 
                                                     <?php  
@@ -120,6 +110,7 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
 
                                                     <td><?= $data['alamat'] . ', ' . $namaDesa . ', ' . $namaKec ?></td>
                                                     <td align='center'><?= $data['no_hp'] ?></td>
+                                                    <td align='center'><?= $data['id_wil'] ?></td>
                                                     <td align='center'><?= $data['wil'] ?></td>
                                                 </tr>
                                                 <?php } ?>

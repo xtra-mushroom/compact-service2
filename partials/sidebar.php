@@ -107,7 +107,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../bukatutup/report/report-bukatutup.php" class="nav-link <?= $activeReportBukaTutup ?>" target="_blank">
+                            <a href="../bukatutup/cetakreport.php" class="nav-link <?= $activeReportBukaTutup ?>">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
                                 <p>Cetak Laporan</p>
                             </a>
@@ -137,7 +137,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../baliknama/report/report-baliknama.php" class="nav-link <?= $activeReportBaliknama ?>" target="_blank">
+                            <a href="../baliknama/cetakreport.php" class="nav-link <?= $activeReportBaliknama ?>">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
                                 <p>Cetak Laporan</p>
                             </a>
@@ -145,7 +145,7 @@
                     </ul>
                 </li>
                 <!-- keluhan pelanggan -->
-                <li class="nav-item mt-2 mb-5 <?= $openKeluhan ?>">
+                <li class="nav-item mt-2 mb-1 <?= $openKeluhan ?>">
                     <a href="#" class="nav-link <?= $activeKeluhan ?>">
                         <i class="nav-icon fas fa-exclamation-circle"></i>
                         <p>
@@ -173,6 +173,15 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <!-- data pelanggan -->
+                <li class="nav-item mb-5">
+                    <a href="../pelanggan/index.php" class="nav-link <?php echo $activePelanggan ?>">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Data Pelanggan
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

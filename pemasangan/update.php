@@ -4,7 +4,6 @@ require "../functions.php";
 if(isset($_POST["submit"])){
     // var_dump($_POST);
     $ktp = $_POST["no_ktp"];
-    $no_pend = $_POST["no_pend"];
     $ds = $_POST["no_ds"];
     $tgl = $_POST["tgl_pasang"];
     $nama = $_POST["nama"];
