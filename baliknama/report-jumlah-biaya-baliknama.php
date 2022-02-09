@@ -1,7 +1,7 @@
 <?php 
 require "../functions.php";
-$openPasang = "menu-open";
-$activePasang = "active"; $activeReportPasang = "active";
+$openBaliknama = "menu-open";
+$activeBaliknama = "active"; $activeReportBaliknama = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +32,8 @@ $activePasang = "active"; $activeReportPasang = "active";
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Pendaftaran</li>
-                                <li class="breadcrumb-item active">Cetak Laporan</li>
-                                <li class="breadcrumb-item">Report Biaya Per Golongan</li>
+                                <li class="breadcrumb-item active">Balik Nama</li>
+                                <li class="breadcrumb-item">Cetak Laporan</li>
                             </ol>
                         </div>
                     </div>
@@ -48,8 +47,8 @@ $activePasang = "active"; $activeReportPasang = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-3">
-                                    <h5 align="center">Laporan Jumlah Biaya Pemasangan Baru Per-Golongan Tarif</h5>
-                                    <form method="get" action="report-jumlah-biaya-pergolongan.php">
+                                    <h5 align="center">Laporan Jumlah Biaya Balik Nama Per-Cabang</h5>
+                                    <form method="get" action="report-jumlah-biaya-baliknama.php">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group my-2">
@@ -66,7 +65,7 @@ $activePasang = "active"; $activeReportPasang = "active";
                                         
                                         <?php
                                         if(isset($_GET['filter']))
-                                            echo '<a href="report-jumlah-biaya-pasba.php" class="btn btn-sm btn-default">RESET</a>';
+                                            echo '<a href="report-jumlah-biaya-baliknama.php" class="btn btn-sm btn-default">RESET</a>';
                                         ?>
 
                                     </form>  
@@ -74,12 +73,12 @@ $activePasang = "active"; $activeReportPasang = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT gol_tarif, SUM(biaya) as total_pasba, COUNT(gol_tarif) as total_data FROM pemasangan GROUP BY gol_tarif ORDER BY total_data DESC";
-                                        $url_cetak = "report/report-jumlah-biaya-pergolongan-tarif.php";
-                                        $label = "Semua Data, per-golongan tarif";
+                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(baliknama.biaya) as total_biaya, COUNT(baliknama.no_ds) as total_data FROM pendaftaran INNER JOIN baliknama ON pendaftaran.no_ds = baliknama.no_ds GROUP BY wil ORDER BY id_wil ASC";
+                                        $url_cetak = "report/report-jumlah-biaya-baliknama.php";
+                                        $label = "Semua Data Jumlah Biaya, per-cabang";
                                     }else{  
-                                        $query = "SELECT gol_tarif, SUM(biaya) as total_pasba, COUNT(gol_tarif) as total_data FROM pemasangan WHERE (tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY gol_tarif ORDER BY total_data DESC";
-                                        $url_cetak = "report/report-jumlah-biaya-pergolongan-tarif.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(baliknama.biaya) as total_biaya, COUNT(baliknama.no_ds) as total_data FROM pendaftaran WHERE (tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY wil ORDER BY id_wil ASC";
+                                        $url_cetak = "report/report-jumlah-biaya-baliknama.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
                                         $label = 'Periode Tanggal <b>'.$tgl_awal.'</b> s/d <b>'.$tgl_akhir.'</b>';
@@ -98,10 +97,10 @@ $activePasang = "active"; $activeReportPasang = "active";
                                             <thead class="text-center">
                                                 <tr>
                                                     <th scope="col">No.</th>
-                                                    <th scope="col">Golongan Tarif</th>
-                                                    <th scope="col">Keterangan Golongan</th>
-                                                    <th scope="col">Total Pemasangan</th>
-                                                    <th scope="col">Jumlah Biaya Pemasangan</th>
+                                                    <th scope="col">ID Wilayah</th>
+                                                    <th scope="col">Wilayah/Cabang</th>
+                                                    <th scope="col">Jumlah Data</th>
+                                                    <th scope="col">Total Biaya Balik Nama</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -114,31 +113,13 @@ $activePasang = "active"; $activeReportPasang = "active";
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
                                                 $no++;
-
-                                                if($data['gol_tarif'] == "R1"){
-                                                    $keterangan_gol = "Rumah Tangga 2";
-                                                }elseif($data['gol_tarif'] == "R2"){
-                                                    $keterangan_gol = "Rumah Tangga 2";
-                                                }elseif($data['gol_tarif'] == "R3"){
-                                                    $keterangan_gol = "Rumah Tangga 3";
-                                                }elseif($data['gol_tarif'] == "SU"){
-                                                    $keterangan_gol = "Sosial Umum";
-                                                }elseif($data['gol_tarif'] == "SK"){
-                                                    $keterangan_gol = "Sosial Khusus";
-                                                }elseif($data['gol_tarif'] == "NK"){
-                                                    $keterangan_gol = "Niaga Kecil";
-                                                }elseif($data['gol_tarif'] == "NB"){
-                                                    $keterangan_gol = "Niaga Besar";
-                                                }elseif($data['gol_tarif'] == "IP"){
-                                                    $keterangan_gol = "Instansi Pemerintah";
-                                                }
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?= $no; ?></td>
-                                                    <td align="center"><?= $data['gol_tarif']; ?></td>
-                                                    <td align="center"><?= $keterangan_gol; ?></td>
-                                                    <td align="center"><?= $data['total_data']; ?></td>
-                                                    <td align="center"><?= rupiah($data['total_pasba']); ?></td>
+                                                    <td align="center"><?php echo $no; ?></td>
+                                                    <td align="center"><?php echo $data['id_wil']; ?></td>
+                                                    <td align="center"><?php echo $data['wil']; ?></td>
+                                                    <td align="center"><?php echo $data['total_data']; ?></td>
+                                                    <td align="center"><?php echo rupiah($data['total_biaya']); ?></td>
                                                 </tr>
                                             <?php }
                                             }else{

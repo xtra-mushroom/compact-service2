@@ -247,11 +247,13 @@ $activePasang = "active"; $activeCariPasang = "active";
                                                     name="gol_tarif" value="">
                                                     <option value="">---</option>
                                                     <?php
-                                                    if ($data['gol_tarif'] == "NN") {
-                                                        $gol1 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "NU") {
-                                                        $gol2 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "SK") {
+                                                    // if ($data['gol_tarif'] == "NN") {
+                                                    //     $gol1 = "selected";
+                                                    // } elseif ($data['gol_tarif'] == "NU") {
+                                                    //     $gol2 = "selected";
+                                                    // } else
+                                                    
+                                                    if ($data['gol_tarif'] == "SK") {
                                                         $gol3 = "selected";
                                                     } elseif ($data['gol_tarif'] == "SU") {
                                                         $gol4 = "selected";
@@ -269,8 +271,8 @@ $activePasang = "active"; $activeCariPasang = "active";
                                                         $gol10 = "selected";
                                                     }
                                                     ?>
-                                                    <option value="NN" <?= " " . $gol1 ?>>NN</option>
-                                                    <option value="NU" <?= " " . $gol2 ?>>NU</option>
+                                                    <!-- <option value="NN">NN</option>
+                                                    <option value="NU">NU</option> -->
                                                     <option value="SK" <?= " " . $gol3 ?>>SK</option>
                                                     <option value="SU" <?= " " . $gol4 ?>>SU</option>
                                                     <option value="R1" <?= " " . $gol5 ?>>R1</option>

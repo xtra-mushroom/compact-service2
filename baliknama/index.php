@@ -185,7 +185,7 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                 
                                         $query = "INSERT INTO baliknama
                                                     VALUES
-                                                    ('$ds', '$wil', '$alamat', '$nik', '$ttl', '$hp', '$jenisKel', '$nama', '$nama_baru', '$jenisKel_baru', '$ttl_baru', '$nik_baru', '$hp_baru', '$tgl');";
+                                                    ('$ds', '$wil', '$alamat', '$nik', '$ttl', '$hp', '$jenisKel', '$nama', '$nama_baru', '$jenisKel_baru', '$ttl_baru', '$nik_baru', '$hp_baru', '$tgl', 20000);";
                                 
                                         $query .= "UPDATE pelanggan
                                                     SET

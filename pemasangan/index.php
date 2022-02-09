@@ -157,8 +157,8 @@ $activePasang = "active"; $activeInputPasang = "active";
                                                 <select class="form-control form-control-sm border-secondary" id="gol_tarif"
                                                     name="gol_tarif">
                                                     <option value="">---</option>
-                                                    <option value="NN">NN</option>
-                                                    <option value="NU">NU</option>
+                                                    <!-- <option value="NN">NN</option>
+                                                    <option value="NU">NU</option> -->
                                                     <option value="SK">SK</option>
                                                     <option value="SU">SU</option>
                                                     <option value="R1">R1</option>
@@ -208,6 +208,7 @@ $activePasang = "active"; $activeInputPasang = "active";
                                         $no_pend = $_POST["no_pend"];
                                         $tgl_pasang = $_POST["tgl_pasang"];
                                         $nama = $_POST["nama"];
+                                        $nik = $_POST["no_ktp"];
                                         $ttl = $_POST["tmpt_lahir"] . ", " . $_POST["tgl_lahir"];
                                         $jenisKel = $_POST["jenis_kel"];
                                         $statusRumah = $_POST["status_kep_rumah"];
@@ -245,17 +246,19 @@ $activePasang = "active"; $activeInputPasang = "active";
 
                                         $query = "INSERT INTO pemasangan
                                                     VALUES
-                                                    ('$generate_ds', '$tgl_pasang', '$statusRumah', '$jmlhJiwa', '$pln', '$cabang', '$gol', $biaya);";
+                                                    ('$generate_ds', $no_pend, '$tgl_pasang', '$statusRumah', '$jmlhJiwa', '$pln', '$cabang', '$gol', $biaya);";
                                         
                                         // otomatis juga memasukkan data ke tabel pelanggan
                                         $query .= "INSERT INTO pelanggan
                                                     VALUES
-                                                    ('$generate_ds', '$status', '$id_tarif', '$nama', '$ttl', '$jenisKel', '$alamat', '$hp');";
+                                                    ('$generate_ds', '$status', '$id_tarif', '$nama', '$nik', '$ttl', '$jenisKel', '$alamat', '$hp');";
 
                                         // update nomor sambungan di tabel pendaftaran
                                         $query .= "UPDATE pendaftaran
                                                     SET
-                                                    no_ds='$generate_ds' WHERE no_pend='$no_pend'";
+                                                    no_ds='$generate_ds' WHERE no_pend=$no_pend";
+
+                                        var_dump($query);
 
                                         $mysqlPemasangan = mysqli_multi_query($conn, $query);
 

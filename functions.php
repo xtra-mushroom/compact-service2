@@ -17,6 +17,13 @@ function alertWindow($msg) {
     echo "</script>";   
 }
 
+function rupiah($angka){
+	
+	$hasil_rupiah = "Rp. " . number_format($angka,2,',','.');
+	return $hasil_rupiah;
+ 
+}
+
 function tgl_indo($tanggal){
 	$bulan = array (
 		1 => 'Januari',

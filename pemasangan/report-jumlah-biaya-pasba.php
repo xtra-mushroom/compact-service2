@@ -74,11 +74,11 @@ $activePasang = "active"; $activeReportPasang = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pemasangan.biaya) as total_pasba FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC";
+                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pemasangan.php";
-                                        $label = "Semua Data Pendaftaran";
+                                        $label = "Semua Data, per-cabang";
                                     }else{  
-                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pemasangan.biaya) as total_pasba FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC";
+                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.*) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pemasangan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
@@ -97,8 +97,10 @@ $activePasang = "active"; $activeReportPasang = "active";
                                         <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
+                                                    <th scope="col">No.</th>
                                                     <th scope="col">ID Wilayah</th>
                                                     <th scope="col">Wilayah / Cabang</th>
+                                                    <th scope="col">Jumlah Data Pemasangan</th>
                                                     <th scope="col">Jumlah Biaya Pemasangan Baru</th>
                                                 </tr>
                                             </thead>
@@ -106,15 +108,19 @@ $activePasang = "active"; $activeReportPasang = "active";
                                             <?php 
                                             $result = $conn->query($query);	
                                             $row = mysqli_num_rows($result);
+                                            $no = 0;
 
                                             if($row > 0){
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                                $no++;
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?php echo $data['id_wil']; ?></td>
-                                                    <td align="center"><?php echo $data['wil']; ?></td>
-                                                    <td align="center"><?php echo $data['total_pasba']; ?></td>
+                                                    <td align="center"><?= $no; ?></td>
+                                                    <td align="center"><?= $data['id_wil']; ?></td>
+                                                    <td align="center"><?= $data['wil']; ?></td>
+                                                    <td align="center"><?= $data['total_data']; ?></td>
+                                                    <td align="center"><?= rupiah($data['total_pasba']); ?></td>
                                                 </tr>
                                             <?php }
                                             }else{

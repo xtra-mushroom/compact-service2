@@ -74,13 +74,13 @@ $activeBukaTutup = "active"; $activeReportBukaTutup = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $queryBuka = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pembukaan.biaya) as total_buka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
-                                        $queryTutup = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(penutupan.biaya) as total_tutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
+                                        $queryBuka = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pembukaan.biaya) as total_buka, COUNT(pembukaan.no_ds) as total_databuka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
+                                        $queryTutup = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(penutupan.biaya) as total_tutup, COUNT(penutupan.no_ds) as total_datatutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
                                         $url_cetak = "report/report-jumlah-biaya-bukatutup.php";
-                                        $label = "Semua Data Biaya Pembukaan dan Penutupan";
+                                        $label = "Semua Data Biaya Pembukaan dan Penutupan, per-cabang";
                                     }else{  
-                                        $queryBuka = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pembukaan.biaya) as total_buka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds WHERE (pembukaan.tgl_buka BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
-                                        $queryTutup = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(penutupan.biaya) as total_tutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds WHERE (penutupan.tgl_tutup BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
+                                        $queryBuka = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pembukaan.biaya) as total_buka, COUNT(pembukaan.no_ds) as total_databuka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds WHERE (pembukaan.tgl_buka BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
+                                        $queryTutup = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(penutupan.biaya) as total_tutup, COUNT(penutupan.no_ds) as total_datatutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds WHERE (penutupan.tgl_tutup BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
                                         $url_cetak = "report/report-jumlah-biaya-bukatutup.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
@@ -99,8 +99,10 @@ $activeBukaTutup = "active"; $activeReportBukaTutup = "active";
                                         <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
+                                                    <th scope="col">No.</th>
                                                     <th scope="col">ID Wilayah</th>
-                                                    <th scope="col">Wilayah / Cabang</th>
+                                                    <th scope="col">Wilayah/Cabang</th>
+                                                    <th scope="col">Jumlah Data</th>
                                                     <th scope="col">Jumlah Biaya Pembukaan</th>
                                                 </tr>
                                             </thead>
@@ -108,19 +110,23 @@ $activeBukaTutup = "active"; $activeReportBukaTutup = "active";
                                             <?php 
                                             $result = $conn->query($queryBuka);	
                                             $row = mysqli_num_rows($result);
+                                            $no = 0;
 
                                             if($row > 0){
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                                $no++;
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?php echo $data['id_wil']; ?></td>
-                                                    <td align="center"><?php echo $data['wil']; ?></td>
-                                                    <td align="center"><?php echo $data['total_buka']; ?></td>
+                                                    <td align="center"><?= $no; ?></td>
+                                                    <td align="center"><?= $data['id_wil']; ?></td>
+                                                    <td align="center"><?= $data['wil']; ?></td>
+                                                    <td align="center"><?= $data['total_databuka']; ?></td>
+                                                    <td align="center"><?= rupiah($data['total_buka']); ?></td>
                                                 </tr>
                                             <?php }
                                             }else{
-                                                echo "<tr><td colspan='5'>Data tidak diitemukan</td></tr>";
+                                                echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
                                             } ?>   
                                             </tbody>
                                         </table>
@@ -128,8 +134,10 @@ $activeBukaTutup = "active"; $activeReportBukaTutup = "active";
                                         <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
+                                                    <th scope="col">No.</th>
                                                     <th scope="col">ID Wilayah</th>
-                                                    <th scope="col">Wilayah / Cabang</th>
+                                                    <th scope="col">Wilayah/Cabang</th>
+                                                    <th scope="col">Jumlah Data</th>
                                                     <th scope="col">Jumlah Biaya Penutupan</th>
                                                 </tr>
                                             </thead>
@@ -137,19 +145,23 @@ $activeBukaTutup = "active"; $activeReportBukaTutup = "active";
                                             <?php 
                                             $result = $conn->query($queryTutup);	
                                             $row = mysqli_num_rows($result);
+                                            $no = 0;
 
                                             if($row > 0){
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                                $no++;
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?php echo $data['id_wil']; ?></td>
-                                                    <td align="center"><?php echo $data['wil']; ?></td>
-                                                    <td align="center"><?php echo $data['total_tutup']; ?></td>
+                                                    <td align="center"><?= $no; ?></td>
+                                                    <td align="center"><?= $data['id_wil']; ?></td>
+                                                    <td align="center"><?= $data['wil']; ?></td>
+                                                    <td align="center"><?= $data['total_datatutup']; ?></td>
+                                                    <td align="center"><?= rupiah($data['total_tutup']); ?></td>
                                                 </tr>
                                             <?php }
                                             }else{
-                                                echo "<tr><td colspan='5'>Data tidak diitemukan</td></tr>";
+                                                echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
                                             } ?>   
                                             </tbody>
                                         </table>

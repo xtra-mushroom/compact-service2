@@ -76,7 +76,7 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
                                         $query = "SELECT id_wil, wil, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran from pendaftaran GROUP BY wil ORDER BY id_wil ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pendaftaran.php";
-                                        $label = "Semua Data Pendaftaran";
+                                        $label = "Semua Data, per-cabang";
                                     }else{  
                                         $query = "SELECT id_wil, wil, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran from pendaftaran WHERE (tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY wil ORDER BY id_wil ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pendaftaran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
@@ -97,6 +97,7 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                         <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
+                                                    <th scope="col">No.</th>
                                                     <th scope="col">ID Wilayah</th>
                                                     <th scope="col">Wilayah / Cabang</th>
                                                     <th scope="col">Jumlah Pendaftaran</th>
@@ -107,16 +108,20 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                             <?php 
                                             $result = $conn->query($query);	
                                             $row = mysqli_num_rows($result);
+                                            $no = 0;
 
                                             if($row > 0){
+                                                
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                                $no++;
                                             ?>
                                                 <tr>
+                                                    <td align="center"><?php echo $no; ?></td>
                                                     <td align="center"><?php echo $data['id_wil']; ?></td>
                                                     <td align="center"><?php echo $data['wil']; ?></td>
                                                     <td align="center"><?php echo $data['jumlah_pendaftaran']; ?></td>
-                                                    <td align="center"><?php echo $data['total_biaya']; ?></td>
+                                                    <td align="center"><?php echo rupiah($data['total_biaya']); ?></td>
                                                 </tr>
                                             <?php }
                                             }else{
