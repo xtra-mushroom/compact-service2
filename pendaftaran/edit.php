@@ -7,6 +7,7 @@ $pendaftaran = $conn->query($sql)->fetch_assoc();
 
 $openDaftar = "menu-open";
 $activeDaftar = "active"; $activeCariDaftar = "active";
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +62,7 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                     while($data = $result->fetch_assoc()){
                                     ?>
                                     
-                                    <form method="post" action="update.php">
+                                    <form method="post" action="">
                                         <div class="form-group row mt-3">
                                             <label for="no_pend" class="col-sm-2 col-form-label">Nomor Pendaftaran</label>
                                             <div class="col-sm-4">
@@ -77,13 +78,13 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                         <div class="form-group row">
                                             <label for="no_ktp" class="col-sm-2 col-form-label">Nomor KTP</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp" value="<?php echo $data['no_ktp']; ?>">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp" autocomplete="off" value="<?php echo $data['no_ktp']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" value="<?php echo $data['nama']; ?>">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" autocomplete="off" value="<?php echo $data['nama']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -107,13 +108,13 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Alamat</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat" value="<?php echo $data['alamat']; ?>">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat" autocomplete="off" value="<?php echo $data['alamat']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_hp" name="no_hp" value="<?php echo $data['no_hp']; ?>">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_hp" name="no_hp" autocomplete="off" value="<?php echo $data['no_hp']; ?>">
                                             </div>
                                         </div>
     
@@ -210,7 +211,60 @@ $activeDaftar = "active"; $activeCariDaftar = "active";
                                             <button type="submit" name="submit" class="btn btn-dark">SIMPAN</button>
                                         </div>
                                     </form>
-                                    <?php } ?>    
+                                    <?php } ?> 
+                                    
+                                    <?php
+                                    if(isset($_POST["submit"])){
+                                        if($_POST["wil"] == "Paringin 1"){
+                                            $idWil = "01";
+                                        }elseif($_POST["wil"] == "Paringin 2"){
+                                            $idWil = "02";
+                                        }elseif($_POST["wil"] == "Awayan"){
+                                            $idWil = "03";
+                                        }elseif($_POST["wil"] == "Lampihong"){
+                                            $idWil = "04";
+                                        }elseif($_POST["wil"] == "Halong"){
+                                            $idWil = "05";
+                                        }elseif($_POST["wil"] == "Juai"){
+                                            $idWil = "06";
+                                        }elseif($_POST["wil"] == "Batumandi"){
+                                            $idWil = "07";
+                                        }elseif($_POST["wil"] == "Paringin Selatan"){
+                                            $idWil = "08";
+                                        }elseif($_POST["wil"] == "Tebing Tinggi"){
+                                            $idWil = "09";
+                                        }
+                                        
+                                        $no = $_POST['no_pend'];
+                                        $tgl = $_POST['tgl_daftar'];
+                                        $ktp = $_POST['no_ktp'];
+                                        $nama = $_POST['nama'];
+                                        $jenisKel = $_POST['jenis_kel'];
+                                        $alamat = $_POST['alamat'];
+                                        $kec = $_POST['kecamatan'];
+                                        $desa = $_POST['desa'];
+                                        $hp = $_POST["no_hp"];
+                                        $wilayah = $_POST["wil"];
+                                        
+                                        $query = "UPDATE pendaftaran
+                                                    SET
+                                                    no_pend=$no, tgl_daftar='$tgl', no_ktp='$ktp', nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', kecamatan='$kec', desa='$desa', no_hp='$hp', id_wil='$idWil', wil='$wilayah' where no_pend='$no'";
+                                        
+                                        $updateDaftar = mysqli_query($conn, $query);
+                                        // var_dump($query);
+                                        
+                                        if($updateDaftar == true){
+                                            $_SESSION['hasil'] = true;
+                                            $_SESSION['pesan'] = "Berhasil ubah data pendaftaran";
+                                        } else {
+                                            $_SESSION['hasil'] = false;
+                                            $_SESSION['pesan'] = "Gagal ubah data pendaftaran";
+                                        }
+                                        echo "<meta http-equiv='refresh' content='0;url=cari.php'>";
+
+                                    }
+
+                                    ?>
                                 </div>  
                             </div>
                         </div>

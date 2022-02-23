@@ -50,14 +50,14 @@ $activePasang = "active"; $activeInputPasang = "active";
                                             <label for="tgl_pasang" class="col-sm-3 col-form-label">Tanggal</label>
                                             <div class="col-sm-4">
                                                 <input type="date" class="form-control form-control-sm border-secondary" id="tgl_pasang"
-                                                name="tgl_pasang">
+                                                name="tgl_pasang" autofocus>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="no_pend" class="col-sm-3 col-form-label">Nomor Pendaftaran</label>
                                             <div class="col-sm-4">
                                                 <input type="number" class="form-control form-control-sm border-secondary" id="no_pend"
-                                                name="no_pend" onkeyup="autofill()">
+                                                name="no_pend" onkeyup="autofill()" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -81,18 +81,6 @@ $activePasang = "active"; $activeInputPasang = "active";
                                                 name="alamat" readonly>
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group row">
-                                            <label for="kecamatan" class="col-sm-3 col-form-label">Kecamatan & Desa</label>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="kecamatan"
-                                                name="kecamatan" readonly>
-                                            </div> 
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="desa"
-                                                name="desa" readonly>
-                                            </div>
-                                        </div> -->
-                                        
                                         <div class="form-group row">
                                             <label for="no_hp" class="col-sm-3 col-form-label">Nomor HP</label>
                                             <div class="col-sm-4">
@@ -111,10 +99,10 @@ $activePasang = "active"; $activeInputPasang = "active";
                                             <label for="tmpt_lahir" class="col-sm-3 col-form-label">Tempat & Tanggal Lahir</label>
                                             <div class="col-sm-2">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="tmpt_lahir"
-                                                name="tmpt_lahir" placeholder="Tempat Lahir">
+                                                name="tmpt_lahir" placeholder="Tempat Lahir" autocomplete="off">
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir" name="tgl_lahir" placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir" name="tgl_lahir" placeholder="dd-mm-yyyy" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -134,13 +122,13 @@ $activePasang = "active"; $activeInputPasang = "active";
                                             <label for="jumlah_jiwa" class="col-sm-3 col-form-label">Jumlah Jiwa</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="jumlah_jiwa"
-                                                name="jumlah_jiwa">
+                                                name="jumlah_jiwa" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pln"  class="col-sm-3 col-form-label">PLN</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln" autocomplete="off">
                                             </div>
                                         </div>                                        
                                         <hr>
@@ -174,7 +162,7 @@ $activePasang = "active"; $activeInputPasang = "active";
                                             <label for="biaya" class="col-sm-3 col-form-label">Biaya</label>
                                             <div class="col-sm-4">
                                                 <input type="number" class="form-control form-control-sm border-secondary" id="biaya"
-                                                name="biaya">
+                                                name="biaya" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="card-footer col-7 text-right">
@@ -223,12 +211,13 @@ $activePasang = "active"; $activeInputPasang = "active";
                                         $id_tarif = $_POST["gol_tarif"];
 
                                         // generate nomor sambungan
-                                        $sql = "SELECT * FROM pelanggan ORDER BY no_ds LIMIT 1;";
+                                        $sql = "SELECT * FROM pemasangan ORDER BY id DESC LIMIT 1";
                                         $result = mysqli_query($conn, $sql);
 
                                         if($result->num_rows > 0){
                                             while($data = mysqli_fetch_assoc($result)){
-                                                $last_ds = $data['no_ds']; // 001001
+                                                $last_ds = $data['no_ds'];
+                                                $id = $data['id'] + 1; // 011001
                                             }
                                             $split_last_ds = substr($last_ds,2); // 1001
                                             $split_new_ds = $split_last_ds + 1;
@@ -246,7 +235,7 @@ $activePasang = "active"; $activeInputPasang = "active";
 
                                         $query = "INSERT INTO pemasangan
                                                     VALUES
-                                                    ('$generate_ds', $no_pend, '$tgl_pasang', '$statusRumah', '$jmlhJiwa', '$pln', '$cabang', '$gol', $biaya);";
+                                                    ('$generate_ds', '$id', '$tgl_pasang', '$statusRumah', '$jmlhJiwa', '$pln', '$cabang', '$gol', $biaya);";
                                         
                                         // otomatis juga memasukkan data ke tabel pelanggan
                                         $query .= "INSERT INTO pelanggan
@@ -257,8 +246,6 @@ $activePasang = "active"; $activeInputPasang = "active";
                                         $query .= "UPDATE pendaftaran
                                                     SET
                                                     no_ds='$generate_ds' WHERE no_pend=$no_pend";
-
-                                        var_dump($query);
 
                                         $mysqlPemasangan = mysqli_multi_query($conn, $query);
 

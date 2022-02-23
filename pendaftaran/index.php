@@ -49,19 +49,19 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                                         <div class="form-group row">
                                             <label for="tgl_daftar" class="col-sm-2 col-form-label">Tanggal Pendaftaran</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_daftar" name="tgl_daftar">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_daftar" name="tgl_daftar" autofocus>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="no_ktp" class="col-sm-2 col-form-label">Nomor KTP</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -78,7 +78,7 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Alamat</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -110,7 +110,7 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                                         <div class="form-group row">
                                             <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_hp" name="no_hp">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_hp" name="no_hp" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">

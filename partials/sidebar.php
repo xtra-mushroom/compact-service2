@@ -107,7 +107,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../bukatutup/cetakreport.php" class="nav-link <?= $activeReportBukaTutup ?>">
+                            <a href="../bukatutup/report-jumlah-biaya-bukatutup.php" class="nav-link <?= $activeReportBukaTutup ?>">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
                                 <p>Cetak Laporan</p>
                             </a>

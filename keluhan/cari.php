@@ -102,7 +102,7 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                                                     <td><?php echo $data['alamat']; ?></td>
                                                     <td><?php echo $data['no_hp']; ?></td>
                                                     <td><?php echo $data['tgl_keluhan']; ?></td>
-                                                    <td><?php echo $data['keluhan']; ?></td>
+                                                    <td><p contenteditable="true"><?php echo $data['keluhan']; ?></p></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

@@ -68,7 +68,7 @@ $html .= "<table style='margin-left:40px;'>
 
 $html .= "<p>Demikian agar dilaksanakan dengan penuh tanggung jawab.</p>";
 
-$html .= "<table style='padding:0px 15px;'>
+$html .= "<table style='font-size:.9em; margin-left:15px'>
 <tbody>
     <tr>
         <td></td>

@@ -2,6 +2,7 @@
 require "../functions.php";
 $openPasang = "menu-open";
 $activePasang = "active"; $activeCariPasang = "active";
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +16,7 @@ $activePasang = "active"; $activeCariPasang = "active";
 <?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+<script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
         <!-- Navbar -->
         <?php include_once ("../partials/navbar.php") ?>
@@ -27,6 +29,35 @@ $activePasang = "active"; $activeCariPasang = "active";
         <!-- Content -->
         <div class="content-wrapper">
             <section class="content-header">
+<?php 
+                if(isset($_SESSION['hasil'])){
+                    if($_SESSION['hasil']){
+?>
+                    <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '<?php echo $_SESSION["pesan"] ?>',
+                        showConfirmButton: true
+                        })
+                    </script>
+<?php 
+                    } else {
+?>
+                    <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: '<?php echo $_SESSION["pesan"] ?>',
+                        showConfirmButton: true
+                        })
+                    </script>
+<?php
+                    }
+                    unset($_SESSION['pesan']);
+                    unset($_SESSION['hasil']);
+                }
+?>
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">

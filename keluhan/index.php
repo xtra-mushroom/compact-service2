@@ -50,7 +50,7 @@ $activeKeluhan = "active"; $activeInputKeluhan = "active";
                                         <div class="form-group row mt-2">
                                             <label for="no_ds" class="col-sm-2 col-form-label">Nomor DS</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" onkeyup="autofill()">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" onkeyup="autofill()" autofocus>
                                             </div>
                                         </div>
                                         <div class="form-group row">

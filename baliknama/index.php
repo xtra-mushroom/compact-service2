@@ -50,7 +50,7 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                         <div class="form-group row mt-2">
                                             <label for="no_ds" class="col-sm-2 col-form-label">Nomor DS</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" onkeyup="autofill()">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" onkeyup="autofill()" autofocus>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -84,7 +84,7 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="ttl_asal" class="col-sm-2 col-form-label">TLL</label>
+                                            <label for="ttl_asal" class="col-sm-2 col-form-label">TTL</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="ttl_asal" name="ttl_asal" readonly>
                                             </div>
@@ -98,23 +98,23 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                         <div class="form-group row">
                                             <label for="nama_baru" class="col-sm-2 col-form-label">Nama Baru</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama_baru" name="nama_baru">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama_baru" name="nama_baru" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nik_baru" class="col-sm-2 col-form-label">NIK Baru</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="nik_baru" name="nik_baru">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nik_baru" name="nik_baru" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="tmpt_lahir" class="col-sm-2 col-form-label">TTL Baru</label>
                                             <div class="col-sm-2">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="tmpt_lahir"
-                                                name="tmpt_lahir" placeholder="Tempat Lahir">
+                                                name="tmpt_lahir" placeholder="Tempat Lahir" autocomplete="off">
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir" name="tgl_lahir" placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir" name="tgl_lahir" placeholder="dd-mm-yyyy" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -131,7 +131,7 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                         <div class="form-group row">
                                             <label for="hp_baru" class="col-sm-2 col-form-label">Nomor HP Baru</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="hp_baru" name="hp_baru">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="hp_baru" name="hp_baru" autocomplete="off" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">

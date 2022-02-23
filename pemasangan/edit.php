@@ -1,9 +1,8 @@
 <?php 
 require_once "../functions.php";
-
-
 $openPasang = "menu-open";
 $activePasang = "active"; $activeCariPasang = "active";
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +56,7 @@ $activePasang = "active"; $activeCariPasang = "active";
                                     while($data = $result->fetch_assoc()){
                                     ?>
 
-                                    <form action="update.php" method="post">
+                                    <form action="" method="post">
                                         <div class="form-group row">
                                             <label for="no_ds" class="col-sm-2 col-form-label">Nomor Sambungan</label>
                                             <div class="col-sm-4">
@@ -68,21 +67,21 @@ $activePasang = "active"; $activeCariPasang = "active";
                                         <div class="form-group row">
                                             <label for="tgl_pasang" class="col-sm-2 col-form-label">Tanggal Pemasangan</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_pasang" name="tgl_pasang" value="<?= $data['tgl_pasang']; ?>">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_pasang" name="tgl_pasang" autocomplete="off" value="<?= $data['tgl_pasang']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="no_ktp" class="col-sm-2 col-form-label">Nomor KTP</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp"
-                                                name="no_ktp" value="<?= $data['no_ktp']; ?>">
+                                                name="no_ktp" autocomplete="off" value="<?= $data['no_ktp']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="nama"
-                                                name="nama" value="<?= $data['nama']; ?>">
+                                                name="nama" autocomplete="off" value="<?= $data['nama']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -104,10 +103,18 @@ $activePasang = "active"; $activeCariPasang = "active";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="ttl" class="col-sm-2 col-form-label">TTL</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="ttl"
-                                                name="ttl" value="<?= $data['ttl']; ?>">
+                                            <label for="tmpt_lahir" class="col-sm-2 col-form-label">TTL Baru</label>
+                                            <?php
+                                            $ttl = $data['ttl'];
+                                            $pecahTtl = explode(',', $ttl);
+                                            ?>
+                                            <div class="col-sm-2"> 
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="tmpt_lahir"
+                                                name="tmpt_lahir" autocomplete="off" value="<?= $pecahTtl[0] ?>">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir"
+                                                name="tgl_lahir" autocomplete="off" value="<?= $pecahTtl[1] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -138,20 +145,20 @@ $activePasang = "active"; $activeCariPasang = "active";
                                             <label for="jumlah_jiwa" class="col-sm-2 col-form-label">Jumlah Jiwa</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="jumlah_jiwa"
-                                                name="jumlah_jiwa" value="<?= $data['jumlah_jiwa']; ?>">
+                                                name="jumlah_jiwa" autocomplete="off" value="<?= $data['jumlah_jiwa']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pln" class="col-sm-2 col-form-label">PLN</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln" value="<?= $data['pln']; ?>">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln" autocomplete="off" value="<?= $data['pln']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="alamat"
-                                                name="alamat" value="<?= $data['alamat']; ?>">
+                                                name="alamat" autocomplete="off" value="<?= $data['alamat']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -197,7 +204,7 @@ $activePasang = "active"; $activeCariPasang = "active";
                                             <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="no_hp"
-                                                name="no_hp" value="<?= $data['no_hp']; ?>">
+                                                name="no_hp" autocomplete="off" value="<?= $data['no_hp']; ?>">
                                             </div>
                                         </div>
                                         <hr>
@@ -288,7 +295,7 @@ $activePasang = "active"; $activeCariPasang = "active";
                                             <label for="biaya" class="col-sm-2 col-form-label">Biaya</label>
                                             <div class="col-sm-4">
                                                 <input type="number" class="form-control form-control-sm border-secondary" id="biaya"
-                                                name="biaya" value="<?= $data['biaya']; ?>">
+                                                name="biaya" autocomplete="off" value="<?= $data['biaya']; ?>">
                                             </div>
                                         </div>
                                         <div class="card-footer col-6 text-right">
@@ -296,6 +303,55 @@ $activePasang = "active"; $activeCariPasang = "active";
                                         </div>
                                     </form>
                                     <?php } ?>
+
+                                    <?php
+                                    if(isset($_POST["submit"])){
+                                        // var_dump($_POST);
+                                        $ktp = $_POST["no_ktp"];
+                                        $ds = $_POST["no_ds"];
+                                        $tgl = $_POST["tgl_pasang"];
+                                        $nama = $_POST["nama"];
+                                        $jenisKel = $_POST["jenis_kel"];
+                                        $tmpLahir = $_POST["tmpt_lahir"];
+                                        $tglLahir = $_POST["tgl_lahir"];
+                                        $statusRumah = $_POST["status_kep_rumah"];
+                                        $jmlhJiwa = $_POST["jumlah_jiwa"];
+                                        $pln = $_POST["pln"];
+                                        $alamat = $_POST["alamat"];
+                                        $kec = $_POST["kecamatan"];
+                                        $desa = $_POST["desa"];
+                                        $hp = $_POST["no_hp"];
+                                        $cabang = $_POST["cabang"];
+                                        $gol = $_POST["gol_tarif"];
+                                        $biaya = $_POST["biaya"];
+                                        $ttl = $_POST["tmpt_lahir"] . "," . $_POST['tgl_lahir'];
+                                    
+                                        $query = "UPDATE pemasangan
+                                                    SET
+                                                    tgl_pasang='$tgl', status_kep_rumah='$statusRumah', jumlah_jiwa='$jmlhJiwa', pln='$pln', cabang='$cabang', gol_tarif='$gol', biaya=$biaya
+                                                    WHERE no_ds='$ds';";
+                                        
+                                        $query .= "UPDATE pendaftaran
+                                                    SET
+                                                    no_ktp='$ktp', nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', no_hp='$hp'
+                                                    WHERE no_ds='$ds';";
+                                        
+                                        $query .= "UPDATE pelanggan
+                                                    SET ttl='$ttl' WHERE no_ds='$ds';";
+                                    
+                                        $updatePemasangan = mysqli_multi_query($conn, $query);
+                                         
+                                        if($updatePemasangan == true){
+                                            $_SESSION['hasil'] = true;
+                                            $_SESSION['pesan'] = "Berhasil ubah data pemasangan";
+                                        } else {
+                                            $_SESSION['hasil'] = false;
+                                            $_SESSION['pesan'] = "Gagal ubah data pemasangan";
+                                        }
+                                        echo "<meta http-equiv='refresh' content='0;url=cari.php'>";
+                                    
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>

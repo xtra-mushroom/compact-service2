@@ -53,7 +53,7 @@
                                     <p class="lead text-center">Compact Service PDAM Kabupaten Balangan mencakup seluruh rangkaian pelayanan dalam satu aplikasi</p>
                                     <hr class="my-4">
                                     <p class="text-secondary ml-3">Pertama kali menggunakan Compact Service?</p>
-                                    <a class="btn btn-primary text-secondary ml-3" href="#" role="button">Pelajari Panduan</a>
+                                    <a class="btn btn-primary text-secondary ml-3" href="panduan/index.php" role="button">Pelajari Panduan</a>
                                 </div>
                                 <div class="card-body mx-auto text-center">
                                     <h4>Statistik Data Pelayanan</h4>
