@@ -19,10 +19,9 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top" style="background-color: #2c3c52">
         <div class="container">
-            <!-- <a class="navbar-brand text-uppercase" href="#">COMPACT SERVICE</a> -->
-                <img src="../layout/dist/img/pdam-logo.png" alt="PDAM Balangan Logo" class="brand-image rounded-circle shadow border border-success"
+            <img src="../layout/dist/img/pdam-logo.png" alt="PDAM Balangan Logo" class="brand-image rounded-circle shadow border border-success"
                     style="margin-left: 6px; width:3em; height:2.7em;">
-                <span class="brand-text font-weight-light ms-2" style="color: #a9d1ab"><b>COMPACT SERVICE</b></span>
+            <span class="brand-text font-weight-light ms-2" style="color: #a9d1ab"><b>COMPACT SERVICE</b></span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,8 +44,6 @@
 
     <!-- jumbotron -->
     <section class="jumbotron text-left">
-        <!-- <img src="images/pdam-logo.png" alt="logo" class="rounded-circle"
-            width="190"> -->
         <div class="#">
             <div class="text-land ps-5">
                 <h1 class="display-2 mt-3">Selamat Datang di Compact Service PDAM Balangan</h1>
@@ -118,8 +115,8 @@
             <em>Maulida Hikmah</em></p>
     </footer>
 
-    <script src="js/bootstrap.js"></script>
-    <script src="js/popper.min.js"></script>
+    <script src="panduan/js/bootstrap.js"></script>
+    <script src="panduan/js/popper.min.js"></script>
 
 </body>
 </html>
