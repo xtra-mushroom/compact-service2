@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,16 +55,16 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,128L120,128C240,128,480,128,720,112C960,96,1200,64,1320,48L1440,32L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     </section>
 
-    <section id="pendaftaran">
+    <section id="infografis">
         <div class="container">
-            <div class="row text-center mb-3">
+            <div class="row text-center">
                 <div class="col">
                     <h3>Infografis Pelayanan Online</h3>
                 </div>
             </div>
             <div class="row justify-content-center fs-6 text-left">
-                <div class="col-10" id="infografis">
-                    <img src="panduan/images/infografik-2.svg" type="svg" alt="infografis">
+                <div class="col-10" id="infosvg">
+                    <img src="panduan/images/infografik-2.svg" type="svg" alt="infosvg">
                 </div>
             </div>
         </div>
@@ -82,28 +80,61 @@
             </div>
             <div class="row justify-content-center fs-6 text-left">
                 <div class="col-10">
-                    <form name="my-contact-form">
+                    <form method="post" action="payment-method.php">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="name" aria-describedby="name" name="name">
+                            <input type="text" class="form-control" id="nama" aria-describedby="nama" name="nama">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Nomor HP</label>
-                            <input type="email" class="form-control" id="phone" aria-describedby="phone" name="phone">
-                            <div id="emailHelp" class="form-text">Pastikan nomor HP anda aktif
+                            <label for="jenis_kel" class="form-label">Jenis Kelamin</label>
+                            <select class="form-control" id="jenis_kel" name="jenis_kel">
+                                <option class="text-secondary" selected></option>
+                                <option value="Laki-Laki">Laki-Laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Nomor HP</label>
+                            <input type="text" class="form-control" id="phone" aria-describedby="phone" name="phone">
+                            <div id="phoneHelp" class="form-text">Pastikan nomor HP anda aktif
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label">Alamat Lengkap</label>
+                            <label for="alamat" class="form-label">Alamat Lengkap</label>
                             <textarea class="form-control" id="alamat" rows="2" name="alamat"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-send btn-primary float-end">Daftar</button>
-                        <button class="btn btn-load d-none" style="background-color: #946A5D; color: white;"
+                        <button type="submit" name="submit" class="btn btn-send btn-primary float-end">Daftar</button>
+                        <!-- <button class="btn btn-load d-none" style="background-color: #946A5D; color: white;"
                             type="button" disabled>
                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                             Loading...
-                        </button>
+                        </button> -->       
                     </form>
+                    <?php 
+                        if(isset($_POST["submit"])){
+                            $nama = $_POST['nama'];
+                            $jenisKel = $_POST['jenis_kel'];
+                            $hp = $_POST['phone'];
+                            $alamat = $_POST['alamat'];               
+                            // $query = "";                                
+                            // $mysqlPendaftaran = mysqli_query($conn, $query);
+                            
+                            // $namaErr = $jeniskelErr = $hpErr = $alamatErr = "";
+                            // $namaCek = $jeniskelCek = $hpCek = $comment = $website = "";
+
+                            // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            //     if (empty($_POST["nama"])) {
+                            //         $nameErr = "Name is required";
+                            //     } else {
+                            //         $name = test_input($_POST["name"]);
+                            //         // check if name only contains letters and whitespace
+                            //         if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+                            //         $nameErr = "Only letters and white space allowed"; 
+                            //         }
+                            //     }
+                            // }
+                        }    
+                    ?>
                 </div>
             </div>
         </div>

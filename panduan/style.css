@@ -11,6 +11,7 @@
 .jumbotron h1{
     font-size: 30px;
     font-weight: 400;
+    color: #2c3c52;
 }
 
 .text-land{
@@ -30,6 +31,16 @@
 
 .jumbotron .lead{
     font-size: 18px;
+    color:#463c3f;
+}
+
+.text-land a {
+    text-decoration: none;
+}
+
+.text-land a:hover {
+    text-decoration: none;
+    color: #2c3c52;
 }
 /* end of style for responsive text */
 
@@ -39,7 +50,7 @@ footer {
     font-size: .8rem;
 }
 
-section {
+#infografis, #registrasi {
     padding-top: 5rem;
 }
 
@@ -54,4 +65,34 @@ td {
 
 #infografis img {
     width: 70vw;
+}
+
+.wrapper {
+    margin: 3% 7%;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+#payment-container {
+    padding-top: 2rem;
+}
+
+#payment-container h3 {
+    color: rgb(34, 32, 32);
+    margin-left: 3%;
+}
+
+#bg-payment {
+    background: url("images/bg-payment.jpg");
+}
+
+.instructions {
+    font-size: .9em;
+    color: #505050;
+}
+
+.ins-title {
+    font-size: .9em;
+    color: #505050;
+    font-weight: bold;
 }
