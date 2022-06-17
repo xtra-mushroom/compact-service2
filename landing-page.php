@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="layout/dist/img/pdam-logo.png">
 </head>
 
-<body id="head">
+<body id="beranda">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top" style="background-color: #2c3c52">
         <div class="container">
@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#head">Head</a>
+                        <a class="nav-link" aria-current="page" href="#beranda">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#registrasi">Registrasi</a>
