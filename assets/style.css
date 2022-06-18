@@ -96,3 +96,8 @@ td {
     color: #505050;
     font-weight: bold;
 }
+
+.error {
+    font-size: .8em;
+    color: rgb(194, 29, 29);
+}

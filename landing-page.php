@@ -1,3 +1,70 @@
+<?php
+if(isset($_POST["submit"])){
+    $nama = $_POST['nama'];
+    $jenisKel = $_POST['jenis_kel'];
+    $hp = $_POST['phone'];
+    $alamat = $_POST['alamat'];
+
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    
+    $namaErr = $jeniskelErr = $hpErr = $alamatErr = "";
+    $namaCek = $jeniskelCek = $hpCek = $action = "";
+    $namaValue = $jkValue = $hpValue = $alamatValue = false;
+    $selectM = $selectF = "";
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(empty($nama)){
+        $namaErr = " *nama tidak boleh kosong";
+        $namaValue = false;
+    }else{
+        $namaCek = test_input($nama);
+        if(!preg_match("/^[a-zA-Z ]*$/",$namaCek)){
+        $namaErr = " *nama tidak boleh mengandung karakter selain huruf dan spasi";
+        $namaValue = false;
+        }else{
+            $namaValue = true;
+        }
+    }
+
+    if(empty($jenisKel)){
+        $jeniskelErr = " *jenis kelamin harus dipilih";
+        $jkValue = false;
+    }else{
+        $jkValue = true;
+    }
+
+    if(empty($hp)){
+        $hpErr = " *nomor HP tidak boleh kosong";
+        $hpValue = false;
+    }else{
+        $hpCek = test_input($hp);
+        if(!preg_match("/^[0-9 ]*$/",$hpCek)){
+        $hpErr = " *nomor HP hanya boleh mengandung angka";
+        $hpValue = false;
+        }else{
+            $hpValue = true;
+        }
+    }
+
+    if(empty($alamat)){
+        $alamatErr = " *alamat tidak boleh kosong";
+        $alamatValue = false;
+    }else{
+        $alamatValue = true;
+    }
+}
+if($namaValue && $jkValue && $hpValue && $alamatValue == false){
+    $action = "";
+}elseif($namaValue && $jkValue && $hpValue && $alamatValue == true){
+    $action = "payment-method.php";
+}
+}    
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -80,61 +147,43 @@
             </div>
             <div class="row justify-content-center fs-6 text-left">
                 <div class="col-10">
-                    <form method="post" action="payment-method.php">
+                    <form method="post" action="<?= htmlspecialchars($action) ?>">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="nama" aria-describedby="nama" name="nama">
+                            <input type="text" class="form-control" id="nama" aria-describedby="nama" name="nama" value="<?= $nama; ?>">
+                            <span class="error"><?= $namaErr ?></span>
                         </div>
+                        <?php 
+                        if($jenisKel == "Laki-Laki"){
+                            $selectM = "selected";
+                        }elseif($jenisKel == "Perempuan"){
+                            $selectF = "selected";
+                        }else{
+                            $selectM = $selectF = "";
+                        }
+                        ?>
                         <div class="mb-3">
                             <label for="jenis_kel" class="form-label">Jenis Kelamin</label>
                             <select class="form-control" id="jenis_kel" name="jenis_kel">
                                 <option class="text-secondary" selected></option>
-                                <option value="Laki-Laki">Laki-Laki</option>
-                                <option value="Perempuan">Perempuan</option>
+                                <option value="Laki-Laki" <?= " ".$selectM ?>>Laki-Laki</option>
+                                <option value="Perempuan" <?= " ".$selectF ?>>Perempuan</option>
                             </select>
+                            <span class="error"><?= $jeniskelErr ?></span>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Nomor HP</label>
-                            <input type="text" class="form-control" id="phone" aria-describedby="phone" name="phone">
-                            <div id="phoneHelp" class="form-text">Pastikan nomor HP anda aktif
-                            </div>
+                            <input type="text" class="form-control" id="phone" aria-describedby="phone" name="phone" value="<?= $hp; ?>">
+                            <div id="phoneHelp" class="form-text">Pastikan nomor HP anda aktif</div>
+                            <span class="error"><?= $hpErr ?></span>
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat Lengkap</label>
-                            <textarea class="form-control" id="alamat" rows="2" name="alamat"></textarea>
+                            <textarea class="form-control" id="alamat" rows="2" name="alamat"><?= $alamat; ?></textarea>
+                            <span class="error"><?= $alamatErr ?></span>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-send btn-primary float-end">Daftar</button>
-                        <!-- <button class="btn btn-load d-none" style="background-color: #946A5D; color: white;"
-                            type="button" disabled>
-                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                            Loading...
-                        </button> -->       
+                        <button type="submit" name="submit" class="btn btn-send btn-primary float-end">Daftar</button>    
                     </form>
-                    <?php 
-                        if(isset($_POST["submit"])){
-                            $nama = $_POST['nama'];
-                            $jenisKel = $_POST['jenis_kel'];
-                            $hp = $_POST['phone'];
-                            $alamat = $_POST['alamat'];               
-                            // $query = "";                                
-                            // $mysqlPendaftaran = mysqli_query($conn, $query);
-                            
-                            // $namaErr = $jeniskelErr = $hpErr = $alamatErr = "";
-                            // $namaCek = $jeniskelCek = $hpCek = $comment = $website = "";
-
-                            // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            //     if (empty($_POST["nama"])) {
-                            //         $nameErr = "Name is required";
-                            //     } else {
-                            //         $name = test_input($_POST["name"]);
-                            //         // check if name only contains letters and whitespace
-                            //         if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-                            //         $nameErr = "Only letters and white space allowed"; 
-                            //         }
-                            //     }
-                            // }
-                        }    
-                    ?>
                 </div>
             </div>
         </div>
