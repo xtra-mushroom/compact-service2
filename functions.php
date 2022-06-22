@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'lava', 'linolee', 'compact_service');
+$conn = mysqli_connect('localhost', 'lava', 'linolee', 'master_pelayanan');
 
 function query($query){
     global $conn;
@@ -68,3 +68,10 @@ function Terbilang($x)
   elseif ($x < 1000000000)   
    return Terbilang($x / 1000000) . " Juta" . Terbilang($x % 1000000);    
  }   
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}

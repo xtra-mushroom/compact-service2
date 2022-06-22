@@ -13,6 +13,7 @@ $username = "";
 if(isset($_POST['signin'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $latestLogin = date("Y-m-d H:i:s");
     if($username == '' || $password == ''){
         $message = "Data tidak bisa kosong!";
     }else{
@@ -116,7 +117,6 @@ if(isset($_POST['signin'])){
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>

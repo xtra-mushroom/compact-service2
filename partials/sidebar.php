@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-secondary elevation-2" style="background-color: #383434">
     <a href="#" class="brand-link">
-        <img src="../layout/dist/img/pdam-logo.png" alt="PDAM Balangan Logo" class="brand-image img-circle elevation-2"
+        <img src="../assets/images/pdam-logo.png" alt="PDAM Balangan Logo" class="brand-image img-circle elevation-2"
             style="margin-left: 6px">
         <span class="brand-text font-weight-light"><b>COMPACT SERVICE</b></span>
     </a>

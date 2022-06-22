@@ -4,7 +4,11 @@
 }
 
 #pemasangan, #registrasi {
-    background-color: #a5c3ca;
+    background-color: #f8feff;
+}
+
+#panduan {
+    background-color: #557981;
 }
 
 /* style for responsive text */
@@ -100,4 +104,9 @@ td {
 .error {
     font-size: .8em;
     color: rgb(194, 29, 29);
+}
+
+#noreg {
+    font-size: 1.3em;
+    font-weight: bold;
 }
