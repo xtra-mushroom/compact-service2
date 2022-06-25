@@ -75,3 +75,25 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
+
+function sendSms($hp, $pesan){
+    $idMesin = "1148";
+    $pin = "014018";
+
+    $pesan = str_replace(" ", "%20", $pesan);
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, "https://sms.indositus.com/sendsms.php?idmesin=$idMesin&pin=$pin&to=$hp&text=$pesan");
+    
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+    $output = curl_exec($ch);
+
+    curl_close($ch);
+
+    return $output;
+}

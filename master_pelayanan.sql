@@ -1,8 +1,8 @@
--- MySQL dump 10.19  Distrib 10.3.32-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.19  Distrib 10.3.34-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: compact_service
+-- Host: localhost    Database: master_pelayanan
 -- ------------------------------------------------------
--- Server version	10.3.32-MariaDB-0ubuntu0.20.04.1
+-- Server version	10.3.34-MariaDB-0ubuntu0.20.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,38 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `antri_daftar`
+--
+
+DROP TABLE IF EXISTS `antri_daftar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `antri_daftar` (
+  `no_reg` varchar(20) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jenis_kel` enum('Laki-Laki','Perempuan') NOT NULL,
+  `no_hp` varchar(15) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `id_kec` char(5) NOT NULL,
+  `no_login` varchar(15) NOT NULL,
+  `bukti_bayar` varchar(255) NOT NULL,
+  `biaya` double NOT NULL,
+  `status` char(5) NOT NULL,
+  PRIMARY KEY (`no_reg`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `antri_daftar`
+--
+
+LOCK TABLES `antri_daftar` WRITE;
+/*!40000 ALTER TABLE `antri_daftar` DISABLE KEYS */;
+INSERT INTO `antri_daftar` VALUES ('343081351557779','Arrayhan','Laki-Laki','081351557779','Paringin Timur, RT.02','01','','1984139085_half-circle.png',0,''),('343082158412297','Maulida Hikmah','Perempuan','082158412297','Paringin Kota, Haur Batu RT.12','01','','1301899069_bg-carousel.jpg',0,'');
+/*!40000 ALTER TABLE `antri_daftar` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `baliknama`
@@ -137,10 +169,13 @@ DROP TABLE IF EXISTS `login`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `login` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `peran` enum('PEGAWAI','PELANGGAN','PERENCANA','DIREKTUR') NOT NULL,
+  `login_terakhir` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +184,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('admin','21232f297a57a5a743894a0e4a801fc3');
+INSERT INTO `login` VALUES (1,'maulida','9e660a6c66e87bdbe458b841462d045f','PEGAWAI','2022-06-25 12:34:16'),(2,'18630766','f5560a4fa1afe891b5af6d038533d4b6','PELANGGAN','2022-06-25 10:03:27');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +301,7 @@ CREATE TABLE `pendaftaran` (
   `biaya` int(11) NOT NULL,
   PRIMARY KEY (`no_pend`),
   UNIQUE KEY `no_ktp` (`no_ktp`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +310,7 @@ CREATE TABLE `pendaftaran` (
 
 LOCK TABLES `pendaftaran` WRITE;
 /*!40000 ALTER TABLE `pendaftaran` DISABLE KEYS */;
-INSERT INTO `pendaftaran` VALUES (33,'080001','2022-02-18','111111111111','Pelanggan Satu','Perempuan','Batu Piring RT.2','2','130','08218948213','08','Paringin Selatan',20000),(34,'','2022-02-05','222222222222','Pelanggan Dua','Laki-Laki','Komplek Muhibin','4','34','08218948414','07','Batumandi',20000),(35,'010002','2022-02-05','333333333333','Pelanggan Tiga','Laki-Laki','Komplek Selawi RT.05','1','125','08218948567','01','Paringin 1',20000),(36,'050003','2022-02-07','444444444444','Pelanggan Empat','Laki-Laki','Baruh Panyambaran RT.03','7','44','08218948567','05','Halong',20000),(37,'050004','2022-02-04','555555555555','Pelanggan Lima','Perempuan','Trans Desa 2','7','44','08218294820','05','Halong',20000),(38,'','2022-02-08','666666666666','Pelanggan Enam','Laki-Laki','Dahai RT.09','1','115','08218948217','02','Paringin 2',20000),(39,'060005','2022-02-02','777777777777','Pelanggan Tujuh','Perempuan','Tugu Gula Habang','5','76','08218948422','06','Juai',20000),(40,'090003','2022-02-09','888888888888','Pelanggan Delapan','Perempuan','Gunung Batu RT.02','8','147','08218948509','09','Tebing Tinggi',20000),(41,'010003','2022-02-09','999999999999','Pelanggan Sembilan','Laki-Laki','Balida RT.09','1','114','082189487777','01','Paringin 1',20000),(42,'040006','2022-02-10','101010101010','Pelanggan Sepuluh','Laki-Laki','Kusambi Hilir RT.07','6','86','08218948421','04','Lampihong',20000),(43,'','2022-02-12','11111111101','Pelanggan Sebelas','Laki-Laki','Desa Etep RT.04','3','2','08218948090','03','Awayan',20000),(44,'080007','2022-02-14','222222222202','Pelanggan Duabelas','Perempuan','Jalan Gampa KM.1,5','2','130','08218948245','08','Paringin Selatan',20000),(45,'010008','2022-02-18','333333333303','Pelanggan Tigabelas','Laki-Laki','Rica Rt.10','1','125','08218948597','01','Paringin 1',20000),(46,'','2022-02-17','444444444404','Pelanggan Empatbelas','Laki-Laki','Batu Piring RT.04','2','130','08218948200','08','Paringin Selatan',20000),(47,'040009','2022-02-21','555555555505','Pelanggan Limabelas','Perempuan','Kupang RT.03','6','91','08218948429','04','Lampihong',20000);
+INSERT INTO `pendaftaran` VALUES (33,'080001','2022-02-18','111111111111','Pelanggan Satu','Perempuan','Batu Piring RT.2','2','130','08218948213','08','Paringin Selatan',20000),(34,'','2022-02-05','222222222222','Pelanggan Dua','Laki-Laki','Komplek Muhibin','4','34','08218948414','07','Batumandi',20000),(35,'010002','2022-02-05','333333333333','Pelanggan Tiga','Laki-Laki','Komplek Selawi RT.05','1','125','08218948567','01','Paringin 1',20000),(36,'050003','2022-02-07','444444444444','Pelanggan Empat','Laki-Laki','Baruh Panyambaran RT.03','7','44','08218948567','05','Halong',20000),(37,'050004','2022-02-04','555555555555','Pelanggan Lima','Perempuan','Trans Desa 2','7','44','08218294820','05','Halong',20000),(38,'','2022-02-08','666666666666','Pelanggan Enam','Laki-Laki','Dahai RT.09','1','115','08218948217','02','Paringin 2',20000),(39,'060005','2022-02-02','777777777777','Pelanggan Tujuh','Perempuan','Tugu Gula Habang','5','76','08218948422','06','Juai',20000),(40,'090003','2022-02-09','888888888888','Pelanggan Delapan','Perempuan','Gunung Batu RT.02','8','147','08218948509','09','Tebing Tinggi',20000),(41,'010003','2022-02-09','999999999999','Pelanggan Sembilan','Laki-Laki','Balida RT.09','1','114','082189487777','01','Paringin 1',20000),(42,'040006','2022-02-10','101010101010','Pelanggan Sepuluh','Laki-Laki','Kusambi Hilir RT.07','6','86','08218948421','04','Lampihong',20000),(43,'','2022-02-12','11111111101','Pelanggan Sebelas','Laki-Laki','Desa Etep RT.04','3','2','08218948090','03','Awayan',20000),(44,'080007','2022-02-14','222222222202','Pelanggan Duabelas','Perempuan','Jalan Gampa KM.1,5','2','130','08218948245','08','Paringin Selatan',20000),(45,'010008','2022-02-18','333333333303','Pelanggan Tigabelas','Laki-Laki','Rica Rt.10','1','125','08218948597','01','Paringin 1',20000),(46,'','2022-02-17','444444444404','Pelanggan Empatbelas','Laki-Laki','Batu Piring RT.04','2','130','08218948200','08','Paringin Selatan',20000),(47,'040009','2022-02-21','555555555505','Pelanggan Limabelas','Perempuan','Kupang RT.03','6','91','08218948429','04','Lampihong',20000),(48,'','2022-06-20','09021983183777','Jajang','Laki-Laki','Parkot','1','125','0877777775675','01','Paringin 1',20000);
 /*!40000 ALTER TABLE `pendaftaran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-23 13:54:36
+-- Dump completed on 2022-06-25 20:36:35

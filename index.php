@@ -1,9 +1,13 @@
-<?php 
+<?php session_start();
     include_once ("functions.php");
-    session_start();
+    
+    if($_SESSION['peran'] !== "PEGAWAI"){
+        header("Location: logsystem/index.php");
+        exit;
+    }
 
-    if (!isset($_SESSION['username'])){
-        header("location: login/index.php");
+    if (!isset($_SESSION['signin'])){
+        header("location: logsystem/index.php");
     }
 
     $activeHome = "active";

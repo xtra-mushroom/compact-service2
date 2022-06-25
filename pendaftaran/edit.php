@@ -53,10 +53,9 @@ session_start();
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-5 mt-1">
-                                    <!-- di sini form pendaftaran -->
                                     <?php 
-                                    $no = $_GET['no_pend'];
-                                    $sql = "SELECT * FROM pendaftaran where no_pend='$no'";
+                                    $noreg = $_GET['no_reg'];
+                                    $sql = "SELECT * FROM antri_daftar WHERE no_reg='$noreg'";
                                     $result = $conn->query($sql);
                                                 
                                     while($data = $result->fetch_assoc()){
@@ -64,9 +63,9 @@ session_start();
                                     
                                     <form method="post" action="">
                                         <div class="form-group row mt-3">
-                                            <label for="no_pend" class="col-sm-2 col-form-label">Nomor Pendaftaran</label>
+                                            <label for="no_reg" class="col-sm-2 col-form-label">Nomor Registrasi</label>
                                             <div class="col-sm-4">
-                                                <input type="number" class="form-control form-control-sm border-secondary" id="no_pend" name="no_pend" value="<?php echo $data['no_pend']; ?>" readonly>
+                                                <input type="number" class="form-control form-control-sm border-secondary" id="no_reg" name="no_reg" value="<?php echo $data['no_reg']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">

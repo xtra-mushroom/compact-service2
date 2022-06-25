@@ -1,37 +1,50 @@
 <?php 
 session_start();
-
-$server = "localhost";
-$user = "lava";
-$passwd = "linolee";
-$db = "compact_service";
-
-$conn = new mysqli($server, $user, $passwd, $db);
-
-$username = "";
+include('../functions.php');
 
 if(isset($_POST['signin'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $uname = $_POST['username'];
+    $pw = md5($_POST['password']);
     $latestLogin = date("Y-m-d H:i:s");
-    if($username == '' || $password == ''){
-        $message = "Data tidak bisa kosong!";
-    }else{
-        $query = "SELECT * FROM login WHERE username ='$username'";
-        $sql1 = mysqli_query($conn, $query);
-        $result = mysqli_fetch_array($sql1);
 
-        if($result['username'] == ''){
-            $message = "Username tidak terdaftar!";
-        } elseif($result['password'] != md5($password)){
-            $message = "Password tidak terdaftar atau salah!";
-        } else {
-            $message = "";
-            $_SESSION['username'] = $username;
-            $_SESSION['password'] = md5($password);
-            header("location: ../index.php");
-        }   
+    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$uname'");
+
+    if(mysqli_num_rows($result) > 0){
+        $row =  mysqli_fetch_assoc($result);
+
+        if($pw == $row['password']){
+            $_SESSION['signin'] = true;
+            $_SESSION['peran'] = $row['peran'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['id'] = $row['id'];
+
+            if($row['peran'] == "PEGAWAI"){
+                $_SESSION['username'] = $username;
+		        $_SESSION['peran'] = "PEGAWAI";
+                $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
+                header("Location: ../index.php");
+            }elseif($row['peran'] == "PELANGGAN"){
+                $_SESSION['username'] = $username;
+		        $_SESSION['peran'] = "PELANGGAN";
+                $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
+                header("Location: ../pelanggan/halaman-pelanggan.php");
+            }elseif($row['peran'] == "PERENCANA"){
+                $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
+                header("Location: ../perencanaan/halaman-perencana.php");
+            }elseif($row['peran'] == "DIREKTUR"){
+                $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
+                header("Location: ../pimpinan/halaman-pengesahan.php");
+            }else{
+                $message = "Anda tidak memiliki hak akses";
+            }
+            exit;
+        }else{
+            $message = "Password anda salah";
+        }
+    }else{
+        $message = "Akun anda tidak terdaftar";
     }
+    $error = true;
 }
 ?>
 <!DOCTYPE html>
@@ -49,14 +62,14 @@ if(isset($_POST['signin'])){
             <div class="signin-signup">
                 <form action="#" class="sign-in-form" method="post">
                     <h2 class="title">Sign in</h2>
-                    <p class="text-danger"><?= $message ?></p>
+                    <p style="color:red"><?= $message ?></p>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" name="username"/>
+                        <input type="text" placeholder="Username" name="username" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" name="password"/>
+                        <input type="password" placeholder="Password" name="password"/ required>
                     </div>
                     <input type="submit" name="signin" value="Login" class="btn solid"/>
                 </form>
@@ -68,7 +81,7 @@ if(isset($_POST['signin'])){
                     </div>
                     <div class="input-field">
                         <i class="fas fa-briefcase"></i>
-                        <input type="jabatan" placeholder="Jabatan"/>
+                        <input type="jabatan" placeholder="Employment"/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>

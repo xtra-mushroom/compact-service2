@@ -7,7 +7,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="../login/logout.php" class="nav-link"><i class="bi bi-box-arrow-right mr-1"></i>Logout</a>
+            <a href="../logsystem/logout.php" class="nav-link"><i class="bi bi-box-arrow-right mr-1"></i>Logout</a>
         </li>
     </ul>
 </nav>

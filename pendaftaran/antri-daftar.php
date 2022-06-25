@@ -1,7 +1,7 @@
 <?php 
 require "../functions.php";
 $openDaftar = "menu-open";
-$activeDaftar = "active"; $activeInputDaftar = "active";
+$activeDaftar = "active"; $activeAntriDaftar = "active";
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +25,12 @@ $activeDaftar = "active"; $activeInputDaftar = "active";
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
-                            <h1 class="d-inline mr-4">Input Data Pendaftaran</h1>
+                            <h1 class="d-inline mr-4">Antrian Pemohon</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">Pendaftaran</li>
-                                <li class="breadcrumb-item">Input Data</li>
+                                <li class="breadcrumb-item">Antrian Pemohon</li>
                             </ol>
                         </div>
                     </div>

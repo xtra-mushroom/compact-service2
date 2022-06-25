@@ -1,7 +1,7 @@
 <?php 
 require "../functions.php";
 $openDaftar = "menu-open";
-$activeDaftar = "active"; $activeCariDaftar = "active";
+$activeDaftar = "active"; $activeAntriMohon = "active";
 session_start();
 ?>
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ session_start();
                     <div class="row mb-1">
                         <div class="col-sm-7">
                             <h1 class="mr-4">
-                                Cari Data & Cetak Kwitansi Pendaftaran
+                                Antrian Pemohon & Verifikasi Bukti Bayar
                                 <button type="button" class="btn btn-sm btn-danger rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom" data-content='Data yang ditampilkan bukan data pelanggan secara real-time, cari data pelanggan di menu "Data Pelanggan"'>
                                     <i class="bi bi-exclamation-diamond-fill"></i>
                                 </button>
@@ -70,13 +70,12 @@ session_start();
                         <div class="col-sm-5">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">Pendaftaran</li>
-                                <li class="breadcrumb-item">Cari & Cetak</li>
+                                <li class="breadcrumb-item">Antrian Pemohon</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </section>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -89,15 +88,14 @@ session_start();
                                             <thead align="center">
                                                 <tr>
                                                     <th>Actions</th>
-                                                    <th>Nomor Pendaftaran</th>
-                                                    <th>Nomor Sambungan</th>
-                                                    <th>Tanggal Daftar</th>
-                                                    <th>Nomor KTP</th>
+                                                    <th>Nomor Registrasi</th>
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
-                                                    <th>Alamat</th>
                                                     <th>Nomor HP</th>
-                                                    <th>Wilayah</th>
+                                                    <th>Alamat</th>
+                                                    <th>Bukti Bayar</th>
+                                                    <th>Nomor Login</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             
@@ -106,52 +104,30 @@ session_start();
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlDaftar = "SELECT * FROM pendaftaran";
+                                                $sqlDaftar = "SELECT * FROM antri_daftar";
                                                 $resultDaftar = $db->prepare($sqlDaftar);
                                                 $resultDaftar->execute();
                                                 
                                                 while ($data = $resultDaftar->fetch(PDO::FETCH_ASSOC)) {
-                                                    $no = $data['no_pend'];
+                                                    $noreg = $data['no_reg'];
                                                 ?>
-
                                                 <tr>
                                                     <td align="center">
-                                                        <a href="edit.php?no_pend=<?= $no ?>" class="btn btn-sm btn-success">
+                                                        <a href="edit.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
                                                             <i class="bi bi-pencil-square"></i>
                                                         </a>
-                                                        <a href="report/kwitansi.php?no_pend=<?= $no ?>" class="btn btn-sm btn-warning" target="_blank">
+                                                        <a href="report/kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-warning" target="_blank">
                                                             <i class="bi bi-printer"></i>
                                                         </a>
                                                     </td>
-                                                    <td align="center"><?= $no ?></td>
-                                                    <td><?= $data['no_ds'] ?></td>
-                                                    <td align='center'><?= $data['tgl_daftar'] ?></td>
-                                                    <td><?= $data['no_ktp'] ?></td>
+                                                    <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= $data['jenis_kel'] ?></td>
-
-                                                    <?php  
-                                                    // agar yang tampil adalah nama kecamatannya
-                                                    $valueKec = $data['kecamatan'];
-                                                    $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
-                                                    $resultKec = $conn->query($queryKec);
-                                                    $dataKec = $resultKec->fetch_assoc();
-                                                    if($data['kecamatan'] == $dataKec['id']){
-                                                        $namaKec = $dataKec['nama'];
-                                                    }
-                                                    // agar yang tampil adalah nama desanya
-                                                    $valueDesa = $data['desa'];
-                                                    $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
-                                                    $resultDesa = $conn->query($queryDesa);
-                                                    $dataDesa = $resultDesa->fetch_assoc();
-                                                    if($data['desa'] == $dataDesa['id']){
-                                                        $namaDesa = $dataDesa['nama'];
-                                                    }
-                                                    ?>  
-
-                                                    <td><?= $data['alamat'] . ', ' . $namaDesa . ', ' . $namaKec ?></td>
-                                                    <td align='center'><?= $data['no_hp'] ?></td>
-                                                    <td align='center'><?= $data['wil'] ?></td>
+                                                    <td align='center'><?= $data['jenis_kel'] ?></td>
+                                                    <td><?= $data['no_hp'] ?></td>
+                                                    <td><?= $data['alamat'] ?></td>
+                                                    <td><?= "<img src='../Paypic/".$data['bukti_bayar']."'style='width:200px; height:100px;'>" ?></td> 
+                                                    <td><?= $data['no_login'] ?></td>
+                                                    <td align='center'><?= $data['status'] ?></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

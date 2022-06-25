@@ -1,26 +1,33 @@
 <?php
 include_once "functions.php";
-$namaErr = $jeniskelErr = $hpErr = $alamatErr = "";
-$action = "";
-$namaVal = $jkVal = $hpVae = $alamatVal = "";
-$selectM = $selectF = "";
 
 if(isset($_POST['submit'])){
     $noreg = "343".$_POST['phone'];
     $nama = $_POST['nama'];
     $jenisKel = $_POST['jenis_kel'];
     $hp = $_POST['phone'];
-    $alamat = $_POST['alamat']; 
+    $alamat = $_POST['alamat'];
+
+    if($jenisKel == "Laki-Laki"){
+        $panggilan = "Bapak";
+    }elseif($jenisKel == "Perempuan"){
+        $panggilan = "Ibu";
+    }else{
+        $panggilan = "Bapak/Ibu";
+    }
 
     $query = "INSERT INTO antri_daftar
                 VALUES
-                ('$noreg', '$nama', '$jenisKel', '$hp', '$alamat');";
+                ('$noreg', '$nama', '$jenisKel', '$hp', '$alamat', '', '', '', 0, '');";
                                         
     $simpanDaftar = mysqli_query($conn, $query);
 
     if($simpanDaftar == true){
         $_SESSION['hasil'] = true;
         $_SESSION['pesan'] = "Registrasi Berhasil";
+        // kirim SMS
+        $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan registrasi pemasangan sambungan baru. Nomor Registrasi Anda adalah ".$noreg.". Segera lakukan pembayaran sesuai instruksi pada halaman metode pembayaran. Terima Kasih";
+        sendSms($hp, $pesan);
     } else {
         $_SESSION['hasil'] = false;
         $_SESSION['pesan'] = "Registrasi Gagal";
@@ -84,7 +91,7 @@ if(isset($_POST['submit'])){
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h3>Pembayaran</h3>
+                        <h3> Metode Pembayaran</h3>
                     </div>
                 </div>
                 <?php
@@ -97,6 +104,7 @@ if(isset($_POST['submit'])){
                 $resultAntrian->execute();
 
                 $data = $resultAntrian->fetch(PDO::FETCH_ASSOC);
+                $nominalBayar = substr($data['no_reg'], -3);
                 ?>
                 <div class="row justify-content-center text-center">
                     <div class="col-12 mt-3 text-center" id="nominal">
@@ -116,8 +124,8 @@ if(isset($_POST['submit'])){
                 ?>
                 <div class="row justify-content-center text-left">
                     <div class="col-10 mt-2 mb-2" id="nominal">
-                        <p>Terima Kasih kepada <?= $pronoun." ".$data["nama"] ?> telah melakukan registrasi pemasangan sambungan
-                            baru. Harap segera melakukan pembayaran biaya pendaftaran sebesar <b>Rp. 20.000,-</b> sesuai
+                        <p>Terima Kasih kepada <b><?= $pronoun." ".$data["nama"] ?></b> telah melakukan registrasi pemasangan sambungan
+                            baru. Harap segera melakukan pembayaran biaya pendaftaran sesuai nominal bayar dan
                             instruksi pada metode pembayaran yang anda pilih.</p>
                     </div>
                 </div>
@@ -168,45 +176,6 @@ if(isset($_POST['submit'])){
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                        aria-controls="flush-collapseTwo">
-                                        Kantor Pos
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <table class="instructions">
-                                            <tr>
-                                                <td valign="top">1.</td>
-                                                <td>Kunjungi Kantor POS terdekat dari lokasi anda</td>
-                                            </tr>
-                                            <tr>
-                                                <td valign="top">2.</td>
-                                                <td>Beritahukan kepada kasir bahwa anda ingin melakukan Pembayaran
-                                                    Registrasi PDAM Balangan</td>
-                                            </tr>
-                                            <tr>
-                                                <td valign="top">3.</td>
-                                                <td>Tunjukkan Nomor REgistrasi anda pada petugas kasir</td>
-                                            </tr>
-                                            <tr>
-                                                <td valign="top">4.</td>
-                                                <td>Petugas kasir kemudian akan meminta anda membayar sebesar Rp.
-                                                    20.000,- beserta biaya admin</td>
-                                            </tr>
-                                            <tr>
-                                                <td valign="top">5.</td>
-                                                <td>Ikuti instruksi selanjutnya dari petugas kasir untuk menyelesaikan
-                                                    pembayaran anda</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapseThree" aria-expanded="false"
@@ -221,26 +190,23 @@ if(isset($_POST['submit'])){
                                         <table class="instructions mb-3">
                                             <tr>
                                                 <td valign="top">1.</td>
-                                                <td>Kunjungi Kantor POS terdekat dari lokasi anda</td>
+                                                <td>Kunjungi ATM terdekat</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">2.</td>
-                                                <td>Beritahukan kepada kasir bahwa anda ingin melakukan Pembayaran
-                                                    Registrasi PDAM Balangan</td>
+                                                <td>Pilih menu transaksi Transfer Antar Bank (apabila anda menggunakan bank selain Bank Kalsel) atau Transfer ke sesama Bank (apabila anda menggunakan Bank Kalsel)</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">3.</td>
-                                                <td>Perlihatkan nomor registrasi anda pada petugas kasir</td>
+                                                <td>Lakukan pembayaran melalui transfer ke nomor rekening Bank Kalsel <b>013 03 01 14388 7</b> atas nama <b>PDAM Balangan</b> dengan nominal <b><?= "Rp. 20.".$nominalBayar.",-"; ?></b> </td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">4.</td>
-                                                <td>Petugas kasir kemudian akan meminta anda membayar sebesar Rp.
-                                                    20.000,- beserta biaya admin</td>
+                                                <td>Selesaikan pembayaran anda sesuai dengan instruksi</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">5.</td>
-                                                <td>Ikuti instruksi selanjutnya dari petugas kasir untuk menyelesaikan
-                                                    pembayaran anda</td>
+                                                <td>Simpan struk/bukti pembayaran anda untuk kemudian di-upload ke halaman <b><a href="upload-bayar.php" style="text-decoration:none">Upload Bukti Bayar</a></b></td>
                                             </tr>
                                         </table>
 
@@ -248,26 +214,23 @@ if(isset($_POST['submit'])){
                                         <table class="instructions">
                                             <tr>
                                                 <td valign="top">1.</td>
-                                                <td>Kunjungi Kantor POS terdekat dari lokasi anda</td>
+                                                <td>Buka aplikasi m-banking anda</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">2.</td>
-                                                <td>Beritahukan kepada kasir bahwa anda ingin melakukan Pembayaran
-                                                    Registrasi PDAM Balangan</td>
+                                                <td>Pilih menu transaksi Transfer Antar Bank (apabila anda menggunakan bank selain Bank Kalsel) atau Transfer ke sesama Bank (apabila anda menggunakan Bank Kalsel)</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">3.</td>
-                                                <td>Perlihatkan nomor registrasi anda pada petugas kasir</td>
+                                                <td>Lakukan pembayaran melalui transfer ke nomor rekening Bank Kalsel <b>013 03 01 14388 7</b> atas nama <b>PDAM Balangan</b> dengan nominal <b><?= "Rp. 20.".$nominalBayar.",-"; ?></b> </td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">4.</td>
-                                                <td>Petugas kasir kemudian akan meminta anda membayar sebesar Rp.
-                                                    20.000,- beserta biaya admin</td>
+                                                <td>Selesaikan pembayaran anda sesuai dengan instruksi</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">5.</td>
-                                                <td>Ikuti instruksi selanjutnya dari petugas kasir untuk menyelesaikan
-                                                    pembayaran anda</td>
+                                                <td>Simpan struk/bukti pembayaran anda untuk kemudian di-upload ke halaman <b><a href="upload-bayar.php" style="text-decoration:none">Upload Bukti Bayar</a></b></td>
                                             </tr>
                                         </table>
                                     </div>

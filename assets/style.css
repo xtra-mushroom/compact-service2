@@ -1,6 +1,6 @@
 .jumbotron {
     padding-top: 6rem;
-    background-color: #a5c3ca;
+    background: linear-gradient(#557981, #98c4cf); 
 }
 
 #pemasangan, #registrasi {
@@ -9,13 +9,14 @@
 
 #panduan {
     background-color: #557981;
+    color: #ffffff;
 }
 
 /* style for responsive text */
 .jumbotron h1{
     font-size: 30px;
     font-weight: 400;
-    color: #2c3c52;
+    color: #ffffff;
 }
 
 .text-land{
@@ -34,11 +35,17 @@
 }
 
 .jumbotron .lead{
-    font-size: 18px;
-    color:#463c3f;
+    font-size: 20px;
+    color:#ffffff;
 }
 
-.text-land a {
+.jumbotron .lead1 {
+    font-size: 16px;
+    color:#ffffff;
+}
+
+.jumbotron .lead1 a{
+    color:#156b2f;
     text-decoration: none;
 }
 
@@ -54,8 +61,12 @@ footer {
     font-size: .8rem;
 }
 
-#infografis, #registrasi {
+#infografis {
     padding-top: 5rem;
+}
+
+#registrasi {
+    padding-top: 3rem;;
 }
 
 td {
@@ -109,4 +120,11 @@ td {
 #noreg {
     font-size: 1.3em;
     font-weight: bold;
+}
+
+#notice-regis {
+    font-size: .9em;
+    font-weight: bold;
+    color: #63728f;
+    margin-top: 20px;
 }

@@ -2,7 +2,7 @@
     <a href="#" class="brand-link">
         <img src="../assets/images/pdam-logo.png" alt="PDAM Balangan Logo" class="brand-image img-circle elevation-2"
             style="margin-left: 6px">
-        <span class="brand-text font-weight-light"><b>COMPACT SERVICE</b></span>
+        <span class="brand-text font-weight-light"><b>PDAM BALANGAN</b></span>
     </a>
 
     <div class="sidebar">
@@ -12,7 +12,7 @@
                     <a href="../index.php" class="nav-link <?php echo $activeHome ?>">
                         <i class="nav-icon fas fa-igloo"></i>
                         <p>
-                            Home Page
+                            Beranda
                         </p>
                     </a>
                 </li>
@@ -28,20 +28,20 @@
                     </a>
                     <ul class="nav nav-treeview" >
                         <li class="nav-item">
-                            <a href="../pendaftaran/index.php" class="nav-link <?= $activeInputDaftar ?>">
-                                <i class="bi bi-menu-app ml-4 mr-2"></i>
-                                <p>Input Data</p>
+                            <a href="../pendaftaran/antri-pemohon.php" class="nav-link <?= $activeAntriMohon ?>">
+                                <i class="bi bi-bar-chart-steps ml-4 mr-2"></i>
+                                <p>Antrian Pemohon</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../pendaftaran/cari.php" class="nav-link <?= $activeCariDaftar ?>">
-                                <i class="bi bi-search ml-4 mr-2"></i>
-                                <p>Cari & Cetak</p>
+                            <a href="../pendaftaran/antri-daftar.php" class="nav-link <?= $activeAntriDaftar ?>">
+                                <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                <p>Antrian Pendaftaran</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../pendaftaran/cetakreport.php" class="nav-link <?= $activeReportDaftar ?>">
-                                <i class="bi bi-archive ml-4 mr-2"></i>
+                                <i class="bi bi-printer ml-4 mr-2"></i>
                                 <p>Cetak Laporan</p>
                             </a>
                         </li>
