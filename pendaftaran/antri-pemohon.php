@@ -83,19 +83,19 @@ session_start();
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table id="myTable" class="table table-sm table-bordered table-hover">
+                                    <h5 class="mb-3 text-center">Menunggu Verifikasi Pembayaran</h5>
+                                    <div class="table-responsive"> 
+                                        <table id="" class="myTable table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
-                                                    <th>Actions</th>
                                                     <th>Nomor Registrasi</th>
                                                     <th>Nama</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Nomor HP</th>
                                                     <th>Alamat</th>
                                                     <th>Bukti Bayar</th>
-                                                    <th>Nomor Login</th>
                                                     <th>Status</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             
@@ -104,7 +104,7 @@ session_start();
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlDaftar = "SELECT * FROM antri_daftar";
+                                                $sqlDaftar = "SELECT * FROM antri_daftar WHERE status_bayar='';";
                                                 $resultDaftar = $db->prepare($sqlDaftar);
                                                 $resultDaftar->execute();
                                                 
@@ -112,22 +112,79 @@ session_start();
                                                     $noreg = $data['no_reg'];
                                                 ?>
                                                 <tr>
+                                                    <td align="center"><?= $noreg ?></td>
+                                                    <td><?= $data['nama'] ?></td>
+                                                    <td align='center'><?= $data['jenis_kel'] ?></td>
+                                                    <td><?= $data['no_hp'] ?></td>
+                                                    <td><?= $data['alamat'] ?></td>
+                                                    <td><?= "<img src='../Paypic/".$data['bukti_bayar']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td align='center' style='color:green'><?= $data['status_bayar'] ?></td>
                                                     <td align="center">
-                                                        <a href="edit.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
+                                                        <a href="verifikasi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
                                                             <i class="bi bi-pencil-square"></i>
                                                         </a>
                                                         <a href="report/kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-warning" target="_blank">
                                                             <i class="bi bi-printer"></i>
                                                         </a>
                                                     </td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>                                            
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    <!-- tabel data telah diverifikasi -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="mb-3 text-center">Sudah Diverifikasi</h5>
+                                    <div class="table-responsive">
+                                        <table id="" class="myTable table table-sm table-bordered table-hover">
+                                            <thead align="center">
+                                                <tr>
+                                                    <th>Nomor Registrasi</th>
+                                                    <th>Nama</th>
+                                                    <th>Jenis Kelamin</th>
+                                                    <th>Nomor HP</th>
+                                                    <th>Alamat</th>
+                                                    <th>Bukti Bayar</th>
+                                                    <th>Status</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                                <?php
+                                                $database = new Database();
+                                                $db = $database->getConnection();
+
+                                                $sqlDaftar = "SELECT * FROM antri_daftar WHERE status_bayar='Diverifikasi';";
+                                                $resultDaftar = $db->prepare($sqlDaftar);
+                                                $resultDaftar->execute();
+                                                
+                                                while ($data = $resultDaftar->fetch(PDO::FETCH_ASSOC)) {
+                                                    $noreg = $data['no_reg'];
+                                                ?>
+                                                <tr>
                                                     <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
                                                     <td align='center'><?= $data['jenis_kel'] ?></td>
                                                     <td><?= $data['no_hp'] ?></td>
                                                     <td><?= $data['alamat'] ?></td>
-                                                    <td><?= "<img src='../Paypic/".$data['bukti_bayar']."'style='width:200px; height:100px;'>" ?></td> 
-                                                    <td><?= $data['no_login'] ?></td>
-                                                    <td align='center'><?= $data['status'] ?></td>
+                                                    <td><?= "<img src='../Paypic/".$data['bukti_bayar']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td align='center' style='color:green'><?= $data['status_bayar'] ?></td>
+                                                    <td align="center">
+                                                        <a href="verifikasi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </a>
+                                                        <a href="report/kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-warning" target="_blank">
+                                                            <i class="bi bi-printer"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

@@ -84,20 +84,6 @@ require "functions.php";
                             <input type="text" class="form-control" id="noreg" aria-describedby="noreg" name="noreg" required>
                         </div>
                         <div class="mb-3">
-                            <label for="kecamatan" class="form-label">Pilih Kecamatan</label>
-                            <select class="form-control" id="kecamatan" name="kecamatan" required>
-                                <option class="text-secondary" selected></option>
-                                <option value="01">Paringin</option>
-                                <option value="02">Paringin Selatan</option>
-                                <option value="03">Awayan</option>
-                                <option value="04">Batu Mandi</option>
-                                <option value="05">Juai</option>
-                                <option value="06">Lampihong</option>
-                                <option value="07">Halong</option>
-                                <option value="08">Tebing Tinggi</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
                             <label for="bukti-bayar" class="form-label">Upload Bukti Bayar <span style="color:#f25056; font-size:.9em;">*Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</span></label>
                             <input type="file" class="form-control" id="bukti-bayar" aria-describedby="bukti-bayar" name="bukti-bayar" required>
                             <div id="phoneHelp" class="form-text">Ukuran maksimal upload foto/pdf 1 MB</div>

@@ -10,6 +10,6 @@
 
 <script>
     $(function() {
-        $('#myTable').DataTable()
+        $('.myTable').DataTable()
     });
 </script>

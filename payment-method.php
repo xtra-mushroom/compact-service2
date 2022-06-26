@@ -18,7 +18,7 @@ if(isset($_POST['submit'])){
 
     $query = "INSERT INTO antri_daftar
                 VALUES
-                ('$noreg', '$nama', '$jenisKel', '$hp', '$alamat', '', '', '', 0, '');";
+                ('$noreg', '$nama', '$jenisKel', '$hp', '$alamat', '', '', '');";
                                         
     $simpanDaftar = mysqli_query($conn, $query);
 
