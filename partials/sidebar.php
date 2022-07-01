@@ -6,10 +6,18 @@
     </a>
 
     <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+            <img src="../assets/images/avatar.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+            <a href="#" class="d-block"><?= $_SESSION['username'] ?></a>
+            </div>
+        </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="../index.php" class="nav-link <?php echo $activeHome ?>">
+                    <a href="../index.php" class="nav-link <?= $activeHome ?>">
                         <i class="nav-icon fas fa-igloo"></i>
                         <p>
                             Beranda
@@ -34,9 +42,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../pendaftaran/antri-daftar.php" class="nav-link <?= $activeAntriDaftar ?>">
+                            <a href="../pendaftaran/antri-survei.php" class="nav-link <?= $activeAntriSurvei ?>">
                                 <i class="bi bi-menu-app ml-4 mr-2"></i>
-                                <p>Antrian Pendaftaran</p>
+                                <p>Antrian Survei</p>
                             </a>
                         </li>
                         <li class="nav-item">

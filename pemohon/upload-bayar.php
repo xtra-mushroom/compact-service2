@@ -1,59 +1,3 @@
-<?php
-require "functions.php";
-
-// $namaErr = $jeniskelErr = $hpErr = $alamatErr = "";
-// $namaVal = $jkVal = $hpVal = $alamatVal = "";
-
-// if(isset($_POST['submit'])){
-
-//     if(empty($_POST['nama'])){
-//         $namaErr = " *nama tidak boleh kosong";
-//     }elseif(!preg_match("/^[a-zA-Z ]*$/",test_input($_POST['nama']))){
-//         $namaErr = " *nama tidak boleh mengandung karakter selain huruf dan spasi";
-//     }else{
-//         $nama = $_POST['nama'];
-//         $namaVal = "valid";
-//     }
-
-//     if(empty($_POST['jenis_kel'])){
-//         $jeniskelErr = " *jenis kelamin harus dipilih";
-//     }else{
-//         $jkVal = "valid";
-//     }
-
-//     if(empty($_POST['phone'])){
-//         $hpErr = " *nomor HP tidak boleh kosong";
-//     }elseif(!preg_match("/^[0-9]*$/",test_input($_POST['phone']))){
-//         $hpErr = " *nomor HP hanya boleh mengandung angka";
-//     }else{
-//         $hpVal = "valid";
-//     }
-
-//     if(empty($_POST['alamat'])){
-//         $alamatErr = " *alamat tidak boleh kosong";
-//     }else{
-//         $alamatVal = "valid";
-//     }
-
-//     if($namaVal && $jkVal && $hpVal && $alamatVal == "valid"){
-//         $action = "payment-method.php";
-//     }else{
-//         $action = "";
-//     }
-// }
-
-                                        
-    // if($simpanDaftar == true){
-    //     $_SESSION['hasil'] = true;
-    //     $_SESSION['pesan'] = "Registrasi Berhasil";
-    // } else {
-    //     $_SESSION['hasil'] = false;
-    //     $_SESSION['pesan'] = "Registrasi Gagal";
-    // }
-    // echo "<meta http-equiv='refresh' content='1;url=payment-method.php>";
-
-?>
-
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -62,11 +6,11 @@ require "functions.php";
     <!-- Icon Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <!-- Bootstrap CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <!-- style -->
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="../assets/style.css">
     <!-- icon tab -->
-    <link rel="shortcut icon" href="assets/images/pdam-logo.png">
+    <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
 </head>
 <body>
     <section id="registrasi">
@@ -99,6 +43,6 @@ require "functions.php";
     </section>
 </body>
 
-    <script src="assets/js/bootstrap.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
     <!-- <script src="assets/js/popper.min.js"></script> -->
 </html>

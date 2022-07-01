@@ -4,33 +4,36 @@ include('../functions.php');
 
 if(isset($_POST['signin'])){
     $uname = $_POST['username'];
-    $pw = md5($_POST['password']);
+    $pw = $_POST['password'];
     $latestLogin = date("Y-m-d H:i:s");
 
-    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$uname'");
+    $result1 = mysqli_query($conn, "SELECT * FROM login WHERE username = '$uname'");
+    $result2 = mysqli_query($conn, "SELECT nama, jenis_kel, no_reg, no_log FROM antri_daftar WHERE no_log = '$uname'");
 
-    if(mysqli_num_rows($result) > 0){
-        $row =  mysqli_fetch_assoc($result);
+    if(mysqli_num_rows($result1) > 0){
+        $row =  mysqli_fetch_assoc($result1);
 
-        if($pw == $row['password']){
+        if(md5($pw) == $row['password']){
             $_SESSION['signin'] = true;
             $_SESSION['peran'] = $row['peran'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['id'] = $row['id'];
 
             if($row['peran'] == "PEGAWAI"){
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $uname;
 		        $_SESSION['peran'] = "PEGAWAI";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../index.php");
             }elseif($row['peran'] == "PELANGGAN"){
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $uname;
 		        $_SESSION['peran'] = "PELANGGAN";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../pelanggan/halaman-pelanggan.php");
             }elseif($row['peran'] == "PERENCANA"){
+                $_SESSION['username'] = $uname;
+		        $_SESSION['peran'] = "PERENCANA";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
-                header("Location: ../perencanaan/halaman-perencana.php");
+                header("Location: ../perencanaan/index.php");
             }elseif($row['peran'] == "DIREKTUR"){
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../pimpinan/halaman-pengesahan.php");
@@ -40,6 +43,20 @@ if(isset($_POST['signin'])){
             exit;
         }else{
             $message = "Password anda salah";
+        }
+
+    }elseif(mysqli_num_rows($result1) < 1){
+        $row =  mysqli_fetch_assoc($result2);
+
+        if($pw == $row['no_log']){
+            $_SESSION['signin'] = true;
+            $_SESSION['username'] = $row['nama'];
+            $_SESSION['noreg'] = $row['no_reg'];
+            $_SESSION['password'] = $row['no_log'];
+            $_SESSION['jenis_kel'] = $row['jenis_kel'];
+            header("Location: ../pemohon/index.php");
+        }else{
+            $message = "Nomor Login Anda Salah";
         }
     }else{
         $message = "Akun anda tidak terdaftar";

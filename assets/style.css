@@ -3,7 +3,7 @@
     background: linear-gradient(#557981, #98c4cf); 
 }
 
-#pemasangan, #registrasi {
+#pemasangan {
     background-color: #f8feff;
 }
 
@@ -127,4 +127,8 @@ td {
     font-weight: bold;
     color: #63728f;
     margin-top: 20px;
+}
+
+#bg-registrasi {
+    background: url("images/bg-registrasi.jpg");
 }

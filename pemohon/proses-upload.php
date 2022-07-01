@@ -1,5 +1,5 @@
 <?php 
-include 'functions.php';
+include '../functions.php';
 $noreg = $_POST['noreg'];
  
 $rand = rand();

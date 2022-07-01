@@ -1,13 +1,10 @@
-<?php 
+<?php
+session_start();
 require_once "../functions.php";
-$query = query("SELECT * FROM antri_daftar");
-$noreg = $_GET['no_reg'];
-$sql = "SELECT * FROM antri_daftar where no_reg='$noreg'";
-$dataAntri = $conn->query($sql)->fetch_assoc();
+include_once "../partials/session-pegawai.php";
 
 $openDaftar = "menu-open";
 $activeDaftar = "active"; $activeAntriMohon = "active";
-session_start();
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +17,8 @@ session_start();
     <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
-        <!-- Navbar right-->
         <?php include_once ("../partials/navbar.php") ?>
-
-        <!-- Sidebar -->
         <?php include_once ("../partials/sidebar.php") ?>
-
         <!-- Content -->
         <div class="content-wrapper">
             <section class="content-header">
@@ -47,7 +40,6 @@ session_start();
 
             <!-- Main content -->
             <section class="content">
-
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -81,9 +73,9 @@ session_start();
                                                     name="jenis_kel">
                                                     <option class="text-secondary" selected>---</option>
                                                     <?php
-                                                    if($dataAntri['jenis_kel'] == "Laki-Laki"){
+                                                    if($data['jenis_kel'] == "Laki-Laki"){
                                                         $laki = "selected";
-                                                    }elseif($dataAntri['jenis_kel'] == "Perempuan"){
+                                                    }elseif($data['jenis_kel'] == "Perempuan"){
                                                         $perem = "selected";
                                                     }
                                                     ?>
@@ -161,12 +153,6 @@ session_start();
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="biaya" class="col-sm-2 col-form-label">Biaya</label>
-                                            <div class="col-sm-4">
-                                                <input type="number" class="form-control form-control-sm border-secondary" id="biaya" name="biaya" autocomplete="off">
-                                            </div>
-                                        </div>
                                         <div class="col-10 float-right">
                                             <div class="form-check">
                                                 <div class="col-sm-5">
@@ -233,37 +219,14 @@ session_start();
                                         $status = $_POST['status'];
 
                                         // generate nomor login
-
                                         $nolog = $idWil.substr($hp,-4).rand(1000,9999);
                                         var_dump($nolog);
-                                        // $daftar = "SELECT * FROM pendaftaran";
-                                        // $result = mysqli_query($conn, $daftar);
-
-                                        // if($result->num_rows > 0){
-                                        //     while($data1 = mysqli_fetch_assoc($result)){
-                                        //         $last_nolog = $data1['no_log'];
-                                        //         $id = $data1['id'] + 1; // 0000 + 1 = 0001
-                                        //     }
-                                        //     $split_last_nolog = substr($last_nolog,-4); // get 4 last digits
-                                        //     $split_new_nolog = $split_last_nolog + 1;
-
-                                        //     for($i=1; $i<4; $i++){
-                                        //         $nol = "0";
-                                        //         if(strlen($split_new_nolog) == $i){
-                                        //             $split_new_nolog = $nol . (string) $split_new_nolog;
-                                        //         }
-                                        //     }
-                                        //     $nolog = $cabang . $split_new_nolog;
-                                        // }else{
-                                        //     $nolog = $cabang . "0001";
-                                        // }
                                         
                                         $query = "UPDATE antri_daftar
                                                     SET
                                                     nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', no_log='$nolog', status_bayar='$status' WHERE no_reg='$noreg';";
                                         
                                         $updateAntri = mysqli_query($conn, $query);
-                                        // var_dump($query);
                                         
                                         if($updateAntri == true){
                                             $_SESSION['hasil'] = true;

@@ -1,5 +1,5 @@
 <?php
-include_once "functions.php";
+include_once "../functions.php";
 
 if(isset($_POST['submit'])){
     $noreg = "343".$_POST['phone'];
@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
         $_SESSION['pesan'] = "Registrasi Berhasil";
         // kirim SMS
         $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan registrasi pemasangan sambungan baru. Nomor Registrasi Anda adalah ".$noreg.". Segera lakukan pembayaran sesuai instruksi pada halaman metode pembayaran. Terima Kasih";
-        sendSms($hp, $pesan);
+        // sendSms($hp, $pesan);
     } else {
         $_SESSION['hasil'] = false;
         $_SESSION['pesan'] = "Registrasi Gagal";
@@ -44,19 +44,19 @@ if(isset($_POST['submit'])){
     <!-- Icon Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <!-- Bootstrap CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <!-- style -->
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="../assets/style.css">
     <!-- icon tab -->
-    <link rel="shortcut icon" href="assets/images/pdam-logo.png">
+    <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
     <!-- sweetalert css -->
-    <link rel="stylesheet" href="libraries/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../libraries/sweetalert2/dist/sweetalert2.min.css">
 </head>
 
-<?php include_once ("database.php") ?>
+<?php include_once ("../database.php") ?>
 
 <body id="bg-payment">
-    <script src="libraries/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
 <?php 
         if(isset($_SESSION['hasil'])){
@@ -243,8 +243,8 @@ if(isset($_POST['submit'])){
         </section>
     </div>
 
-    <script src="assets/js/bootstrap.js"></script>
-    <script src="assets/js/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
 
 </body>
 

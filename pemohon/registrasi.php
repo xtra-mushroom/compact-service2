@@ -65,13 +65,13 @@
     <!-- Icon Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <!-- Bootstrap CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <!-- style -->
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="../assets/style.css">
     <!-- icon tab -->
-    <link rel="shortcut icon" href="assets/images/pdam-logo.png">
+    <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
 </head>
-<body>
+<body id="bg-registrasi">
     <section id="registrasi">
         <div class="container">
             <div class="row text-center mb-3">
@@ -118,6 +118,6 @@
     </section>
 </body>
 
-    <script src="assets/js/bootstrap.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
     <!-- <script src="assets/js/popper.min.js"></script> -->
 </html>
