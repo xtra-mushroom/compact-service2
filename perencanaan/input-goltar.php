@@ -121,12 +121,14 @@ $activeSurvei = "active";
                                         $lantaiVal = $_POST['lantai'];
                                         $atapVal = $_POST['atap'];
                                         $luasBangunanVal = $_POST['luas_bangunan'];
+                                        $totalPoin = $pondasiVal + $dindingVal + $lantaiVal + $atapVal + $luasBangunanVal;
                                     }else{
                                         $pondasiVal = $goltar['pondasi'];
                                         $dindingVal = $goltar['dinding'];
                                         $lantaiVal = $goltar['lantai'];
                                         $atapVal = $goltar['atap'];
                                         $luasBangunanVal = $goltar['luas_bangunan'];
+                                        $totalPoin = $pondasiVal + $dindingVal + $lantaiVal + $atapVal + $luasBangunanVal;
                                     }
                                     ?>
                                     <h6>Klasifikasi Rumah Tangga (RT) NON NIAGA menggunakan parameter dan data terukur :</h6>
@@ -134,58 +136,74 @@ $activeSurvei = "active";
                                     <form method="POST">
                                         <div class="table-responsive">
                                             <table class="table table-sm" border="2">
-                                                    <tr class="bg-secondary text-bold">
-                                                        <td rowspan="2" class="text-center align-middle border-dark">Indikator Penilaian</td>
-                                                        <td colspan="3" class="text-center border-dark">Poin</td>
-                                                        <td rowspan="2" class="text-center align-middle border-dark">Nilai</td>
-                                                    </tr>
-                                                    <tr class="bg-secondary text-bold">
-                                                        <td class="text-center border-dark">2</td>
-                                                        <td class="text-center border-dark">3</td>
-                                                        <td class="text-center border-dark">4</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center border-dark">Pondasi</td>
-                                                        <td class="text-center border-dark">Kayu Biasa</td>
-                                                        <td class="text-center border-dark">Kayu Ulin</td>
-                                                        <td class="text-center text-nowrap border-dark">Pasangan Batu / Cor</td>
-                                                        <td class="text-center border-dark"><input type="number" id="pondasi" name="pondasi" style='width:60px;' value="<?=$pondasiVal?>"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center border-dark">Dinding</td>
-                                                        <td class="text-center border-dark">Papan Biasa / Seng / Kalsiboard</td>
-                                                        <td class="text-center border-dark">Campuran Papan dan Bata / Plesteran</td>
-                                                        <td class="text-center border-dark">Papan Ulin / Bata / Beton</td>
-                                                        <td class="text-center border-dark"><input type="number" id="dinding" name="dinding" style='width:60px;' value="<?=$dindingVal?>"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center border-dark">Lantai</td>
-                                                        <td class="text-center border-dark">Papan Biasa</td>
-                                                        <td class="text-center text-nowrap border-dark">Rabat Tanpa Keramik</td>
-                                                        <td class="text-center border-dark">Papan Ulin / Keramik</td>
-                                                        <td class="text-center border-dark"><input type="number" id="lantai" name="lantai" style='width:60px;' value="<?=$lantaiVal?>"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center border-dark">Atap</td>
-                                                        <td class="text-center border-dark">Daun</td>
-                                                        <td class="text-center border-dark">Seng / Asbes</td>
-                                                        <td class="text-center border-dark">Sirap / Metal / Dak / Genteng</td>
-                                                        <td class="text-center border-dark"><input type="number" id="atap" name="atap" style='width:60px;' value="<?=$atapVal?>"></td> 
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center test-nowrap border-dark">Luas Bangunan</td>
-                                                        <td class="text-center text-nowrap border-dark">Kurang dari 36 m<sup>2</sup></td>
-                                                        <td class="text-center border-dark">36 - 200 m<sup>2</sup></td>
-                                                        <td class="text-center border-dark">Lebih dari 200 m<sup>2</sup></td>
-                                                        <td class="text-center border-dark"><input type="number" id="luas_bangunan" name="luas_bangunan" style='width:60px;' value="<?=$luasBangunanVal?>"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="4" class="text-right text-bold border-dark"> 
-                                                        <input class="bg-secondary" value="Totalkan" type="submit" name="total" alt="Hitung">
-                                                        <input type="hidden" name="update">
-                                                        </td>
-                                                        <td class="text-center border-dark"><?=$s;?></td>
-                                                    </tr>
+                                                <tr class="bg-secondary text-bold">
+                                                    <td rowspan="2" class="text-center align-middle border-dark">Indikator Penilaian</td>
+                                                    <td colspan="3" class="text-center border-dark">Poin</td>
+                                                    <td rowspan="2" class="text-center align-middle border-dark">Nilai</td>
+                                                </tr>
+                                                <tr class="bg-secondary text-bold">
+                                                    <td class="text-center border-dark">2</td>
+                                                    <td class="text-center border-dark">3</td>
+                                                    <td class="text-center border-dark">4</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-dark">Pondasi</td>
+                                                    <td class="text-center border-dark">Kayu Biasa</td>
+                                                    <td class="text-center border-dark">Kayu Ulin</td>
+                                                    <td class="text-center text-nowrap border-dark">Pasangan Batu / Cor</td>
+                                                    <td class="text-center border-dark"><input type="number" id="pondasi" name="pondasi" style='width:60px;' value="<?=$pondasiVal?>"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-dark">Dinding</td>
+                                                    <td class="text-center border-dark">Papan Biasa / Seng / Kalsiboard</td>
+                                                    <td class="text-center border-dark">Campuran Papan dan Bata / Plesteran</td>
+                                                    <td class="text-center border-dark">Papan Ulin / Bata / Beton</td>
+                                                    <td class="text-center border-dark"><input type="number" id="dinding" name="dinding" style='width:60px;' value="<?=$dindingVal?>"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-dark">Lantai</td>
+                                                    <td class="text-center border-dark">Papan Biasa</td>
+                                                    <td class="text-center text-nowrap border-dark">Rabat Tanpa Keramik</td>
+                                                    <td class="text-center border-dark">Papan Ulin / Keramik</td>
+                                                    <td class="text-center border-dark"><input type="number" id="lantai" name="lantai" style='width:60px;' value="<?=$lantaiVal?>"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-dark">Atap</td>
+                                                    <td class="text-center border-dark">Daun</td>
+                                                    <td class="text-center border-dark">Seng / Asbes</td>
+                                                    <td class="text-center border-dark">Sirap / Metal / Dak / Genteng</td>
+                                                    <td class="text-center border-dark"><input type="number" id="atap" name="atap" style='width:60px;' value="<?=$atapVal?>"></td> 
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center test-nowrap border-dark">Luas Bangunan</td>
+                                                    <td class="text-center text-nowrap border-dark">Kurang dari 36 m<sup>2</sup></td>
+                                                    <td class="text-center border-dark">36 - 200 m<sup>2</sup></td>
+                                                    <td class="text-center border-dark">Lebih dari 200 m<sup>2</sup></td>
+                                                    <td class="text-center border-dark"><input type="number" id="luas_bangunan" name="luas_bangunan" style='width:60px;' value="<?=$luasBangunanVal?>"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="text-right text-bold border-dark"> 
+                                                    <input class="bg-secondary" value="Totalkan" type="submit" name="total" alt="Hitung">
+                                                    <input type="hidden" name="update">
+                                                    </td>
+                                                    <td class="text-center border-dark"><?=$totalPoin;?></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm" border="2">
+                                                <tr>
+                                                    <td class="text-bold bg-secondary text-center border-dark">Akumulasi Nilai</td>
+                                                    <td class="text-center border-dark">10</td>
+                                                    <td class="text-center border-dark">11 - 19</td>
+                                                    <td class="text-center border-dark">20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-bold bg-secondary text-center border-dark">Golongan</td>
+                                                    <td class="text-center border-dark">R1</td>
+                                                    <td class="text-center border-dark">R2</td>
+                                                    <td class="text-center border-dark">R3</td>
+                                                </tr>
                                             </table>
                                         </div>
                                         <div class="form-group row">
@@ -224,7 +242,7 @@ $activeSurvei = "active";
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="card-footer col-6 text-right">
+                                        <div class="mt-4 col-12 text-center">
                                             <button type="submit" name="submit" class="btn btn-dark">SIMPAN</button>
                                         </div>
                                     </form>

@@ -129,7 +129,7 @@ CREATE TABLE `detail_survei_bahan` (
 
 LOCK TABLES `detail_survei_bahan` WRITE;
 /*!40000 ALTER TABLE `detail_survei_bahan` DISABLE KEYS */;
-INSERT INTO `detail_survei_bahan` VALUES ('KWM1','343082158412297',56000,1),('SK1','343082158412297',98562,1),('L1','343082158412297',178410,3);
+INSERT INTO `detail_survei_bahan` VALUES ('KWM1','343082158412297',56000,1),('SK1','343082158412297',98562,1),('L1','343082158412297',178410,3),('T1','343082158412297',20000,1),('PP1','343082158412297',10000,1);
 /*!40000 ALTER TABLE `detail_survei_bahan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +158,7 @@ CREATE TABLE `gudang` (
 
 LOCK TABLES `gudang` WRITE;
 /*!40000 ALTER TABLE `gudang` DISABLE KEYS */;
-INSERT INTO `gudang` VALUES ('BCB1','UPAH',23,'Biaya Crossing Beton',117000,'-',''),('BCJ1','UPAH',22,'Biaya Crossing Jalan',175000,'-',''),('BPK1','UPAH',19,'Bongkar & Pasang Kran',2500,'-',''),('DNB1','BAHAN',5,'Double Niple Besi',9357,'0.5\"',''),('DNB2','BAHAN',6,'Double Niple Besi',21210,'1\"',''),('EG1','BAHAN',14,'Elbow Galvanis',17467,'0.5\"',''),('I1','BAHAN',13,'Isolatif',9868,'-',''),('K1','BAHAN',15,'Kran',34071,'0.5\"',''),('KG1','BAHAN',4,'Knie Galvanis',9357,'0.5\"',''),('KWM1','BAHAN',1,'Kotak Water Meter',56000,'-',''),('L1','BAHAN',3,'Lockable',178410,'0.5\"',''),('PD1','BAHAN',11,'Plat DS',10000,'-',''),('PH1','BAHAN',12,'Pipa HDPE',8110,'0.5\"',''),('PP1','UPAH',21,'Perencanaan & Pengukuran',10000,'-',''),('PPH1','UPAH',17,'Pasang Pipa HDPE',5000,'0.5\"',''),('PS1','UPAH',18,'Pasang SR',170000,'-',''),('SG1','BAHAN',16,'Socket Galvanis',8733,'0.5\"',''),('SK1','BAHAN',2,'Stop Kran',98562,'0.5\"',''),('T1','UPAH',20,'Transport',20000,'-',''),('TSG1','BAHAN',7,'Tee Stock Galvanis',24400,'1.5\"',''),('WM1','BAHAN',8,'Water Moer',33000,'0.5\"',''),('WM2','BAHAN',9,'Water Moer',46786,'1\"',''),('WMC1','BAHAN',10,'Water Meter + Coupling',490000,'0.5\"','');
+INSERT INTO `gudang` VALUES ('BCB1','UPAH',23,'Biaya Crossing Beton',117000,'-','tersedia'),('BCJ1','UPAH',22,'Biaya Crossing Jalan',175000,'-','tersedia'),('BPK1','UPAH',19,'Bongkar & Pasang Kran',2500,'-','tersedia'),('DNB1','BAHAN',5,'Double Niple Besi',9357,'0.5\"','tersedia'),('DNB2','BAHAN',6,'Double Niple Besi',21210,'1\"','tersedia'),('EG1','BAHAN',14,'Elbow Galvanis',17467,'0.5\"','tersedia'),('I1','BAHAN',13,'Isolatif',9868,'-','tersedia'),('K1','BAHAN',15,'Kran',34071,'0.5\"','tersedia'),('KG1','BAHAN',4,'Knie Galvanis',9357,'0.5\"','tersedia'),('KWM1','BAHAN',1,'Kotak Water Meter',56000,'-','tersedia'),('L1','BAHAN',3,'Lockable',178410,'0.5\"','tersedia'),('PD1','BAHAN',11,'Plat DS',10000,'-','tersedia'),('PH1','BAHAN',12,'Pipa HDPE',8110,'0.5\"','tersedia'),('PP1','UPAH',21,'Perencanaan & Pengukuran',10000,'-','tersedia'),('PPH1','UPAH',17,'Pasang Pipa HDPE',5000,'0.5\"','tersedia'),('PS1','UPAH',18,'Pasang SR',170000,'-','tersedia'),('SG1','BAHAN',16,'Socket Galvanis',8733,'0.5\"','tersedia'),('SK1','BAHAN',2,'Stop Kran',98562,'0.5\"','tersedia'),('T1','UPAH',20,'Transport',20000,'-','tersedia'),('TSG1','BAHAN',7,'Tee Stock Galvanis',24400,'1.5\"','tersedia'),('WM1','BAHAN',8,'Water Moer',33000,'0.5\"','tersedia'),('WM2','BAHAN',9,'Water Moer',46786,'1\"','tersedia'),('WMC1','BAHAN',10,'Water Meter + Coupling',490000,'0.5\"','tersedia');
 /*!40000 ALTER TABLE `gudang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +236,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'maulida','9e660a6c66e87bdbe458b841462d045f','PEGAWAI','2022-06-30 22:53:14'),(2,'hikmah','f5560a4fa1afe891b5af6d038533d4b6','PELANGGAN','2022-06-27 08:16:25'),(3,'udin','1c22ee8aa48bf6f351d8c3ed568dbe63','PERENCANA','2022-07-01 07:11:53');
+INSERT INTO `login` VALUES (1,'maulida','9e660a6c66e87bdbe458b841462d045f','PEGAWAI','2022-06-30 22:53:14'),(2,'hikmah','f5560a4fa1afe891b5af6d038533d4b6','PELANGGAN','2022-06-27 08:16:25'),(3,'udin','1c22ee8aa48bf6f351d8c3ed568dbe63','PERENCANA','2022-07-03 05:08:01');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,4 +454,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-01 19:37:22
+-- Dump completed on 2022-07-03 13:35:03

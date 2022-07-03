@@ -174,11 +174,11 @@ $activeSurvei = "active";
                                                     <td><?= $data['tgl_survei'] ?></td>
                                                     <td align='center' class='text-success'><?= $data['status_survei'] ?></td>
                                                     <td align="center">
-                                                        <a href="report/hasil-surveibahan.php?no_reg=<?= $noreg ?>" class="text-primary text-bold">
+                                                        <a href="report/hasil-surveibahan.php?no_reg=<?= $noreg ?>" class="text-primary text-bold" target="_blank">
                                                             Survei Bahan
                                                         </a>
                                                         <br/>
-                                                        <a href="report/hasil-surveigoltar.php?no_reg=<?= $noreg ?>" class="text-warning text-bold">
+                                                        <a href="report/hasil-surveigoltar.php?no_reg=<?= $noreg ?>" class="text-warning text-bold" target="_blank">
                                                             Survei Tarif
                                                         </a>
                                                     </td>
