@@ -8,7 +8,8 @@ if(isset($_POST['signin'])){
     $latestLogin = date("Y-m-d H:i:s");
 
     $result1 = mysqli_query($conn, "SELECT * FROM login WHERE username = '$uname'");
-    $result2 = mysqli_query($conn, "SELECT nama, jenis_kel, no_reg, no_log FROM antri_daftar WHERE no_log = '$uname'");
+    $result2 = mysqli_query($conn, "SELECT ad.nama as nama_pemohon, ad.jenis_kel as pemohon_jk, ad.no_reg, ad.no_log, ad.passwd_pelanggan, p.nama as nama_pelanggan, p.jenis_kel as pelanggan_jk, p.no_ds FROM antri_daftar as ad INNER JOIN pelanggan as p ON p.no_ds = ad.no_log WHERE no_log = '$uname'");
+    $result3 = mysqli_query($conn, "SELECT ad.nama as nama_pemohon, ad.jenis_kel as pemohon_jk, ad.no_reg, ad.no_log FROM antri_daftar as ad WHERE no_log = '$uname'");
 
     if(mysqli_num_rows($result1) > 0){
         $row =  mysqli_fetch_assoc($result1);
@@ -18,17 +19,11 @@ if(isset($_POST['signin'])){
             $_SESSION['peran'] = $row['peran'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['id'] = $row['id'];
-
             if($row['peran'] == "PEGAWAI"){
                 $_SESSION['username'] = $uname;
 		        $_SESSION['peran'] = "PEGAWAI";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../index.php");
-            }elseif($row['peran'] == "PELANGGAN"){
-                $_SESSION['username'] = $uname;
-		        $_SESSION['peran'] = "PELANGGAN";
-                $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
-                header("Location: ../pelanggan/halaman-pelanggan.php");
             }elseif($row['peran'] == "PERENCANA"){
                 $_SESSION['username'] = $uname;
 		        $_SESSION['peran'] = "PERENCANA";
@@ -48,16 +43,29 @@ if(isset($_POST['signin'])){
     }elseif(mysqli_num_rows($result1) < 1){
         $row =  mysqli_fetch_assoc($result2);
 
-        if($pw == $row['no_log']){
+        if(md5($pw) == $row['passwd_pelanggan']){
             $_SESSION['signin'] = true;
-            $_SESSION['username'] = $row['nama'];
+            $_SESSION['username'] = $row['nama_pelanggan'];
             $_SESSION['noreg'] = $row['no_reg'];
-            $_SESSION['password'] = $row['no_log'];
-            $_SESSION['jenis_kel'] = $row['jenis_kel'];
-            header("Location: ../pemohon/index.php");
-        }else{
-            $message = "Nomor Login Anda Salah";
+            $_SESSION['no_log'] = $row['no_ds'];
+            $_SESSION['jenis_kel'] = $row['pelanggan_jk'];
+            header("Location: ../otheruser/index.php");
+
+        }elseif(mysqli_num_rows($result2) < 1){
+        $row =  mysqli_fetch_assoc($result3);
+
+            if($pw == $row['no_log']){
+                $_SESSION['signin'] = true;
+                $_SESSION['username'] = $row['nama_pemohon'];
+                $_SESSION['noreg'] = $row['no_reg'];
+                $_SESSION['no_log'] = $row['no_log'];
+                $_SESSION['jenis_kel'] = $row['pemohon_jk'];
+                header("Location: ../otheruser/index.php");
+            }else{
+                $message = "Nomor Login Anda Salah";
+            }
         }
+
     }else{
         $message = "Akun anda tidak terdaftar";
     }
@@ -71,13 +79,15 @@ if(isset($_POST['signin'])){
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Login Pelayanan | PDAM Balangan</title>
+    <!-- icon tab -->
+    <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
 </head>
 
 <body>
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form action="#" class="sign-in-form" method="post">
+                <form action="" class="sign-in-form" method="post">
                     <h2 class="title">Sign in</h2>
                     <p style="color:red"><?= $message ?></p>
                     <div class="input-field">

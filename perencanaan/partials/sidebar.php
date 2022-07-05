@@ -11,7 +11,7 @@
                 <?php echo '<img src="../../assets/images/avatar4.png" class="img-circle elevation-2" alt="User Image">' ?>
             </div>
             <div class="info">
-            <a href="#" class="d-block"><?= $_SESSION['username'] ?></a>
+            <a href="#" class="d-block text-uppercase"><?= $_SESSION['username'] ?></a>
             </div>
         </div>
         <nav class="mt-2">

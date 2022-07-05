@@ -5,28 +5,27 @@ use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
 $ds = $_GET['no_ds'];
-$sql = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pendaftaran.nama, pendaftaran.alamat, pendaftaran.no_hp, pendaftaran.kecamatan, pendaftaran.desa
-        FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds WHERE pemasangan.no_ds='$ds'";
+$sql = "SELECT pemasangan.no_ds, pendaftaran.no_reg, antri_daftar.no_reg, antri_daftar.nama, antri_daftar.alamat, antri_daftar.no_hp FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds INNER JOIN antri_daftar ON antri_daftar.no_reg=pendaftaran.no_reg WHERE pemasangan.no_ds='$ds'";
 $result = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($result);
 
 // agar yang tampil adalah nama kecamatannya
-$valueKec = $data['kecamatan'];
-$queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
-$resultKec = $conn->query($queryKec);
-$dataKec = $resultKec->fetch_assoc();
-if($data['kecamatan'] == $dataKec['id']){
-    $namaKec = $dataKec['nama'];
-}
+// $valueKec = $data['kecamatan'];
+// $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
+// $resultKec = $conn->query($queryKec);
+// $dataKec = $resultKec->fetch_assoc();
+// if($data['kecamatan'] == $dataKec['id']){
+//     $namaKec = $dataKec['nama'];
+// }
 
-// agar yang tampil adalah nama desanya
-$valueDesa = $data['desa'];
-$queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
-$resultDesa = $conn->query($queryDesa);
-$dataDesa = $resultDesa->fetch_assoc();
-if($data['desa'] == $dataDesa['id']){
-    $namaDesa = $dataDesa['nama'];
-}
+// // agar yang tampil adalah nama desanya
+// $valueDesa = $data['desa'];
+// $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
+// $resultDesa = $conn->query($queryDesa);
+// $dataDesa = $resultDesa->fetch_assoc();
+// if($data['desa'] == $dataDesa['id']){
+//     $namaDesa = $dataDesa['nama'];
+// }
 
 $html = "<html><head><style>
 body { font-family:Times New Roman, Times, serif;
@@ -36,7 +35,7 @@ body { font-family:Times New Roman, Times, serif;
 
 </style>";
 
-$html .= "<body><img src='../../layout/dist/img/kop-surat.png' width='610px' style='margin-bottom:5px;'>";
+$html .= "<body><img src='../../assets/images/kop-surat.png' width='610px' style='margin-bottom:5px;'>";
 
 $html .= "<hr><br/><p id='title'><u>SURAT PERNYATAAN SUDAH TERPASANG</u></p><br/>";
 
@@ -52,7 +51,7 @@ $html .= "<table>
     <tr>
         <td>Alamat</td>
         <td class='ddots'>:</td>
-        <td style='text-transform:capitalize;' width='450px'><b>" . $data['alamat'] . ', ' . $namaDesa . ', ' . $namaKec . "</b></td>
+        <td style='text-transform:capitalize;' width='450px'><b>" . $data['alamat'] . "</b></td>
     </tr>
     <tr>
         <td>No. Hp</td>

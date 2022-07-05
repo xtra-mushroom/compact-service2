@@ -80,7 +80,7 @@ session_start();
                             <div class="card">
                                 <div class="card-body mt-1">
                                     <?php 
-                                    $nolog = $_SESSION['password'];
+                                    $nolog = $_SESSION['no_log'];
                                     $noreg = $_SESSION['noreg'];
                                     $sql = "SELECT * FROM pendaftaran WHERE no_reg='$noreg'";
                                     $result = $conn->query($sql);

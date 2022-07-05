@@ -17,4 +17,4 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="../layout/dist/css/adminlte.min.css">
 <!-- icon tab -->
-<link rel="shortcut icon" href="../layout/dist/img/pdam-logo.png">
+<link rel="shortcut icon" href="../assets/images/pdam-logo.png">

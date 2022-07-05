@@ -1,5 +1,8 @@
 <?php 
+session_start();
 require "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openDaftar = "menu-open";
 $activeDaftar = "active"; $activeReportDaftar = "active";
 ?>
@@ -75,11 +78,11 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT id_wil, wil, nama, alamat, no_hp, tgl_daftar from pendaftaran WHERE no_ds='' ORDER BY id_wil ASC";
+                                        $query = "SELECT ad.no_reg, ad.nama, ad.jenis_kel, ad.no_hp, ad.alamat, p.cabang, p.no_reg, p.no_ds, p.tgl_daftar FROM antri_daftar as ad INNER JOIN pendaftaran as p ON ad.no_reg=p.no_reg WHERE p.no_ds='' ORDER BY p.cabang ASC";
                                         $url_cetak = "report/report-pendaftaran-tanpa-pasang.php";
                                         $label = "Semua Data Pendaftaran Tanpa Pemasangan";
                                     }else{  
-                                        $query = "SELECT id_wil, wil, nama, alamat, no_hp, tgl_daftar from pendaftaran WHERE (tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') AND no_ds='' ORDER BY id_wil ASC";
+                                        $query = "SELECT ad.no_reg, ad.nama, ad.jenis_kel, ad.no_hp, ad.alamat, p.cabang, p.no_reg, p.no_ds, p.tgl_daftar FROM antri_daftar as ad INNER JOIN pendaftaran as p ON ad.no_reg=p.no_reg WHERE (p.tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') AND p.no_ds='' ORDER BY cabang ASC";
                                         $url_cetak = "report/report-pendaftaran-tanpa-pasang.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
@@ -98,9 +101,9 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                         <table class="table table-sm table-hover table-bordered mt-2 mr-3">
                                             <thead class="text-center">
                                                 <tr>
-                                                    <th scope="col">ID Wilayah</th>
                                                     <th scope="col">Wilayah / Cabang</th>
                                                     <th scope="col">Nama</th>
+                                                    <th scope="col">Jenis Kelamin</th>
                                                     <th scope="col">Alamat</th>
                                                     <th scope="col">Nomor Telepon</th>
                                                     <th scope="col">Tanggal Daftar</th>
@@ -114,18 +117,35 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                             if($row > 0){
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                                if($data['cabang'] == '01'){
+                                                    $namaCabang = 'Paringin';
+                                                }elseif($data['cabang'] == '02'){
+                                                    $namaCabang = 'Paringin Selatan';
+                                                }elseif($data['cabang'] == '3'){
+                                                    $namaCabang = 'Awayan';
+                                                }elseif($data['cabang'] == '04'){
+                                                    $namaCabang = 'Lampihong';
+                                                }elseif($data['cabang'] == '05'){
+                                                    $namaCabang = 'Juai';
+                                                }elseif($data['cabang'] == '06'){
+                                                    $namaCabang = 'Halong';
+                                                }elseif($data['cabang'] == '07'){
+                                                    $namaCabang = 'Batumandi';
+                                                }elseif($data['cabang'] == '08'){
+                                                    $namaCabang = 'Tebing Tinggi';
+                                                }
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?= $data['id_wil']; ?></td>
-                                                    <td align="center"><?= $data['wil']; ?></td>
-                                                    <td><?= $data['nama']; ?></td>
+                                                    <td align="center"><?= $namaCabang; ?></td>
+                                                    <td align="center"><?= $data['nama']; ?></td>
+                                                    <td><?= $data['jenis_kel']; ?></td>
                                                     <td><?= $data['alamat']; ?></td>
                                                     <td align="center"><?= $data['no_hp']; ?></td>
                                                     <td align="center"><?= $data['tgl_daftar']; ?></td>
                                                 </tr>
                                             <?php }
                                             }else{
-                                                echo "<tr><td colspan='5'>Data tidak diitemukan</td></tr>";
+                                                echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
                                             } ?>   
                                             </tbody>
                                         </table>

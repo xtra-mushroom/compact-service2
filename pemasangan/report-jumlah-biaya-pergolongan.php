@@ -1,5 +1,8 @@
 <?php 
+session_start();
 require "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openPasang = "menu-open";
 $activePasang = "active"; $activeReportPasang = "active";
 ?>
@@ -66,7 +69,7 @@ $activePasang = "active"; $activeReportPasang = "active";
                                         
                                         <?php
                                         if(isset($_GET['filter']))
-                                            echo '<a href="report-jumlah-biaya-pasba.php" class="btn btn-sm btn-default">RESET</a>';
+                                            echo '<a href="report-jumlah-biaya-pergolongan-tarif.php" class="btn btn-sm btn-default">RESET</a>';
                                         ?>
 
                                     </form>  

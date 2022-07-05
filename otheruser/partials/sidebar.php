@@ -11,7 +11,7 @@
                 <?php echo '<img src="../../assets/images/'.$image.'" class="img-circle elevation-2" alt="User Image">' ?>
             </div>
             <div class="info">
-            <a href="#" class="d-block"><?= $_SESSION['username'] ?></a>
+            <a href="#" class="d-block text-uppercase"><?= $_SESSION['username'] ?></a>
             </div>
         </div>
         <nav class="mt-2">
@@ -26,7 +26,7 @@
                 </li>
                 <li class="nav-header mt-2"><b>MENU UTAMA</b></li>
                 <li class="nav-item">
-                    <a href="../pemohon/lengkapi-berkas.php" class="nav-link <?php echo $activeBerkas ?>">
+                    <a href="../otheruser/lengkapi-berkas.php" class="nav-link <?php echo $activeBerkas ?>">
                     <i class="fas fa-file mr-2"></i>
                         <p>
                             Lengkapi Berkas
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="../pemohon/hasil-survei.php" class="nav-link <?php echo $activeSurvei?>">
+                    <a href="../otheruser/hasil-survei.php" class="nav-link <?php echo $activeSurvei?>">
                         <i class="fas fa-sign-out-alt mr-2"></i>
                         <p>
                             Hasil Survei Pemasangan

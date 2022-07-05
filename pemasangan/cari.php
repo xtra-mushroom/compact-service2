@@ -1,5 +1,8 @@
 <?php 
+session_start();
 require "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openPasang = "menu-open";
 $activePasang = "active"; $activeCariPasang = "active";
 session_start();
@@ -86,16 +89,15 @@ session_start();
                             <div class="card">
                                 <div class="card-body"> 
                                     <div class="table-responsive">
-                                        <table id="myTable" class="table table-sm table-hover table-bordered">
+                                        <table class="myTable table table-sm table-hover table-bordered">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Actions</th>
-                                                    <th>Nomor Sambungan</th>
+                                                    <th>Nomor DS</th>
                                                     <th>Tanggal Pemasangan</th>
                                                     <th>Nomor KTP</th>
                                                     <th>Nama</th>
                                                     <th>Alamat</th>
-                                                    <th>Tempat Tanggal Lahir</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Nomor HP</th>
                                                     <th>Status Kepemilikan Rumah</th>
@@ -112,11 +114,7 @@ session_start();
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlPasang = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pemasangan.status_kep_rumah, pemasangan.jumlah_jiwa, pemasangan.pln, pemasangan.cabang, pemasangan.gol_tarif, pemasangan.biaya,
-                                                                pendaftaran.nama, pendaftaran.no_ktp, pendaftaran.jenis_kel, pendaftaran.alamat, pendaftaran.no_hp, pendaftaran.kecamatan, pendaftaran.desa,
-                                                                pelanggan.ttl
-                                                                FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds
-                                                                INNER JOIN pelanggan ON pelanggan.no_ds = pemasangan.no_ds;";
+                                                $sqlPasang = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pemasangan.status_kep_rumah, pemasangan.jumlah_jiwa, pemasangan.pln, pemasangan.cabang, pemasangan.gol_tarif, pemasangan.biaya, antri_daftar.nama, pendaftaran.no_ktp, antri_daftar.jenis_kel, antri_daftar.alamat, antri_daftar.no_hp FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds INNER JOIN antri_daftar ON antri_daftar.no_reg = pendaftaran.no_reg;";
                                                 $resultPasang = $db->prepare($sqlPasang);
                                                 $resultPasang->execute();
 
@@ -137,26 +135,25 @@ session_start();
 
                                                     <?php 
                                                     // agar yang tampil adalah nama kecamatannya
-                                                    $valueKec = $data['kecamatan'];
-                                                    $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
-                                                    $resultKec = $conn->query($queryKec);
-                                                    $dataKec = $resultKec->fetch_assoc();
-                                                    if($data['kecamatan'] == $dataKec['id']){
-                                                        $namaKec = $dataKec['nama'];
-                                                    }
+                                                    // $valueKec = $data['kecamatan'];
+                                                    // $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
+                                                    // $resultKec = $conn->query($queryKec);
+                                                    // $dataKec = $resultKec->fetch_assoc();
+                                                    // if($data['kecamatan'] == $dataKec['id']){
+                                                    //     $namaKec = $dataKec['nama'];
+                                                    // }
 
                                                     // agar yang tampil adalah nama desanya
-                                                    $valueDesa = $data['desa'];
-                                                    $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
-                                                    $resultDesa = $conn->query($queryDesa);
-                                                    $dataDesa = $resultDesa->fetch_assoc();
-                                                    if($data['desa'] == $dataDesa['id']){
-                                                        $namaDesa = $dataDesa['nama'];
-                                                    }
+                                                    // $valueDesa = $data['desa'];
+                                                    // $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
+                                                    // $resultDesa = $conn->query($queryDesa);
+                                                    // $dataDesa = $resultDesa->fetch_assoc();
+                                                    // if($data['desa'] == $dataDesa['id']){
+                                                    //     $namaDesa = $dataDesa['nama'];
+                                                    // }
                                                     ?>
 
-                                                    <td><?= $data['alamat'] . ', ' .  $namaDesa . ', ' . $namaKec; ?></td>
-                                                    <td><?= $data['ttl']; ?></td>
+                                                    <td><?= $data['alamat']; ?></td>
                                                     <td><?= $data['jenis_kel']; ?></td>
                                                     <td><?= $data['no_hp']; ?></td>
                                                     <td align="center"><?= $data['status_kep_rumah']; ?></td>

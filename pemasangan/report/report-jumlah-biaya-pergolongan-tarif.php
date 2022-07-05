@@ -4,7 +4,9 @@ require ("../../libraries/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-$html = "<html><head><style>
+$html = "<html><head>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+<style>
 body { font-family:Arial, Helvetica, sans-serif;
         text-transform: capitalize;
         margin : -25px 0 }
@@ -15,7 +17,7 @@ th, td{ padding:5px; font-size:.9em}
 img { object-fit:cover; }
 </style>";
 
-$html .= "<body><img src='../../layout/dist/img/kop-surat.png' width='700px' style='margin-bottom:5px;'><hr/>";
+$html .= "<body><img src='../../assets/images/kop-surat.png' width='700px' style='margin-bottom:5px;'><hr/>";
 
 $tgl_awal = @$_GET['tgl_awal'];
 $tgl_akhir = @$_GET['tgl_akhir'];
@@ -32,13 +34,13 @@ if(empty($tgl_awal) or empty($tgl_akhir)){
 $html .= "<body><h3>Laporan Jumlah Biaya Pemasangan Baru Per-Golongan Tarif</h3>
 <h5 align='right' style='margin-right:45px;'>".$label."</h5>";
 
-$html .= '<table border="1" width="90%" align="center">
- <tr>
+$html .= '<table class="table table-sm" border="1">
+ <tr style="background:#adcded">
  <th>Nomor</th>
+ <th>ID Tarif</th>
  <th>Golongan Tarif</th>
- <th>Keterangan Golongan</th>
  <th>Total Pemasangan</th>
- <th>Jumlah Biaya Pemasangan Baru</th>
+ <th class="text-nowrap">Jumlah Biaya Masuk</th>
  </tr>';
 
 $result = $conn->query($query);	
@@ -85,7 +87,7 @@ $html .= "<table style='padding-top:50px; padding-right:60px;'>
         <td valign='top' align='center' style='font-size:.9em'> Paringin, " . tgl_indo(date('Y-m-d')) . "</td>
     </tr>
     <tr>
-        <td style='color:rgb(0,0,0,0.0);'>________________________________________________</td>
+        <td style='color:rgb(0,0,0,0.0);'>_______________________________________________________________</td>
         <td valign='top' align='center'><br/>Plt. Direktur,<br/><br/><br/><br/><br/></td>
     </tr>
     <tr>

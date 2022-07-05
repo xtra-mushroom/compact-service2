@@ -1,5 +1,8 @@
 <?php 
+session_start();
 require "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openDaftar = "menu-open";
 $activeDaftar = "active"; $activeReportDaftar = "active";
 ?>

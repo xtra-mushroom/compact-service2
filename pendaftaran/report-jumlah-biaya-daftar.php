@@ -1,5 +1,8 @@
 <?php 
+session_start();
 require "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openDaftar = "menu-open";
 $activeDaftar = "active"; $activeReportDaftar = "active";
 ?>
@@ -74,11 +77,11 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT id_wil, wil, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran from pendaftaran GROUP BY wil ORDER BY id_wil ASC";
+                                        $query = "SELECT cabang, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran, tgl_daftar from pendaftaran GROUP BY cabang ORDER BY cabang ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pendaftaran.php";
                                         $label = "Semua Data, per-cabang";
                                     }else{  
-                                        $query = "SELECT id_wil, wil, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran from pendaftaran WHERE (tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY wil ORDER BY id_wil ASC";
+                                        $query = "SELECT cabang, SUM(biaya) as total_biaya, COUNT(*) as jumlah_pendaftaran, tgl_daftar from pendaftaran WHERE (tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY cabang ORDER BY cabang ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pendaftaran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
@@ -114,18 +117,35 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                                 
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                                if($data['cabang'] == '01'){
+                                                    $namaCabang = 'Paringin';
+                                                }elseif($data['cabang'] == '02'){
+                                                    $namaCabang = 'Paringin Selatan';
+                                                }elseif($data['cabang'] == '3'){
+                                                    $namaCabang = 'Awayan';
+                                                }elseif($data['cabang'] == '04'){
+                                                    $namaCabang = 'Lampihong';
+                                                }elseif($data['cabang'] == '05'){
+                                                    $namaCabang = 'Juai';
+                                                }elseif($data['cabang'] == '06'){
+                                                    $namaCabang = 'Halong';
+                                                }elseif($data['cabang'] == '07'){
+                                                    $namaCabang = 'Batumandi';
+                                                }elseif($data['cabang'] == '08'){
+                                                    $namaCabang = 'Tebing Tinggi';
+                                                }
                                                 $no++;
                                             ?>
                                                 <tr>
                                                     <td align="center"><?php echo $no; ?></td>
-                                                    <td align="center"><?php echo $data['id_wil']; ?></td>
-                                                    <td align="center"><?php echo $data['wil']; ?></td>
+                                                    <td align="center"><?php echo $data['cabang']; ?></td>
+                                                    <td align="center"><?php echo $namaCabang; ?></td>
                                                     <td align="center"><?php echo $data['jumlah_pendaftaran']; ?></td>
                                                     <td align="center"><?php echo rupiah($data['total_biaya']); ?></td>
                                                 </tr>
                                             <?php }
                                             }else{
-                                                echo "<tr><td colspan='5'>Data tidak diitemukan</td></tr>";
+                                                echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
                                             } ?>   
                                             </tbody>
                                         </table>

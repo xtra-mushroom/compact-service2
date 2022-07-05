@@ -1,5 +1,8 @@
 <?php 
+session_start();
 require "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $pemasangan = query("SELECT * FROM pemasangan");
 $openPasang = "menu-open";
 $activePasang = "active"; $activeSuratPasang = "active";
@@ -29,7 +32,7 @@ $activePasang = "active"; $activeSuratPasang = "active";
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
-                            <h1 class="d-inline mr-4">Cetak Surat Pernyataan</h1>
+                            <h1 class="d-inline mr-4">Cetak Surat Pernyataan & Hasil Survei</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -49,17 +52,16 @@ $activePasang = "active"; $activeSuratPasang = "active";
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="myTable" class="table table-sm table-hover table-bordered mt-3">
+                                        <table class="myTable table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
-                                                    <th>Actions</th>
                                                     <th>Nomor Sambungan</th>
                                                     <th>Tanggal Pemasangan</th>
                                                     <th>Nama</th>
                                                     <th>Alamat</th>
                                                     <th>Nomor HP</th>
-                                                    <th>Golongan Tarif</th>
-                                                    <th>Biaya</th>
+                                                    <th>Surat</th>
+                                                    <th>Survei</th>
                                                 </tr>
                                             </thead>
 
@@ -68,49 +70,36 @@ $activePasang = "active"; $activeSuratPasang = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlPasang = "SELECT pemasangan.*, pendaftaran.nama, pendaftaran.alamat, pendaftaran.no_hp, pendaftaran.kecamatan, pendaftaran.desa
-                                                                from pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds";
+                                                $sqlPasang = "SELECT pemasangan.*, pendaftaran.no_ds, pendaftaran.no_reg, antri_daftar.no_reg, antri_daftar.nama, antri_daftar.alamat, antri_daftar.no_hp FROM antri_daftar INNER JOIN pendaftaran ON pendaftaran.no_reg = antri_daftar.no_reg INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds;";
                                                 $resultPasang = $db->prepare($sqlPasang);
                                                 $resultPasang->execute();
 
                                                 
                                                 while ($data = $resultPasang->fetch(PDO::FETCH_ASSOC)) {
-                                                    $no = $data['no_ds'];
+                                                    $nods = $data['no_ds'];
+                                                    $noreg = $data['no_reg'];
                                                 ?>
 
                                                 <tr>
-                                                    <td align="center">
-                                                        <a href="report/surat-pelanggan.php?no_ds=<?= $no ?>" target="_blank">Pernyataan Pelanggan</a>
-                                                        <a href="report/surat-terpasang.php?no_ds=<?= $no ?>" target="_blank">Pernyataan Terpasang</a>
-                                                    </td>
                                                     <td align="center"><?= $data['no_ds']; ?></td>
-                                                    <td><?= $data['tgl_pasang']; ?></td>
-                                                    <td><?= $data['nama']; ?></td>
-
-                                                    <?php 
-                                                    // agar yang tampil adalah nama kecamatannya
-                                                    $valueKec = $data['kecamatan'];
-                                                    $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
-                                                    $resultKec = $conn->query($queryKec);
-                                                    $dataKec = $resultKec->fetch_assoc();
-                                                    if($data['kecamatan'] == $dataKec['id']){
-                                                        $namaKec = $dataKec['nama'];
-                                                    }
-
-                                                    // agar yang tampil adalah nama desanya
-                                                    $valueDesa = $data['desa'];
-                                                    $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
-                                                    $resultDesa = $conn->query($queryDesa);
-                                                    $dataDesa = $resultDesa->fetch_assoc();
-                                                    if($data['desa'] == $dataDesa['id']){
-                                                        $namaDesa = $dataDesa['nama'];
-                                                    }
-                                                    ?>
-
-                                                    <td><?= $data['alamat'] . ', ' .  $namaDesa . ', ' . $namaKec ?></td>
+                                                    <td align="center"><?= $data['tgl_pasang']; ?></td>
+                                                    <td class="text-nowrap"><?= $data['nama']; ?></td>
+                                                    <td><?= $data['alamat']; ?></td>
                                                     <td><?php echo $data['no_hp']; ?></td>
-                                                    <td align="center"><?php echo $data['gol_tarif']; ?></td>
-                                                    <td><?php echo $data['biaya']; ?></td>
+                                                    <td align="center" class="text-nowrap">
+                                                        <a href="report/surat-pelanggan.php?no_ds=<?= $nods ?>" target="_blank" class="text-bold">Pernyataan Pelanggan</a>
+                                                        <br/>
+                                                        <a href="report/surat-terpasang.php?no_ds=<?= $nods ?>" target="_blank" class="text-bold">Pernyataan Terpasang</a>
+                                                    </td>
+                                                    <td align="center" class="text-nowrap">
+                                                        <a href="../perencanaan/report/hasil-surveibahan.php?no_reg=<?= $noreg ?>" class="text-primary text-bold" target="_blank">
+                                                            Survei Bahan
+                                                        </a>
+                                                        <br/>
+                                                        <a href="../perencanaan/report/hasil-surveigoltar.php?no_reg=<?= $noreg ?>" class="text-warning text-bold" target="_blank">
+                                                            Survei Tarif
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

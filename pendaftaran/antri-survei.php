@@ -197,7 +197,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                     <th>Status Berkas</th>
                                                     <th>Tanggal Survei</th>
                                                     <th>Status Survei</th>
-                                                    <th>Aksi</th>
+                                                    <th>Hasil</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -221,8 +221,12 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                     <td><?= $data['tgl_survei'] ?></td>
                                                     <td><?= $data['status_survei'] ?></td>
                                                     <td align="center">
-                                                        <a href="verifikasi-berkas.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
-                                                            <i class="bi bi-pencil-square"></i>
+                                                        <a href="../perencanaan/report/hasil-surveibahan.php?no_reg=<?= $noreg ?>" class="text-primary text-bold" target="_blank">
+                                                            Survei Bahan
+                                                        </a>
+                                                        <br/>
+                                                        <a href="../perencanaan/report/hasil-surveigoltar.php?no_reg=<?= $noreg ?>" class="text-warning text-bold" target="_blank">
+                                                            Survei Tarif
                                                         </a>
                                                     </td>
                                                 </tr>

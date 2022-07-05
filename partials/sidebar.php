@@ -11,7 +11,7 @@
             <img src="../assets/images/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-            <a href="#" class="d-block"><?= $_SESSION['username'] ?></a>
+            <a href="#" class="d-block text-uppercase"><?= $_SESSION['username'] ?></a>
             </div>
         </div>
         <nav class="mt-2">
@@ -79,7 +79,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="../pemasangan/surat.php" class="nav-link <?= $activeSuratPasang ?>">
-                                <i class="bi bi-printer ml-4 mr-2"></i>
+                                <i class="bi bi-file-text ml-4 mr-2"></i>
                                 <p>Cetak Surat</p>
                             </a>
                         </li>

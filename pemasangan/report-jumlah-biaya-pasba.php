@@ -1,5 +1,8 @@
 <?php 
+session_start();
 require "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openPasang = "menu-open";
 $activePasang = "active"; $activeReportPasang = "active";
 ?>
@@ -74,11 +77,11 @@ $activePasang = "active"; $activeReportPasang = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC";
+                                        $query = "SELECT pendaftaran.cabang, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pemasangan.php";
                                         $label = "Semua Data, per-cabang";
                                     }else{  
-                                        $query = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.*) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC";
+                                        $query = "SELECT pendaftaran.cabang, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pemasangan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
@@ -108,17 +111,34 @@ $activePasang = "active"; $activeReportPasang = "active";
                                             <?php 
                                             $result = $conn->query($query);	
                                             $row = mysqli_num_rows($result);
-                                            $no = 0;
+                                            
 
                                             if($row > 0){
                                             while($data = $result->fetch_assoc()){
                                                 $tgl = date('d-m-Y', strtotime($data['tgl']));
-                                                $no++;
+                                                $no = 1;
+                                                if($data['cabang'] == '01'){
+                                                    $namaCabang = 'Paringin';
+                                                }elseif($data['cabang'] == '02'){
+                                                    $namaCabang = 'Paringin Selatan';
+                                                }elseif($data['cabang'] == '3'){
+                                                    $namaCabang = 'Awayan';
+                                                }elseif($data['cabang'] == '04'){
+                                                    $namaCabang = 'Lampihong';
+                                                }elseif($data['cabang'] == '05'){
+                                                    $namaCabang = 'Juai';
+                                                }elseif($data['cabang'] == '06'){
+                                                    $namaCabang = 'Halong';
+                                                }elseif($data['cabang'] == '07'){
+                                                    $namaCabang = 'Batumandi';
+                                                }elseif($data['cabang'] == '08'){
+                                                    $namaCabang = 'Tebing Tinggi';
+                                                }
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?= $no; ?></td>
-                                                    <td align="center"><?= $data['id_wil']; ?></td>
-                                                    <td align="center"><?= $data['wil']; ?></td>
+                                                    <td align="center"><?= $no++; ?></td>
+                                                    <td align="center"><?= $data['cabang']; ?></td>
+                                                    <td align="center"><?= $namaCabang; ?></td>
                                                     <td align="center"><?= $data['total_data']; ?></td>
                                                     <td align="center"><?= rupiah($data['total_pasba']); ?></td>
                                                 </tr>

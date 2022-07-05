@@ -6,8 +6,20 @@ require 'item.php';
 $tgl = date('Y-m-d');
 $perencana = $_SESSION['username'];
 $noreg = $_GET['no_reg'];
+
+// hitung biaya pemasangan, $bup adalah biaya umum perusahaan sebesar 20% dari $totalAB)
+$totalAB = $_SESSION['total'];
+$bup = $totalAB * 20 / 100;
+$totalSeluruh = $totalAB + $bup;
+$totalSeluruh = ceil($totalSeluruh);
+if (substr($totalSeluruh,-3)>499){
+    $totalPembulatan = round($totalSeluruh,-3);
+} else {
+    $totalPembulatan = round($totalSeluruh,-3)+1000;
+} 
+
 // simpan catatan survei
-$sql1 = "INSERT INTO survei_bahan VALUES ('$noreg', '$tgl', 'Telah disurvei', '$perencana');";
+$sql1 = "INSERT INTO survei_bahan VALUES ('$noreg', '$tgl', 'Telah disurvei', $totalPembulatan, '$perencana');";
 mysqli_query($conn, $sql1);
 mysqli_insert_id($conn); 
 

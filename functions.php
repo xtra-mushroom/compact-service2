@@ -97,3 +97,25 @@ function sendSms($hp, $pesan){
 
     return $output;
 }
+
+function TimeAgo($waktu)
+{
+    $waktu      = time()-$waktu;
+    $waktu      = ($waktu < 1) ? 1 : $waktu;
+    $waktuarr   = array (
+        31536000    => 'tahun',
+        2592000     => 'bulan',
+        604800      => 'minggu',
+        86400       => 'hari',
+        3600        => 'jam',
+        60          => 'menit',
+        1           => 'detik'
+    );
+
+    foreach($waktuarr as $ambilwaktu => $text) 
+    {
+        if ($waktu < $ambilwaktu) continue;
+
+        return floor($waktu / $ambilwaktu).' '.$text;
+    }
+}

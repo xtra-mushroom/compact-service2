@@ -177,15 +177,16 @@ $activeSurvei = "active";
                                                         <td> <?= $cart[$i]->ukuran; ?> </td>
                                                         <td class="text-right"><?= $cart[$i]->harga; ?></td>
                                                         <td class="text-center"><input type="number" min="1" value="<?= $cart[$i]->banyaknya; ?>" style='width:50px;' name="banyaknya[]"> </td>  
-                                                        <td class="text-right"><?= $cart[$i]->harga * $cart[$i]->banyaknya; ?></td>
+                                                        <td class="text-right"><?= rupiah($cart[$i]->harga * $cart[$i]->banyaknya); ?></td>
                                                     </tr>
-                                                    <?php $index++; } ?>
+                                                    <?php $index++; }
+                                                    $_SESSION['total'] = $s; ?>
                                                     <tr>
                                                         <td colspan="6" style="text-align:right; font-weight:bold"> 
                                                         <input class="bg-secondary" value="Totalkan" type="submit" name="update" alt="Totalkan">
                                                         <input type="hidden" name="update">
                                                         </td>
-                                                        <td class="text-right"><?=rupiah($s);?></td>
+                                                        <td class="text-right"><input value="<?=$s;?>" type="number" name="total" alt="Total dari Sub-Total" style='width:100px;text-align:right;'></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

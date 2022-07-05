@@ -175,7 +175,7 @@ $activeSurvei = "active";
                                                     <td class="text-center border-dark"><input type="number" id="atap" name="atap" style='width:60px;' value="<?=$atapVal?>"></td> 
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-center test-nowrap border-dark">Luas Bangunan</td>
+                                                    <td class="text-center text-nowrap border-dark">Luas Bangunan</td>
                                                     <td class="text-center text-nowrap border-dark">Kurang dari 36 m<sup>2</sup></td>
                                                     <td class="text-center border-dark">36 - 200 m<sup>2</sup></td>
                                                     <td class="text-center border-dark">Lebih dari 200 m<sup>2</sup></td>
