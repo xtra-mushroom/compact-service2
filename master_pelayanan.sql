@@ -238,7 +238,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'maulida','9e660a6c66e87bdbe458b841462d045f','PEGAWAI','2022-07-05 04:49:11'),(2,'hikmah','f5560a4fa1afe891b5af6d038533d4b6','PELANGGAN','2022-07-03 05:59:30'),(3,'udin','1c22ee8aa48bf6f351d8c3ed568dbe63','PERENCANA','2022-07-05 09:29:07');
+INSERT INTO `login` VALUES (1,'maulida','9e660a6c66e87bdbe458b841462d045f','PEGAWAI','2022-07-06 05:53:22'),(2,'hikmah','f5560a4fa1afe891b5af6d038533d4b6','PELANGGAN','2022-07-03 05:59:30'),(3,'udin','1c22ee8aa48bf6f351d8c3ed568dbe63','PERENCANA','2022-07-06 14:15:37');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,6 +446,37 @@ LOCK TABLES `survei_goltar_noniaga` WRITE;
 INSERT INTO `survei_goltar_noniaga` VALUES ('343082158412297',2,3,3,4,3,'R2');
 /*!40000 ALTER TABLE `survei_goltar_noniaga` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `tagihan`
+--
+
+DROP TABLE IF EXISTS `tagihan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tagihan` (
+  `no_ds` varchar(6) NOT NULL,
+  `cabang` char(5) NOT NULL,
+  `bulan` varchar(15) NOT NULL,
+  `tahun` varchar(5) NOT NULL,
+  `stan` double NOT NULL,
+  `pakai` int(11) NOT NULL,
+  `tagihan` double NOT NULL,
+  `denda` double NOT NULL,
+  `tgl_rilis` date NOT NULL,
+  `tgl_lunas` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tagihan`
+--
+
+LOCK TABLES `tagihan` WRITE;
+/*!40000 ALTER TABLE `tagihan` DISABLE KEYS */;
+INSERT INTO `tagihan` VALUES ('010001','01','Juni','2022',25000,10,57000,5000,'2022-06-03','0000-00-00'),('010001','01','Juli','2022',25000,9,53800,0,'2022-07-06','0000-00-00');
+/*!40000 ALTER TABLE `tagihan` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -456,4 +487,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-05 22:33:58
+-- Dump completed on 2022-07-07  3:46:42
