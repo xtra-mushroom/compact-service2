@@ -17,8 +17,8 @@ $activeSurvei = "active";
 <!DOCTYPE html>
 <head>
     <?php
-    include_once ("partials/head.php");
-    include_once ("partials/cssdatatables.php");
+    include_once ("../partials-perencanaan/head.php");
+    include_once ("../partials-perencanaan/cssdatatables.php");
     ?> 
 </head>
 <?php include_once ("../database.php") ?>
@@ -27,8 +27,8 @@ $activeSurvei = "active";
     <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
-        <?php include_once ("partials/navbar.php") ?>
-        <?php include_once ("partials/sidebar.php") ?>
+        <?php include_once ("../partials-perencanaan/navbar.php") ?>
+        <?php include_once ("../partials-perencanaan/sidebar.php") ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -168,7 +168,7 @@ $activeSurvei = "active";
                                                 <tr>
                                                     <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= "<img src='../pemohon/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align="center"><?= $data['tgl_daftar'] ?></td>
                                                     <td align='center' style='color:green'><?= $data['status_berkas'] ?></td>
                                                     <td><?= $data['tgl_survei'] ?></td>
@@ -197,8 +197,8 @@ $activeSurvei = "active";
     </div>
 
     <?php
-    include_once ("partials/importjs.php");
-    include_once ("partials/scriptsdatatables.php");
+    include_once ("../partials-perencanaan/importjs.php");
+    include_once ("../partials-perencanaan/scriptsdatatables.php");
     ?>
 
     <script>

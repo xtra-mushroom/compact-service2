@@ -17,8 +17,8 @@ $activeSurvei = "active";
 <!DOCTYPE html>
 <head>
     <?php
-    include_once ("partials/head.php");
-    include_once ("partials/cssdatatables.php");
+    include_once ("../partials-perencanaan/head.php");
+    include_once ("../partials-perencanaan/cssdatatables.php");
     ?> 
 </head>
 <?php include_once ("../database.php") ?>
@@ -26,8 +26,8 @@ $activeSurvei = "active";
 <body class="hold-transition sidebar-mini layout-fixed">
 
     <div class="wrapper">
-        <?php include_once ("partials/navbar.php") ?>
-        <?php include_once ("partials/sidebar.php") ?>
+        <?php include_once ("../partials-perencanaan/navbar.php") ?>
+        <?php include_once ("../partials-perencanaan/sidebar.php") ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -274,8 +274,8 @@ $activeSurvei = "active";
     </div>
 
     <?php
-    include_once ("partials/importjs.php");
-    include_once ("partials/scriptsdatatables.php");
+    include_once ("../partials-perencanaan/importjs.php");
+    include_once ("../partials-perencanaan/scriptsdatatables.php");
     ?>
 
     <script>

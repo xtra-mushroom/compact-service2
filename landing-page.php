@@ -84,22 +84,27 @@
                     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                            <img src="assets/images/bg-carousel.jpg" class="d-block w-100 rounded opacity-0" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tahap Pertama</h5>
-                                <p>Pendaftaran atau registrasi online dapat dilakukan dengan mengisi form registrasi</p>
-                            </div>
-                            </div>
-                            <div class="carousel-item">
-                            <img src="assets/images/bg-carousel.jpg" class="d-block w-100 rounded" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tahap Kedua</h5>
-                                <img src="assets/images/pdam-logo.png" alt="...">
-                                <p>Pembayaran biaya pendaftaran dapat dilakukan dengan metode pembayaran via Kantor PDAM maupun via Transfer Bank</p>
-                            </div>
+                                <img src="assets/images/1.png" class="d-block w-100 rounded" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Tahap Pertama</h5>
+                                    <p>Pendaftaran atau registrasi online dapat dilakukan dengan mengisi form registrasi</p>
+                                </div>
                             </div>
                             <div class="carousel-item">
-                            <img src="..." class="d-block w-100" alt="...">
+                                <img src="assets/images/bg-carousel.jpg" class="d-block w-100 rounded" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Tahap Kedua</h5>
+                                    <img src="assets/images/pdam-logo.png" alt="...">
+                                    <p>Pembayaran biaya pendaftaran dapat dilakukan dengan metode pembayaran via Kantor PDAM maupun via Transfer Bank</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/bg-carousel.jpg" class="d-block w-100 rounded" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Tahap Kedua</h5>
+                                    <img src="assets/images/pdam-logo.png" alt="...">
+                                    <p>Pembayaran biaya pendaftaran dapat dilakukan dengan metode pembayaran via Kantor PDAM maupun via Transfer Bank</p>
+                                </div>
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">

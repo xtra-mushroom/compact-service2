@@ -1,28 +1,28 @@
 <?php
 session_start();
-    include_once ("../functions.php");
+include_once "../functions.php";
 
-    if(isset($_SESSION['peran'])){
-        header("location: ../logsystem/index.php");
-        exit;
-    }
+if(!isset($_SESSION['peran'])){
+    header("location: ../logsystem/index.php");
+    exit;
+}
 
-    if (!isset($_SESSION['signin'])){
-        header("location: ../logsystem/index.php");
-    }
+if (!isset($_SESSION['signin'])){
+    header("location: ../logsystem/index.php");
+}
 
-    $activeBerkas = "active";
+$activeBaca = "active";
 
-    if($_SESSION['jenis_kel'] == 'Laki-Laki'){
-        $image = "avatar.png";
-    }elseif($_SESSION['jenis_kel'] == 'Perempuan'){
-        $image = "avatar2.png";
-    }
+// if($_SESSION['jenis_kel'] == 'Laki-Laki'){
+//     $image = "avatar.png";
+// }elseif($_SESSION['jenis_kel'] == 'Perempuan'){
+//     $image = "avatar2.png";
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials-otheruser/head.php") ?>
+    <?php include_once ("../partials-perencanaan/head.php") ?>
     <!-- sweetalert css -->
     <link rel="stylesheet" href="../libraries/sweetalert2/dist/sweetalert2.min.css">
 </head>
@@ -30,8 +30,8 @@ session_start();
 <body class="hold-transition sidebar-mini layout-fixed">
     <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
-        <?php include_once ("../partials-otheruser/navbar.php") ?>
-        <?php include_once ("../partials-otheruser/sidebar.php") ?>
+        <?php include_once ("../partials-perencanaan/navbar.php") ?>
+        <?php include_once ("../partials-perencanaan/sidebar.php") ?>
 <?php 
         if(isset($_SESSION['hasil'])){
             if($_SESSION['hasil']){
@@ -106,17 +106,7 @@ session_start();
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp" value="<?= $data['no_ktp'] ?>" required>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="ktp" class="col-sm-2 col-form-label">Upload KTP</label>
-                                            <div class="col-sm-4">
-                                                <input type="file" class="form-control form-control-sm border-secondary mb-2" id="ktp" name="ktp" required>
-                                                <img src="ktppic/<?= $data['ktp'] ?>" alt="" width="160px">
-                                            </div>
-                                            <div id="phoneHelp" class="form-text">
-                                                Ukuran maksimal 1 MB
-                                                <span style="color:#f25056; font-size:.9em;">*Ekstensi foto .png | .jpg | .jpeg</span>
-                                            </div>
-                                        </div>
+                                        
                                         <?php 
                                         if($data['cabang'] == '01'){
                                             $select1 = 'selected';
@@ -170,6 +160,6 @@ session_start();
         </div>
     </div>
 
-    <?php include_once ("../partials-otheruser/importjs.php") ?>
+    <?php include_once ("../partials-perencanaan/importjs.php") ?>
 </body>
 </html>

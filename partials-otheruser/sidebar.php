@@ -24,7 +24,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-header mt-2"><b>MENU UTAMA</b></li>
+                <li class="nav-header mt-2"><b>MENU PEMOHON</b></li>
                 <li class="nav-item">
                     <a href="../otheruser/lengkapi-berkas.php" class="nav-link <?php echo $activeBerkas ?>">
                     <i class="fas fa-file mr-2"></i>
@@ -41,9 +41,36 @@
                         </p>
                     </a>
                 </li>
+                <?php
+                $nolog = $_SESSION['no_log'];
+                $sql = "SELECT * FROM antri_daftar WHERE no_log='$nolog' AND status_pasang='Terpasang';";
+                $result = $conn->query($sql);
+                                          
+                $data = $result->fetch_assoc();
+                $row = mysqli_num_rows($result);
+                if($row > 0){
+                ?>
+                <li class="nav-header mt-1"><b>MENU PELANGGAN</b></li>
+                <li class="nav-item">
+                    <a href="../otheruser/lengkapi-berkas.php" class="nav-link <?php echo $activeAjututup ?>">
+                    <i class="fas fa-file mr-2"></i>
+                        <p>
+                            Pengajuan Penutupan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="../otheruser/hasil-survei.php" class="nav-link <?php echo $activeKeluhan?>">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        <p>
+                            Keluhan
+                        </p>
+                    </a>
+                </li>
+                <?php } ?>
                 <li class="nav-header"><b>MENU LAINNYA</b></li>
                 <li class="nav-item">
-                    <a href="../../logsystem/logout.php" class="nav-link <?php echo $activePelanggan ?>">
+                    <a href="../logsystem/logout.php" class="nav-link <?php echo $activePelanggan ?>">
                         <i class="fas fa-sign-out-alt mr-2"></i>
                         <p>
                             Keluar

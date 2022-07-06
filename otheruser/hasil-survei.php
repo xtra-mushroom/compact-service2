@@ -22,13 +22,13 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("partials/head.php") ?>
+    <?php include_once ("../partials-otheruser/head.php") ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <?php include_once ("partials/navbar.php") ?>
-        <?php include_once ("partials/sidebar.php") ?>
+        <?php include_once ("../partials-otheruser/navbar.php") ?>
+        <?php include_once ("../partials-otheruser/sidebar.php") ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -48,7 +48,7 @@ session_start();
                             <div class="card">
                                 <div class="card-body mt-1">
                                     <?php 
-                                    $nolog = $_SESSION['password'];
+                                    $nolog = $_SESSION['username'];
                                     $noreg = $_SESSION['noreg'];
                                     $sql = "SELECT * FROM pendaftaran WHERE no_reg='$noreg'";
                                     $result = $conn->query($sql);
@@ -104,6 +104,6 @@ session_start();
         </div>
     </div>
 
-    <?php include_once ("partials/importjs.php") ?>
+    <?php include_once ("../partials-otheruser/importjs.php") ?>
 </body>
 </html>

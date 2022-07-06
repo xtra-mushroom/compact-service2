@@ -17,7 +17,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="index.php" class="nav-link <?= $activeHome ?>">
+                    <a href="../perencanaan/index.php" class="nav-link <?= $activeHome ?>">
                         <i class="nav-icon fas fa-igloo"></i>
                         <p>
                             Beranda
@@ -27,15 +27,24 @@
                 <li class="nav-header mt-2"><b>MENU UTAMA</b></li>
                 <li class="nav-item">
                     <a href="../perencanaan/antrian-survei.php" class="nav-link <?php echo $activeSurvei ?>">
-                    <i class="fas fa-bars mr-2"></i>
+                    <i class="bi bi-list-nested mr-2"></i>
                         <p>
                             Antrian Survei
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="../bacameter/input-baca.php" class="nav-link <?php echo $activeBaca ?>">
+                    <!-- <i class="fas fa-ruler mr-2"></i> -->
+                    <i class="bi bi-rulers mr-2"></i>
+                        <p>
+                            Input Baca Meter
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item mb-2">
                     <a href="../perencanaan/keluhan-pelanggan.php" class="nav-link <?php echo $activeKeluhan ?>">
-                        <i class="fas fa-exclamation mr-2"></i>
+                        <i class="fas fa-exclamation mr-3"></i>
                         <p>
                             Keluhan Pelanggan
                         </p>
@@ -43,7 +52,7 @@
                 </li>
                 <li class="nav-header"><b>MENU LAINNYA</b></li>
                 <li class="nav-item">
-                    <a href="../../logsystem/logout.php" class="nav-link">
+                    <a href="../logsystem/logout.php" class="nav-link">
                         <i class="fas fa-sign-out-alt mr-2"></i>
                         <p>
                             Keluar

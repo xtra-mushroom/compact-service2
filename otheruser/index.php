@@ -22,13 +22,13 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("partials/head.php") ?>
+    <?php include_once ("../partials-otheruser/head.php") ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <?php include_once ("partials/navbar.php") ?>
-        <?php include_once ("partials/sidebar.php") ?>
+        <?php include_once ("../partials-otheruser/navbar.php") ?>
+        <?php include_once ("../partials-otheruser/sidebar.php") ?>
 
         <div class="content-wrapper">
             <!-- Main content -->
@@ -58,6 +58,6 @@ session_start();
         </div>
     </div>
 
-    <?php include_once ("partials/importjs.php") ?>
+    <?php include_once ("../partials-otheruser/importjs.php") ?>
 </body>
 </html>
