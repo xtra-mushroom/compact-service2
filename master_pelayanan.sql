@@ -84,33 +84,6 @@ INSERT INTO `baliknama` VALUES ('080001','08','Batu Piring RT.2','111111111111',
 UNLOCK TABLES;
 
 --
--- Table structure for table `desa`
---
-
-DROP TABLE IF EXISTS `desa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `desa` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_kec` varchar(5) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_kec` (`id_kec`),
-  CONSTRAINT `desa_ibfk_1` FOREIGN KEY (`id_kec`) REFERENCES `kecamatan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `desa`
---
-
-LOCK TABLES `desa` WRITE;
-/*!40000 ALTER TABLE `desa` DISABLE KEYS */;
-INSERT INTO `desa` VALUES (1,'3','Ambakiyang'),(2,'3','Awayan'),(3,'3','Awayan Hilir'),(4,'3','Badalungga'),(5,'3','Badalungga Hilir'),(6,'3','Baramban'),(7,'3','Baru'),(8,'3','Bihara'),(9,'3','Bihara Hilir'),(10,'3','Kedondong'),(11,'3','Merah'),(12,'3','Muara Jaya'),(13,'3','Nungka'),(14,'3','Pematang'),(15,'3','Piyait'),(16,'3','Pudak'),(17,'3','Pulantan'),(18,'3','Putat Basiun'),(19,'3','Sikontan'),(20,'3','Sungai Pumpung'),(21,'3','Tangalin'),(22,'3','Tundakan'),(23,'3','Tundi'),(24,'4','Bakung'),(25,'4','Banua Hanyar'),(26,'4','Batumandi'),(27,'4','Bungur'),(28,'4','Guha'),(29,'4','Gunung Manau'),(30,'4','Hamparaya'),(31,'4','Karuh'),(32,'4','Kasai'),(33,'4','Lok Batu'),(34,'4','Mampari'),(35,'4','Mantimin'),(36,'4','Munjung'),(37,'4','Pelajau'),(38,'4','Riwa'),(39,'4','Tariwin'),(40,'4','Teluk Mesjid'),(41,'4','Timbun Tulang'),(42,'7','Aniungan'),(43,'7','Bangkal'),(44,'7','Baruh Panyambaran'),(45,'7','Binjai Punggal'),(46,'7','Binju'),(47,'7','Binuang Santang'),(48,'7','Buntut Pilanduk'),(49,'7','Gunung Riut'),(50,'7','Ha\'uwai'),(51,'7','Halong'),(52,'7','Kapul'),(53,'7','Karya'),(54,'7','Liyu'),(55,'7','Mamantang'),(56,'7','Mantuyan'),(57,'7','Marajai'),(58,'7','Mauya'),(59,'7','Padang Raya'),(60,'7','Puyun'),(61,'7','Sumber Agung'),(62,'7','Suryatama'),(63,'7','Tabuan'),(64,'7','Uren'),(65,'5','Bata'),(66,'5','Buntu Karau'),(67,'5','Galumbang'),(68,'5','Gulinggang'),(69,'5','Hamarung'),(70,'5','Hukai'),(71,'5','Juai'),(72,'5','Lalayau'),(73,'5','Marias'),(74,'5','Mihu'),(75,'5','Muara Ninian'),(76,'5','Mungkur Uyam'),(77,'5','Pamurus'),(78,'5','Panimbaan'),(79,'5','Sirap'),(80,'5','Sumber Rejeki'),(81,'5','Sungai Batung'),(82,'5','Tawahan'),(83,'5','Teluk Bayur'),(84,'5','Tigarun'),(85,'5','Wonorejo'),(86,'6','Batu Merah'),(87,'6','Hilir Pasar'),(88,'6','Jimamun'),(89,'6','Jungkal'),(90,'6','Kandang Jaya'),(91,'6','Kupang'),(92,'6','Kusambi Hilir'),(93,'6','Kusambi Hulu'),(94,'6','Lajar'),(95,'6','Lampihong Kanan'),(96,'6','Lampihong Kiri'),(97,'6','Lampihong Selatan'),(98,'6','Lok Hamawang'),(99,'6','Lok Panginangan'),(100,'6','Matang Hanau'),(101,'6','Matang Lurus'),(102,'6','Mundar'),(103,'6','Panaitan'),(104,'6','Pimping'),(105,'6','Pupuyuan'),(106,'6','Simpang Tiga'),(107,'6','Sungai Awang'),(108,'6','Tampang'),(109,'6','Tanah Habang Kanan'),(110,'6','Tanah Habang Kiri'),(111,'6','Teluk Karya'),(112,'1','Babayau'),(113,'1','Balang'),(114,'1','Balida'),(115,'1','Dahai'),(116,'1','Hujan Mas'),(117,'1','Kalahiang'),(118,'1','Lamida'),(119,'1','Lasung Batu'),(120,'1','Layap'),(121,'1','Lokbatung'),(122,'1','Mangkayahu'),(123,'1','Murung Ilung'),(124,'1','Paran'),(125,'1','Paringin Kota'),(126,'1','Paringin Timur'),(127,'1','Sungai Katapi'),(128,'2','Baruh Bahinu Dalam'),(129,'2','Baruh Bahinu Luar'),(130,'2','Batu Piring'),(131,'2','Binjai'),(132,'2','Bungin'),(133,'2','Galombang'),(134,'2','Halubau'),(135,'2','Halubau Utara'),(136,'2','Inan'),(137,'2','Lingsir'),(138,'2','Maradap'),(139,'2','Murung Abuin'),(140,'2','Murung Jambu'),(141,'2','Panggung'),(142,'2','Tarangan'),(143,'2','Telaga Purun'),(144,'8','Ajung'),(145,'8','Auh'),(146,'8','Dayak Pitap'),(147,'8','Gunung Batu'),(148,'8','Ju\'uh'),(149,'8','Kambiyain'),(150,'8','Langkap'),(151,'8','Mayanau'),(152,'8','Simpang Bumbuan'),(153,'8','Simpang Nadung'),(154,'8','Sungsum'),(155,'8','Tebing Tinggi');
-/*!40000 ALTER TABLE `desa` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `detail_survei_bahan`
 --
 
@@ -165,30 +138,6 @@ INSERT INTO `gudang` VALUES ('BCB1','UPAH',23,'Biaya Crossing Beton',117000,'-',
 UNLOCK TABLES;
 
 --
--- Table structure for table `kecamatan`
---
-
-DROP TABLE IF EXISTS `kecamatan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `kecamatan` (
-  `id` varchar(5) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `kecamatan`
---
-
-LOCK TABLES `kecamatan` WRITE;
-/*!40000 ALTER TABLE `kecamatan` DISABLE KEYS */;
-INSERT INTO `kecamatan` VALUES ('1','Paringin'),('2','Paringin Selatan'),('3','Awayan'),('4','Batu Mandi'),('5','Juai'),('6','Lampihong'),('7','Halong'),('8','Tebing Tinggi');
-/*!40000 ALTER TABLE `kecamatan` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `keluhan`
 --
 
@@ -197,11 +146,17 @@ DROP TABLE IF EXISTS `keluhan`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `keluhan` (
   `no_ds` varchar(10) NOT NULL,
+  `no_keluhan` varchar(10) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `no_hp` varchar(20) NOT NULL,
   `tgl_keluhan` date NOT NULL,
-  `keluhan` text NOT NULL
+  `keluhan` text NOT NULL,
+  `img_keluhan` varchar(255) NOT NULL,
+  `jenis_penanganan` enum('Butuh observasi dan tindak lanjut','Penanganan instan','Telah ditangani','') NOT NULL,
+  `penanganan` text NOT NULL,
+  `tgl_tangani` date NOT NULL,
+  `catatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -211,7 +166,7 @@ CREATE TABLE `keluhan` (
 
 LOCK TABLES `keluhan` WRITE;
 /*!40000 ALTER TABLE `keluhan` DISABLE KEYS */;
-INSERT INTO `keluhan` VALUES ('080001','Pelanggan Satu Balik Nama','Batu Piring RT.2','082152527752','2022-02-19','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),('060005','Pelanggan Tujuh Balik Satu','Tugu Gula Habang','082152526666','2022-02-21','Aliran air sangat kecil setelah rumah ditinggalkan cukup lama kemudian ditinggali kembali, mengatur meter air tetap tidak mempengaruhi debit air');
+INSERT INTO `keluhan` VALUES ('010001','0001001','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','2022-07-06','Pipa bocor kecil (tidak terlihat)','010001_img-480358138.jpg','','','0000-00-00',''),('010001','0001002','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','2022-07-07','Pipa bocor membesar','tidak tersedia','Telah ditangani','Pipa sudah diperbaiki, pipa hanya perlu ditambal dengan plester penambal pipa HDPE, tidak perlu mengganti saluran pipa ','2022-07-09','dikonfirmasi operator pelayanan, ditangani operator lapangan Wawan (trandis)');
 /*!40000 ALTER TABLE `keluhan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,10 +181,10 @@ CREATE TABLE `login` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `peran` enum('PEGAWAI','PELANGGAN','PERENCANA','DIREKTUR') NOT NULL,
+  `peran` enum('PEGAWAI','KEUANGAN','PERENCANA','DIREKTUR') NOT NULL,
   `login_terakhir` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +193,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'maulida','9e660a6c66e87bdbe458b841462d045f','PEGAWAI','2022-07-06 05:53:22'),(2,'hikmah','f5560a4fa1afe891b5af6d038533d4b6','PELANGGAN','2022-07-03 05:59:30'),(3,'udin','1c22ee8aa48bf6f351d8c3ed568dbe63','PERENCANA','2022-07-06 14:15:37');
+INSERT INTO `login` VALUES (1,'pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-09 11:48:32'),(2,'kabag','1a50ef14d0d75cd795860935ee0918af','KEUANGAN','2022-07-07 16:25:20'),(3,'perencana','7d70c522bf3c837573c10fb0d2fac500','PERENCANA','2022-07-09 11:47:57');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,7 +303,8 @@ CREATE TABLE `pendaftaran` (
   `biaya` double NOT NULL,
   `status_berkas` varchar(20) NOT NULL,
   `tgl_survei` date NOT NULL,
-  `status_survei` varchar(20) NOT NULL
+  `status_survei` varchar(20) NOT NULL,
+  `pengesahan` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -358,7 +314,7 @@ CREATE TABLE `pendaftaran` (
 
 LOCK TABLES `pendaftaran` WRITE;
 /*!40000 ALTER TABLE `pendaftaran` DISABLE KEYS */;
-INSERT INTO `pendaftaran` VALUES ('343082158412297','010001','2022-06-28','6308054606000007','295466711_ktp-contoh.jpeg','01',20297,'Diverifikasi','2022-07-01','Telah disurvei');
+INSERT INTO `pendaftaran` VALUES ('343082158412297','010001','2022-06-28','6308054606000007','295466711_ktp-contoh.jpeg','01',20297,'Diverifikasi','2022-07-01','Telah disurvei','qr-pengesahan/202207082016616350.png');
 /*!40000 ALTER TABLE `pendaftaran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -487,4 +443,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-07  3:46:42
+-- Dump completed on 2022-07-09 19:51:31
