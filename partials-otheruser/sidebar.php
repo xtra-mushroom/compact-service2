@@ -35,7 +35,7 @@
                 </li>
                 <li class="nav-item mb-2">
                     <a href="../otheruser/hasil-survei.php" class="nav-link <?php echo $activeSurvei?>">
-                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        <i class="bi bi-clipboard-check-fill mr-2"></i>
                         <p>
                             Hasil Survei Pemasangan
                         </p>
@@ -51,17 +51,17 @@
                 if($row > 0){
                 ?>
                 <li class="nav-header mt-1"><b>MENU PELANGGAN</b></li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="../otheruser/lengkapi-berkas.php" class="nav-link <?php echo $activeAjututup ?>">
                     <i class="fas fa-file mr-2"></i>
                         <p>
                             Pengajuan Penutupan
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item mb-2">
-                    <a href="../otheruser/hasil-survei.php" class="nav-link <?php echo $activeKeluhan?>">
-                        <i class="fas fa-sign-out-alt mr-2"></i>
+                    <a href="../otheruser/keluhan.php" class="nav-link <?php echo $activeKeluhan?>">
+                        <i class="bi bi-exclamation-circle-fill mr-2"></i>
                         <p>
                             Keluhan
                         </p>

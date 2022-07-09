@@ -164,22 +164,22 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="../keluhan/index.php" class="nav-link <?= $activeInputKeluhan ?>">
-                                <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                <i class="bi bi-plus-square ml-4 mr-2"></i>
                                 <p>Input Keluhan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../keluhan/cari.php" class="nav-link <?= $activeCariKeluhan ?>">
-                                <i class="bi bi-search ml-4 mr-2"></i>
-                                <p>Cari Data</p>
+                            <a href="../keluhan/penanganan.php" class="nav-link <?= $activePenanganan ?>">
+                                <i class="bi bi-menu-app ml-4 mr-2"></i>
+                                <p>Antrian Penanganan</p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="../keluhan/report/report-baliknama.php" class="nav-link <?= $activeReportKeluhan ?>" target="_blank">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
                                 <p>Cetak Laporan</p>
                             </a>
-                        </li> -->
+                        </li>
                     </ul>
                 </li>
                 <!-- data pelanggan -->

@@ -29,9 +29,11 @@ if(isset($_POST['signin'])){
 		        $_SESSION['peran'] = "PERENCANA";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../perencanaan/index.php");
-            }elseif($row['peran'] == "DIREKTUR"){
+            }elseif($row['peran'] == "KEUANGAN"){
+                $_SESSION['username'] = $uname;
+		        $_SESSION['peran'] = "KEUANGAN";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
-                header("Location: ../pimpinan/halaman-pengesahan.php");
+                header("Location: ../pengesahan/index.php");
             }else{
                 $message = "Anda tidak memiliki hak akses";
             }

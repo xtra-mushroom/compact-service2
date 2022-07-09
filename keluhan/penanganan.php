@@ -1,7 +1,10 @@
 <?php 
-require "../functions.php";
+session_start();
+include_once "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openKeluhan = "menu-open";
-$activeKeluhan = "active"; $activeCariKeluhan = "active";
+$activeKeluhan = "active"; $activePenanganan = "active";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +18,7 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
 <?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
         <!-- Navbar -->
         <?php include_once ("../partials/navbar.php") ?>
@@ -26,15 +29,44 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
         <!-- Content -->
         <div class="content-wrapper">
             <section class="content-header">
+            <?php 
+                if(isset($_SESSION['hasil'])){
+                    if($_SESSION['hasil']){
+?>
+                    <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '<?php echo $_SESSION["pesan"] ?>',
+                        showConfirmButton: true
+                        })
+                    </script>
+<?php 
+                    } else {
+?>
+                    <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: '<?php echo $_SESSION["pesan"] ?>',
+                        showConfirmButton: true
+                        })
+                    </script>
+<?php
+                    }
+                    unset($_SESSION['pesan']);
+                    unset($_SESSION['hasil']);
+                }
+?>
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
-                            <h1>Cari Data Keluhan</h1>
+                            <h1>Antrian & Penanganan Keluhan</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">Keluhan</li>
-                                <li class="breadcrumb-item">Cari Data</li>
+                                <li class="breadcrumb-item">Antrian Penanganan</li>
                             </ol>
                         </div>
                     </div>
@@ -48,29 +80,8 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-2 mt-2">
-                                    <!-- <form method="get" action="cari.php">
-                                        <div class="form-group col-12">
-                                          <div class="form-inline mt-2">
-                                            <div class="input-group">
-                                                <input class="form-control" type="text" name="cari" placeholder="cari nama">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary btn-sidebar" type="submit" value="cari">
-                                                        <i class="fas fa-search fa-fw"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>   -->
-
-                                    <?php 
-                                    // if(isset($_GET['cari'])){
-                                    //     $cari = $_GET['cari'];
-                                    //     echo "<b class='text-primary'>Hasil pencarian : ".$cari."</b>";
-                                    // }
-                                    ?>
-
                                     <div class="table-responsive">
-                                        <table id="myTable" class="table table-sm table-hover table-bordered mt-3">
+                                        <table class="myTable table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
                                                     <th scope="col">Nomor Sambungan</th>
@@ -79,30 +90,42 @@ $activeKeluhan = "active"; $activeCariKeluhan = "active";
                                                     <th scope="col">Nomor HP</th>
                                                     <th scope="col">Tanggal Keluhan</th>
                                                     <th scope="col">Isi Keluhan</th>
+                                                    <th scope="col">Gambar Bukti</th>
+                                                    <th scope="col">Tangani</th>
                                                 </tr>
                                             </thead>
-
                                             <tbody>
                                                 <?php
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlKeluhan = "SELECT * FROM keluhan";
+                                                $sqlKeluhan = "SELECT * FROM keluhan WHERE penanganan=''";
                                                 $resultKeluhan = $db->prepare($sqlKeluhan);
                                                 $resultKeluhan->execute();
 
-                                                
                                                 while ($data = $resultKeluhan->fetch(PDO::FETCH_ASSOC)) {
-                                                    $no = $data['no_ds'];
+                                                    $id = $data['no_keluhan'];
                                                 ?>
 
                                                 <tr>
-                                                    <td><?php echo $data['no_ds']; ?></td>
+                                                    <td class="text-center"><?php echo $data['no_ds']; ?></td>
                                                     <td><?php echo $data['nama']; ?></td>
                                                     <td><?php echo $data['alamat']; ?></td>
                                                     <td><?php echo $data['no_hp']; ?></td>
-                                                    <td><?php echo $data['tgl_keluhan']; ?></td>
-                                                    <td><p contenteditable="true"><?php echo $data['keluhan']; ?></p></td>
+                                                    <td class="text-center"><?php echo $data['tgl_keluhan']; ?></td>
+                                                    <td><?php echo $data['keluhan']; ?></td>
+                                                    <?php 
+                                                    if($data['img_keluhan'] == "tidak tersedia"){
+                                                        echo "<td class='text-danger text-center'>Tidak tersedia</td>";
+                                                    }elseif($data['img_keluhan'] !== "tidak tersedia"){
+                                                    ?>
+                                                    <td class='text-center'><img src="../otheruser/img-keluhan/<?php echo $data['img_keluhan']; ?>" style='width:100px;'></td>
+                                                    <?php } ?>
+                                                    <td align="center">
+                                                        <a href="input-penanganan.php?id=<?= $id; ?>" class="btn btn-sm btn-success">
+                                                            <i class="bi bi-plus-circle"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

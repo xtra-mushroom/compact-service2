@@ -167,6 +167,11 @@ $html .= "<tr>
 
 $html .= "</table>";
 
+// laod pengesahan
+$queryPengesahan = "SELECT pengesahan FROM pendaftaran WHERE no_reg='$noreg'";
+$resultPengesahan = mysqli_query($conn, $queryPengesahan);
+$dataPengesahan = mysqli_fetch_assoc($resultPengesahan);
+
 $html .= "<table class='table table-sm table-condensed'style='border-style:none;'>
 <tr>
     <td align='center'>Diketahui Oleh :</td>
@@ -180,15 +185,15 @@ $html .= "<table class='table table-sm table-condensed'style='border-style:none;
 </tr>
 <tr>
     <td>
-        <p style='color:#ffffff'>_<br/>_<br/></p>
-        <p align='center'>MURJANI</p>
+        <p style='color:#ffffff'><br/><br/><br/><br/><br/></p>
+        <p align='center'><b>MURJANI</b></p>
     </td>
     <td>
-        <p align='center'><img src='../../assets/images/pengesahan-kabagkeuangan.png' width='80px'></p>
+        <p align='center'><img src='../../pengesahan/".$dataPengesahan['pengesahan']."' width='90px'></p>
         <p align='center'><b>DRAJAT WINDARTO, SE.</b></p>
     </td>
     <td>
-        <p style='color:#ffffff'>_<br/>_<br/></p>
+        <p style='color:#ffffff'><br/><br/><br/><br/><br/></p>
         <p align='center'>ADITYA PUTRA, ST.</p>
     </td>
 </tr>

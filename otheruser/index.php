@@ -46,7 +46,7 @@ session_start();
                                     <?php 
                                     $no_ds = $_SESSION['no_log'];
 
-                                    $sqlTagihan = "SELECT p.nama, p.no_ds, p.alamat, t.no_ds, t.bulan, t.tahun, t.tagihan, t.pakai, t.tgl_lunas FROM pelanggan as p INNER JOIN tagihan as t ON p.no_ds = t.no_ds WHERE t.no_ds='$no_ds' AND t.tgl_lunas='0000-00-00';";
+                                    $sqlTagihan = "SELECT p.nama, p.no_ds, p.alamat, t.no_ds, t.bulan, t.tahun, t.tagihan, t.denda, t.pakai, t.tgl_lunas FROM pelanggan as p INNER JOIN tagihan as t ON p.no_ds = t.no_ds WHERE t.no_ds='$no_ds' AND t.tgl_lunas='0000-00-00';";
                                     $resultTagihan = mysqli_query($conn, $sqlTagihan);
                                     $row = mysqli_num_rows($resultTagihan);
 
@@ -79,7 +79,7 @@ session_start();
                                                     <td><?= $data['nama'] ?></td>
                                                     <td><?= $data['alamat'] ?></td>
                                                     <td><?= $data['bulan'] . " " . $data['tahun'] ?></td>
-                                                    <td><?= rupiah($data['tagihan']) ?></td>
+                                                    <td><?= rupiah($data['tagihan'] + $data['denda']) ?></td>
                                                     <td><?= $data['pakai'] . " Meter Kubik" ?></td>
                                                 </tr>
                                             </tbody>

@@ -10,6 +10,17 @@
 
 <script>
     $(function() {
-        $('.myTable').DataTable()
+        $('.myTable').DataTable({
+            "language": {
+      "emptyTable": "Data belum tersedia"
+        }
+    }
+    )
     });
+</script>
+
+<script>
+    $(function () {
+    $('[data-toggle="popover"]').popover()
+    })
 </script>

@@ -1,5 +1,8 @@
 <?php 
-require "../functions.php";
+session_start();
+include_once "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openKeluhan = "menu-open";
 $activeKeluhan = "active"; $activeInputKeluhan = "active";
 ?>
@@ -11,7 +14,7 @@ $activeKeluhan = "active"; $activeInputKeluhan = "active";
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-<script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
         <!-- Navbar -->
@@ -44,13 +47,13 @@ $activeKeluhan = "active"; $activeInputKeluhan = "active";
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body ml-5 mt-2">
+                                <div class="card-body ml-4 mt-2">
                                     <!-- di sini form buka tutup -->
                                     <form action="" method="post">
                                         <div class="form-group row mt-2">
                                             <label for="no_ds" class="col-sm-2 col-form-label">Nomor DS</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" onkeyup="autofill()" autofocus>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" required onkeyup="autofill()" autofocus>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -74,13 +77,13 @@ $activeKeluhan = "active"; $activeInputKeluhan = "active";
                                         <div class="form-group row">
                                             <label for="tgl_keluhan" class="col-sm-2 col-form-label">Tanggal Keluhan</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_keluhan" name="tgl_keluhan">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_keluhan" name="tgl_keluhan" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="keluhan" class="col-sm-2 col-form-label">Keluhan</label>
                                             <div class="col-sm-4">
-                                                <textarea class="form-control form-control-sm border-secondary" id="keluhan" name="keluhan" rows="5"></textarea>
+                                                <textarea class="form-control form-control-sm border-secondary" id="keluhan" name="keluhan" rows="5" required></textarea>
                                             </div>
                                         </div>
                                         <div class="card-footer col-6 text-right">
@@ -112,11 +115,35 @@ $activeKeluhan = "active"; $activeInputKeluhan = "active";
                                         $alamat = $_POST["alamat"];
                                         $hp = $_POST["no_hp"];
                                         $tgl = $_POST["tgl_keluhan"];
-                                        $keluhan = $_POST["keluhan"];   
+                                        $keluhan = $_POST["keluhan"];
+
+                                        $sqlID = "SELECT * FROM keluhan WHERE no_ds='$ds' ORDER BY no_keluhan DESC LIMIT 1";
+                                        $resultID = mysqli_query($conn, $sqlID);
+                                        if($resultID->num_rows > 0){
+                                            while($dataID = mysqli_fetch_assoc($resultID)){
+                                                $last_ID = $dataID['no_keluhan'];
+                                            }
+                                            $splitLastID = substr($last_ID,4); // substring id
+                                            $splitNewID = (int)$splitLastID + 1;
+
+                                            for($i=1; $i<3; $i++){
+                                                $nol = "0";
+                                                if(strlen($splitNewID) == $i){
+                                                    $splitNewID = $nol . (string)$splitNewID;
+                                                }
+                                            }
+                                            $generateID = substr($ds,2) . $splitNewID;
+                                        }else{
+                                            $generateID = substr($ds,2) . "001";
+                                        }
                                 
-                                        $query = "INSERT INTO keluhan
+                                        if(empty($nama)){
+                                            $query = error;
+                                        }else{
+                                            $query = "INSERT INTO keluhan
                                                     VALUES
-                                                    ('$ds', '$nama', '$alamat', '$hp', '$tgl', '$keluhan')";
+                                                    ('$ds', '$generateID', '$nama', '$alamat', '$hp', '$tgl', '$keluhan', 'tidak tersedia', '', '', '0000-00-00', '')";
+                                        }
                                 
                                         $mysqlKeluhan = mysqli_query($conn, $query);
 
@@ -129,12 +156,12 @@ $activeKeluhan = "active"; $activeInputKeluhan = "active";
                                                 showConfirmButton: true
                                             })
                                             </script>";
-                                        }else{
+                                        }elseif($mysqlKeluhan == false){
                                             echo "<script>
                                             Swal.fire({
                                                 position: 'center',
                                                 icon: 'error',
-                                                title: 'Input Keluhan Gagal!',
+                                                title: 'Input Keluhan Gagal! Pastikan tidak ada kolom inputan yang kosong',
                                                 showConfirmButton: true
                                             })
                                             </script>";
