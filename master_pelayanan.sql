@@ -193,7 +193,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-09 11:48:32'),(2,'kabag','1a50ef14d0d75cd795860935ee0918af','KEUANGAN','2022-07-07 16:25:20'),(3,'perencana','7d70c522bf3c837573c10fb0d2fac500','PERENCANA','2022-07-09 11:47:57');
+INSERT INTO `login` VALUES (1,'pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-10 00:39:02'),(2,'kabag','1a50ef14d0d75cd795860935ee0918af','KEUANGAN','2022-07-07 16:25:20'),(3,'perencana','7d70c522bf3c837573c10fb0d2fac500','PERENCANA','2022-07-10 00:31:03');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +272,8 @@ CREATE TABLE `pembukaan` (
   `alamat` varchar(225) NOT NULL,
   `no_hp` varchar(20) NOT NULL,
   `keterangan` varchar(50) NOT NULL,
-  `biaya` int(11) DEFAULT NULL
+  `biaya` int(11) DEFAULT NULL,
+  `status_tindakan` enum('selesai','belum ditindak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -282,7 +283,7 @@ CREATE TABLE `pembukaan` (
 
 LOCK TABLES `pembukaan` WRITE;
 /*!40000 ALTER TABLE `pembukaan` DISABLE KEYS */;
-INSERT INTO `pembukaan` VALUES ('050003','05','2022-02-18','Pelanggan Empat','Baruh Panyambaran RT.03','08218948567','Permintaan Pembukaan',20000),('010002','01','2022-02-21','Pelanggan Tiga','Komplek Selawi RT.05','08218948567','Permintaan Pembukaan',20000);
+INSERT INTO `pembukaan` VALUES ('010001','01','2022-07-09','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','Permintaan Pembukaan',20000,'belum ditindak');
 /*!40000 ALTER TABLE `pembukaan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +334,8 @@ CREATE TABLE `penutupan` (
   `alamat` varchar(225) NOT NULL,
   `no_hp` varchar(20) NOT NULL,
   `keterangan` varchar(50) NOT NULL,
-  `biaya` int(11) DEFAULT NULL
+  `biaya` int(11) DEFAULT NULL,
+  `status_tindakan` enum('selesai','belum ditindak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -343,7 +345,7 @@ CREATE TABLE `penutupan` (
 
 LOCK TABLES `penutupan` WRITE;
 /*!40000 ALTER TABLE `penutupan` DISABLE KEYS */;
-INSERT INTO `penutupan` VALUES ('050003','05','2022-02-17','Pelanggan Empat','Baruh Panyambaran RT.03','08218948567','Permintaan Penutupan',20000),('080001','08','2022-02-18','Pelanggan Satu Balik Nama','Batu Piring RT.2','082152527752','Penutupan Otomatis',NULL),('090003','09','2022-02-19','Pelanggan Delapan','Gunung Batu RT.02','08218948509','Permintaan Penutupan',20000),('010003','01','2022-02-21','Pelanggan Sembilan','Balida RT.09','082189487777','Permintaan Penutupan',20000),('010002','01','2022-02-21','Pelanggan Tiga','Komplek Selawi RT.05','08218948567','Permintaan Penutupan',20000);
+INSERT INTO `penutupan` VALUES ('010001','01','2022-07-09','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','Permintaan Penutupan',20000,'selesai');
 /*!40000 ALTER TABLE `penutupan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,4 +445,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-09 19:51:31
+-- Dump completed on 2022-07-10  8:39:56

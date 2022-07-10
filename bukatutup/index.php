@@ -1,5 +1,8 @@
 <?php 
-require "../functions.php";
+session_start();
+include_once "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openBukaTutup = "menu-open";
 $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
 ?>
@@ -63,7 +66,7 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                         <div class="form-group row">
                                             <label for="status" class="col-sm-2 col-form-label">Status Saat Ini</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="status" name="status" readonly>
+                                                <input type="text" class="form-control form-control-sm border-secondary text-bold text-danger" id="status" name="status" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -99,19 +102,18 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                         <div class="form-group row">
                                             <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-4">
-                                            <select class="form-control form-control-sm border-secondary" id="keterangan"
+                                                <select class="form-control form-control-sm border-secondary" id="keterangan"
                                                     name="keterangan">
                                                     <option class="text-secondary" selected>---</option>
                                                     <option value="1">Permintaan Penutupan</option>
                                                     <option value="2">Permintaan Pembukaan</option>
-                                                    <option value="3">Penutupan Otomatis</option>
+                                                    <option value="3">Penutupan Sepihak</option>
                                                 </select>
                                             </div>
                                         </div>
                                         
                                         <div class="card-footer col-6 text-right">
                                             <button type="submit" name="submit" class="btn btn-dark ml-3">SIMPAN</button>
-                                            
                                         </div>
                                     </form>
                                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -144,10 +146,11 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                             $tgl = $_POST["tgl"];
                                             $sValue = $_POST["menu"];
                                             $status = "TERBUKA";
+                                            $statusTindakan = "belum ditindak";
                                     
                                             $query = "INSERT INTO pembukaan
                                                         VALUES
-                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', 'Permintaan Pembukaan', 20000);";
+                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', 'Permintaan Pembukaan', 20000, '$statusTindakan');";
                                     
                                             $query .= "UPDATE pelanggan
                                                         SET
@@ -194,10 +197,11 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                             $tgl = $_POST["tgl"];
                                             $sValue = $_POST["menu"];
                                             $status = "TERTUTUP";
+                                            $statusTindakan = "belum ditindak";
                                         
                                             $query = "INSERT INTO penutupan
                                                         VALUES
-                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', '$keterangan', $biaya);";
+                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', '$keterangan', $biaya, '$statusTindakan');";
                                     
                                             $query .= "UPDATE pelanggan
                                                         SET

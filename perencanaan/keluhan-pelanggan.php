@@ -64,11 +64,11 @@ $activeKeluhan = "active";
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
-                            <h1 class="d-inline mr-4">Antrian Survei</h1>
+                            <h1 class="d-inline mr-4">Antrian Tindak Lanjut Keluhan</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item">Antrian Survei</li>
+                                <li class="breadcrumb-item">Keluhan Pelanggan</li>
                                 <!-- <li class="breadcrumb-item active">Antrian Survei</li> -->
                             </ol>
                         </div>

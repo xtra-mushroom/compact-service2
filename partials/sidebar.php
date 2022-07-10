@@ -109,9 +109,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../bukatutup/surat.php" class="nav-link <?= $activeSuratBukaTutup ?>">
-                                <i class="bi bi-printer ml-4 mr-2"></i>
-                                <p>Cetak Surat</p>
+                            <a href="../bukatutup/antrian-bukatutup.php" class="nav-link <?= $activeAntrianBukaTutup ?>">
+                                <i class="bi bi-bar-chart-steps ml-4 mr-2"></i>
+                                <p>Antrian Buka Tutup</p>
                             </a>
                         </li>
                         <li class="nav-item">

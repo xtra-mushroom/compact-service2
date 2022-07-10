@@ -18,7 +18,7 @@ h3 { text-align:center; }
 
 </style></head>";
 
-$html .= "<body><img src='../../layout/dist/img/kop-surat.png' width='469px' style='margin-bottom:5px;'>";
+$html .= "<body><img src='../../assets/images/kop-surat.png' width='469px' style='margin-bottom:5px;'>";
 
 $html .= "<hr><h3>SURAT PERINTAH PEMBUKAAN</h3>";
 

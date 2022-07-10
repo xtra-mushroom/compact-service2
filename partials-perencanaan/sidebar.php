@@ -43,6 +43,14 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
+                    <a href="../perencanaan/antrian-bukatutup.php" class="nav-link <?php echo $activeAntriBukatutup ?>">
+                        <i class="bi bi-toggles mr-2"></i>
+                        <p>
+                            Antrian Buka Tutup
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
                     <a href="../perencanaan/keluhan-pelanggan.php" class="nav-link <?php echo $activeKeluhan ?>">
                         <i class="fas fa-exclamation mr-3"></i>
                         <p>

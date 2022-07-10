@@ -34,7 +34,7 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                         </div>
                         <div class="col-sm-5">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Antrian Penanganan</li>
+                                <li class="breadcrumb-item active">Keluhan Pelanggan</li>
                                 <li class="breadcrumb-item">Input Penanganan</li>
                             </ol>
                         </div>
