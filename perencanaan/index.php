@@ -1,28 +1,28 @@
 <?php
 session_start();
-    include_once ("../functions.php");
+include_once ("../functions.php");
 
-    if(!isset($_SESSION['peran'])){
-        header("location: ../logsystem/index.php");
-        exit;
-    }
+if($_SESSION['peran'] !== "TEKNISI"){
+    header("location: ../logsystem/index.php");
+    exit;
+}
 
-    if (!isset($_SESSION['signin'])){
-        header("location: ../logsystem/index.php");
-    }
+if (!isset($_SESSION['signin'])){
+    header("location: ../logsystem/index.php");
+}
 
-    $activeHome = "active";
+$activeHome = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials-perencanaan/head.php") ?>
+    <?php include_once ("../partials-teknisi/head.php") ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <?php include_once ("../partials-perencanaan/navbar.php") ?>
-        <?php include_once ("../partials-perencanaan/sidebar.php") ?>
+        <?php include_once ("../partials-teknisi/navbar.php") ?>
+        <?php include_once ("../partials-teknisi/sidebar.php") ?>
 
         <div class="content-wrapper">
             <!-- Main content -->
@@ -51,6 +51,6 @@ session_start();
         </div>
     </div>
 
-    <?php include_once ("../partials-perencanaan/importjs.php") ?>
+    <?php include_once ("../partials-teknisi/importjs.php") ?>
 </body>
 </html>

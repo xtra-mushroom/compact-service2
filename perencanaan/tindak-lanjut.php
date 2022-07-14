@@ -2,7 +2,7 @@
 session_start();
 include_once "../functions.php";
 
-if(!isset($_SESSION['peran'])){
+if($_SESSION['peran'] !== "TEKNISI"){
     header("location: ../logsystem/index.php");
     exit;
 }
@@ -17,13 +17,13 @@ $activeKeluhan = "active"; $activePenanganan = "active";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials-perencanaan/head.php") ?>
+    <?php include_once ("../partials-teknisi/head.php") ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <?php include_once ("../partials-perencanaan/navbar.php") ?>
-        <?php include_once ("../partials-perencanaan/sidebar.php") ?>
+        <?php include_once ("../partials-teknisi/navbar.php") ?>
+        <?php include_once ("../partials-teknisi/sidebar.php") ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -179,6 +179,6 @@ $activeKeluhan = "active"; $activePenanganan = "active";
         </div>
     </div>
 
-    <?php include_once ("../partials-perencanaan/importjs.php") ?>
+    <?php include_once ("../partials-teknisi/importjs.php") ?>
 </body>
 </html>

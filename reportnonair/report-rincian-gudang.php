@@ -1,28 +1,20 @@
 <?php 
 session_start();
-include_once "../functions.php";
+require "../functions.php";
 include_once ("../partials/session-pegawai.php");
-
-$openBaliknama = "menu-open";
-$activeBaliknama = "active"; $activeReportBaliknama = "active";
+$activeReportNonair = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php include_once ("../partials/head.php") ?>
-     <!-- Include library Bootstrap Datepicker -->
      <link href="libraries/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <script src="../sweetalert2/dist/sweetalert2.min.js"></script>
-
-    <!-- Site wrapper -->
     <div class="wrapper">
-        <!-- Navbar right-->
         <?php include_once ("../partials/navbar.php") ?>
-
-        <!-- Main Sidebar Container -->
         <?php include_once ("../partials/sidebar.php") ?>
 
         <!-- Content -->
@@ -31,12 +23,12 @@ $activeBaliknama = "active"; $activeReportBaliknama = "active";
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-6">
-                            <h1 class="d-inline mr-4">Cetak Laporan</h1>
+                            <h1 class="d-inline mr-4">Cetak Laporan Rincian Gudang</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Balik Nama</li>
-                                <li class="breadcrumb-item">Cetak Laporan</li>
+                                <li class="breadcrumb-item active">Laporan Non Air</li>
+                                <li class="breadcrumb-item">Laporan Rincian Gudang</li>
                             </ol>
                         </div>
                     </div>
@@ -50,8 +42,8 @@ $activeBaliknama = "active"; $activeReportBaliknama = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-3">
-                                    <h5 align="center">Laporan Jumlah Biaya Balik Nama Per-Cabang</h5>
-                                    <form method="get" action="report-jumlah-biaya-baliknama.php">
+                                    <h5 align="center">Laporan Rincian Pemakaian Bahan dari Gudang</h5>
+                                    <form method="get" action="report-rincian-gudang.php">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group my-2">
@@ -68,7 +60,7 @@ $activeBaliknama = "active"; $activeReportBaliknama = "active";
                                         
                                         <?php
                                         if(isset($_GET['filter']))
-                                            echo '<a href="report-jumlah-biaya-baliknama.php" class="btn btn-sm btn-default">RESET</a>';
+                                            echo '<a href="report-rincian-gudang.php" class="btn btn-sm btn-default">RESET</a>';
                                         ?>
 
                                     </form>  
@@ -76,12 +68,12 @@ $activeBaliknama = "active"; $activeReportBaliknama = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT pendaftaran.cabang, SUM(baliknama.biaya) as total_biaya, COUNT(baliknama.no_ds) as total_data FROM pendaftaran INNER JOIN baliknama ON pendaftaran.no_ds = baliknama.no_ds GROUP BY cabang ORDER BY cabang ASC";
-                                        $url_cetak = "report/report-jumlah-biaya-baliknama.php";
-                                        $label = "Semua Data Jumlah Biaya, per-cabang";
+                                        $query = "SELECT sb.tgl_survei, dsb.kode_bahan, SUM(dsb.banyaknya), g.nama, g.jenis, g.nomor, g.ukuran, g.harga FROM survei_bahan sb INNER JOIN detail_survei_bahan dsb ON sb.no_reg = dsb.no_reg INNER JOIN gudang g ON dsb.kode_bahan = g.kode WHERE sb.keterangan = 'terpasang' GROUP BY g.kode ORDER BY g.nomor ASC";
+                                        $url_cetak = "report/report-rincian-gudang.php";
+                                        $label = "Semua data, periode waktu keseluruhan";
                                     }else{  
-                                        $query = "SELECT pendaftaran.cabang, SUM(baliknama.biaya) as total_biaya, COUNT(baliknama.no_ds) as total_data FROM pendaftaran INNER JOIN baliknama ON pendaftaran.no_ds = baliknama.no_ds WHERE (tanggal BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC";
-                                        $url_cetak = "report/report-jumlah-biaya-baliknama.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+                                        $query = "SELECT sb.tgl_survei, dsb.kode_bahan, SUM(dsb.banyaknya), g.nama, g.jenis, g.nomor, g.ukuran, g.harga FROM survei_bahan sb INNER JOIN detail_survei_bahan dsb ON sb.no_reg = dsb.no_reg INNER JOIN gudang g ON dsb.kode_bahan = g.kode WHERE sb.keterangan = 'terpasang' AND (tgl_survei BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')GROUP BY g.kode ORDER BY g.nomor ASC";
+                                        $url_cetak = "report/report-rincian-gudang.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
                                         $label = 'Periode Tanggal <b>'.$tgl_awal.'</b> s/d <b>'.$tgl_akhir.'</b>';
@@ -100,10 +92,11 @@ $activeBaliknama = "active"; $activeReportBaliknama = "active";
                                             <thead class="text-center">
                                                 <tr>
                                                     <th scope="col">No.</th>
-                                                    <th scope="col">ID Wilayah</th>
-                                                    <th scope="col">Wilayah/Cabang</th>
-                                                    <th scope="col">Jumlah Data</th>
-                                                    <th scope="col">Total Biaya Balik Nama</th>
+                                                    <th scope="col">Nama</th>
+                                                    <th scope="col">Jenis</th>
+                                                    <th scope="col">Ukuran</th>
+                                                    <th scope="col">Harga Satuan</th>
+                                                    <th scope="col">Jumlah Terpakai</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -114,36 +107,19 @@ $activeBaliknama = "active"; $activeReportBaliknama = "active";
 
                                             if($row > 0){
                                             while($data = $result->fetch_assoc()){
-                                                $tgl = date('d-m-Y', strtotime($data['tgl']));
                                                 $no++;
-                                                if($data['cabang'] == '01'){
-                                                    $namaCabang = 'Paringin';
-                                                }elseif($data['cabang'] == '02'){
-                                                    $namaCabang = 'Paringin Selatan';
-                                                }elseif($data['cabang'] == '3'){
-                                                    $namaCabang = 'Awayan';
-                                                }elseif($data['cabang'] == '04'){
-                                                    $namaCabang = 'Lampihong';
-                                                }elseif($data['cabang'] == '05'){
-                                                    $namaCabang = 'Juai';
-                                                }elseif($data['cabang'] == '06'){
-                                                    $namaCabang = 'Halong';
-                                                }elseif($data['cabang'] == '07'){
-                                                    $namaCabang = 'Batumandi';
-                                                }elseif($data['cabang'] == '08'){
-                                                    $namaCabang = 'Tebing Tinggi';
-                                                }
                                             ?>
                                                 <tr>
                                                     <td align="center"><?php echo $no; ?></td>
-                                                    <td align="center"><?php echo $data['cabang']; ?></td>
-                                                    <td align="center"><?php echo $namaCabang; ?></td>
-                                                    <td align="center"><?php echo $data['total_data']; ?></td>
-                                                    <td align="center"><?php echo rupiah($data['total_biaya']); ?></td>
+                                                    <td align="center"><?php echo $data['nama']; ?></td>
+                                                    <td align="center"><?php echo $data['jenis']; ?></td>
+                                                    <td align="center"><?php echo $data['ukuran']; ?></td>
+                                                    <td align="center"><?php echo rupiah($data['harga']); ?></td>
+                                                    <td align="center"><?php echo $data['SUM(dsb.banyaknya)']; ?></td>
                                                 </tr>
                                             <?php }
                                             }else{
-                                                echo "<tr><td colspan='5'>Data tidak diitemukan</td></tr>";
+                                                echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
                                             } ?>   
                                             </tbody>
                                         </table>

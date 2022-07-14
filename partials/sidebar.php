@@ -28,7 +28,7 @@
                 <!-- pendaftaran -->
                 <li class="nav-item <?= $openDaftar ?>">
                 <a href="#" class="nav-link <?= $activeDaftar ?>">
-                    <i class="nav-icon fab fa-wpforms"></i>
+                    <i class="nav-icon fas fa-sticky-note"></i>
                         <p>
                             Pendaftaran
                             <i class="right fas fa-angle-left"></i>
@@ -183,11 +183,20 @@
                     </ul>
                 </li>
                 <!-- data pelanggan -->
-                <li class="nav-item mb-5">
+                <li class="nav-item">
                     <a href="../pelanggan/index.php" class="nav-link <?php echo $activePelanggan ?>">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Data Pelanggan
+                        </p>
+                    </a>
+                </li>
+                <!-- laporan nonair -->
+                <li class="nav-item mb-5">
+                    <a href="../reportnonair/index.php" class="nav-link <?php echo $activeReportNonair ?>">
+                        <i class=" nav-icon fas fa-print"></i>
+                        <p>
+                            Laporan Non Air
                         </p>
                     </a>
                 </li>

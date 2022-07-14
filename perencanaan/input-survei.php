@@ -2,7 +2,7 @@
 session_start();
 include_once "../functions.php";
 
-if(!isset($_SESSION['peran'])){
+if($_SESSION['peran'] !== "TEKNISI"){
     header("location: ../logsystem/index.php");
     exit;
 }
@@ -17,8 +17,8 @@ $activeSurvei = "active";
 <!DOCTYPE html>
 <head>
     <?php
-    include_once ("../partials-perencanaan/head.php");
-    include_once ("../partials-perencanaan/cssdatatables.php");
+    include_once ("../partials-teknisi/head.php");
+    include_once ("../partials-teknisi/cssdatatables.php");
     ?> 
 </head>
 <?php include_once ("../database.php") ?>
@@ -27,8 +27,8 @@ $activeSurvei = "active";
     <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
-        <?php include_once ("../partials-perencanaan/navbar.php") ?>
-        <?php include_once ("../partials-perencanaan/sidebar.php") ?>
+        <?php include_once ("../partials-teknisi/navbar.php") ?>
+        <?php include_once ("../partials-teknisi/sidebar.php") ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -221,8 +221,8 @@ $activeSurvei = "active";
     </div>
 
     <?php
-    include_once ("../partials-perencanaan/importjs.php");
-    include_once ("../partials-perencanaan/scriptsdatatables.php");
+    include_once ("../partials-teknisi/importjs.php");
+    include_once ("../partials-teknisi/scriptsdatatables.php");
     ?>
 
     <script>

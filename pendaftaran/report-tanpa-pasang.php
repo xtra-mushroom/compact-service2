@@ -16,13 +16,8 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <script src="../sweetalert2/dist/sweetalert2.min.js"></script>
-
-    <!-- Site wrapper -->
     <div class="wrapper">
-        <!-- Navbar right-->
         <?php include_once ("../partials/navbar.php") ?>
-
-        <!-- Main Sidebar Container -->
         <?php include_once ("../partials/sidebar.php") ?>
 
         <!-- Content -->
@@ -51,7 +46,6 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-3">
-                                    <!-- di sini pencarian pendaftaran -->
                                     <h5 align="center">Laporan Rincian Data Pendaftaran Tanpa Pemasangan</h5>
                                     <form method="get" action="report-tanpa-pasang.php">
                                         <div class="row">

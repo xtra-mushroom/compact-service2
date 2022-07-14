@@ -189,7 +189,7 @@ $html .= "<table class='table table-sm table-condensed'style='border-style:none;
         <p align='center'><b>MURJANI</b></p>
     </td>
     <td>
-        <p align='center'><img src='../../pengesahan/".$dataPengesahan['pengesahan']."' width='90px'></p>
+        <p align='center'><img src='../../pimpinan/".$dataPengesahan['pengesahan']."' width='90px'></p>
         <p align='center'><b>DRAJAT WINDARTO, SE.</b></p>
     </td>
     <td>

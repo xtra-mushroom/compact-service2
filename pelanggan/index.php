@@ -1,5 +1,8 @@
 <?php 
-require "../functions.php";
+session_start();
+include_once "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $activePelanggan = "active";
 ?>
 <!DOCTYPE html>

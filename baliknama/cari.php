@@ -1,8 +1,10 @@
 <?php 
-require "../functions.php";
+session_start();
+include_once "../functions.php";
+include_once ("../partials/session-pegawai.php");
+
 $openBaliknama = "menu-open";
 $activeBaliknama = "active"; $activeCariBaliknama = "active";
-session_start();
 ?>
 
 <!DOCTYPE html>

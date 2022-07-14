@@ -2,7 +2,7 @@
 session_start();
 include_once "../functions.php";
 
-if($_SESSION['peran'] == !"KEUANGAN"){
+if($_SESSION['peran'] == !"PIMPINAN"){
     header("Location: ../logsystem/index.php");
     exit;
 }
@@ -17,8 +17,8 @@ $activePengesahan = "active";
 <!DOCTYPE html>
 <head>
     <?php
-    include_once ("../partials-pengesahan/head.php");
-    include_once ("../partials-pengesahan/cssdatatables.php");
+    include_once ("../partials-pimpinan/head.php");
+    include_once ("../partials-pimpinan/cssdatatables.php");
     ?> 
 </head>
 <?php include_once ("../database.php") ?>
@@ -27,8 +27,8 @@ $activePengesahan = "active";
     <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <div class="wrapper">
-        <?php include_once ("../partials-pengesahan/navbar.php") ?>
-        <?php include_once ("../partials-pengesahan/sidebar.php") ?>
+        <?php include_once ("../partials-pimpinan/navbar.php") ?>
+        <?php include_once ("../partials-pimpinan/sidebar.php") ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -147,8 +147,8 @@ $activePengesahan = "active";
     </div>
 
     <?php
-    include_once ("../partials-pengesahan/importjs.php");
-    include_once ("../partials-pengesahan/scriptsdatatables.php");
+    include_once ("../partials-pimpinan/importjs.php");
+    include_once ("../partials-pimpinan/scriptsdatatables.php");
     ?>
 
     <script>

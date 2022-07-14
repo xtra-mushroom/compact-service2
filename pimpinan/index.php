@@ -2,7 +2,7 @@
 session_start();
 include_once ("../functions.php");
 
-if($_SESSION['peran'] == !"KEUANGAN"){
+if($_SESSION['peran'] == !"PIMPINAN"){
     header("Location: ../logsystem/index.php");
     exit;
 }
@@ -16,14 +16,14 @@ $activeHome = "active";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials-pengesahan/head.php") ?>
+    <?php include_once ("../partials-pimpinan/head.php") ?>
 </head>
 <?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <?php include_once ("../partials-pengesahan/navbar.php") ?>
-        <?php include_once ("../partials-pengesahan/sidebar.php") ?>
+        <?php include_once ("../partials-pimpinan/navbar.php") ?>
+        <?php include_once ("../partials-pimpinan/sidebar.php") ?>
 
         <div class="content-wrapper">
             <!-- Main content -->
@@ -51,6 +51,6 @@ $activeHome = "active";
         </div>
     </div>
 
-    <?php include_once ("../partials-pengesahan/importjs.php") ?>
+    <?php include_once ("../partials-pimpinan/importjs.php") ?>
 </body>
 </html>

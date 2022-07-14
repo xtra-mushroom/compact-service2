@@ -17,7 +17,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="../pengesahan/index.php" class="nav-link <?= $activeHome ?>">
+                    <a href="../pimpinan/index.php" class="nav-link <?= $activeHome ?>">
                         <i class="nav-icon fas fa-igloo"></i>
                         <p>
                             Beranda
@@ -26,7 +26,7 @@
                 </li>
                 <li class="nav-header mt-2"><b>MENU UTAMA</b></li>
                 <li class="nav-item">
-                    <a href="../pengesahan/antrian-pengesahan.php" class="nav-link <?php echo $activePengesahan ?>">
+                    <a href="../pimpinan/antrian-pengesahan.php" class="nav-link <?php echo $activePengesahan ?>">
                         <i class="bi bi-pen-fill mr-2"></i>
                         <p>
                             Antrian Pengesahan
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="../pengesahan/laporan.php" class="nav-link <?php echo $activeLaporan ?>">
+                    <a href="../pimpinan/laporan.php" class="nav-link <?php echo $activeLaporan ?>">
                     <i class="bi bi-file-earmark-fill mr-2"></i>
                         <p>
                             Laporan Biaya Pelayanan

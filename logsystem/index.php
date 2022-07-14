@@ -24,16 +24,16 @@ if(isset($_POST['signin'])){
 		        $_SESSION['peran'] = "PEGAWAI";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../index.php");
-            }elseif($row['peran'] == "PERENCANA"){
+            }elseif($row['peran'] == "TEKNISI"){
                 $_SESSION['username'] = $uname;
-		        $_SESSION['peran'] = "PERENCANA";
+		        $_SESSION['peran'] = "TEKNISI";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../perencanaan/index.php");
-            }elseif($row['peran'] == "KEUANGAN"){
+            }elseif($row['peran'] == "PIMPINAN"){
                 $_SESSION['username'] = $uname;
-		        $_SESSION['peran'] = "KEUANGAN";
+		        $_SESSION['peran'] = "PIMPINAN";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
-                header("Location: ../pengesahan/index.php");
+                header("Location: ../pimpinan/index.php");
             }else{
                 $message = "Anda tidak memiliki hak akses";
             }
@@ -90,7 +90,8 @@ if(isset($_POST['signin'])){
         <div class="forms-container">
             <div class="signin-signup">
                 <form action="" class="sign-in-form" method="post">
-                    <h2 class="title">Sign in</h2>
+                <img src="../assets/images/pdam-logo.png" width="120px" alt="">
+                    <h2 class="title">Log in</h2>
                     <p style="color:red"><?= $message ?></p>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
@@ -102,7 +103,7 @@ if(isset($_POST['signin'])){
                     </div>
                     <input type="submit" name="signin" value="Login" class="btn solid"/>
                 </form>
-                <form action="#" class="sign-up-form">
+                <!-- <form action="#" class="sign-up-form">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
@@ -121,27 +122,28 @@ if(isset($_POST['signin'])){
                         <input type="password" placeholder="Password"/>
                     </div>
                     <input type="submit" class="btn" value="Sign up"/>
-                </form>
+                </form> -->
             </div>
         </div>
 
         <div class="panels-container">
             <div class="panel left-panel">
                 <div class="content">
+                    
                     <h3>PDAM BALANGAN</h3>
                     <p>
                         Silahkan masuk dengan akun anda untuk mengakses menu pelayanan
                     </p>
-                    <p>
+                    <!-- <p>
                         Anda karyawan dan belum memilik akun?
                     </p>
                     <button class="btn transparent" id="sign-up-btn">
                         Sign up
-                    </button>
+                    </button> -->
                 </div>
-                <img src="img/log.svg" class="image" alt="" />
+                <img src="img/register.svg" class="image" alt="" />
             </div>
-            <div class="panel right-panel">
+            <!-- <div class="panel right-panel">
                 <div class="content">
                     <h3>PDAM BALANGAN</h3>
                     <p>
@@ -155,7 +157,7 @@ if(isset($_POST['signin'])){
                     </button>
                 </div>
                 <img src="img/register.svg" class="image" alt="" />
-            </div>
+            </div> -->
         </div>
     </div>
 

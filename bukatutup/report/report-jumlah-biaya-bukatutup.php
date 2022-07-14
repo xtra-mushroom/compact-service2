@@ -15,18 +15,18 @@ th, td{ padding:5px; font-size:.9em }
 img { object-fit:cover; }
 </style>";
 
-$html .= "<body><img src='../../layout/dist/img/kop-surat.png' width='700px' style='margin-bottom:5px;'><hr/>";
+$html .= "<body><img src='../../assets/images/kop-surat.png' width='700px' style='margin-bottom:5px;'><hr/>";
 
 $tgl_awal = @$_GET['tgl_awal'];
 $tgl_akhir = @$_GET['tgl_akhir'];
 if(empty($tgl_awal) or empty($tgl_akhir)){
-    $queryBuka = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pembukaan.biaya) as total_buka, COUNT(pembukaan.no_ds) as total_databuka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
-    $queryTutup = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(penutupan.biaya) as total_tutup, COUNT(penutupan.no_ds) as total_datatutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
+    $queryBuka = "SELECT pendaftaran.cabang, SUM(pembukaan.biaya) as total_buka, COUNT(pembukaan.no_ds) as total_databuka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC;";
+    $queryTutup = "SELECT pendaftaran.cabang, SUM(penutupan.biaya) as total_tutup, COUNT(penutupan.no_ds) as total_datatutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC;";
     $url_cetak = "report/report-jumlah-biaya-bukatutup.php";
     $label = "Semua Data Biaya Pembukaan dan Penutupan, per-cabang";
 }else{  
-    $queryBuka = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(pembukaan.biaya) as total_buka, COUNT(pembukaan.no_ds) as total_databuka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds WHERE (pembukaan.tgl_buka BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
-    $queryTutup = "SELECT pendaftaran.id_wil, pendaftaran.wil, SUM(penutupan.biaya) as total_tutup, COUNT(penutupan.no_ds) as total_datatutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds WHERE (penutupan.tgl_tutup BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.id_wil ORDER BY pendaftaran.id_wil ASC;";
+    $queryBuka = "SELECT pendaftaran.cabang, SUM(pembukaan.biaya) as total_buka, COUNT(pembukaan.no_ds) as total_databuka FROM pembukaan INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds WHERE (pembukaan.tgl_buka BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC;";
+    $queryTutup = "SELECT pendaftaran.cabang, SUM(penutupan.biaya) as total_tutup, COUNT(penutupan.no_ds) as total_datatutup FROM penutupan INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds WHERE (penutupan.tgl_tutup BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC;";
     $url_cetak = "report/report-jumlah-biaya-bukatutup.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
     $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
@@ -52,10 +52,27 @@ if($row > 0){
     while($data = $result->fetch_array())
     {
         $no++;
+        if($data['cabang'] == '01'){
+            $namaCabang = 'Paringin';
+        }elseif($data['cabang'] == '02'){
+            $namaCabang = 'Paringin Selatan';
+        }elseif($data['cabang'] == '3'){
+            $namaCabang = 'Awayan';
+        }elseif($data['cabang'] == '04'){
+            $namaCabang = 'Lampihong';
+        }elseif($data['cabang'] == '05'){
+            $namaCabang = 'Juai';
+        }elseif($data['cabang'] == '06'){
+            $namaCabang = 'Halong';
+        }elseif($data['cabang'] == '07'){
+            $namaCabang = 'Batumandi';
+        }elseif($data['cabang'] == '08'){
+            $namaCabang = 'Tebing Tinggi';
+        }
     $html .= "<tr>
     <td style='text-align:center;'>".$no."</td>
-    <td style='text-align:center;'>".$data['id_wil']."</td>
-    <td style='text-align:center;'>".$data['wil']."</td>
+    <td style='text-align:center;'>".$data['cabang']."</td>
+    <td style='text-align:center;'>".$namaCabang."</td>
     <td style='text-align:center;'>".$data['total_databuka']."</td>
     <td style='text-align:center;'>".rupiah($data['total_buka'])."</td>
     </tr>";
@@ -81,10 +98,27 @@ if($row > 0){
     while($data = $result->fetch_array())
     {
         $no++;
+        if($data['cabang'] == '01'){
+            $namaCabang = 'Paringin';
+        }elseif($data['cabang'] == '02'){
+            $namaCabang = 'Paringin Selatan';
+        }elseif($data['cabang'] == '3'){
+            $namaCabang = 'Awayan';
+        }elseif($data['cabang'] == '04'){
+            $namaCabang = 'Lampihong';
+        }elseif($data['cabang'] == '05'){
+            $namaCabang = 'Juai';
+        }elseif($data['cabang'] == '06'){
+            $namaCabang = 'Halong';
+        }elseif($data['cabang'] == '07'){
+            $namaCabang = 'Batumandi';
+        }elseif($data['cabang'] == '08'){
+            $namaCabang = 'Tebing Tinggi';
+        }
     $html .= "<tr>
     <td style='text-align:center;'>".$no."</td>
-    <td style='text-align:center;'>".$data['id_wil']."</td>
-    <td style='text-align:center;'>".$data['wil']."</td>
+    <td style='text-align:center;'>".$data['cabang']."</td>
+    <td style='text-align:center;'>".$namaCabang."</td>
     <td style='text-align:center;'>".$data['total_datatutup']."</td>
     <td style='text-align:center;'>".rupiah($data['total_tutup'])."</td>
     </tr>";
