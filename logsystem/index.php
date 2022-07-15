@@ -19,6 +19,7 @@ if(isset($_POST['signin'])){
             $_SESSION['peran'] = $row['peran'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['nama'] = $row['nama'];
+            $_SESSION['jenis_kel'] = $row['jenis_kel'];
             $_SESSION['id'] = $row['id'];
             if($row['peran'] == "PEGAWAI"){
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");

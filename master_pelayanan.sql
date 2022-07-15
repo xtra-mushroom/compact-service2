@@ -178,6 +178,7 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nama` varchar(255) NOT NULL,
+  `jenis_kel` enum('Laki-Laki','Perempuan') NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `peran` enum('PEGAWAI','PIMPINAN','TEKNISI') NOT NULL,
@@ -192,7 +193,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'fitria','pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-15 00:11:48'),(2,'drajat windarto','kabag','1a50ef14d0d75cd795860935ee0918af','PIMPINAN','2022-07-15 00:08:47'),(3,'udin','perencana','7d70c522bf3c837573c10fb0d2fac500','TEKNISI','2022-07-15 00:15:40'),(4,'murjani','direktur','4fbfd324f5ffcdff5dbf6f019b02eca8','PIMPINAN','2022-07-15 00:09:23'),(5,'herli','trandis','ef8177f83393e3c159aa9d6f7eb9555f','TEKNISI','2022-07-15 00:09:35');
+INSERT INTO `login` VALUES (1,'fitria','Perempuan','pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-15 00:48:56'),(2,'drajat windarto','Laki-Laki','kabag','1a50ef14d0d75cd795860935ee0918af','PIMPINAN','2022-07-15 00:08:47'),(3,'udin','Laki-Laki','perencana','7d70c522bf3c837573c10fb0d2fac500','TEKNISI','2022-07-15 00:15:40'),(4,'murjani','Laki-Laki','direktur','4fbfd324f5ffcdff5dbf6f019b02eca8','PIMPINAN','2022-07-15 00:09:23'),(5,'herli','Laki-Laki','trandis','ef8177f83393e3c159aa9d6f7eb9555f','TEKNISI','2022-07-15 00:31:37');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,4 +446,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-15  8:25:38
+-- Dump completed on 2022-07-15  8:49:51

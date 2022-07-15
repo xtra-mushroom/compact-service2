@@ -227,15 +227,15 @@ $activePasang = "active"; $activeInputPasang = "active";
                                         // update nomor sambungan di tabel pendaftaran
                                         $query .= "UPDATE pendaftaran
                                                     SET
-                                                    no_ds='$generate_ds' WHERE no_reg=$noreg";
+                                                    no_ds='$generate_ds' WHERE no_reg=$noreg;";
 
                                         // update status_pasang di tabel antri_daftar
                                         $query .= "UPDATE antri_daftar
                                                     SET
-                                                    status_pasang='Terpasang' WHERE no_reg=$noreg";
+                                                    status_pasang='Terpasang' WHERE no_reg=$noreg;";
 
                                         // update ketarangan pada survei bahan
-                                        $query = "UPDATE survei_bahan SET keterangan='terpasang' WHERE no_reg=$noreg";
+                                        $query .= "UPDATE survei_bahan SET keterangan='terpasang' WHERE no_reg=$noreg;";
 
                                         $mysqlPemasangan = mysqli_multi_query($conn, $query);
 
