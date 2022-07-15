@@ -39,7 +39,7 @@ if(isset($_POST["submit"])){
 
         if(!in_array($ext,$ekstensi) ) {
             $fotoKeluhan = "tidak tersedia";
-            $query = "INSERT INTO keluhan VALUES ('$ds', '$generateID', '$nama', '$alamat', '$hp', '$tgl', '$keluhan', '$fotoKeluhan', '', '', '0000-00-00', '');";
+            $query = "INSERT INTO keluhan VALUES ('$ds', '$generateID', '$nama', '$alamat', '$hp', '$tgl', '$keluhan', '$fotoKeluhan', '', '', '0000-00-00', '', 'Belum ditangani');";
             $simpanKeluhan = mysqli_query($conn, $query);
 
             if($simpanKeluhan == true){
@@ -54,7 +54,7 @@ if(isset($_POST["submit"])){
             if($ukuran < 1044070){		
                 $fotoKeluhan = $ds.'_'.$filename;
                 move_uploaded_file($_FILES['foto_keluhan']['tmp_name'], 'img-keluhan/'.$ds.'_'.$filename);
-                $query = "INSERT INTO keluhan VALUES ('$ds', '$generateID', '$nama', '$alamat', '$hp', '$tgl', '$keluhan', '$fotoKeluhan', '', '', '0000-00-00', '');";
+                $query = "INSERT INTO keluhan VALUES ('$ds', '$generateID', '$nama', '$alamat', '$hp', '$tgl', '$keluhan', '$fotoKeluhan', '', '', '0000-00-00', '', 'Belum ditangani');";
                 $simpanKeluhan = mysqli_query($conn, $query);
 
                 // var_dump($query);

@@ -106,7 +106,7 @@ $activeKeluhan = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlKeluhan = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut'";
+                                                $sqlKeluhan = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut' AND status_penanganan='Belum ditangani'";
                                                 $resultKeluhan = $db->prepare($sqlKeluhan);
                                                 $resultKeluhan->execute();
 

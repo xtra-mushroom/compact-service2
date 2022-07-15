@@ -29,9 +29,11 @@ $tgl_tangani = $data['tgl_tangani'];
 //     $namaDesa = $dataDesa['nama'];
 // }
 
-$html = "<html><head><style>
+$html = "<html><head>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+<style>
 body { font-family:Times New Roman, Times, serif;
-        margin: -10px 45px; font-size: 0.9em; }
+        margin: -10px 45px;  }
 #title{ text-align:center; font-weight:900; }
 .ddots{ padding-left:15px; padding-right: 8px; }
 
@@ -39,9 +41,9 @@ body { font-family:Times New Roman, Times, serif;
 
 $html .= "<body><img src='../../assets/images/kop-surat.png' width='610px' style='margin-bottom:5px;'>";
 
-$html .= "<hr><br/><p id='title'><u>LAPORAN HASIL PENANGANAN KELUHAN</u></p><br/>";
+$html .= "<hr><br/><h5 id='title'><u>LAPORAN HASIL PENANGANAN KELUHAN</u></h5><br/>";
 
-$html .= "<p align='justify'>Sesuai dengan permohonan yang telah anda ajukan kepada Pihak PDAM Kab. Balangan, anda yang bertanda tangan di bawah ini :</p>";
+$html .= "<p align='justify'>Sesuai dengan keluhan yang telah anda sampaikan kepada Pihak PDAM Kab. Balangan, anda yang bertanda tangan di bawah ini :</p>";
 
 $html .= "<table>
 <tbody>
@@ -73,7 +75,7 @@ $html .= "<table>
     <tr>
         <td>Isi keluhan</td>
         <td class='ddots'>:</td>
-        <td style='text-transform:capitalize;'><b>" . $data['keluhan'] . "</b></td>
+        <td><b>" . $data['keluhan'] . "</b></td>
     </tr>
 </tbody>
 </table>";
@@ -83,7 +85,7 @@ $html .= "<br/><p>Dengan ini pihak PDAM Kab. Balangan menyatakan bahwa masalah t
 $html .= "<table>
     <tbody>
         <tr>
-            <td valign='top'>Tanggal Penindakan</td>
+            <td valign='top' class='text-nowrap'>Tanggal Penindakan</td>
             <td valign='top' class='ddots'>:</td>
             <td valign='top'>" . tgl_indo(date($tgl_tangani)) . "</td>
         </tr>
@@ -115,7 +117,7 @@ $html .= "<table style='padding:0px 20px;'>
     </tr>
     <tr>
         <td valign='top' align='center' style='padding-top: 15px;'>PETUGAS<br/><br/><br/><br/><br/><br/></td>
-        <td><div style='color:rgb(0,0,0,0.0);'>_________________________</div></td>
+        <td><div style='color:rgb(0,0,0,0.0);'>________________________________</div></td>
         <td valign='top' align='center' style='padding-top: 15px;'>Pelanggan<br/><br/><br/><br/><br/><br/></td>
     </tr>
     <tr>

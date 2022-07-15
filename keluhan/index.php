@@ -142,7 +142,7 @@ $activeKeluhan = "active"; $activeInputKeluhan = "active";
                                         }else{
                                             $query = "INSERT INTO keluhan
                                                     VALUES
-                                                    ('$ds', '$generateID', '$nama', '$alamat', '$hp', '$tgl', '$keluhan', 'tidak tersedia', '', '', '0000-00-00', '')";
+                                                    ('$ds', '$generateID', '$nama', '$alamat', '$hp', '$tgl', '$keluhan', 'tidak tersedia', '', '', '0000-00-00', '', 'Belum ditangani')";
                                         }
                                 
                                         $mysqlKeluhan = mysqli_query($conn, $query);

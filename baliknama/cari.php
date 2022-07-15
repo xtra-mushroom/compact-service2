@@ -81,9 +81,21 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
+                                    <form action="cari.php" method="get" class="d-inline">
+                                        <label>Cari :</label>
+                                        <input type="text" name="cari" class="d-inline form-control form-control-sm border-primary col-3" autocomplete="off" autofocus required>
+                                        <button type="submit" name="submit" value="true" class="d-inline btn btn-primary btn-sm"><i class="bi bi-search"></i></button>  
+                                    </form>
+                                    <span><a href="cari.php"><button type="submit" class="ml-3 d-inline btn btn-danger btn-sm"><i class="bi bi-eraser-fill mr-2"></i>RESET</button><a></span>
                                     <div class="table-responsive">
-                                        <table id="myTable" class="table table-sm table-hover table-bordered mt-3">
-                                            <thead class="text-center">
+                                        <?php 
+                                        if(isset($_GET['cari'])){
+                                            $cari = $_GET['cari'];
+                                            echo "<b>Hasil pencarian : <span class='text-green'>".$cari."</span></b>";
+                                        }
+                                        ?>
+                                        <table class="table table-hover table-sm table-bordered mt-4">
+                                            <thead align="center">
                                                 <tr>
                                                     <th scope="col">Action</th>
                                                     <th scope="col">Nomor Sambungan</th>
@@ -94,24 +106,39 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                                                     <th scope="col">Wilayah</th>
                                                 </tr>
                                             </thead>
-
+                                            <?php 
+                                            if(isset($_GET['submit'])){
+                                                $cari = $_GET['cari'];
+                                                $query = "SELECT * FROM baliknama WHERE no_ds LIKE '$cari' OR nama_baru LIKE '%$cari%' OR nama_asal LIKE '%$cari%' OR alamat LIKE '%$cari%' ORDER BY id DESC";
+                                                $result = mysqli_query($conn, $query);				
+                                            }else{
+                                                $query = "";
+                                                $result = mysqli_query($conn, $query);		
+                                            }
+                                            while($data = mysqli_fetch_assoc($result)){
+                                                if($data['id_wilayah'] == '01'){
+                                                    $namaCabang = 'Paringin';
+                                                }elseif($data['id_wilayah'] == '02'){
+                                                    $namaCabang = 'Paringin Selatan';
+                                                }elseif($data['id_wilayah'] == '3'){
+                                                    $namaCabang = 'Awayan';
+                                                }elseif($data['id_wilayah'] == '04'){
+                                                    $namaCabang = 'Lampihong';
+                                                }elseif($data['id_wilayah'] == '05'){
+                                                    $namaCabang = 'Juai';
+                                                }elseif($data['id_wilayah'] == '06'){
+                                                    $namaCabang = 'Halong';
+                                                }elseif($data['id_wilayah'] == '07'){
+                                                    $namaCabang = 'Batumandi';
+                                                }elseif($data['id_wilayah'] == '08'){
+                                                    $namaCabang = 'Tebing Tinggi';
+                                                }
+                                                $id = $data['id'];
+                                            ?>
                                             <tbody>
-                                                <?php
-                                                $database = new Database();
-                                                $db = $database->getConnection();
-
-                                                $sqlBaliknama = "SELECT * FROM baliknama";
-                                                $resultBaliknama = $db->prepare($sqlBaliknama);
-                                                $resultBaliknama->execute();
-
-                                                
-                                                while ($data = $resultBaliknama->fetch(PDO::FETCH_ASSOC)) {
-                                                    $no = $data['no_ds'];
-                                                ?>
-
                                                 <tr>
                                                     <td align="center">
-                                                        <a href="edit.php?no_ds=<?= $no; ?>" class="btn btn-sm btn-success">
+                                                        <a href="edit.php?id=<?= $id; ?>" class="btn btn-sm btn-success">
                                                             <i class="bi bi-pencil-square"></i>
                                                         </a>
                                                     </td>
@@ -120,10 +147,10 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                                                     <td><?php echo $data['nama_asal']; ?></td>
                                                     <td><?php echo $data['nama_baru']; ?></td>
                                                     <td><?php echo $data['alamat']; ?></td>
-                                                    <td align="center"><?php echo $data['id_wilayah']; ?></td>
+                                                    <td align="center"><?php echo $namaCabang; ?></td>
                                                 </tr>
-                                                <?php } ?>
                                             </tbody>
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>

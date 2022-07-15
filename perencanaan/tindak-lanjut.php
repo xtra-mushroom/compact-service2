@@ -110,21 +110,9 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                                     <h5 class="text-center mb-3">Penanganan</h5>
                                     <form method="post" action="">
                                         <div class="form-group row mt-2">
-                                            <label for="jenis" class="col-sm-4 col-form-label">Jenis Penanganan</label>
+                                        <label for="jenis" class="col-sm-4 col-form-label">Jenis Penanganan</label>
                                             <div class="col-sm-7">
-                                                <select class="form-control form-control-sm border-secondary" id="jenis" name="jenis">
-                                                    <?php 
-                                                    if($data['jenis_penanganan'] == 'Butuh observasi dan tindak lanjut'){
-                                                        $opsi1 = "selected";
-                                                    }elseif($data['jenis_penanganan'] == 'Penanganan instan'){
-                                                        $opsi2 = "selected";
-                                                    }
-                                                    ?>
-                                                    <option class="text-secondary" selected>---</option>
-                                                    <option value="Butuh observasi dan tindak lanjut" <?=$opsi1?>>Observasi dan tindak lanjut</option>
-                                                    <option value="Penanganan instan" <?=$opsi2?>>Penanganan instan</option>
-                                                    <option value="Telah ditangani">Telah ditangani</option>
-                                                </select>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="jenis" name="jenis" value="<?=$data['jenis_penanganan']?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -160,7 +148,7 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                             $catatan = $_POST['catatan'];
                             $tglTangani = $_POST['tgl_tangani'];
 
-                            $sqlUpdate = "UPDATE keluhan SET jenis_penanganan='$jenis', penanganan='$penanganan', catatan='$catatan', tgl_tangani='$tglTangani' WHERE no_keluhan='$id';";
+                            $sqlUpdate = "UPDATE keluhan SET jenis_penanganan='$jenis', penanganan='$penanganan', catatan='$catatan', tgl_tangani='$tglTangani', status_penanganan='Telah ditangani' WHERE no_keluhan='$id';";
                             $updatePenanganan = mysqli_query($conn, $sqlUpdate);
 
                             if($updatePenanganan == true){

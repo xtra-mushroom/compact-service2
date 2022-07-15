@@ -3,15 +3,14 @@ session_start();
 require "../functions.php";
 include_once ("../partials/session-pegawai.php");
 
-$openDaftar = "menu-open";
-$activeDaftar = "active"; $activeReportDaftar = "active";
+$openKeluhan = "menu-open";
+$activeKeluhan = "active"; $activeReportKeluhan = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php include_once ("../partials/head.php") ?>
-     <!-- Include library Bootstrap Datepicker -->
-     <link href="libraries/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="../libraries/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -30,9 +29,8 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Pendaftaran</li>
-                                <li class="breadcrumb-item active">Cetak Laporan</li>
-                                <li class="breadcrumb-item">Report Tanpa Pasang</li>
+                                <li class="breadcrumb-item active">Keluhan</li>
+                                <li class="breadcrumb-item">Cetak Report</li>
                             </ol>
                         </div>
                     </div>
@@ -46,8 +44,8 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-3">
-                                    <h5 align="center">Laporan Rincian Data Pendaftaran Tanpa Pemasangan</h5>
-                                    <form method="get" action="report-tanpa-pasang.php">
+                                    <h5 align="center">Laporan Observasi Keluhan Pelanggan</h5>
+                                    <form method="get" action="report-observasi-keluhan.php">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group my-2">
@@ -64,7 +62,7 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                         
                                         <?php
                                         if(isset($_GET['filter']))
-                                            echo '<a href="report-tanpa-pasang.php" class="btn btn-sm btn-default">RESET</a>';
+                                            echo '<a href="report-observasi-keluhan.php" class="btn btn-sm btn-default">RESET</a>';
                                         ?>
                                     </form>  
 
@@ -72,35 +70,34 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT ad.no_reg, ad.nama, ad.jenis_kel, ad.no_hp, ad.alamat, p.cabang, p.no_reg, p.no_ds, p.tgl_daftar FROM antri_daftar as ad INNER JOIN pendaftaran as p ON ad.no_reg=p.no_reg WHERE p.no_ds='' ORDER BY p.cabang ASC";
-                                        $url_cetak = "report/report-pendaftaran-tanpa-pasang.php";
-                                        $label = "Semua Data Pendaftaran Tanpa Pemasangan";
+                                        $query = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut' ORDER BY no_keluhan DESC LIMIT 10";
+                                        $url_cetak = "report/report-observasi-keluhan.php";
+                                        $label = "10 data keluhan terbaru yang diobservasi";
                                     }else{  
-                                        $query = "SELECT ad.no_reg, ad.nama, ad.jenis_kel, ad.no_hp, ad.alamat, p.cabang, p.no_reg, p.no_ds, p.tgl_daftar FROM antri_daftar as ad INNER JOIN pendaftaran as p ON ad.no_reg=p.no_reg WHERE (p.tgl_daftar BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') AND p.no_ds='' ORDER BY cabang ASC";
-                                        $url_cetak = "report/report-pendaftaran-tanpa-pasang.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+                                        $query = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut' AND (tgl_keluhan BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') ORDER BY no_keluhan ASC";
+                                        $url_cetak = "report/report-observasi-keluhan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
                                         $label = 'Periode Tanggal <b>'.$tgl_awal.'</b> s/d <b>'.$tgl_akhir.'</b>';
                                     }
                                     ?>
-
+                                    
                                     <div>
                                         <a href="<?php echo $url_cetak ?>" target="_blank" class="btn btn-success mt-3 mb-2">CETAK PDF</a>
                                     </div>
 
-                                    <?php echo $label ?>
-                                    <br />
+                                    <p class="font-italic"><?php echo $label ?></p>
 
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover table-bordered mt-2">
+                                        <table class="table table-sm table-hover table-bordered">
                                             <thead class="text-center">
                                                 <tr>
-                                                    <th scope="col">Wilayah / Cabang</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Jenis Kelamin</th>
-                                                    <th scope="col">Alamat</th>
-                                                    <th scope="col">Nomor Telepon</th>
-                                                    <th scope="col">Tanggal Daftar</th>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Nomor Sambungan</th>
+                                                    <th scope="col">Alamat / Lokasi</th>
+                                                    <th scope="col">Tanggal Keluhan</th>
+                                                    <th scope="col">Keluhan</th>
+                                                    <th scope="col">Penanganan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -109,41 +106,24 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                             $row = mysqli_num_rows($result);
 
                                             if($row > 0){
+                                            $no = 1;
                                             while($data = $result->fetch_assoc()){
-                                                $tgl = date('d-m-Y', strtotime($data['tgl']));
-                                                if($data['cabang'] == '01'){
-                                                    $namaCabang = 'Paringin';
-                                                }elseif($data['cabang'] == '02'){
-                                                    $namaCabang = 'Paringin Selatan';
-                                                }elseif($data['cabang'] == '3'){
-                                                    $namaCabang = 'Awayan';
-                                                }elseif($data['cabang'] == '04'){
-                                                    $namaCabang = 'Lampihong';
-                                                }elseif($data['cabang'] == '05'){
-                                                    $namaCabang = 'Juai';
-                                                }elseif($data['cabang'] == '06'){
-                                                    $namaCabang = 'Halong';
-                                                }elseif($data['cabang'] == '07'){
-                                                    $namaCabang = 'Batumandi';
-                                                }elseif($data['cabang'] == '08'){
-                                                    $namaCabang = 'Tebing Tinggi';
-                                                }
+                                                // $tgl = date('d-m-Y', strtotime($data['tgl']));
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?= $namaCabang; ?></td>
-                                                    <td align="center"><?= $data['nama']; ?></td>
-                                                    <td><?= $data['jenis_kel']; ?></td>
-                                                    <td><?= $data['alamat']; ?></td>
-                                                    <td align="center"><?= $data['no_hp']; ?></td>
-                                                    <td align="center"><?= $data['tgl_daftar']; ?></td>
+                                                    <td align="center"><?= $no++; ?></td>
+                                                    <td align="center"><?= $data['no_ds']; ?></td>
+                                                    <td align="left"><?= $data['alamat']; ?></td>
+                                                    <td align="center"><?= $data['tgl_keluhan']; ?></td>
+                                                    <td align="left"><?= $data['keluhan']; ?></td>
+                                                    <td align="left"><?= $data['penanganan']; ?></td>
                                                 </tr>
                                             <?php }
                                             }else{
                                                 echo "<tr><td colspan='6'>Data tidak tersedia</td></tr>";
                                             } ?>   
                                             </tbody>
-                                        </table>
-                                        
+                                        </table> 
                                     </div>
                                 </div>  
                             </div>

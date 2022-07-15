@@ -106,7 +106,7 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                                             <div class="col-sm-7">
                                                 <select class="form-control form-control-sm border-secondary" id="jenis" name="jenis">
                                                     <option class="text-secondary" selected>---</option>
-                                                    <option value="Butuh observasi dan tindak lanjut">Observasi dan tindak lanjut</option>
+                                                    <option value="Butuh observasi dan tindak lanjut">Butuh observasi dan tindak lanjut</option>
                                                     <option value="Penanganan instan">Penanganan instan</option>
                                                 </select>
                                             </div>
@@ -144,7 +144,13 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                             $catatan = $_POST['catatan'];
                             $tglTangani = $_POST['tgl_tangani'];
 
-                            $sqlUpdate = "UPDATE keluhan SET jenis_penanganan='$jenis', penanganan='$penanganan', catatan='$catatan', tgl_tangani='$tglTangani' WHERE no_keluhan='$id';";
+                            if($jenis == 'Penanganan instan'){
+                                $statusPenanganan = 'Telah ditangani';
+                            }elseif($jenis == 'Butuh observasi dan tindak lanjut'){
+                                $statusPenanganan = 'Belum ditangani'; // karena akan dilempar dulu ke teknisi untuk dicek ke lapangan, status penanganan akan diupdate teknisi jika masalah telah diatasi
+                            }
+
+                            $sqlUpdate = "UPDATE keluhan SET jenis_penanganan='$jenis', penanganan='$penanganan', catatan='$catatan', tgl_tangani='$tglTangani', status_penanganan='$statusPenanganan' WHERE no_keluhan='$id';";
                             $updatePenanganan = mysqli_query($conn, $sqlUpdate);
 
                             if($updatePenanganan == true){

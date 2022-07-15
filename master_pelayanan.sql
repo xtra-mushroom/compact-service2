@@ -55,6 +55,7 @@ DROP TABLE IF EXISTS `baliknama`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `baliknama` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `no_ds` varchar(6) NOT NULL,
   `id_wilayah` char(5) NOT NULL,
   `alamat` varchar(255) NOT NULL,
@@ -67,8 +68,9 @@ CREATE TABLE `baliknama` (
   `nik_baru` varchar(20) NOT NULL,
   `hp_baru` varchar(20) NOT NULL,
   `tanggal` varchar(30) NOT NULL,
-  `biaya` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `biaya` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +79,7 @@ CREATE TABLE `baliknama` (
 
 LOCK TABLES `baliknama` WRITE;
 /*!40000 ALTER TABLE `baliknama` DISABLE KEYS */;
-INSERT INTO `baliknama` VALUES ('010001','01','Paringin Kota, Haur Batu RT.12','6308054606000007','082158412297','Perempuan','Maulida Hikmah','Maulida Rahayu','Perempuan','6308054606000006','082158412298','2022-07-10',20000),('010001','01','Paringin Kota, Haur Batu RT.12','6308054606000006','082158412298','Perempuan','Maulida Rahayu','Maulida Hikmah','Perempuan','6308054606000007','082158412297','2022-07-10',20000),('010001','01','Paringin Kota, Haur Batu RT.12','6308054606000007','082158412297','Perempuan','Maulida Hikmah','Sarah','Perempuan','6308054606000098','080852526397','2022-07-14',20000);
+INSERT INTO `baliknama` VALUES (1,'010001','01','Paringin Kota, Haur Batu RT.12','6308054606000007','082158412297','Perempuan','Maulida Hikmah','Maulida Rahayu','Perempuan','6308054606000006','082158412298','2022-07-10',20000),(2,'010001','01','Paringin Kota, Haur Batu RT.12','6308054606000006','082158412298','Perempuan','Maulida Rahayu','Maulida Hikmah','Perempuan','6308054606000007','082158412297','2022-07-10',20000),(3,'010001','01','Paringin Kota, Haur Batu RT.12','6308054606000007','082158412297','Perempuan','Maulida Hikmah','Sarah','Perempuan','6308054606000098','080852526397','2022-07-14',20000),(4,'010001','01','Paringin Kota, Haur Batu RT.12','6308054606000098','080852526397','Perempuan','Sarah','Maulida','Perempuan','6308054606000066','082158412297','2022-07-15',20000);
 /*!40000 ALTER TABLE `baliknama` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,10 +153,11 @@ CREATE TABLE `keluhan` (
   `tgl_keluhan` date NOT NULL,
   `keluhan` text NOT NULL,
   `img_keluhan` varchar(255) NOT NULL,
-  `jenis_penanganan` enum('Butuh observasi dan tindak lanjut','Penanganan instan','Telah ditangani','') NOT NULL,
+  `jenis_penanganan` enum('Butuh observasi dan tindak lanjut','Penanganan instan','') NOT NULL,
   `penanganan` text NOT NULL,
   `tgl_tangani` date NOT NULL,
-  `catatan` text NOT NULL
+  `catatan` text NOT NULL,
+  `status_penanganan` enum('Telah ditangani','Belum ditangani') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -164,7 +167,7 @@ CREATE TABLE `keluhan` (
 
 LOCK TABLES `keluhan` WRITE;
 /*!40000 ALTER TABLE `keluhan` DISABLE KEYS */;
-INSERT INTO `keluhan` VALUES ('010001','0001001','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','2022-07-06','Pipa bocor kecil (tidak terlihat)','010001_img-480358138.jpg','','','0000-00-00',''),('010001','0001002','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','2022-07-07','Pipa bocor membesar','tidak tersedia','Telah ditangani','Pipa sudah diperbaiki, pipa hanya perlu ditambal dengan plester penambal pipa HDPE, tidak perlu mengganti saluran pipa ','2022-07-09','dikonfirmasi operator pelayanan, ditangani operator lapangan Wawan (trandis)');
+INSERT INTO `keluhan` VALUES ('010001','0001001','Maulida','Paringin Kota, Haur Batu RT.12','082158412297','2022-07-15','Pipa bocor tidak terlihat (bocor kecil)','tidak tersedia','Butuh observasi dan tindak lanjut','Perlu dicek keadaan pipa, titik bocor tidak diketahui, butuh observasi langsung ke lokasi - Keluhan sudah ditangani, titik bocoh telah ditemukan, tidak perlu ganti pipa, hanya perlu ditambal','2022-07-15','Dikonfirmasi operator pelayanan, ditangani oleh trandis herli','Telah ditangani');
 /*!40000 ALTER TABLE `keluhan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +196,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'fitria','Perempuan','pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-15 00:48:56'),(2,'drajat windarto','Laki-Laki','kabag','1a50ef14d0d75cd795860935ee0918af','PIMPINAN','2022-07-15 00:08:47'),(3,'udin','Laki-Laki','perencana','7d70c522bf3c837573c10fb0d2fac500','TEKNISI','2022-07-15 00:15:40'),(4,'murjani','Laki-Laki','direktur','4fbfd324f5ffcdff5dbf6f019b02eca8','PIMPINAN','2022-07-15 00:09:23'),(5,'herli','Laki-Laki','trandis','ef8177f83393e3c159aa9d6f7eb9555f','TEKNISI','2022-07-15 00:31:37');
+INSERT INTO `login` VALUES (1,'fitria','Perempuan','pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-15 16:10:27'),(2,'drajat windarto','Laki-Laki','kabag','1a50ef14d0d75cd795860935ee0918af','PIMPINAN','2022-07-15 00:08:47'),(3,'udin','Laki-Laki','perencana','7d70c522bf3c837573c10fb0d2fac500','TEKNISI','2022-07-15 15:05:23'),(4,'murjani','Laki-Laki','direktur','4fbfd324f5ffcdff5dbf6f019b02eca8','PIMPINAN','2022-07-15 00:09:23'),(5,'herli','Laki-Laki','trandis','ef8177f83393e3c159aa9d6f7eb9555f','TEKNISI','2022-07-15 14:55:45');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +225,7 @@ CREATE TABLE `pelanggan` (
 
 LOCK TABLES `pelanggan` WRITE;
 /*!40000 ALTER TABLE `pelanggan` DISABLE KEYS */;
-INSERT INTO `pelanggan` VALUES ('010001','TERBUKA','R2','Sarah','6308054606000098','Perempuan','Paringin Kota, Haur Batu RT.12','080852526397');
+INSERT INTO `pelanggan` VALUES ('010001','TERBUKA','R2','Maulida','6308054606000066','Perempuan','Paringin Kota, Haur Batu RT.12','082158412297');
 /*!40000 ALTER TABLE `pelanggan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +286,6 @@ CREATE TABLE `pembukaan` (
 
 LOCK TABLES `pembukaan` WRITE;
 /*!40000 ALTER TABLE `pembukaan` DISABLE KEYS */;
-INSERT INTO `pembukaan` VALUES ('010001','01','2022-07-09','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','Permintaan Pembukaan',20000,'belum ditindak');
 /*!40000 ALTER TABLE `pembukaan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +347,6 @@ CREATE TABLE `penutupan` (
 
 LOCK TABLES `penutupan` WRITE;
 /*!40000 ALTER TABLE `penutupan` DISABLE KEYS */;
-INSERT INTO `penutupan` VALUES ('010001','01','2022-07-09','Maulida Hikmah','Paringin Kota, Haur Batu RT.12','082158412297','Permintaan Penutupan',20000,'selesai');
 /*!40000 ALTER TABLE `penutupan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-15  8:49:51
+-- Dump completed on 2022-07-16  1:00:11

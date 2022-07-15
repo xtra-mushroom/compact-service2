@@ -175,7 +175,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../keluhan/report/report-baliknama.php" class="nav-link <?= $activeReportKeluhan ?>" target="_blank">
+                            <a href="../keluhan/report-observasi-keluhan.php" class="nav-link <?= $activeReportKeluhan ?>">
                                 <i class="bi bi-archive ml-4 mr-2"></i>
                                 <p>Cetak Laporan</p>
                             </a>

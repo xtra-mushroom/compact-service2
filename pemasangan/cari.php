@@ -87,9 +87,21 @@ session_start();
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body"> 
+                                <div class="card-body">
+                                    <form action="cari.php" method="get" class="d-inline">
+                                        <label>Cari :</label>
+                                        <input type="text" name="cari" class="d-inline form-control form-control-sm border-primary col-3" autocomplete="off" autofocus required>
+                                        <button type="submit" name="submit" value="true" class="d-inline btn btn-primary btn-sm"><i class="bi bi-search"></i></button>  
+                                    </form>
+                                    <span><a href="cari.php"><button type="submit" class="ml-3 d-inline btn btn-danger btn-sm"><i class="bi bi-eraser-fill mr-2"></i>RESET</button><a></span>
                                     <div class="table-responsive">
-                                        <table class="myTable table table-sm table-hover table-bordered">
+                                        <?php 
+                                        if(isset($_GET['cari'])){
+                                            $cari = $_GET['cari'];
+                                            echo "<b>Hasil pencarian : <span class='text-green'>".$cari."</span></b>";
+                                        }
+                                        ?>
+                                        <table class="table table-hover table-sm table-bordered mt-4">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Actions</th>
@@ -108,20 +120,19 @@ session_start();
                                                     <th>Biaya</th>
                                                 </tr>
                                             </thead>
-
+                                            <?php 
+                                            if(isset($_GET['submit'])){
+                                                $cari = $_GET['cari'];
+                                                $query = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pemasangan.status_kep_rumah, pemasangan.jumlah_jiwa, pemasangan.pln, pemasangan.cabang, pemasangan.gol_tarif, pemasangan.biaya, antri_daftar.nama, pendaftaran.no_ktp, antri_daftar.jenis_kel, antri_daftar.alamat, antri_daftar.no_hp FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds INNER JOIN antri_daftar ON antri_daftar.no_reg = pendaftaran.no_reg WHERE pemasangan.no_ds LIKE '$cari' OR antri_daftar.nama LIKE '%$cari%' OR pendaftaran.no_ktp LIKE '%$cari%' OR antri_daftar.alamat LIKE '%$cari%' ORDER BY pemasangan.no_ds ASC";
+                                                $result = mysqli_query($conn, $query);				
+                                            }else{
+                                                $query = "";
+                                                $result = mysqli_query($conn, $query);		
+                                            }
+                                            while($data = mysqli_fetch_assoc($result)){
+                                                $no = $data['no_ds'];
+                                            ?>
                                             <tbody>
-                                                <?php
-                                                $database = new Database();
-                                                $db = $database->getConnection();
-
-                                                $sqlPasang = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pemasangan.status_kep_rumah, pemasangan.jumlah_jiwa, pemasangan.pln, pemasangan.cabang, pemasangan.gol_tarif, pemasangan.biaya, antri_daftar.nama, pendaftaran.no_ktp, antri_daftar.jenis_kel, antri_daftar.alamat, antri_daftar.no_hp FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds INNER JOIN antri_daftar ON antri_daftar.no_reg = pendaftaran.no_reg;";
-                                                $resultPasang = $db->prepare($sqlPasang);
-                                                $resultPasang->execute();
-
-                                                while ($data = $resultPasang->fetch(PDO::FETCH_ASSOC)) {
-                                                    $no = $data['no_ds'];
-                                                ?>
-
                                                 <tr>
                                                     <td align="center">
                                                         <a href="edit.php?no_ds=<?= $no; ?>" class="btn btn-sm btn-success">
@@ -132,27 +143,6 @@ session_start();
                                                     <td><?= $data['tgl_pasang']; ?></td>
                                                     <td><?= $data['no_ktp']; ?></td>
                                                     <td><?= $data['nama']; ?></td>
-
-                                                    <?php 
-                                                    // agar yang tampil adalah nama kecamatannya
-                                                    // $valueKec = $data['kecamatan'];
-                                                    // $queryKec = "SELECT * FROM kecamatan WHERE id='$valueKec'";
-                                                    // $resultKec = $conn->query($queryKec);
-                                                    // $dataKec = $resultKec->fetch_assoc();
-                                                    // if($data['kecamatan'] == $dataKec['id']){
-                                                    //     $namaKec = $dataKec['nama'];
-                                                    // }
-
-                                                    // agar yang tampil adalah nama desanya
-                                                    // $valueDesa = $data['desa'];
-                                                    // $queryDesa = "SELECT * FROM desa WHERE id='$valueDesa'";
-                                                    // $resultDesa = $conn->query($queryDesa);
-                                                    // $dataDesa = $resultDesa->fetch_assoc();
-                                                    // if($data['desa'] == $dataDesa['id']){
-                                                    //     $namaDesa = $dataDesa['nama'];
-                                                    // }
-                                                    ?>
-
                                                     <td><?= $data['alamat']; ?></td>
                                                     <td><?= $data['jenis_kel']; ?></td>
                                                     <td><?= $data['no_hp']; ?></td>
@@ -163,8 +153,8 @@ session_start();
                                                     <td align="center"><?= $data['gol_tarif']; ?></td>
                                                     <td><?= $data['biaya']; ?></td>
                                                 </tr>
-                                                <?php } ?>
                                             </tbody>
+                                            <?php } ?>
                                         </table>
                                     </div> 
                                 </div>  

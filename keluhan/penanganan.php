@@ -99,7 +99,7 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlKeluhan = "SELECT * FROM keluhan WHERE penanganan=''";
+                                                $sqlKeluhan = "SELECT * FROM keluhan WHERE status_penanganan='Belum ditangani'";
                                                 $resultKeluhan = $db->prepare($sqlKeluhan);
                                                 $resultKeluhan->execute();
 

@@ -49,18 +49,19 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                             <div class="card">
                                 <div class="card-body ml-5 mt-2">
                                 <?php 
-                                    $ds = $_GET['no_ds'];
-                                    $sql = "SELECT * FROM baliknama WHERE no_ds='$ds'";
+                                    $id = $_GET['id'];
+                                    $sql = "SELECT * FROM baliknama WHERE id=$id";
                                     $result = $conn->query($sql);
                                                 
                                     while($data = $result->fetch_assoc()){
+                                        $no_ds = $data['no_ds'];
                                     ?>
                                     <!-- di sini form buka tutup -->
                                     <form action="" method="post">
                                         <div class="form-group row mt-2">
                                             <label for="no_ds" class="col-sm-2 col-form-label">Nomor DS</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" value="<?=$ds ?>" readonly>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ds" name="no_ds" value="<?= $no_ds ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -79,21 +80,6 @@ $activeBaliknama = "active"; $activeCariBaliknama = "active";
                                             <label for="nik_baru" class="col-sm-2 col-form-label">NIK Baru</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="nik_baru" name="nik_baru" value="<?= $data['nik_baru'] ?>" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="tmpt_lahir" class="col-sm-2 col-form-label">TTL Baru</label>
-                                            <?php
-                                            $ttl = $data['ttl_baru'];
-                                            $pecahTtl = explode(',', $ttl);
-                                            ?>
-                                            <div class="col-sm-2"> 
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tmpt_lahir"
-                                                name="tmpt_lahir" value="<?= $pecahTtl[0] ?>" autocomplete="off">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir"
-                                                name="tgl_lahir" value="<?= $pecahTtl[1] ?>" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="form-group row">
