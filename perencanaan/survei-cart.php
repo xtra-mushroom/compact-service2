@@ -94,9 +94,6 @@ $activeSurvei = "active";
                                                 name="no_hp" autocomplete="off" value="<?= $data['no_hp']; ?>" readonly>
                                             </div>
                                         </div>
-                                        <!-- <div class="card-footer col-6 text-right">
-                                            <button type="submit" name="submit" class="btn btn-dark">SIMPAN</button>
-                                        </div> -->
                                     </form>
                                     <?php } ?>
 

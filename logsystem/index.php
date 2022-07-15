@@ -18,20 +18,15 @@ if(isset($_POST['signin'])){
             $_SESSION['signin'] = true;
             $_SESSION['peran'] = $row['peran'];
             $_SESSION['username'] = $row['username'];
+            $_SESSION['nama'] = $row['nama'];
             $_SESSION['id'] = $row['id'];
             if($row['peran'] == "PEGAWAI"){
-                $_SESSION['username'] = $uname;
-		        $_SESSION['peran'] = "PEGAWAI";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../index.php");
             }elseif($row['peran'] == "TEKNISI"){
-                $_SESSION['username'] = $uname;
-		        $_SESSION['peran'] = "TEKNISI";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../perencanaan/index.php");
             }elseif($row['peran'] == "PIMPINAN"){
-                $_SESSION['username'] = $uname;
-		        $_SESSION['peran'] = "PIMPINAN";
                 $update = mysqli_query($conn, "UPDATE login SET login_terakhir = '$latestLogin' WHERE username = '$uname'");
                 header("Location: ../pimpinan/index.php");
             }else{
@@ -95,7 +90,7 @@ if(isset($_POST['signin'])){
                     <p style="color:red"><?= $message ?></p>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" name="username" required/>
+                        <input type="text" placeholder="Username" name="username" required autofocus/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>

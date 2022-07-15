@@ -234,6 +234,9 @@ $activePasang = "active"; $activeInputPasang = "active";
                                                     SET
                                                     status_pasang='Terpasang' WHERE no_reg=$noreg";
 
+                                        // update ketarangan pada survei bahan
+                                        $query = "UPDATE survei_bahan SET keterangan='terpasang' WHERE no_reg=$noreg";
+
                                         $mysqlPemasangan = mysqli_multi_query($conn, $query);
 
                                         if($mysqlPemasangan == true){
