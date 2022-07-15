@@ -102,7 +102,7 @@ CREATE TABLE `detail_survei_bahan` (
 
 LOCK TABLES `detail_survei_bahan` WRITE;
 /*!40000 ALTER TABLE `detail_survei_bahan` DISABLE KEYS */;
-INSERT INTO `detail_survei_bahan` VALUES ('KWM1','343082158412297',56000,1),('SK1','343082158412297',98562,1),('L1','343082158412297',178410,3),('T1','343082158412297',20000,1),('PP1','343082158412297',10000,1),('PP1','00012',10000,2);
+INSERT INTO `detail_survei_bahan` VALUES ('KWM1','343082158412297',56000,1),('SK1','343082158412297',98562,1),('L1','343082158412297',178410,3),('T1','343082158412297',20000,1),('PP1','343082158412297',10000,1);
 /*!40000 ALTER TABLE `detail_survei_bahan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +192,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'','pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-14 17:43:39'),(2,'','kabag','1a50ef14d0d75cd795860935ee0918af','PIMPINAN','2022-07-13 16:42:22'),(3,'','perencana','7d70c522bf3c837573c10fb0d2fac500','TEKNISI','2022-07-13 17:04:51'),(4,'','direktur','4fbfd324f5ffcdff5dbf6f019b02eca8','PIMPINAN','2022-07-13 17:02:36'),(5,'','trandis','ef8177f83393e3c159aa9d6f7eb9555f','TEKNISI','2022-07-13 17:00:54');
+INSERT INTO `login` VALUES (1,'fitria','pegawai','047aeeb234644b9e2d4138ed3bc7976a','PEGAWAI','2022-07-15 00:11:48'),(2,'drajat windarto','kabag','1a50ef14d0d75cd795860935ee0918af','PIMPINAN','2022-07-15 00:08:47'),(3,'udin','perencana','7d70c522bf3c837573c10fb0d2fac500','TEKNISI','2022-07-15 00:15:40'),(4,'murjani','direktur','4fbfd324f5ffcdff5dbf6f019b02eca8','PIMPINAN','2022-07-15 00:09:23'),(5,'herli','trandis','ef8177f83393e3c159aa9d6f7eb9555f','TEKNISI','2022-07-15 00:09:35');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +372,7 @@ CREATE TABLE `survei_bahan` (
 
 LOCK TABLES `survei_bahan` WRITE;
 /*!40000 ALTER TABLE `survei_bahan` DISABLE KEYS */;
-INSERT INTO `survei_bahan` VALUES ('00012','2022-07-14','Telah disurvei',20000,'udin','terpasang'),('343082158412297','2022-07-01','Telah disurvei',864000,'udin','terpasang');
+INSERT INTO `survei_bahan` VALUES ('343082158412297','2022-07-01','Telah disurvei',864000,'udin','terpasang');
 /*!40000 ALTER TABLE `survei_bahan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,4 +445,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-15  2:07:19
+-- Dump completed on 2022-07-15  8:25:38
