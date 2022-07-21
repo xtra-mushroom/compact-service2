@@ -5,7 +5,7 @@ use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
 $ds = $_GET['no_ds'];
-$sql = "SELECT * FROM pelanggan where no_ds=$ds";
+$sql = "SELECT * FROM pelanggan WHERE no_ds='$ds'";
 $result = $conn->query($sql);
 $data = $result->fetch_assoc();
 // $dompdf->set_base_path("../layout/dist/css/style.css");

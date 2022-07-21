@@ -17,7 +17,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
 <?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-<script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
         <!-- Navbar right-->
         <?php include_once ("../partials/navbar.php") ?>
@@ -85,18 +85,18 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="mb-3 text-center">Menunggu Verifikasi Pembayaran</h5>
+                                    <h5 class="mb-4 text-center text-bold">Menunggu Verifikasi Pembayaran</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
-                                                    <th>Nama Lengkap</th>
+                                                    <th class="text-nowrap">Nama Lengkap</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Nomor HP</th>
                                                     <th>Alamat</th>
                                                     <th>Bukti Bayar</th>
-                                                    <th>Status</th>
+                                                    <th>Verifkasi Bayar</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead> 
@@ -105,7 +105,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlDaftar = "SELECT * FROM antri_daftar WHERE status_bayar='' AND bukti_bayar!='';";
+                                                $sqlDaftar = "SELECT * FROM antri_daftar WHERE status_bayar='belum' AND bukti_bayar!='';";
                                                 $resultDaftar = $db->prepare($sqlDaftar);
                                                 $resultDaftar->execute();
                                                 
@@ -118,7 +118,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                                     <td align='center'><?= $data['jenis_kel'] ?></td>
                                                     <td><?= $data['no_hp'] ?></td>
                                                     <td><?= $data['alamat'] ?></td>
-                                                    <td><?= "<img src='../pemohon/Paypic/".$data['bukti_bayar']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td><?= "<img src='../otheruser/Paypic/".$data['bukti_bayar']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align='center' style='color:green'><?= $data['status_bayar'] ?></td>
                                                     <td align="center">
                                                         <a href="verifikasi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
@@ -142,19 +142,18 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="mb-3 text-center">Belum Upload Bukti Pembayaran</h5>
+                                    <h5 class="mb-4 text-center text-bold">Belum Upload Bukti Pembayaran</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
-                                                    <th>Nama Lengkap</th>
+                                                    <th class="text-nowrap">Nama Lengkap</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Nomor HP</th>
                                                     <th>Alamat</th>
                                                     <th>Bukti Bayar</th>
-                                                    <th>Status</th>
-                                                    <th>Aksi</th>
+                                                    <th>Upload Kwitansi</th>
                                                 </tr>
                                             </thead> 
                                             <tbody>
@@ -175,14 +174,10 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                                     <td align='center'><?= $data['jenis_kel'] ?></td>
                                                     <td><?= $data['no_hp'] ?></td>
                                                     <td><?= $data['alamat'] ?></td>
-                                                    <td><?= "<img src='../pemohon/Paypic/".$data['bukti_bayar']."'style='width:100px; height:100px;'>" ?></td>
-                                                    <td align='center' style='color:green'><?= $data['status_bayar'] ?></td>
+                                                    <td class="text-danger">Belum tersedia</td>
                                                     <td align="center">
-                                                        <a href="verifikasi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
-                                                            <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                        <a href="report/kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-warning" target="_blank">
-                                                            <i class="bi bi-printer"></i>
+                                                        <a href="upload-kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success" target="_blank" onclick="return confirm('Verifikasi Pembayaran dan Cetak Kwitansi?')">
+                                                            <i class="bi bi-file-earmark-arrow-up-fill"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -199,19 +194,18 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="mb-3 text-center">Sudah Diverifikasi</h5>
+                                    <h5 class="mb-4 text-center text-bold">Sudah Verifikasi Pembayaran (Menunggu Kelengkapan Berkas)</h5>
                                     <div class="table-responsive">
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
-                                                    <th>Nama Lengkap</th>
+                                                    <th class="text-nowrap">Nama Lengkap</th>
                                                     <th>Jenis Kelamin</th>
                                                     <th>Nomor HP</th>
                                                     <th>Alamat</th>
-                                                    <th>Bukti Bayar</th>
-                                                    <th>Status</th>
-                                                    <th>Aksi</th>
+                                                    <th>Verifikasi Bayar</th>
+                                                    <th>Kelengkapan Berkas</th>
                                                 </tr>
                                             </thead>
                                             
@@ -220,7 +214,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlDaftar = "SELECT * FROM antri_daftar WHERE status_bayar='Diverifikasi';";
+                                                $sqlDaftar = "SELECT * FROM antri_daftar WHERE status_bayar='diverifikasi' AND status_up_berkas='belum';";
                                                 $resultDaftar = $db->prepare($sqlDaftar);
                                                 $resultDaftar->execute();
                                                 
@@ -233,16 +227,8 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                                     <td align='center'><?= $data['jenis_kel'] ?></td>
                                                     <td><?= $data['no_hp'] ?></td>
                                                     <td><?= $data['alamat'] ?></td>
-                                                    <td><?= "<img src='../pemohon/Paypic/".$data['bukti_bayar']."' width='100px' height='100px'>" ?></td>
                                                     <td align='center' style='color:green'><?= $data['status_bayar'] ?></td>
-                                                    <td align="center">
-                                                        <a href="verifikasi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
-                                                            <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                        <a href="report/kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-warning" target="_blank">
-                                                            <i class="bi bi-printer"></i>
-                                                        </a>
-                                                    </td>
+                                                    <td align='center' style='color:red'><?= $data['status_up_berkas'] ?></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

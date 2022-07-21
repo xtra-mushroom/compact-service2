@@ -248,12 +248,18 @@ $activeSurvei = "active";
                                     </form>
                                     <?php 
                                     if(isset($_POST['submit'])){
+
+
                                         $pondasi = $_POST['pondasi'];
                                         $dinding = $_POST['dinding'];
                                         $lantai = $_POST['lantai'];
                                         $atap = $_POST['atap'];
                                         $luasBangunan = $_POST['luas_bangunan'];
                                         $gol_tarif = $_POST['gol_tarif'];
+
+                                        if($_POST['pondasi'] = $_POST['dinding'] = $_POST['lantai'] = $_POST['atap'] = $_POST['luas_bangunan'] == NULL){
+                                            $pondasi = $dinding = $lantai = $atap = $luasBangunan = 0;
+                                        }
 
                                         $query = "INSERT INTO survei_goltar_noniaga
                                                     VALUES

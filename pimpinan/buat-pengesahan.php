@@ -111,7 +111,7 @@ $activePengesahan = "active";
                                         $file_name=date("Ymd").rand().".png";	
                                         $file_path = $tempdir.$file_name;
 
-                                        $content = "Pengesahan Hasil Survei Kebutuhan Bahan dan Biaya a/n ".$dataAmbil['nama']."\n \nDiperiksa Oleh : Drajat Windarto, SE \nJabatan : Kabag Administrasi & Keuangan \nTanggal Pengesahan : ".date('d-m-Y');
+                                        $content = "Diperiksa Oleh : Drajat Windarto, SE \nJabatan : Kabag Administrasi & Keuangan \n".date('d-m-Y');
                                         
                                         QRcode::png($content, $file_path, "H", 6, 4);
                                         /* param (1)qrcontent,(2)filename,(3)errorcorrectionlevel,(4)pixelwidth,(5)margin */

@@ -77,11 +77,11 @@ $activePasang = "active"; $activeReportPasang = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT pendaftaran.cabang, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC";
+                                        $query = "SELECT cabang, SUM(biaya) as total_pasba, COUNT(cabang) as total_data FROM pemasangan GROUP BY cabang ORDER BY cabang ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pemasangan.php";
                                         $label = "Semua Data, per-cabang";
                                     }else{  
-                                        $query = "SELECT pendaftaran.cabang, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC";
+                                        $query = "SELECT cabang, SUM(biaya) as total_pasba, COUNT(cabang) as total_data FROM pemasangan WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY cabang ORDER BY cabang ASC";
                                         $url_cetak = "report/report-jumlah-biaya-pemasangan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));

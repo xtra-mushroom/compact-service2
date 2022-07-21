@@ -18,7 +18,7 @@ if(isset($_POST['submit'])){
 
     $query = "INSERT INTO antri_daftar
                 VALUES
-                ('$noreg', '$nama', '$jenisKel', '$hp', '$alamat', '', '', '', '');";
+                ('$noreg', '$nama', '$jenisKel', '$hp', '$alamat', '', '', '', 'belum', 'belum', 'belum');";
                                         
     $simpanDaftar = mysqli_query($conn, $query);
 
@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
         $_SESSION['pesan'] = "Registrasi Berhasil";
         // kirim SMS
         $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan registrasi pemasangan sambungan baru. Nomor Registrasi Anda adalah ".$noreg.". Segera lakukan pembayaran sesuai instruksi pada halaman metode pembayaran. Terima Kasih";
-        // sendSms($hp, $pesan);
+        sendSms($hp, $pesan);
     } else {
         $_SESSION['hasil'] = false;
         $_SESSION['pesan'] = "Registrasi Gagal";

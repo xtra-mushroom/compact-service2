@@ -51,9 +51,10 @@ $activeBukaTutup = "active"; $activeAntrianBukaTutup = "active";
                                 <div class="card-body">
                                     <h5 class="text-center">Antrian Penutupan</h5>
                                     <div class="table-responsive">
-                                        <table class="myTable table table-sm table-hover table-bordered mt-3">
+                                        <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
+                                                    <th scope="row">Status Perintah</th>
                                                     <th scope="row">Status Tindakan</th>
                                                     <th scope="col">Nomor Sambungan</th>
                                                     <th scope="col">Status Pelanggan</th>
@@ -73,19 +74,12 @@ $activeBukaTutup = "active"; $activeAntrianBukaTutup = "active";
                                                 $resultAntriTutup->execute();
 
                                                 while ($data1 = $resultAntriTutup->fetch(PDO::FETCH_ASSOC)) {
+                                                    $no_ds = $data1['no_ds'];
                                                 ?>
                                                 <tr>
-                                                    <!-- <td align="center">
-                                                        <?php 
-                                                        // if($data['status_ket'] == "TERBUKA"){
-                                                        //     echo "<a href='report/surat-pembukaan.php?no_ds=$no' target='_blank'>Surat Perintah</a>";
-                                                        // }elseif($data['status_ket'] == "TERTUTUP"){
-                                                        //     echo "<a href='report/surat-penutupan.php?no_ds=$no' target='_blank'>Surat Perintah</a>";
-                                                        // }else{
-                                                        //     echo "";
-                                                        // }
-                                                        ?>
-                                                    </td> -->
+                                                    <td align="center">
+                                                        <a href="../bukatutup/report/surat-penutupan.php?no_ds=<?=$no_ds?>" target='_blank'>Surat Perintah Penutupan</a>
+                                                    </td>
                                                     <td class="text-bold text-center text-danger"><?php echo $data1['status_tindakan']; ?></td>
                                                     <td class="text-center"><?php echo $data1['no_ds']; ?></td>
                                                     <td class="text-center"><?php echo $data1['status_ket']; ?></td>
@@ -107,9 +101,10 @@ $activeBukaTutup = "active"; $activeAntrianBukaTutup = "active";
                                 <div class="card-body">
                                     <h5 class="text-center">Antrian Pembukaan</h5>
                                     <div class="table-responsive">
-                                        <table class="myTable table table-sm table-hover table-bordered mt-3">
+                                        <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
+                                                    <th scope="row">Status Perintah</th>
                                                     <th scope="row">Status Tindakan</th>
                                                     <th scope="col">Nomor Sambungan</th>
                                                     <th scope="col">Status Pelanggan</th>
@@ -129,19 +124,12 @@ $activeBukaTutup = "active"; $activeAntrianBukaTutup = "active";
                                                 $resultAntriBuka->execute();
 
                                                 while ($data2 = $resultAntriBuka->fetch(PDO::FETCH_ASSOC)) {
+                                                    $no_ds = $data2['no_ds'];
                                                 ?>
                                                 <tr>
-                                                    <!-- <td align="center">
-                                                        <?php 
-                                                        // if($data['status_ket'] == "TERBUKA"){
-                                                        //     echo "<a href='report/surat-pembukaan.php?no_ds=$no' target='_blank'>Surat Perintah</a>";
-                                                        // }elseif($data['status_ket'] == "TERTUTUP"){
-                                                        //     echo "<a href='report/surat-penutupan.php?no_ds=$no' target='_blank'>Surat Perintah</a>";
-                                                        // }else{
-                                                        //     echo "";
-                                                        // }
-                                                        ?>
-                                                    </td> -->
+                                                    <td align="center">
+                                                        <a href="../bukatutup/report/surat-pembukaan.php?no_ds=<?=$no_ds?>" target='_blank'>Surat Perintah Penutupan</a>
+                                                    </td>
                                                     <td class="text-bold text-center text-danger"><?php echo $data2['status_tindakan']; ?></td>
                                                     <td class="text-center"><?php echo $data2['no_ds']; ?></td>
                                                     <td class="text-center"><?php echo $data2['status_ket']; ?></td>

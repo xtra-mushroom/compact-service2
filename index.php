@@ -16,15 +16,10 @@ $activeHome = "active";
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <!-- Navbar right-->
         <?php include_once ("partials/navbar.php") ?>
-
-        <!-- Sidebar -->
         <?php include_once ("partials/sidebar.php") ?>
 
-        <!-- Content -->
         <div class="content-wrapper">
-
             <!-- Main content -->
             <section class="content">
                     <div class="row">
@@ -39,7 +34,7 @@ $activeHome = "active";
                                 </div>
                                 <div style="margin-top:-60px;" class="card-body mx-auto text-center row">
                                     <div class="col-12" style="width: 500px; height: 300px;">
-                                        <h4>Statistik Data Antrian (belum diverifikasi)</h4>
+                                        <h4>Statistik Data Antrian (menunggu verifikasi)</h4>
                                         <canvas id="chartDataAntrian"></canvas>
                                     </div>
                                 </div>
@@ -107,20 +102,24 @@ $activeHome = "active";
                                         var myChart = new Chart(ctx, {
                                             type: 'bar',
                                             data: {
-                                                labels: ["Antrian Pemohon", "Antrian Berkas", "Antrian Survei"],
+                                                labels: ["Antrian Pemohon", "Antrian Berkas", "Antrian Survei", "Antrian Keluhan"],
                                                 datasets: [{
                                                     label: '# of Total data',
                                                     data: [
                                                         <?php
-                                                        $jumlah_pendaftaran = mysqli_query($conn, "SELECT * FROM antri_daftar WHERE status_bayar='' AND bukti_bayar!='';");
+                                                        $jumlah_pendaftaran = mysqli_query($conn, "SELECT * FROM antri_daftar WHERE status_bayar='belum' AND bukti_bayar!='';");
                                                         echo mysqli_num_rows($jumlah_pendaftaran);
                                                         ?>,
                                                         <?php
-                                                        $jumlah_pemasangan = mysqli_query($conn, "SELECT * FROM pendaftaran WHERE status_berkas='';");
+                                                        $jumlah_pemasangan = mysqli_query($conn, "SELECT * FROM pendaftaran WHERE status_berkas='belum';");
                                                         echo mysqli_num_rows($jumlah_pemasangan);
                                                         ?>,
                                                         <?php
-                                                        $jumlah_pembukaan = mysqli_query($conn, "SELECT * FROM pendaftaran WHERE status_survei='';");
+                                                        $jumlah_pembukaan = mysqli_query($conn, "SELECT * FROM pendaftaran WHERE status_survei='belum';");
+                                                        echo mysqli_num_rows($jumlah_pembukaan);
+                                                        ?>,
+                                                        <?php
+                                                        $jumlah_pembukaan = mysqli_query($conn, "SELECT * FROM keluhan WHERE penanganan='';");
                                                         echo mysqli_num_rows($jumlah_pembukaan);
                                                         ?>
                                                     ],

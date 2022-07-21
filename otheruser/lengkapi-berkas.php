@@ -82,10 +82,13 @@ session_start();
                                     <?php 
                                     $nolog = $_SESSION['no_log'];
                                     $noreg = $_SESSION['noreg'];
-                                    $sql = "SELECT * FROM pendaftaran WHERE no_reg='$noreg'";
-                                    $result = $conn->query($sql);
+                                    $sqlDaftar = "SELECT * FROM pendaftaran WHERE no_reg='$noreg'";
+                                    $sqlCabang = "SELECT * FROM antri_daftar WHERE no_reg='$noreg'";
+                                    $resultDaftar = $conn->query($sqlDaftar);
+                                    $resultCabang = $conn->query($sqlCabang);
                                           
-                                    $data = $result->fetch_assoc();
+                                    $dataPendaftaran = $resultDaftar->fetch_assoc();
+                                    $dataCabang = $resultCabang->fetch_assoc();
                                     ?>
                                     <form method="post" action="action-berkas.php" enctype="multipart/form-data">
                                         <div class="form-group row mt-3">
@@ -103,14 +106,14 @@ session_start();
                                         <div class="form-group row">
                                             <label for="no_ktp" class="col-sm-2 col-form-label">Nomor KTP / NIK</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp" value="<?= $data['no_ktp'] ?>" required>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp" value="<?= $dataPendaftaran['no_ktp'] ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="ktp" class="col-sm-2 col-form-label">Upload KTP</label>
                                             <div class="col-sm-4">
                                                 <input type="file" class="form-control form-control-sm border-secondary mb-2" id="ktp" name="ktp" required>
-                                                <img src="ktppic/<?= $data['ktp'] ?>" alt="" width="160px">
+                                                <img src="ktppic/<?= $dataPendaftaran['ktp'] ?>" alt="" width="160px">
                                             </div>
                                             <div id="phoneHelp" class="form-text">
                                                 Ukuran maksimal 1 MB
@@ -118,21 +121,21 @@ session_start();
                                             </div>
                                         </div>
                                         <?php 
-                                        if($data['cabang'] == '01'){
+                                        if($dataCabang['cabang'] == '01'){
                                             $select1 = 'selected';
-                                        }elseif($data['cabang'] == '02'){
+                                        }elseif($dataCabang['cabang'] == '02'){
                                             $select2 = 'selected';
-                                        }elseif($data['cabang'] == '3'){
+                                        }elseif($dataCabang['cabang'] == '03'){
                                             $select3 = 'selected';
-                                        }elseif($data['cabang'] == '04'){
+                                        }elseif($dataCabang['cabang'] == '04'){
                                             $select4 = 'selected';
-                                        }elseif($data['cabang'] == '05'){
+                                        }elseif($dataCabang['cabang'] == '05'){
                                             $select5 = 'selected';
-                                        }elseif($data['cabang'] == '06'){
+                                        }elseif($dataCabang['cabang'] == '06'){
                                             $select5 = 'selected';
-                                        }elseif($data['cabang'] == '07'){
+                                        }elseif($dataCabang['cabang'] == '07'){
                                             $select7 = 'selected';
-                                        }elseif($data['cabang'] == '08'){
+                                        }elseif($dataCabang['cabang'] == '08'){
                                             $select8 = 'selected';
                                         }
                                         ?>

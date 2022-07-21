@@ -24,6 +24,7 @@ $activeAntriBukatutup = "active";
 <?php include_once ("../database.php") ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
         <?php include_once ("../partials-teknisi/navbar.php") ?>
         <?php include_once ("../partials-teknisi/sidebar.php") ?>
@@ -31,6 +32,35 @@ $activeAntriBukatutup = "active";
         <!-- Content -->
         <div class="content-wrapper">
             <section class="content-header">
+            <?php 
+                if(isset($_SESSION['hasil'])){
+                    if($_SESSION['hasil']){
+?>
+                    <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '<?php echo $_SESSION["pesan"] ?>',
+                        showConfirmButton: true
+                        })
+                    </script>
+<?php 
+                    } else {
+?>
+                    <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: '<?php echo $_SESSION["pesan"] ?>',
+                        showConfirmButton: true
+                        })
+                    </script>
+<?php
+                    }
+                    unset($_SESSION['pesan']);
+                    unset($_SESSION['hasil']);
+                }
+?>
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-8">
@@ -53,17 +83,17 @@ $activeAntriBukatutup = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="text-center">Antrian Penutupan</h5>
+                                    <h5 class="text-center text-bold">Antrian Penutupan</h5>
                                     <div class="table-responsive">
-                                        <table class="myTable table table-sm table-hover table-bordered mt-3">
+                                        <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
-                                                    <th scope="row">Surat Perintah</th>
-                                                    <th scope="row">Status Tindakan</th>
                                                     <th scope="col">Nomor Sambungan</th>
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">Alamat</th>
                                                     <th scope="col">Nomor HP</th>
+                                                    <th scope="row">Lihat Koordinat</th>
+                                                    <th scope="row">Status Tindakan</th>
                                                 </tr>
                                             </thead>
 
@@ -72,30 +102,24 @@ $activeAntriBukatutup = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlAntriTutup = "SELECT pelanggan.*, penutupan.status_tindakan FROM pelanggan INNER JOIN penutupan ON pelanggan.no_ds = penutupan.no_ds WHERE penutupan.status_tindakan = 'belum ditindak'";
+                                                $sqlAntriTutup = "SELECT pelanggan.*, pendaftaran.*, penutupan.status_tindakan FROM pelanggan INNER JOIN penutupan ON pelanggan.no_ds = penutupan.no_ds INNER JOIN pendaftaran ON penutupan.no_ds = pendaftaran.no_ds WHERE penutupan.status_tindakan = 'belum ditindak'";
                                                 $resultAntriTutup = $db->prepare($sqlAntriTutup);
                                                 $resultAntriTutup->execute();
 
                                                 while ($data1 = $resultAntriTutup->fetch(PDO::FETCH_ASSOC)) {
-                                                    $no_ds = $data2['no_ds'];
+                                                    $no_ds = $data1['no_ds'];
                                                 ?>
                                                 <tr>
-                                                    <td align="center">
-                                                        <?php 
-                                                        if($data1['status_ket'] == "TERBUKA"){
-                                                            echo "<a href='../bukatutup/report/surat-pembukaan.php?no_ds=$no_ds' target='_blank'>Surat Perintah</a>";
-                                                        }elseif($data1['status_ket'] == "TERTUTUP"){
-                                                            echo "<a href='../bukatutup/report/surat-penutupan.php?no_ds=$no_ds' target='_blank'>Surat Perintah</a>";
-                                                        }else{
-                                                            echo "";
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td class="text-bold text-center text-danger"><?php echo $data1['status_tindakan']; ?></td>
                                                     <td class="text-center"><?php echo $data1['no_ds']; ?></td>
                                                     <td><?php echo $data1['nama']; ?></td>
                                                     <td><?php echo $data1['alamat']; ?></td>
                                                     <td><?php echo $data1['no_hp']; ?></td>
+                                                    <td align="center">
+                                                        <a href="tampil-lokasi-trandis.php?no_ds=<?=$no_ds?>">
+                                                            <?= $data1['lalong_val'] ?>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-bold text-center text-danger"><a href="tindak-penutupan.php?no_ds=<?=$no_ds?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin perbarui status penindakan menjadi SELESAI?')"><?= $data1['status_tindakan']; ?></a></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -109,17 +133,17 @@ $activeAntriBukatutup = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="text-center">Antrian Pembukaan</h5>
+                                    <h5 class="text-center text-bold">Antrian Pembukaan</h5>
                                     <div class="table-responsive">
-                                        <table class="myTable table table-sm table-hover table-bordered mt-3">
+                                        <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
-                                                    <th scope="row">Surat Perintah</th>
-                                                    <th scope="row">Status Tindakan</th>
                                                     <th scope="col">Nomor Sambungan</th>
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">Alamat</th>
                                                     <th scope="col">Nomor HP</th>
+                                                    <th scope="row">Lihat Koordinat</th>
+                                                    <th scope="row">Status Tindakan</th>
                                                 </tr>
                                             </thead>
 
@@ -128,7 +152,7 @@ $activeAntriBukatutup = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sqlAntriBuka = "SELECT pelanggan.*, pembukaan.status_tindakan FROM pelanggan INNER JOIN pembukaan ON pelanggan.no_ds = pembukaan.no_ds WHERE pembukaan.status_tindakan = 'belum ditindak'";
+                                                $sqlAntriBuka = "SELECT pelanggan.*, pendaftaran.*, pembukaan.status_tindakan FROM pelanggan INNER JOIN pembukaan ON pelanggan.no_ds = pembukaan.no_ds INNER JOIN pendaftaran ON pembukaan.no_ds = pendaftaran.no_ds WHERE pembukaan.status_tindakan = 'belum ditindak'";
                                                 $resultAntriBuka = $db->prepare($sqlAntriBuka);
                                                 $resultAntriBuka->execute();
 
@@ -136,22 +160,16 @@ $activeAntriBukatutup = "active";
                                                     $no_ds = $data2['no_ds'];
                                                 ?>
                                                 <tr>
-                                                    <td align="center">
-                                                        <?php 
-                                                        if($data2['status_ket'] == "TERBUKA"){
-                                                            echo "<a href='../bukatutup/report/surat-pembukaan.php?no_ds=$no_ds' target='_blank'>Surat Perintah</a>";
-                                                        }elseif($data2['status_ket'] == "TERTUTUP"){
-                                                            echo "<a href='../bukatutup/report/surat-penutupan.php?no_ds=$no_ds' target='_blank'>Surat Perintah</a>";
-                                                        }else{
-                                                            echo "";
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td class="text-bold text-center text-danger"><?php echo $data2['status_tindakan']; ?></td>
                                                     <td class="text-center"><?php echo $data2['no_ds']; ?></td>
                                                     <td><?php echo $data2['nama']; ?></td>
                                                     <td><?php echo $data2['alamat']; ?></td>
                                                     <td><?php echo $data2['no_hp']; ?></td>
+                                                    <td align="center">
+                                                        <a href="tampil-lokasi-trandis.php?no_ds=<?=$no_ds?>">
+                                                            <?= $data2['lalong_val'] ?>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-bold text-center text-danger"><a href="tindak-pembukaan.php?no_ds=<?=$no_ds?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin perbarui status penindakan menjadi SELESAI?')"><?= $data2['status_tindakan']; ?></a></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

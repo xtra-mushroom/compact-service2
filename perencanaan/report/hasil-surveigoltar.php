@@ -59,6 +59,32 @@ $html .= "<b><table border=0>
 </tr>
 </table></b><br/>";
 
+if($data['gol_tarif'] == SU){
+    $SU = "black";
+    $SK = $R1 = $R2 = $R3 = $IP = $NK = $NB = "white";
+}elseif($data['gol_tarif'] == SK){
+    $SK = "black";
+    $SU = $R1 = $R2 = $R3 = $IP = $NK = $NB = "white";
+}elseif($data['gol_tarif'] == R1){
+    $R1 = "black";
+    $SK = $SU = $R2 = $R3 = $IP = $NK = $NB = "white";
+}elseif($data['gol_tarif'] == R2){
+    $R2 = "black";
+    $SK = $R1 = $SU = $R3 = $IP = $NK = $NB = "white";
+}elseif($data['gol_tarif'] == R3){
+    $R3 = "black";
+    $SK = $R1 = $R2 = $SU = $IP = $NK = $NB = "white";
+}elseif($data['gol_tarif'] == IP){
+    $IP = "black";
+    $SK = $R1 = $R2 = $R3 = $SU = $NK = $NB = "white";
+}elseif($data['gol_tarif'] == NK){
+    $NK = "black";
+    $SK = $R1 = $R2 = $R3 = $IP = $SU = $NB = "white";
+}elseif($data['gol_tarif'] == NB){
+    $NB = "black";
+    $SK = $R1 = $R2 = $R3 = $IP = $NK = $SU = "white";
+}
+
 $html .= "<table>
 <tr>
     <td style='color:#ffffff'>----</td>
@@ -74,26 +100,26 @@ $html .= "<table>
     <td style='color:#ffffff'>----</td>
 </tr>
 <tr>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$NK.";'><p style='color:".$NK.";'>___</p></td>
     <td>Niaga Kecil</td>
     <td style='color:#ffffff'>----</td>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$SU.";'><p style='color:".$SU.";'>___</p></td>
     <td>Sosial Umum</td>
     <td style='color:#ffffff'>----</td>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$R1.";'><p style='color:".$R1.";'>___</p></td>
     <td>Rumah Tangga 1</td>
     <td style='color:#ffffff'>----</td>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$IP.";'><p style='color:".$IP.";'>___</p></td>
     <td>Instansi Pemerintah</td>
 </tr>
 <tr>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$NB.";'><p style='color:".$NB.";'>___</p></td>
     <td>Niaga Besar</td>
     <td style='color:#ffffff'>----</td>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$SK.";'><p style='color:".$SK.";'>___</p></td>
     <td>Sosial Khusus</td>
     <td style='color:#ffffff'>----</td>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$R2.";'><p style='color:".$R2.";'>___</p></td>
     <td>Rumah Tangga 2</td>
     <td style='color:#ffffff'>----</td>
     <td style='color:#ffffff'>----</td>
@@ -106,7 +132,7 @@ $html .= "<table>
     <td style='color:#ffffff'>----</td>
     <td style='color:#ffffff'>----</td>
     <td style='color:#ffffff'>----</td>
-    <td style='border-style:groove'><p style='color:#ffffff'>___</p></td>
+    <td style='border-style:groove;background:".$R3.";'><p style='color:".$R3.";'>___</p></td>
     <td>Rumah Tangga 3</td>
     <td style='color:#ffffff'>----</td>
     <td style='color:#ffffff'>----</td>

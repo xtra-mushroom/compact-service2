@@ -52,9 +52,9 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                     <form action="" method="post">
                                         <div class="form-group row">
                                             <select class="form-control form-control-lg col-6 font-weight-bold text-center bg-success" id="menu" name="menu" autofocus>
-                                                    <option value="" selected>--Pilih menu--</option>
-                                                    <option value="1">PEMBUKAAN</option>
-                                                    <option value="0">PENUTUPAN</option>
+                                                <option value="" selected>--Pilih menu--</option>
+                                                <option value="1">PEMBUKAAN</option>
+                                                <option value="0">PENUTUPAN</option>
                                             </select>
                                         </div>
                                         <div class="form-group row mt-2">
@@ -150,7 +150,7 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                     
                                             $query = "INSERT INTO pembukaan
                                                         VALUES
-                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', 'Permintaan Pembukaan', 20000, '$statusTindakan');";
+                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', 'Permintaan Pembukaan', 20000, '0000-00-00', '$statusTindakan');";
                                     
                                             $query .= "UPDATE pelanggan
                                                         SET
@@ -201,7 +201,7 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                         
                                             $query = "INSERT INTO penutupan
                                                         VALUES
-                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', '$keterangan', $biaya, '$statusTindakan');";
+                                                        ('$ds', '$id_wil', '$tgl', '$nama', '$alamat', '$hp', '$keterangan', $biaya, '0000-00-00', '$statusTindakan');";
                                     
                                             $query .= "UPDATE pelanggan
                                                         SET

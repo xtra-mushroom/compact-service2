@@ -86,7 +86,7 @@ $activeKeluhan = "active";
                                 <div class="card-body">
                                     <h5 class="mb-3 text-center">Keluhan Pelanggan</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-hover table-bordered mt-3">
+                                        <table class="table table-sm table-hover table-bordered mt-3">
                                             <thead class="text-center">
                                                 <tr>
                                                     <th scope="col">Nomor Sambungan</th>

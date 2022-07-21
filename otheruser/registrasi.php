@@ -84,7 +84,7 @@
                     <form method="post" action="<?= htmlspecialchars("payment-method.php") ?>">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="nama" aria-describedby="nama" name="nama" pattern="[A-Za-z\s]{3,150}" oninvalid="this.setCustomValidity('Nama hanya boleh mengandung huruf, spasi, dan tidak boleh kurang dari 3 karakter')" oninput="setCustomValidity('')">
+                            <input type="text" class="form-control" id="nama" autocomplete="off" aria-describedby="nama" name="nama" pattern="[A-Za-z\s]{3,150}" oninvalid="this.setCustomValidity('Nama hanya boleh mengandung huruf, spasi, dan tidak boleh kurang dari 3 karakter')" oninput="setCustomValidity('')">
                             <span class="error"><?= $namaErr ?></span>
                         </div>
                         <div class="mb-3">
@@ -98,13 +98,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Nomor HP</label>
-                            <input type="number" max="999999999999999" class="form-control" id="phone" aria-describedby="phone" name="phone" required>
+                            <input type="number" max="999999999999999" class="form-control" id="phone" aria-describedby="phone" name="phone" required autocomplete="off">
                             <div id="phoneHelp" class="form-text">Pastikan nomor HP anda aktif</div>
                             <span class="error"><?= $hpErr ?></span>
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat Lengkap</label>
-                            <textarea class="form-control" id="alamat" rows="2" name="alamat" pattern="[A-Za-z\s\d\.]{5,255}" oninvalid="this.setCustomValidity('Alamat tidak boleh kurang dari 5 karakter dan tidak boleh mengandung simbol')" oninput="setCustomValidity('')"></textarea>
+                            <textarea class="form-control" id="alamat" rows="2" name="alamat" autocomplete="off" pattern="[A-Za-z\s\d\.]{5,255}" oninvalid="this.setCustomValidity('Alamat tidak boleh kurang dari 5 karakter dan tidak boleh mengandung simbol')" oninput="setCustomValidity('')"></textarea>
                             <span class="error"><?= $alamatErr ?></span>
                         </div>
                         <div class="bottom float-end">

@@ -77,9 +77,9 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="mb-3 text-center">Menunggu Verifikasi Berkas</h5>
+                                    <h5 class="mb-4 text-bold text-center">Menunggu Verifikasi Berkas</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
@@ -88,7 +88,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                     <th>NIK</th>
                                                     <th>KTP</th>
                                                     <th>Tanggal Daftar</th>
-                                                    <th>Status</th>
+                                                    <th>Verifikasi Berkas</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -97,7 +97,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_berkas='';";
+                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_berkas='belum';";
                                                 $result = $db->prepare($sql);
                                                 $result->execute();
                                                 
@@ -109,9 +109,9 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                     <td><?= $data['nama'] ?></td>
                                                     <td><?= $data['alamat'] ?></td>
                                                     <td><?= $data['no_ktp'] ?></td>
-                                                    <td><?= "<img src='../pemohon/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align="center"><?= $data['tgl_daftar'] ?></td>
-                                                    <td align='center' style='color:green'><?= $data['status_berkas'] ?></td>
+                                                    <td align='center' style='color:red'>belum</td>
                                                     <td align="center">
                                                         <a href="verifikasi-berkas.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
                                                             <i class="bi bi-pencil-square"></i>
@@ -131,9 +131,9 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="mb-3 text-center">Menunggu Hasil Survei</h5>
+                                    <h5 class="mb-4 text-bold text-center">Menunggu Hasil Survei</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
@@ -143,7 +143,6 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                     <th>Status Berkas</th>
                                                     <th>Tanggal Survei</th>
                                                     <th>Status Survei</th>
-                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -151,7 +150,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='' AND pendaftaran.status_berkas!='';";
+                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='belum' AND pendaftaran.status_berkas='diverifikasi';";
                                                 $result = $db->prepare($sql);
                                                 $result->execute();
                                                 
@@ -161,16 +160,11 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                 <tr>
                                                     <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= "<img src='../pemohon/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align="center"><?= $data['tgl_daftar'] ?></td>
                                                     <td align='center' style='color:green'><?= $data['status_berkas'] ?></td>
-                                                    <td><?= $data['tgl_survei'] ?></td>
-                                                    <td><?= $data['status_survei'] ?></td>
-                                                    <td align="center">
-                                                        <a href="verifikasi-berkas.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
-                                                            <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                    </td>
+                                                    <td class="text-center"><?= $data['tgl_survei'] ?></td>
+                                                    <td class="text-danger text-center">belum</td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -185,9 +179,9 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="mb-3 text-center">Telah disurvei</h5>
+                                    <h5 class="mb-4 text-bold text-center">Telah disurvei (Belum Pemasangan)</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
@@ -205,7 +199,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei!='' AND pendaftaran.status_berkas!='';";
+                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei, pendaftaran.status_pasang FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='selesai' AND pendaftaran.status_berkas='diverifikasi' AND pendaftaran.status_pasang='belum';";
                                                 $result = $db->prepare($sql);
                                                 $result->execute();
                                                 
@@ -215,7 +209,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                 <tr>
                                                     <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= "<img src='../pemohon/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align="center"><?= $data['tgl_daftar'] ?></td>
                                                     <td align='center' style='color:green'><?= $data['status_berkas'] ?></td>
                                                     <td><?= $data['tgl_survei'] ?></td>

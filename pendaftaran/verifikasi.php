@@ -121,27 +121,6 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                             <div class="col-sm-4">
                                                 <select class="form-control form-control-sm border-secondary" id="wil" name="wil">
                                                     <option class="text-secondary" value="">---</option>
-                                                        <?php
-                                                        // $wil1 = $wil2 = $wil3 = $wil4 = $wil5 = $wil6 = $wil7 = $wil8 = $wil9 = "";
-
-                                                        // if ($pendaftaran['wil'] == "Paringin") {
-                                                        //     $wil1 = "selected";
-                                                        // } elseif ($pendaftaran['wil'] == "Paringin Selatan") {
-                                                        //     $wil2 = "selected";
-                                                        // } elseif ($pendaftaran['wil'] == "Awayan") {
-                                                        //     $wil3 = "selected";
-                                                        // } elseif ($pendaftaran['wil'] == "Lampihong") {
-                                                        //     $wil4 = "selected";
-                                                        // } elseif ($pendaftaran['wil'] == "Juai") {
-                                                        //     $wil5 = "selected";
-                                                        // } elseif ($pendaftaran['wil'] == "Halong") {
-                                                        //     $wil6 = "selected";
-                                                        // } elseif ($pendaftaran['wil'] == "Batumandi") {
-                                                        //     $wil7 = "selected";
-                                                        // } elseif ($pendaftaran['wil'] == "Tebing Tinggi") {
-                                                        //     $wil8 = "selected";
-                                                        // }
-                                                        ?>
                                                     <option value="01">01 Paringin</option>
                                                     <option value="02">02 Paringin Selatan</option>
                                                     <option value="03">03 Awayan</option>
@@ -156,7 +135,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                         <div class="col-10 float-right">
                                             <div class="form-check">
                                                 <div class="col-sm-5">
-                                                    <input class="form-check-input" type="checkbox" value="Diverifikasi" id="status" name="status">
+                                                    <input class="form-check-input" type="checkbox" value="diverifikasi" id="status" name="status">
                                                     <label class="form-check-label text-danger" for="status">
                                                         <b>Telah Diverifikasi</b>
                                                     </label>
@@ -192,23 +171,6 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                     
                                     <?php
                                     if(isset($_POST["submit"])){
-                                        // if($_POST["wil"] == "Paringin"){
-                                        //     $idWil = "01";
-                                        // }elseif($_POST["wil"] == "Paringin Selatan"){
-                                        //     $idWil = "02";
-                                        // }elseif($_POST["wil"] == "Awayan"){
-                                        //     $idWil = "03";
-                                        // }elseif($_POST["wil"] == "Lampihong"){
-                                        //     $idWil = "04";
-                                        // }elseif($_POST["wil"] == "Juai"){
-                                        //     $idWil = "05";
-                                        // }elseif($_POST["wil"] == "Halong"){
-                                        //     $idWil = "06";
-                                        // }elseif($_POST["wil"] == "Batumandi"){
-                                        //     $idWil = "07";
-                                        // }elseif($_POST["wil"] == "Tebing Tinggi"){
-                                        //     $idWil = "08";
-                                        // }
                                         $noreg = $_POST['no_reg'];
                                         $nama = $_POST['nama'];
                                         $jenisKel = $_POST['jenis_kel'];
@@ -218,22 +180,33 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                         $biaya = $_POST['biaya'];
                                         $status = $_POST['status'];
 
+                                        if($jenisKel == "Laki-Laki"){
+                                            $panggilan = "Bapak";
+                                        }elseif($jenisKel == "Perempuan"){
+                                            $panggilan = "Ibu";
+                                        }else{
+                                            $panggilan = "Bapak/Ibu";
+                                        }
+
                                         // generate nomor login
                                         $nolog = $idWil.substr($hp,-4).rand(1000,9999);
                                         var_dump($nolog);
                                         
                                         $query = "UPDATE antri_daftar
                                                     SET
-                                                    nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', no_log='$nolog', status_bayar='$status' WHERE no_reg='$noreg';";
+                                                    nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', cabang='$idWil', no_log='$nolog', status_bayar='$status' WHERE no_reg='$noreg';";
                                         
                                         $updateAntri = mysqli_query($conn, $query);
                                         
                                         if($updateAntri == true){
                                             $_SESSION['hasil'] = true;
-                                            $_SESSION['pesan'] = "Berhasil udah data dan verifikasi";
+                                            $_SESSION['pesan'] = "Berhasil udah dan verifikasi data";
+                                            // kirim SMS
+                                            $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan pembayaran biaya registrasi, bukti pembayaran anda telah diverifikasi. Silahkan masuk/login ke sistem dengan username dan password ".$nolog." untuk melengkapi berkas anda.";
+                                            sendSms($hp, $pesan);
                                         } else {
                                             $_SESSION['hasil'] = false;
-                                            $_SESSION['pesan'] = "Gagal ubah data dan verifkasi";
+                                            $_SESSION['pesan'] = "Gagal ubah dan verifkasi data";
                                         }
                                         echo "<meta http-equiv='refresh' content='0;url=antri-pemohon.php'>";
 

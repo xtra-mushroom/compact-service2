@@ -23,8 +23,9 @@ if(isset($_POST["save"])){
         if($ukuran < 1044070){		
             $ktp = $rand.'_'.$filename;
             move_uploaded_file($_FILES['ktp']['tmp_name'], 'ktppic/'.$rand.'_'.$filename);
-            $query = "INSERT INTO pendaftaran VALUES ('$noreg', '', '$tanggal', '$noktp', '$ktp', '$cabang', $biaya, '', '0000-00-00', '');";
-            $simpanBerkas = mysqli_query($conn, $query);
+            $query = "INSERT INTO pendaftaran VALUES ('$noreg', '', '$tanggal', '$noktp', '$ktp', '$cabang', $biaya, 'belum', '0000-00-00', 'belum', 'belum', 'belum', '');";
+            $query .= "UPDATE antri_daftar SET status_up_berkas='lengkap';";
+            $simpanBerkas = mysqli_multi_query($conn, $query);
 
             if($simpanBerkas == true){
                 $_SESSION['hasil'] = true;

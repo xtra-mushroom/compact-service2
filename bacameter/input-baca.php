@@ -22,7 +22,7 @@ $activeBaca = "active";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once ("../partials-perencanaan/head.php") ?>
+    <?php include_once ("../partials-teknisi/head.php") ?>
     <!-- sweetalert css -->
     <link rel="stylesheet" href="../libraries/sweetalert2/dist/sweetalert2.min.css">
 </head>
@@ -30,8 +30,8 @@ $activeBaca = "active";
 <body class="hold-transition sidebar-mini layout-fixed">
     <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
-        <?php include_once ("../partials-perencanaan/navbar.php") ?>
-        <?php include_once ("../partials-perencanaan/sidebar.php") ?>
+        <?php include_once ("../partials-teknisi/navbar.php") ?>
+        <?php include_once ("../partials-teknisi/sidebar.php") ?>
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
@@ -156,10 +156,31 @@ $activeBaca = "active";
                                         $pakai = $_POST["pakai"];
 
                                         // menentukan beban dan tarif berdasarkan id_tarif
-                                        if($_POST["gol_tarif"] == "R2"){
+                                        if($_POST["gol_tarif"] == "R1"){
+                                            $stan = 20000;
+                                            $tarif = 3000;
+                                        }elseif($_POST["gol_tarif"] == "R2"){
                                             $stan = 25000;
                                             $tarif = 3200;
-                                        } // nanti dulu tambahkan gologan tarif lain
+                                        }elseif($_POST["gol_tarif"] == "R3"){
+                                            $stan = 25000;
+                                            $tarif = 3500;
+                                        }elseif($_POST["gol_tarif"] == "IP"){
+                                            $stan = 30000;
+                                            $tarif = 3500;
+                                        }elseif($_POST["gol_tarif"] == "NK"){
+                                            $stan = 30000;
+                                            $tarif = 3400;
+                                        }elseif($_POST["gol_tarif"] == "NB"){
+                                            $stan = 35000;
+                                            $tarif = 4000;
+                                        }elseif($_POST["gol_tarif"] == "SU"){
+                                            $stan = 20000;
+                                            $tarif = 3000;
+                                        }elseif($_POST["gol_tarif"] == "R2"){
+                                            $stan = 20000;
+                                            $tarif = 3000;
+                                        }
 
                                         // menentukan tagihan
                                         $tagihan = $stan + $tarif * $pakai;

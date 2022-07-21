@@ -30,7 +30,7 @@
                         <a class="nav-link" aria-current="page" href="#beranda">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="pemohon/registrasi.php">Registrasi</a>
+                        <a class="nav-link" aria-current="page" href="otheruser/registrasi.php">Registrasi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logsystem/index.php">Log In</a>
@@ -46,8 +46,8 @@
             <div class="text-land ps-5">
                 <h1 class="display-2 mt-3">Selamat Datang di Compact Service PDAM Balangan</h1>
                 <p class="lead">Website pelayanan online PDAM Balangan yang dapat memudahkan anda mengakses layanan kami secara online dari mana saja dan kapan saja</p>
-                <p class="lead1">Ingin mengajukan pemasangan sambungan baru? <a href="pemohon/registrasi.php">Registrasi di sini</a></p>
-                <p class="lead1">Sudah registrasi dan melakukan pembayaran biaya pendaftaran? <a href="pemohon/upload-bayar.php">Upload bukti bayar di sini</a></p>
+                <p class="lead1">Ingin mengajukan pemasangan sambungan baru? <a href="otheruser/registrasi.php">Registrasi di sini</a></p>
+                <p class="lead1">Sudah registrasi dan melakukan pembayaran biaya pendaftaran? <a href="otheruser/upload-bayar.php">Upload bukti bayar di sini</a></p>
             </div>
             <div class="pic-land">
                 <img src="assets/images/half-circle.png" alt="landing image">

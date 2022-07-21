@@ -19,11 +19,11 @@ if (substr($totalSeluruh,-3)>499){
 } 
 
 // simpan catatan survei
-$sql1 = "INSERT INTO survei_bahan VALUES ('$noreg', '$tgl', 'Telah disurvei', $totalPembulatan, '$perencana', '');";
+$sql1 = "INSERT INTO survei_bahan VALUES ('$noreg', '$tgl', 'selesai', $totalPembulatan, '$perencana', '');";
 mysqli_query($conn, $sql1);
 mysqli_insert_id($conn); 
 
-$sql2 = "UPDATE pendaftaran SET tgl_survei='$tgl', status_survei='Telah disurvei';";
+$sql2 = "UPDATE pendaftaran SET tgl_survei='$tgl', status_survei='selesai';";
 mysqli_query($conn, $sql2);
 mysqli_insert_id($conn); 
 

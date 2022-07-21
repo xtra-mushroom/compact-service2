@@ -9,9 +9,6 @@ $sql = "SELECT dsb.*, g.kode, g.jenis, g.nomor, g.nama as nama_bahan, g.ukuran, 
 $result = $conn->query($sql);
 $data = $result->fetch_assoc();
 
-// akumulasi nilai
-
-
 $html = "<html><head>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
 
@@ -70,12 +67,12 @@ $html .= "<table class='table table-sm table-condensed' border='1'>
     <td class='text-center'><b>A</b></td>
     <td colspan='5'><b>Rincian Bahan</b></td>
 </tr>";
+
 $no = 1;
 $queryBahan = "SELECT dsb.*, g.kode, g.jenis, g.nomor, g.nama as nama_bahan, g.ukuran, ad.no_reg, ad.nama as pemohon, ad.alamat FROM detail_survei_bahan as dsb INNER JOIN gudang as g ON dsb.kode_bahan=g.kode INNER JOIN antri_daftar as ad ON dsb.no_reg=ad.no_reg WHERE dsb.no_reg='$noreg' AND g.jenis='BAHAN' ORDER BY g.nomor ASC;";
-$resultBahan = $conn->query($queryBahan);	
-$row = mysqli_num_rows($resultBahan);
-if($row > 0){
-    while($data1 = $resultBahan->fetch_array()){
+$resultBahan = mysqli_query($conn, $queryBahan);	
+if($resultBahan->num_rows > 0){
+    while($data1 = $resultBahan->fetch_assoc()){
         $hargaSatuan = $data1['harga'];
         $banyaknya = $data1['banyaknya'];
         $subTotal = $hargaSatuan * $banyaknya;
@@ -104,10 +101,9 @@ $html .= "
 </tr>";
 
 $queryUpah = "SELECT dsb.*, g.kode, g.jenis, g.nomor, g.nama as nama_bahan, g.ukuran, ad.no_reg, ad.nama as pemohon, ad.alamat FROM detail_survei_bahan as dsb INNER JOIN gudang as g ON dsb.kode_bahan=g.kode INNER JOIN antri_daftar as ad ON dsb.no_reg=ad.no_reg WHERE dsb.no_reg='$noreg' AND g.jenis='UPAH' ORDER BY g.nomor ASC;";
-$resultUpah = $conn->query($queryUpah);	
-$row = mysqli_num_rows($resultUpah);
-if($row > 0){
-    while($data2 = $resultUpah->fetch_array()){
+$resultUpah = mysqli_query($conn, $queryUpah);	
+if($resultUpah->num_rows > 0){
+    while($data2 = $resultUpah->fetch_assoc()){
         $hargaSatuan = $data2['harga'];
         $banyaknya = $data2['banyaknya'];
         $subTotal = $hargaSatuan * $banyaknya;
@@ -171,6 +167,11 @@ $html .= "</table>";
 $queryPengesahan = "SELECT pengesahan FROM pendaftaran WHERE no_reg='$noreg'";
 $resultPengesahan = mysqli_query($conn, $queryPengesahan);
 $dataPengesahan = mysqli_fetch_assoc($resultPengesahan);
+if($dataPengesahan['pengesahan'] == "belum"){  
+    $QR = "qr-pengesahan/unnamed.png";
+}else{
+    $QR = $dataPengesahan['pengesahan'];
+}
 
 $html .= "<table class='table table-sm table-condensed'style='border-style:none;'>
 <tr>
@@ -189,7 +190,7 @@ $html .= "<table class='table table-sm table-condensed'style='border-style:none;
         <p align='center'><b>MURJANI</b></p>
     </td>
     <td>
-        <p align='center'><img src='../../pimpinan/".$dataPengesahan['pengesahan']."' width='90px'></p>
+        <p align='center'><img src='../../pimpinan/"."$QR"."' width='90px'></p>
         <p align='center'><b>DRAJAT WINDARTO, SE.</b></p>
     </td>
     <td>

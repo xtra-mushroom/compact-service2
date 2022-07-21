@@ -22,10 +22,10 @@ $html .= "<body><img src='../../assets/images/kop-surat.png' width='700px' style
 $tgl_awal = @$_GET['tgl_awal'];
 $tgl_akhir = @$_GET['tgl_akhir'];
 if(empty($tgl_awal) or empty($tgl_akhir)){
-    $query = "SELECT pendaftaran.cabang, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC";
+    $query = "SELECT cabang, SUM(biaya) as total_pasba, COUNT(cabang) as total_data FROM pemasangan GROUP BY cabang ORDER BY cabang ASC";
     $label = "Semua Data, Per-Cabang";
   }else{
-    $query = "SELECT pendaftaran.cabang, SUM(pemasangan.biaya) as total_pasba, COUNT(pemasangan.biaya) as total_data FROM pendaftaran INNER JOIN pemasangan ON pendaftaran.no_ds = pemasangan.no_ds WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY pendaftaran.cabang ORDER BY pendaftaran.cabang ASC";
+    $query = "SELECT cabang, SUM(biaya) as total_pasba, COUNT(cabang) as total_data FROM pemasangan WHERE (pemasangan.tgl_pasang BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') GROUP BY cabang ORDER BY cabang ASC";
     $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
     $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
@@ -53,7 +53,7 @@ if($row > 0){
             $namaCabang = 'Paringin';
         }elseif($data['cabang'] == '02'){
             $namaCabang = 'Paringin Selatan';
-        }elseif($data['cabang'] == '3'){
+        }elseif($data['cabang'] == '03'){
             $namaCabang = 'Awayan';
         }elseif($data['cabang'] == '04'){
             $namaCabang = 'Lampihong';

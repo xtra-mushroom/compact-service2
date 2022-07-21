@@ -86,17 +86,17 @@ $activeSurvei = "active";
                                 <div class="card-body">
                                     <h5 class="mb-3 text-center">Data Antrian Survei</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
                                                     <th>Nama Lengkap</th>
                                                     <th>KTP</th>
-                                                    <th>Tanggal Daftar</th>
-                                                    <th>Status Berkas</th>
+                                                    <th>Alamat</th>
+                                                    <th>Lihat Koordinat</th>
                                                     <th>Tanggal Survei</th>
                                                     <th>Status Survei</th>
-                                                    <th>Aksi</th>
+                                                    <th>Input Survei</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -104,7 +104,7 @@ $activeSurvei = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='' AND pendaftaran.status_berkas!='';";
+                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei, pendaftaran.status_pasang, pendaftaran.lalong_val FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='belum' AND pendaftaran.status_berkas!='';";
                                                 $result = $db->prepare($sql);
                                                 $result->execute();
                                                 
@@ -114,10 +114,14 @@ $activeSurvei = "active";
                                                 <tr>
                                                     <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= "<img src='../pemohon/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
-                                                    <td align="center"><?= $data['tgl_daftar'] ?></td>
-                                                    <td align='center' style='color:green'><?= $data['status_berkas'] ?></td>
-                                                    <td><?= $data['tgl_survei'] ?></td>
+                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td align='center'><?= $data['alamat'] ?></td>
+                                                    <td align="center">
+                                                        <a href="tampil-lokasi-perencana.php?no_reg=<?= $noreg ?>">
+                                                            <?= $data['lalong_val'] ?>
+                                                        </a>
+                                                    </td>
+                                                    <td align='center'><?= $data['tgl_survei'] ?></td>
                                                     <td align='center'><?= $data['status_survei'] ?></td>
                                                     <td align="center">
                                                         <a href="input-survei.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
@@ -140,7 +144,7 @@ $activeSurvei = "active";
                                 <div class="card-body">
                                     <h5 class="mb-3 text-center">Selesai disurvei</h5>
                                     <div class="table-responsive"> 
-                                        <table class="myTable table table-sm table-bordered table-hover">
+                                        <table class="table table-sm table-bordered table-hover">
                                             <thead align="center">
                                                 <tr>
                                                     <th>Nomor Registrasi</th>
@@ -158,7 +162,7 @@ $activeSurvei = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei!='' AND pendaftaran.status_berkas!='';";
+                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei, pendaftaran.status_pasang FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='selesai' AND pendaftaran.status_berkas='diverifikasi'";
                                                 $result = $db->prepare($sql);
                                                 $result->execute();
                                                 

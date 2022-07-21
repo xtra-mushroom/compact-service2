@@ -91,7 +91,7 @@ if(isset($_POST['signin'])){
                     <p style="color:red"><?= $message ?></p>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" name="username" required autofocus/>
+                        <input type="text" placeholder="Username" name="username" required autofocus autocomplete="off"/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
