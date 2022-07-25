@@ -43,6 +43,14 @@
                 </li>
                 <li class="nav-header"><b>MENU LAINNYA</b></li>
                 <li class="nav-item">
+                    <a href="../pimpinan/tambahkan-pengguna.php" class="nav-link <?php echo $activeTambahUser ?>">
+                        <i class="bi bi-person-plus-fill mr-2"></i>
+                        <p>
+                            Tambahkan Pengguna
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="../logsystem/logout.php" class="nav-link">
                         <i class="fas fa-sign-out-alt mr-2"></i>
                         <p>

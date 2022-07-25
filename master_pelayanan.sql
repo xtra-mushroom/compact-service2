@@ -177,7 +177,7 @@ DROP TABLE IF EXISTS `login`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `login` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `nama` varchar(255) NOT NULL,
   `jenis_kel` enum('Laki-Laki','Perempuan') NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE `login` (
   `peran` enum('PEGAWAI','PIMPINAN','TEKNISI') NOT NULL,
   `login_terakhir` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +194,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'fitria','Perempuan','pegawai','202cb962ac59075b964b07152d234b70','PEGAWAI','2022-07-21 16:37:45'),(2,'drajat windarto','Laki-Laki','kabag','202cb962ac59075b964b07152d234b70','PIMPINAN','2022-07-21 04:28:20'),(3,'udin','Laki-Laki','perencana','202cb962ac59075b964b07152d234b70','TEKNISI','2022-07-21 16:25:32'),(4,'murjani','Laki-Laki','direktur','202cb962ac59075b964b07152d234b70','PIMPINAN','2022-07-21 04:28:20'),(5,'herli','Laki-Laki','trandis','202cb962ac59075b964b07152d234b70','TEKNISI','2022-07-21 15:13:56');
+INSERT INTO `login` VALUES (1,'Drajat Windarto','Laki-Laki','kabag','$2y$10$SM3M4lIeEWAj5xNl.iCF9u5w8Q7.RpK6VS8iYgBnPRQvGYc3Q4Jju','PIMPINAN','2022-07-25 06:50:49'),(2,'Fitria','Perempuan','pegawai','$2y$10$dBpM/ZEToZvtt9Keny7Yz.LlVOCLK9Lhd6qvSa81igfszHAir69Yi','PEGAWAI','2022-07-25 06:49:40'),(3,'Udin','Laki-Laki','perencana','$2y$10$hGkqRqWPJBBPBeVDFQQDCeg3ObgXlLHRUg0LnlcVGoBIpjxuCXY8q','TEKNISI','2022-07-25 06:49:11'),(4,'Herli','Laki-Laki','trandis','$2y$10$fhRULIs7QwnBHMc4L/2g5.ptMacnvexYVYsNx7vx3DAVG37Z6vLC2','TEKNISI','2022-07-25 06:18:35');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,4 +444,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-22  0:54:12
+-- Dump completed on 2022-07-25 14:58:41
