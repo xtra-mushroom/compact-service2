@@ -44,7 +44,7 @@
                         <li class="nav-item">
                             <a href="../pendaftaran/antri-survei.php" class="nav-link <?= $activeAntriSurvei ?>">
                                 <i class="bi bi-menu-app ml-4 mr-2"></i>
-                                <p>Antrian Survei</p>
+                                <p>Antrian Berkas</p>
                             </a>
                         </li>
                         <li class="nav-item">

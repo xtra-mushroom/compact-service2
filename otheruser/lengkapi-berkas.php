@@ -121,38 +121,12 @@ session_start();
                                             </div>
                                         </div>
                                         <?php 
-                                        if($dataCabang['cabang'] == '01'){
-                                            $select1 = 'selected';
-                                        }elseif($dataCabang['cabang'] == '02'){
-                                            $select2 = 'selected';
-                                        }elseif($dataCabang['cabang'] == '03'){
-                                            $select3 = 'selected';
-                                        }elseif($dataCabang['cabang'] == '04'){
-                                            $select4 = 'selected';
-                                        }elseif($dataCabang['cabang'] == '05'){
-                                            $select5 = 'selected';
-                                        }elseif($dataCabang['cabang'] == '06'){
-                                            $select5 = 'selected';
-                                        }elseif($dataCabang['cabang'] == '07'){
-                                            $select7 = 'selected';
-                                        }elseif($dataCabang['cabang'] == '08'){
-                                            $select8 = 'selected';
-                                        }
+                                        $dataCabang['cabang']
                                         ?>
                                         <div class="form-group row">
-                                            <label for="wil" class="col-sm-2 col-form-label">Wilayah / Cabang</label>
+                                            <label for="cabang" class="col-sm-2 col-form-label">Wilayah / Cabang</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="wil" name="wil" required>
-                                                    <option class="text-secondary" value="">---</option>
-                                                    <option value="01" <?= $select1 ?>>01 Paringin</option>
-                                                    <option value="02" <?= $select2 ?>>02 Paringin Selatan</option>
-                                                    <option value="03" <?= $select3 ?>>03 Awayan</option>
-                                                    <option value="04" <?= $select4 ?>>04 Lampihong</option>
-                                                    <option value="05" <?= $select5 ?>>05 Juai</option>
-                                                    <option value="06" <?= $select6 ?>>06 Halong</option>
-                                                    <option value="07" <?= $select7 ?>>07 Batumandi</option>
-                                                    <option value="08" <?= $select8 ?>>08 Tebing Tinggi</option>
-                                                </select>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="cabang" name="cabang" value="<?= $dataCabang['cabang'] ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-8 float-right mt-3 mb-4">

@@ -119,7 +119,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                         <div class="form-group row">
                                             <label for="biaya" class="col-sm-2 col-form-label">Biaya</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="biaya" name="biaya" autocomplete="off" value="<?php echo $data['biaya']; ?>" readonly>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="biaya" name="biaya" autocomplete="off" value="<?php echo rupiah($data['biaya']); ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">

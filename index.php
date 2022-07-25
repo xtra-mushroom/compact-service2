@@ -115,7 +115,7 @@ $activeHome = "active";
                                                         echo mysqli_num_rows($jumlah_pemasangan);
                                                         ?>,
                                                         <?php
-                                                        $jumlah_pembukaan = mysqli_query($conn, "SELECT * FROM pendaftaran WHERE status_survei='belum';");
+                                                        $jumlah_pembukaan = mysqli_query($conn, "SELECT * FROM pendaftaran WHERE status_survei='belum' AND status_berkas='diverifikasi';");
                                                         echo mysqli_num_rows($jumlah_pembukaan);
                                                         ?>,
                                                         <?php

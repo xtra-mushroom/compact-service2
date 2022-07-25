@@ -118,13 +118,19 @@ $activeBaca = "active";
                                                 <input type="number" class="form-control form-control-sm border-secondary" id="pakai" name="pakai">
                                             </div>
                                         </div>
-                                        <div class="col-8 float-right mt-3 mb-4">
+                                        <div class="form-group row">
+                                            <label for="tgl_rilis" class="col-sm-2 col-form-label">Tanggal Rilis</label>
+                                            <div class="col-sm-4">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_rilis" name="tgl_rilis">
+                                            </div>
+                                        </div>
+                                        <div class="col-7 float-right mt-3 mb-4 mr-3">
                                             <span class="col-sm-5">
                                                 <button type="submit" name="save" class="btn" style="background:#046ea7; color:white;">SIMPAN</button>
                                             </span>
-                                            <span class="col-sm-5">
+                                            <!-- <span class="col-sm-5">
                                                 <button type="submit" name="edit" class="btn" style="background:#02a44f; color:white;">UBAH</button>
-                                            </span>
+                                            </span> -->
                                         </div>
                                     </form>
 
@@ -148,7 +154,7 @@ $activeBaca = "active";
 
                                     <?php 
                                     if(isset($_POST["save"])){
-                                        $tgl_rilis = date("Y-m-d");
+                                        $tgl_rilis = $_POST['tgl_rilis'];
                                         $no_ds = $_POST["no_ds"];
                                         $cabang = $_POST["cabang"];
                                         $bulan = $_POST["bulan"];

@@ -1,8 +1,9 @@
-<?php 
+<?php
+session_start();
+include_once ("../partials/session-pegawai.php");
 require_once "../functions.php";
 $openPasang = "menu-open";
 $activePasang = "active"; $activeCariPasang = "active";
-session_start();
 ?>
 
 <!DOCTYPE html>
@@ -48,9 +49,7 @@ session_start();
                                     <!-- di sini form pemasangan -->
                                     <?php 
                                     $no = $_GET['no_ds'];
-                                    $sql = "SELECT pemasangan.*, pendaftaran.nama, pendaftaran.no_ktp, pendaftaran.jenis_kel, pendaftaran.alamat, pendaftaran.no_hp, pendaftaran.kecamatan, pendaftaran.desa, pendaftaran.wil, pelanggan.ttl
-                                            from pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds
-                                            INNER JOIN pelanggan ON pelanggan.no_ds = pemasangan.no_ds WHERE pemasangan.no_ds='$no'";
+                                    $sql = "SELECT pemasangan.no_ds, pemasangan.tgl_pasang, pemasangan.status_kep_rumah, pemasangan.jumlah_jiwa, pemasangan.pln, pemasangan.cabang, pemasangan.gol_tarif, pemasangan.biaya, antri_daftar.nama, pendaftaran.no_ktp, antri_daftar.jenis_kel, antri_daftar.alamat, antri_daftar.no_hp FROM pemasangan INNER JOIN pendaftaran ON pemasangan.no_ds = pendaftaran.no_ds INNER JOIN antri_daftar ON antri_daftar.no_reg = pendaftaran.no_reg WHERE pemasangan.no_ds='$no'";
                                     $result = $conn->query($sql);
                                                 
                                     while($data = $result->fetch_assoc()){
@@ -71,50 +70,24 @@ session_start();
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="no_ktp" class="col-sm-2 col-form-label">Nomor KTP</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp"
-                                                name="no_ktp" autocomplete="off" value="<?= $data['no_ktp']; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="nama"
-                                                name="nama" autocomplete="off" value="<?= $data['nama']; ?>">
+                                                name="nama" autocomplete="off" value="<?= $data['nama']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel"
-                                                    name="jenis_kel" value="">
-                                                    <option class="text-secondary" selected>---</option>
-                                                    <?php 
-                                                    if($data['jenis_kel'] == "Laki-Laki"){
-                                                        $male = "selected";
-                                                    } elseif ($data['jenis_kel'] == "Perempuan"){
-                                                        $female = "selected";
-                                                    }
-                                                    ?>
-                                                    <option value="Laki-Laki" <?= " " . $male; ?>>Laki-Laki</option>
-                                                    <option value="Perempuan" <?= " " . $female; ?>>Perempuan</option>
-                                                </select>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="jenis_kel"
+                                                name="jenis_kel" autocomplete="off" value="<?= $data['jenis_kel']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="tmpt_lahir" class="col-sm-2 col-form-label">TTL Baru</label>
-                                            <?php
-                                            $ttl = $data['ttl'];
-                                            $pecahTtl = explode(',', $ttl);
-                                            ?>
-                                            <div class="col-sm-2"> 
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tmpt_lahir"
-                                                name="tmpt_lahir" autocomplete="off" value="<?= $pecahTtl[0] ?>">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="tgl_lahir"
-                                                name="tgl_lahir" autocomplete="off" value="<?= $pecahTtl[1] ?>">
+                                            <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="alamat"
+                                                name="alamat" autocomplete="off" value="<?= $data['alamat']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -154,192 +127,50 @@ session_start();
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln" autocomplete="off" value="<?= $data['pln']; ?>">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="alamat"
-                                                name="alamat" autocomplete="off" value="<?= $data['alamat']; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="kecamatan" class="col-sm-2 col-form-label">Kecamatan</label>
-                                            <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="kecamatan"
-                                                    name="kecamatan" value="<?= $data['kecamatan']; ?>">
-                                                    <option class="text-secondary" value="">---</option>
-                                                    <?php
-                                                    $sql1 = "SELECT * FROM kecamatan";
-                                                    $result1 = $conn->query($sql1);
-                                                    while($kecamatan = $result1->fetch_assoc()){
-                                                        if ($data['kecamatan'] == $kecamatan['id']) {
-                                                            echo "<option value='".$kecamatan['id']."' selected>".$kecamatan['nama']."</option>";
-                                                        } else {
-                                                            echo "<option value='".$kecamatan['id']."'>".$kecamatan['nama']."</option>";
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="desa" class="col-sm-2 col-form-label">Desa</label>
-                                            <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="desa" name="desa" value="<?php echo $data['desa']; ?>">
-                                                    <option class="text-secondary">---</option>
-                                                    <?php 
-                                                    $sql1 = "SELECT * FROM desa";
-                                                    $result1 = $conn->query($sql1);
-                                                    while($desa = $result1->fetch_assoc()){
-                                                        if ($data['desa'] == $desa['id']) {
-                                                            echo "<option value='".$desa['id']."' selected>".$desa['nama']."</option>";
-                                                        } else {
-                                                            echo "<option value='".$desa['id']."'>".$desa['nama']."</option>";
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div> 
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="no_hp"
-                                                name="no_hp" autocomplete="off" value="<?= $data['no_hp']; ?>">
-                                            </div>
-                                        </div>
                                         <hr>
                                         <h5 class="mb-3">Cabang & Biaya</h5>
                                         <div class="form-group row">
-                                            <label for="cabang" class="col-sm-2 col-form-label">Cabang</label>
+                                            <label for="cabang" class="col-sm-2 col-form-label">Cabang / Wilayah</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="cabang" name="cabang" value="">
-                                                    <option class="text-secondary" value="">---</option>
-                                                    <?php
-                                                    if ($data['cabang'] == "01") {
-                                                        $par1 = "selected";
-                                                    } elseif ($data['cabang'] == "02") {
-                                                        $par2 = "selected";
-                                                    } elseif ($data['cabang'] == "03") {
-                                                        $awayan = "selected";
-                                                    } elseif ($data['cabang'] == "04") {
-                                                        $lampihong = "selected";
-                                                    } elseif ($data['cabang'] == "05") {
-                                                        $halong = "selected";
-                                                    } elseif ($data['cabang'] == "06") {
-                                                        $juai = "selected";
-                                                    } elseif ($data['cabang'] == "07") {
-                                                        $btm = "selected";
-                                                    } elseif ($data['cabang'] == "08") {
-                                                        $parsel = "selected";
-                                                    } elseif ($data['cabang'] == "09") {
-                                                        $tTinggi = "selected";
-                                                    }
-                                                    ?>
-                                                    <option value="01" <?= " " . $par1; ?>>Paringin 1</option>
-                                                    <option value="02" <?= " " . $par2; ?>>Paringin 2</option>
-                                                    <option value="03" <?= " " . $awayan; ?>>Awayan</option>
-                                                    <option value="04" <?= " " . $lampihong; ?>>Lampihong</option>
-                                                    <option value="05" <?= " " . $halong; ?>>Halong</option>
-                                                    <option value="06" <?= " " . $juai; ?>>Juai</option>
-                                                    <option value="07" <?= " " . $btm; ?>>Batumandi</option>
-                                                    <option value="08" <?= " " . $parsel; ?>>Paringin Selatan</option>
-                                                    <option value="09" <?= " " . $tTinggi; ?>>Tebing Tinggi</option>
-                                                </select>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="cabang"
+                                                name="cabang" autocomplete="off" value="<?= $data['cabang']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="gol_tarif" class="col-sm-2 col-form-label">Golongan Tarif</label>
+                                            <label for="gol_tarif" class="col-sm-2 col-form-label">ID Tarif</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="gol_tarif"
-                                                    name="gol_tarif" value="">
-                                                    <option value="">---</option>
-                                                    <?php
-                                                    // if ($data['gol_tarif'] == "NN") {
-                                                    //     $gol1 = "selected";
-                                                    // } elseif ($data['gol_tarif'] == "NU") {
-                                                    //     $gol2 = "selected";
-                                                    // } else
-                                                    
-                                                    if ($data['gol_tarif'] == "SK") {
-                                                        $gol3 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "SU") {
-                                                        $gol4 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "R1") {
-                                                        $gol5 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "R2") {
-                                                        $gol6 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "R3") {
-                                                        $gol7 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "IP") {
-                                                        $gol8 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "NK") {
-                                                        $gol9 = "selected";
-                                                    } elseif ($data['gol_tarif'] == "NB") {
-                                                        $gol10 = "selected";
-                                                    }
-                                                    ?>
-                                                    <!-- <option value="NN">NN</option>
-                                                    <option value="NU">NU</option> -->
-                                                    <option value="SK" <?= " " . $gol3 ?>>SK</option>
-                                                    <option value="SU" <?= " " . $gol4 ?>>SU</option>
-                                                    <option value="R1" <?= " " . $gol5 ?>>R1</option>
-                                                    <option value="R2" <?= " " . $gol6 ?>>R2</option>
-                                                    <option value="R3" <?= " " . $gol7 ?>>R3</option>
-                                                    <option value="IP" <?= " " . $gol8 ?>>IP</option>
-                                                    <option value="NK" <?= " " . $gol9 ?>>NK</option>
-                                                    <option value="NB" <?= " " . $gol10 ?>>NB</option>
-                                                </select>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="gol_tarif"
+                                                name="gol_tarif" autocomplete="off" value="<?= $data['gol_tarif']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="biaya" class="col-sm-2 col-form-label">Biaya</label>
                                             <div class="col-sm-4">
                                                 <input type="number" class="form-control form-control-sm border-secondary" id="biaya"
-                                                name="biaya" autocomplete="off" value="<?= $data['biaya']; ?>">
+                                                name="biaya" autocomplete="off" value="<?= $data['biaya']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="card-footer col-6 text-right">
-                                            <button type="submit" name="submit" class="btn btn-dark">SIMPAN</button>
+                                            <button type="submit" name="update" class="btn btn-dark">UBAH</button>
                                         </div>
                                     </form>
                                     <?php } ?>
 
                                     <?php
-                                    if(isset($_POST["submit"])){
-                                        // var_dump($_POST);
-                                        $ktp = $_POST["no_ktp"];
+                                    if(isset($_POST["update"])){
+                                     
                                         $ds = $_POST["no_ds"];
                                         $tgl = $_POST["tgl_pasang"];
-                                        $nama = $_POST["nama"];
-                                        $jenisKel = $_POST["jenis_kel"];
-                                        $tmpLahir = $_POST["tmpt_lahir"];
-                                        $tglLahir = $_POST["tgl_lahir"];
                                         $statusRumah = $_POST["status_kep_rumah"];
                                         $jmlhJiwa = $_POST["jumlah_jiwa"];
                                         $pln = $_POST["pln"];
-                                        $alamat = $_POST["alamat"];
-                                        $kec = $_POST["kecamatan"];
-                                        $desa = $_POST["desa"];
-                                        $hp = $_POST["no_hp"];
-                                        $cabang = $_POST["cabang"];
-                                        $gol = $_POST["gol_tarif"];
-                                        $biaya = $_POST["biaya"];
-                                        $ttl = $_POST["tmpt_lahir"] . "," . $_POST['tgl_lahir'];
                                     
                                         $query = "UPDATE pemasangan
                                                     SET
-                                                    tgl_pasang='$tgl', status_kep_rumah='$statusRumah', jumlah_jiwa='$jmlhJiwa', pln='$pln', cabang='$cabang', gol_tarif='$gol', biaya=$biaya
+                                                    tgl_pasang='$tgl', status_kep_rumah='$statusRumah', jumlah_jiwa='$jmlhJiwa', pln='$pln'
                                                     WHERE no_ds='$ds';";
-                                        
-                                        $query .= "UPDATE pendaftaran
-                                                    SET
-                                                    no_ktp='$ktp', nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', no_hp='$hp'
-                                                    WHERE no_ds='$ds';";
-                                        
-                                        $query .= "UPDATE pelanggan
-                                                    SET ttl='$ttl' WHERE no_ds='$ds';";
                                     
-                                        $updatePemasangan = mysqli_multi_query($conn, $query);
+                                        $updatePemasangan = mysqli_query($conn, $query);
                                          
                                         if($updatePemasangan == true){
                                             $_SESSION['hasil'] = true;

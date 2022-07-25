@@ -66,7 +66,6 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                     <i class="bi bi-exclamation-diamond-fill"></i>
                                 </button>
                             </h1>
-                            
                         </div>
                         <div class="col-sm-5">
                             <ol class="breadcrumb float-sm-right">
@@ -123,9 +122,6 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                                     <td align="center">
                                                         <a href="verifikasi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
                                                             <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                        <a href="report/kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-warning" target="_blank">
-                                                            <i class="bi bi-printer"></i>
                                                         </a>
                                                     </td>
                                                 </tr>

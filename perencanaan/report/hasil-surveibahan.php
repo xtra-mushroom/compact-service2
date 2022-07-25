@@ -176,26 +176,20 @@ if($dataPengesahan['pengesahan'] == "belum"){
 $html .= "<table class='table table-sm table-condensed'style='border-style:none;'>
 <tr>
     <td align='center'>Diketahui Oleh :</td>
-    <td align='center'>Diperiksa Oleh :</td>
-    <td align='center'>Dibuat Oleh :</td>
+    <td align='center' width=50%>Diperiksa Oleh :</td>
 </tr>
 <tr>
     <td align='center'>Plt. Direktur</td>
     <td align='center'>Kabag Administrasi & Keuangan</td>
-    <td align='center'>Kasi Perencanaan</td>
 </tr>
 <tr>
     <td>
-        <p style='color:#ffffff'><br/><br/><br/><br/><br/></p>
+        <p align='center' style='color:#ffffff'><br/><br/><br/><br/><br/></p>
         <p align='center'><b>MURJANI</b></p>
     </td>
     <td>
         <p align='center'><img src='../../pimpinan/"."$QR"."' width='90px'></p>
         <p align='center'><b>DRAJAT WINDARTO, SE.</b></p>
-    </td>
-    <td>
-        <p style='color:#ffffff'><br/><br/><br/><br/><br/></p>
-        <p align='center'>ADITYA PUTRA, ST.</p>
     </td>
 </tr>
 </table>";

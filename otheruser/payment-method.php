@@ -1,38 +1,6 @@
 <?php
+session_start();
 include_once "../functions.php";
-
-if(isset($_POST['submit'])){
-    $noreg = "343".$_POST['phone'];
-    $nama = $_POST['nama'];
-    $jenisKel = $_POST['jenis_kel'];
-    $hp = $_POST['phone'];
-    $alamat = $_POST['alamat'];
-
-    if($jenisKel == "Laki-Laki"){
-        $panggilan = "Bapak";
-    }elseif($jenisKel == "Perempuan"){
-        $panggilan = "Ibu";
-    }else{
-        $panggilan = "Bapak/Ibu";
-    }
-
-    $query = "INSERT INTO antri_daftar
-                VALUES
-                ('$noreg', '$nama', '$jenisKel', '$hp', '$alamat', '', '', '', 'belum', 'belum', 'belum');";
-                                        
-    $simpanDaftar = mysqli_query($conn, $query);
-
-    if($simpanDaftar == true){
-        $_SESSION['hasil'] = true;
-        $_SESSION['pesan'] = "Registrasi Berhasil";
-        // kirim SMS
-        $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan registrasi pemasangan sambungan baru. Nomor Registrasi Anda adalah ".$noreg.". Segera lakukan pembayaran sesuai instruksi pada halaman metode pembayaran. Terima Kasih";
-        sendSms($hp, $pesan);
-    } else {
-        $_SESSION['hasil'] = false;
-        $_SESSION['pesan'] = "Registrasi Gagal";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +63,7 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
                 <?php
-                $noreg = "343".$_POST['phone'];
+                $noreg = $_GET['no_reg'];
                 $database = new Database();
                 $db = $database->getConnection();
 

@@ -18,7 +18,7 @@ if(isset($_POST["update"])){
         $ukuran = $_FILES['foto_keluhan']['size'];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
 
-        if(!in_array($ext,$ekstensi) ) {
+        if(!in_array($ext,$ekstensi)) {
             $fotoKeluhan = $filenameLama;
 
             $query = "UPDATE keluhan SET no_ds='$ds', nama='$nama', alamat='$alamat', no_hp='$hp', tgl_keluhan='$tgl', keluhan='$keluhan', img_keluhan='$fotoKeluhan' WHERE no_keluhan='$id'";

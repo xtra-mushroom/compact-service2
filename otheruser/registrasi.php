@@ -51,9 +51,9 @@
 // }elseif($jenisKel == "Perempuan"){
 //     $selectF = "selected";
 // }else{
-//     $selectM = $selectF = "";
-// }
-
+//    
+session_start();
+include "../functions.php";
 
 ?>
 
@@ -81,7 +81,7 @@
             </div>
             <div class="row justify-content-center fs-6 text-left">
                 <div class="col-10">
-                    <form method="post" action="<?= htmlspecialchars("payment-method.php") ?>">
+                    <form method="post" action="">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
                             <input type="text" class="form-control" id="nama" autocomplete="off" aria-describedby="nama" name="nama" pattern="[A-Za-z\s]{3,150}" oninvalid="this.setCustomValidity('Nama hanya boleh mengandung huruf, spasi, dan tidak boleh kurang dari 3 karakter')" oninput="setCustomValidity('')">
@@ -112,6 +112,43 @@
                         <button type="submit" name="submit" class="btn btn-send btn-primary float-end">Daftar</button>   
                         </div> 
                     </form>
+                    <?php 
+                    if(isset($_POST['submit'])){
+                        $nama = $_POST['nama'];
+                        $jenisKel = $_POST['jenis_kel'];
+                        $hp = $_POST['phone'];
+                        $alamat = $_POST['alamat'];
+                        $no_reg = "343".$_POST['phone'];
+                    
+                        if($jenisKel == "Laki-Laki"){
+                            $panggilan = "Bapak";
+                        }elseif($jenisKel == "Perempuan"){
+                            $panggilan = "Ibu";
+                        }else{
+                            $panggilan = "Bapak/Ibu";
+                        }
+                    
+                        $query = "INSERT INTO antri_daftar
+                                    VALUES
+                                    ('$no_reg', '$nama', '$jenisKel', '$hp', '$alamat', '', '', '', '', 'belum', 'belum', 'belum');";
+                                                            
+                        $simpanDaftar = mysqli_query($conn, $query);
+                    
+                        if($simpanDaftar == true){
+                            $_SESSION['hasil'] = true;
+                            $_SESSION['pesan'] = "Registrasi Berhasil";
+                            // kirim SMS
+                            $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan registrasi pemasangan sambungan baru. Nomor Registrasi Anda adalah ".$noreg.". Segera lakukan pembayaran sesuai instruksi pada halaman metode pembayaran. Terima Kasih";
+                            // sendSms($hp, $pesan);
+                            header("Location: payment-method.php?no_reg=$no_reg");
+                        } else {
+                            $_SESSION['hasil'] = false;
+                            $_SESSION['pesan'] = "Registrasi Gagal";
+                            header("Location: payment-method.php?no_reg=");
+                        }
+                    }
+                    
+                    ?>
                 </div>
             </div>
         </div>

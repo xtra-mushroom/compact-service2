@@ -51,19 +51,19 @@
                 if($row > 0){
                 ?>
                 <li class="nav-header mt-1"><b>MENU PELANGGAN</b></li>
-                <!-- <li class="nav-item">
-                    <a href="../otheruser/lengkapi-berkas.php" class="nav-link <?php echo $activeAjututup ?>">
-                    <i class="fas fa-file mr-2"></i>
-                        <p>
-                            Pengajuan Penutupan
-                        </p>
-                    </a>
-                </li> -->
                 <li class="nav-item mb-2">
                     <a href="../otheruser/keluhan.php" class="nav-link <?php echo $activeKeluhan?>">
                         <i class="bi bi-exclamation-circle-fill mr-2"></i>
                         <p>
                             Keluhan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="../otheruser/ganti-password.php" class="nav-link <?php echo $activeGantiPW?>">
+                        <i class="bi bi-key-fill mr-2"></i>
+                        <p>
+                            Ganti Password
                         </p>
                     </a>
                 </li>

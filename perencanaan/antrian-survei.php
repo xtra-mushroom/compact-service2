@@ -162,7 +162,7 @@ $activeSurvei = "active";
                                                 $database = new Database();
                                                 $db = $database->getConnection();
 
-                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei, pendaftaran.status_pasang FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='selesai' AND pendaftaran.status_berkas='diverifikasi'";
+                                                $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei, pendaftaran.status_pasang FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='selesai' AND pendaftaran.status_berkas='diverifikasi' AND pendaftaran.status_pasang!='terpasang'";
                                                 $result = $db->prepare($sql);
                                                 $result->execute();
                                                 

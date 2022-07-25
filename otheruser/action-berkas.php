@@ -4,7 +4,7 @@ include "../functions.php";
 
 $noreg = $_POST['no_reg'];
 $noktp = $_POST['no_ktp'];
-$cabang = $_POST['wil'];
+$cabang = $_POST['cabang'];
 $tanggal = date('Y-m-d');
 
 $strbiaya = "20".substr($noreg, -3);
@@ -21,8 +21,7 @@ if(isset($_POST["save"])){
         header("location:lengkapi-berkas.php?alert=gagal_ekstensi");
     }else{
         if($ukuran < 1044070){		
-            $ktp = $rand.'_'.$filename;
-            move_uploaded_file($_FILES['ktp']['tmp_name'], 'ktppic/'.$rand.'_'.$filename);
+            $ktp = $rand.'_'.$filename;   
             $query = "INSERT INTO pendaftaran VALUES ('$noreg', '', '$tanggal', '$noktp', '$ktp', '$cabang', $biaya, 'belum', '0000-00-00', 'belum', 'belum', 'belum', '');";
             $query .= "UPDATE antri_daftar SET status_up_berkas='lengkap';";
             $simpanBerkas = mysqli_multi_query($conn, $query);
@@ -30,6 +29,7 @@ if(isset($_POST["save"])){
             if($simpanBerkas == true){
                 $_SESSION['hasil'] = true;
                 $_SESSION['pesan'] = "Berhasil Upload Berkas";
+                move_uploaded_file($_FILES['ktp']['tmp_name'], 'ktppic/'.$rand.'_'.$filename);
             } else {
                 $_SESSION['hasil'] = false;
                 $_SESSION['pesan'] = "Gagal Upload Berkas";
@@ -53,13 +53,13 @@ if(isset($_POST["save"])){
     }else{
         if($ukuran < 1044070){		
             $ktp = $rand.'_'.$filename;
-            move_uploaded_file($_FILES['ktp']['tmp_name'], 'ktppic/'.$rand.'_'.$filename);
             $query = "UPDATE pendaftaran SET tgl_daftar='$tanggal', no_ktp='$noktp', ktp='$ktp', cabang='$cabang' WHERE no_reg='$noreg'";
             $ubahBerkas = mysqli_query($conn, $query);
 
             if($ubahBerkas == true){
                 $_SESSION['hasil'] = true;
                 $_SESSION['pesan'] = "Berhasil Ubah Data";
+                move_uploaded_file($_FILES['ktp']['tmp_name'], 'ktppic/'.$rand.'_'.$filename);
             } else {
                 $_SESSION['hasil'] = false;
                 $_SESSION['pesan'] = "Gagal Ubah Data";
