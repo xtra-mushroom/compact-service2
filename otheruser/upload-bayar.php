@@ -8,11 +8,11 @@
     <!-- Bootstrap CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <!-- style -->
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style1.css">
     <!-- icon tab -->
     <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
 </head>
-<body>
+<body id="bg-uploadbayar">
     <section id="registrasi">
         <div class="container">
             <div class="row text-center mb-3">
@@ -21,19 +21,19 @@
                 </div>
             </div>
             <div class="row justify-content-center fs-6 text-left">
-                <div class="col-10">
+                <div class="col-9">
                     <form method="post" action="<?= htmlspecialchars("proses-upload.php") ?>" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="noreg" class="form-label">Nomor Registrasi</label>
                             <input type="text" class="form-control" id="noreg" aria-describedby="noreg" name="noreg" required>
                         </div>
                         <div class="mb-3">
-                            <label for="bukti-bayar" class="form-label">Upload Bukti Bayar <span style="color:#f25056; font-size:.9em;">*Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</span></label>
+                            <label for="bukti-bayar" class="form-label">Upload Bukti Bayar <span style="color:#f25056; font-size:.9em;">*Ekstensi yang dibolehkan .png | .jpg | .jpeg</span></label>
                             <input type="file" class="form-control" id="bukti-bayar" aria-describedby="bukti-bayar" name="bukti-bayar" required>
-                            <div id="phoneHelp" class="form-text">Ukuran maksimal upload foto/pdf 1 MB</div>
+                            <div id="phoneHelp" class="form-text">Ukuran maksimal upload foto: 1 MB</div>
                         </div>
                         <div class="bottom float-end">
-                        <p id="notice-regis" class="text-right">Cek kembali nomor registrasi anda sebelum klik Upload</p>
+                        <p id="notice-regis" class="text-right">Cek kembali nomor registrasi anda sebelum klik "Upload"</p>
                         <button type="submit" name="submit" class="btn btn-send btn-primary float-end">Upload</button>   
                         </div> 
                     </form>

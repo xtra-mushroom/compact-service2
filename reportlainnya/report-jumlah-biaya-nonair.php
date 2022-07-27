@@ -2,7 +2,7 @@
 session_start();
 require "../functions.php";
 include_once ("../partials/session-pegawai.php");
-$activeReportNonair = "active";
+$activeReportLainnya = "active";
 ?>
 <!DOCTYPE html>
 <html lang="en">

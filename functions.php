@@ -1,5 +1,6 @@
 <?php
 $conn = mysqli_connect('localhost', 'lava', 'linolee', 'master_pelayanan');
+error_reporting(0);
 
 function query($query){
     global $conn;

@@ -172,7 +172,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                                     <td><?= $data['alamat'] ?></td>
                                                     <td class="text-danger">Belum tersedia</td>
                                                     <td align="center">
-                                                        <a href="upload-kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success" target="_blank" onclick="return confirm('Verifikasi Pembayaran dan Cetak Kwitansi?')">
+                                                        <a href="upload-kwitansi.php?no_reg=<?= $noreg ?>" class="btn btn-sm btn-success">
                                                             <i class="bi bi-file-earmark-arrow-up-fill"></i>
                                                         </a>
                                                     </td>

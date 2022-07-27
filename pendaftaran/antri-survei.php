@@ -109,7 +109,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                     <td><?= $data['nama'] ?></td>
                                                     <td><?= $data['alamat'] ?></td>
                                                     <td><?= $data['no_ktp'] ?></td>
-                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td align='center'><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align="center"><?= $data['tgl_daftar'] ?></td>
                                                     <td align='center' style='color:red'>belum</td>
                                                     <td align="center">
@@ -160,7 +160,7 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                 <tr>
                                                     <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td align='center'><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align="center"><?= $data['tgl_daftar'] ?></td>
                                                     <td align='center' style='color:green'><?= $data['status_berkas'] ?></td>
                                                     <td class="text-center"><?= $data['tgl_survei'] ?></td>
@@ -209,11 +209,11 @@ $activeDaftar = "active"; $activeAntriSurvei = "active";
                                                 <tr>
                                                     <td align="center"><?= $noreg ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
+                                                    <td align='center'><?= "<img src='../otheruser/ktppic/".$data['ktp']."'style='width:100px; height:100px;'>" ?></td>
                                                     <td align="center"><?= $data['tgl_daftar'] ?></td>
                                                     <td align='center' style='color:green'><?= $data['status_berkas'] ?></td>
-                                                    <td><?= $data['tgl_survei'] ?></td>
-                                                    <td><?= $data['status_survei'] ?></td>
+                                                    <td align='center'><?= $data['tgl_survei'] ?></td>
+                                                    <td align='center'><?= $data['status_survei'] ?></td>
                                                     <td align="center">
                                                         <a href="../perencanaan/report/hasil-surveibahan.php?no_reg=<?= $noreg ?>" class="text-primary text-bold" target="_blank">
                                                             Survei Bahan

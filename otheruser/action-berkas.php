@@ -23,7 +23,7 @@ if(isset($_POST["save"])){
         if($ukuran < 1044070){		
             $ktp = $rand.'_'.$filename;   
             $query = "INSERT INTO pendaftaran VALUES ('$noreg', '', '$tanggal', '$noktp', '$ktp', '$cabang', $biaya, 'belum', '0000-00-00', 'belum', 'belum', 'belum', '');";
-            $query .= "UPDATE antri_daftar SET status_up_berkas='lengkap';";
+            $query .= "UPDATE antri_daftar SET status_up_berkas='lengkap' WHERE no_reg='$noreg';";
             $simpanBerkas = mysqli_multi_query($conn, $query);
 
             if($simpanBerkas == true){

@@ -207,11 +207,12 @@ $activeBaca = "active";
                                             $diffWaktu = $diff->days;
                                             // pengkondisian update denda
                                             $tgl_lunas = $fetchDenda["tgl_lunas"];
-                                            if($tgl_lunas == "0000-00-00" && $diffWaktu > 30){
+                                            if($tgl_lunas == "0000-00-00" && $diffWaktu > 25){
                                                 $updateDenda = 5000;
                                                 $tgl_lalu = $tgl_lalu->format('Y-m-d');
-                                            }elseif($tgl_lunas !== "0000-00-00"){
+                                            }elseif($tgl_lunas !== "0000-00-00" && $diffWaktu < 25){
                                                 $updateDenda = 0;
+                                                $tgl_lalu = $tgl_lalu->format('Y-m-d');
                                             }
                                         }else{
                                             $denda = 0;

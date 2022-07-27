@@ -130,7 +130,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                     
                                     <?php
                                     if(isset($_POST["submit"])){
-                                        $noreg = $_POST['no_reg'];
+                                        $noreg = $_GET['no_reg'];
                                         $nama = $_POST['nama'];
                                         $jenisKel = $_POST['jenis_kel'];
                                         $hp = $_POST['no_hp'];
@@ -141,28 +141,19 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
 
                                         // generate nomor login
                                         $nolog = $idWil.substr($hp,-4).rand(1000,9999);
-                                        var_dump($nolog);
+                                        // var_dump($nolog);
                                         
-                                        $buktiBayar = "report/kwitansi.php?no_reg=".$no_reg;
+                                        $buktiBayar = "report/kwitansi.php?no_reg=".$noreg;
 
                                         $query = "UPDATE antri_daftar
                                                     SET
-                                                    nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', bukti_bayar='$buktiBayar', no_log='$nolog', status_bayar='$status' WHERE no_reg='$noreg'";
+                                                    nama='$nama', jenis_kel='$jenisKel', alamat='$alamat', cabang='$idWil', no_log='$nolog', bukti_bayar='$buktiBayar', status_bayar='$status' WHERE no_reg='$noreg';";
                                         $resultUploadKwitansi = mysqli_query($conn, $query);
 
-                                        header("Location: report/kwitansi.php?no_reg=$no_reg");
-
-                                        // if($resultUploadKwitansi == true){
-                                        //     $_SESSION['hasil'] = true;
-                                        //     $_SESSION['pesan'] = "Berhasil upload kwitansi dan verifkasi pembayaran";
-                                        // } else {
-                                        //     $_SESSION['hasil'] = false;
-                                        //     $_SESSION['pesan'] = "Gagal upload kwitansi dan verifkasi pembayaran";
-                                        // }
-                                        // echo "<meta http-equiv='refresh' content='0;url=antri-pemohon.php'>";
-
+                                        if($resultUploadKwitansi == true){
+                                            echo "<meta http-equiv='refresh' content='0;url=report/kwitansi.php?no_reg=$noreg'>";
+                                        }
                                     }
-
                                     ?>
                                 </div>  
                             </div>
@@ -179,9 +170,4 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
 
 </body>
 
-</html><?php 
-session_start();
-include_once "../functions.php";
-$no_reg = $_GET['no_reg'];
-
-?>
+</html>

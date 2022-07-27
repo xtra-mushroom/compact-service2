@@ -37,19 +37,20 @@ $html .= "<body><h3>Laporan Rincian Data Pendaftaran Tanpa Pemasangan</h3>
 
 $html .= '<table class="table table-sm" border="1">
  <tr style="background:#adcded">
- <th>Nomor</th>
- <th>Cabang</th>
- <th>Nama</th>
- <th>Jenis Kelamin</th>
- <th>Alamat</th>
- <th>Nomor Telepon</th>
- <th>Tanggal Daftar</th>
+ <th style="vertical-align:middle">Nomor</th>
+ <th style="vertical-align:middle">Cabang</th>
+ <th style="vertical-align:middle">Nama</th>
+ <th style="vertical-align:middle">Jenis Kelamin</th>
+ <th style="vertical-align:middle">Alamat</th>
+ <th style="vertical-align:middle">Nomor Telepon</th>
+ <th style="vertical-align:middle">Tanggal Daftar</th>
  </tr>';
 
 $result = $conn->query($query);	
 $row = mysqli_num_rows($result);
 
 if($row > 0){
+    $no = 1;
     while($data = $result->fetch_array())
     {
         if($data['cabang'] == '01'){
@@ -69,7 +70,6 @@ if($row > 0){
         }elseif($data['cabang'] == '08'){
             $namaCabang = 'Tebing Tinggi';
         }
-        $no = 1;
     $html .= "<tr>
     <td style='text-align:center;'>".$no++."</td>
     <td style='text-align:center;'>".$namaCabang."</td>

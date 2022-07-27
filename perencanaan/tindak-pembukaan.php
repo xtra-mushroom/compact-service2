@@ -1,8 +1,9 @@
 <?php
 session_start();
 include "../functions.php";
+$no_ds = $_GET['no_ds'];
 $tgl = date('Y-m-d');
-$sqlTindakBuka = "UPDATE pembukaan SET tgl_tindak='$tgl', status_tindakan='selesai'";
+$sqlTindakBuka = "UPDATE pembukaan SET tgl_tindak='$tgl', status_tindakan='selesai' WHERE no_ds='$no_ds'";
 $updateStatus = mysqli_query($conn, $sqlTindakBuka);
 
 if($updateStatus == true){

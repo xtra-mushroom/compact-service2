@@ -2,7 +2,7 @@
 session_start();
 include_once ("../functions.php");
 
-if($_SESSION['peran'] == !"PIMPINAN"){
+if($_SESSION['peran'] !== "PIMPINAN"){
     header("Location: ../logsystem/index.php");
     exit;
 }

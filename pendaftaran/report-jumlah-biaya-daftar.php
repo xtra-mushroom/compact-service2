@@ -111,7 +111,7 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                             <?php 
                                             $result = $conn->query($query);	
                                             $row = mysqli_num_rows($result);
-                                            $no = 0;
+                                            $no = 1;
 
                                             if($row > 0){
                                                 
@@ -134,14 +134,14 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                                 }elseif($data['cabang'] == '08'){
                                                     $namaCabang = 'Tebing Tinggi';
                                                 }
-                                                $no++;
+                                                
                                             ?>
                                                 <tr>
-                                                    <td align="center"><?php echo $no; ?></td>
-                                                    <td align="center"><?php echo $data['cabang']; ?></td>
-                                                    <td align="center"><?php echo $namaCabang; ?></td>
-                                                    <td align="center"><?php echo $data['jumlah_pendaftaran']; ?></td>
-                                                    <td align="center"><?php echo rupiah($data['total_biaya']); ?></td>
+                                                    <td align="center"><?= $no++; ?></td>
+                                                    <td align="center"><?= $data['cabang']; ?></td>
+                                                    <td align="center"><?= $namaCabang; ?></td>
+                                                    <td align="center"><?= $data['jumlah_pendaftaran']; ?></td>
+                                                    <td align="center"><?= rupiah($data['total_biaya']); ?></td>
                                                 </tr>
                                             <?php }
                                             }else{

@@ -74,8 +74,9 @@ $activeSurvei = "active";
                                     <?php
                                     $database = new Database();
                                     $db = $database->getConnection();
+                                    $noreg = $_GET['no_reg'];
 
-                                    $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei, pendaftaran.status_pasang, pendaftaran.lalong_val FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='belum' AND pendaftaran.status_berkas!='';";
+                                    $sql = "SELECT pendaftaran.no_reg, antri_daftar.nama, antri_daftar.jenis_kel, antri_daftar.no_hp, antri_daftar.alamat, pendaftaran.no_ktp, pendaftaran.ktp, pendaftaran.tgl_daftar, pendaftaran.biaya, pendaftaran.status_berkas, pendaftaran.tgl_survei, pendaftaran.status_survei, pendaftaran.status_pasang, pendaftaran.lalong_val FROM pendaftaran INNER JOIN antri_daftar ON pendaftaran.no_reg = antri_daftar.no_reg WHERE pendaftaran.status_survei='belum' AND pendaftaran.status_berkas!='' AND pendaftaran.no_reg='$noreg';";
                                     $result = $db->prepare($sql);
                                     $result->execute();             
                                     $data = $result->fetch(PDO::FETCH_ASSOC);

@@ -67,7 +67,7 @@ include "../functions.php";
     <!-- Bootstrap CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <!-- style -->
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style1.css">
     <!-- icon tab -->
     <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
 </head>
@@ -80,7 +80,7 @@ include "../functions.php";
                 </div>
             </div>
             <div class="row justify-content-center fs-6 text-left">
-                <div class="col-10">
+                <div class="col-9">
                     <form method="post" action="">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
@@ -108,7 +108,7 @@ include "../functions.php";
                             <span class="error"><?= $alamatErr ?></span>
                         </div>
                         <div class="bottom float-end">
-                        <p id="notice-regis" class="text-right">Cek kembali data diri anda sebelum klik Daftar</p>
+                        <p id="notice-regis" class="text-right">Cek kembali data diri anda sebelum klik "Daftar"</p>
                         <button type="submit" name="submit" class="btn btn-send btn-primary float-end">Daftar</button>   
                         </div> 
                     </form>

@@ -190,7 +190,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
 
                                         // generate nomor login
                                         $nolog = $idWil.substr($hp,-4).rand(1000,9999);
-                                        var_dump($nolog);
+                                        // var_dump($nolog);
                                         
                                         $query = "UPDATE antri_daftar
                                                     SET
@@ -203,7 +203,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                             $_SESSION['pesan'] = "Berhasil udah dan verifikasi data";
                                             // kirim SMS
                                             $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan pembayaran biaya registrasi, bukti pembayaran anda telah diverifikasi. Silahkan masuk/login ke sistem dengan username dan password ".$nolog." untuk melengkapi berkas anda.";
-                                            sendSms($hp, $pesan);
+                                            // sendSms($hp, $pesan);
                                         } else {
                                             $_SESSION['hasil'] = false;
                                             $_SESSION['pesan'] = "Gagal ubah dan verifkasi data";

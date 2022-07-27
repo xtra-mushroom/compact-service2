@@ -95,6 +95,7 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                         <table class="table table-sm table-hover table-bordered mt-2">
                                             <thead class="text-center">
                                                 <tr>
+                                                    <th scope="col">No.</th>
                                                     <th scope="col">Wilayah / Cabang</th>
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">Jenis Kelamin</th>
@@ -109,27 +110,29 @@ $activeDaftar = "active"; $activeReportDaftar = "active";
                                             $row = mysqli_num_rows($result);
 
                                             if($row > 0){
-                                            while($data = $result->fetch_assoc()){
-                                                $tgl = date('d-m-Y', strtotime($data['tgl']));
-                                                if($data['cabang'] == '01'){
-                                                    $namaCabang = 'Paringin';
-                                                }elseif($data['cabang'] == '02'){
-                                                    $namaCabang = 'Paringin Selatan';
-                                                }elseif($data['cabang'] == '3'){
-                                                    $namaCabang = 'Awayan';
-                                                }elseif($data['cabang'] == '04'){
-                                                    $namaCabang = 'Lampihong';
-                                                }elseif($data['cabang'] == '05'){
-                                                    $namaCabang = 'Juai';
-                                                }elseif($data['cabang'] == '06'){
-                                                    $namaCabang = 'Halong';
-                                                }elseif($data['cabang'] == '07'){
-                                                    $namaCabang = 'Batumandi';
-                                                }elseif($data['cabang'] == '08'){
-                                                    $namaCabang = 'Tebing Tinggi';
-                                                }
+                                                $no = 1;
+                                                while($data = $result->fetch_assoc()){
+                                                    $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                                    if($data['cabang'] == '01'){
+                                                        $namaCabang = 'Paringin';
+                                                    }elseif($data['cabang'] == '02'){
+                                                        $namaCabang = 'Paringin Selatan';
+                                                    }elseif($data['cabang'] == '3'){
+                                                        $namaCabang = 'Awayan';
+                                                    }elseif($data['cabang'] == '04'){
+                                                        $namaCabang = 'Lampihong';
+                                                    }elseif($data['cabang'] == '05'){
+                                                        $namaCabang = 'Juai';
+                                                    }elseif($data['cabang'] == '06'){
+                                                        $namaCabang = 'Halong';
+                                                    }elseif($data['cabang'] == '07'){
+                                                        $namaCabang = 'Batumandi';
+                                                    }elseif($data['cabang'] == '08'){
+                                                        $namaCabang = 'Tebing Tinggi';
+                                                    }
                                             ?>
                                                 <tr>
+                                                    <td align="center"><?= $no++; ?></td>
                                                     <td align="center"><?= $namaCabang; ?></td>
                                                     <td align="center"><?= $data['nama']; ?></td>
                                                     <td><?= $data['jenis_kel']; ?></td>

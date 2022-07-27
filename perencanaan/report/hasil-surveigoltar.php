@@ -42,20 +42,20 @@ $html .= "<div style='width:25%;position:relative;left:75%;'>
 </table>
 </div>";
 
-$html .= "<b><table border=0>
+$html .= "<b><table width='520px' border=0>
 <tr>
     <td>NAMA</b></td>
     <td style='color:#ffffff'>__</td>
     <td>:</td>
     <td style='color:#ffffff'>_</td>
-    <td>".$data['nama']."</td>
+    <td width='80%'>".$data['nama']."</td>
 </tr>
 <tr>
-    <td>ALAMAT</td>
+    <td valign='top'>ALAMAT</td>
     <td style='color:#ffffff'>__</td>
-    <td>:</td>
+    <td valign='top'>:</td>
     <td style='color:#ffffff'>_</td>
-    <td>".$data['alamat']."</td>
+    <td width='80%'>".$data['alamat']."</td>
 </tr>
 </table></b><br/>";
 

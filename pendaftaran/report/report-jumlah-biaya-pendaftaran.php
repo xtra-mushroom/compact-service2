@@ -38,17 +38,18 @@ $html .= "<body><h3>Laporan Jumlah Data Pendaftaran Per-cabang / Wilayah</h3>
 
 $html .= '<table class="table table-sm" border="1">
  <tr style="background:#adcded">
- <th>Nomor</th>
- <th>ID Wilayah</th>
- <th>Wilayah / Cabang</th>
- <th>Jumlah Pendaftaran</th>
- <th>Total Biaya Masuk</th>
+ <th style="vertical-align:middle">Nomor</th>
+ <th style="vertical-align:middle">ID Wilayah</th>
+ <th style="vertical-align:middle">Wilayah / Cabang</th>
+ <th style="vertical-align:middle">Jumlah Pendaftaran</th>
+ <th style="vertical-align:middle">Total Biaya Masuk</th>
  </tr>';
 
 $result = $conn->query($query);	
 $row = mysqli_num_rows($result);
 
 if($row > 0){
+    $no = 1;
     while($data = $result->fetch_array())
     {
         if($data['cabang'] == '01'){
@@ -67,8 +68,7 @@ if($row > 0){
             $namaCabang = 'Batumandi';
         }elseif($data['cabang'] == '08'){
             $namaCabang = 'Tebing Tinggi';
-        }
-        $no = 1;
+        }   
     $html .= "<tr>
     <td style='text-align:center;'>".$no++."</td>
     <td style='text-align:center;'>".$data['cabang']."</td>

@@ -193,10 +193,10 @@
                 </li>
                 <!-- laporan nonair -->
                 <li class="nav-item mb-5">
-                    <a href="../reportnonair/index.php" class="nav-link <?php echo $activeReportNonair ?>">
+                    <a href="../reportlainnya/index.php" class="nav-link <?php echo $activeReportLainnya ?>">
                         <i class=" nav-icon fas fa-print"></i>
                         <p>
-                            Laporan Non Air
+                            Laporan Lainnya
                         </p>
                     </a>
                 </li>

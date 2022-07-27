@@ -172,52 +172,52 @@ if(isset($_POST["submit"])){
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="form-group row">
-                                            <label for="nama" class="col-sm-3 col-form-label">Nama</label>
-                                            <div class="col-sm-4">
+                                            <label for="nama" class="col-sm-4 col-form-label">Nama</label>
+                                            <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="no_ktp" class="col-sm-3 col-form-label">Nomor KTP</label>
-                                            <div class="col-sm-4">
+                                            <label for="no_ktp" class="col-sm-4 col-form-label">Nomor KTP</label>
+                                            <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="no_ktp" name="no_ktp" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
-                                            <div class="col-sm-4">
+                                            <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
+                                            <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="alamat" name="alamat" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="no_hp" class="col-sm-3 col-form-label">Nomor HP</label>
-                                            <div class="col-sm-4">
+                                            <label for="no_hp" class="col-sm-4 col-form-label">Nomor HP</label>
+                                            <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="no_hp" name="no_hp" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="jenis_kel" class="col-sm-3 col-form-label">Jenis Kelamin</label>
-                                            <div class="col-sm-4">
+                                            <label for="jenis_kel" class="col-sm-4 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="jenis_kel" name="jenis_kel" readonly>
                                             </div>
                                         </div>                                       
                                         <hr>
                                         <h5 class=" mb-3">Cabang & Biaya</h5>
                                         <div class="form-group row">
-                                            <label for="cabang" class="col-sm-3 col-form-label">Cabang</label>
-                                            <div class="col-sm-4">
+                                            <label for="cabang" class="col-sm-4 col-form-label">Cabang</label>
+                                            <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="cabang" name="cabang" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="gol_tarif" class="col-sm-3 col-form-label">Golongan Tarif</label>
-                                            <div class="col-sm-4">
+                                            <label for="gol_tarif" class="col-sm-4 col-form-label">Golongan Tarif</label>
+                                            <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm border-secondary" id="gol_tarif" name="gol_tarif" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="biaya" class="col-sm-3 col-form-label">Biaya</label>
-                                            <div class="col-sm-4">
+                                            <label for="biaya" class="col-sm-4 col-form-label">Biaya</label>
+                                            <div class="col-sm-8">
                                                 <input type="number" class="form-control form-control-sm border-secondary" id="biaya" name="biaya" autocomplete="off" readonly>
                                             </div>
                                         </div>

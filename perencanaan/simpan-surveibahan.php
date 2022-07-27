@@ -23,7 +23,7 @@ $sql1 = "INSERT INTO survei_bahan VALUES ('$noreg', '$tgl', 'selesai', $totalPem
 mysqli_query($conn, $sql1);
 mysqli_insert_id($conn); 
 
-$sql2 = "UPDATE pendaftaran SET tgl_survei='$tgl', status_survei='selesai';";
+$sql2 = "UPDATE pendaftaran SET tgl_survei='$tgl', status_survei='selesai' WHERE no_reg='$noreg';";
 mysqli_query($conn, $sql2);
 mysqli_insert_id($conn); 
 

@@ -5,10 +5,13 @@ require "../../libraries/dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-$cari = $_GET['no_reg'];
-$sql = "SELECT * FROM antri_daftar where no_reg=$cari";
+$noreg = $_GET['no_reg'];
+$sql = "SELECT * FROM antri_daftar WHERE no_reg=$noreg";
 $result = $conn->query($sql);
 $data = $result->fetch_assoc();
+
+$ratusan = substr($noreg, -3);
+$nominalBayar = "20".$ratusan;
 
 // agar yang tampil adalah nama kecamatannya
 // $valueKec = $data['kecamatan'];
@@ -30,7 +33,7 @@ $data = $result->fetch_assoc();
 
 $html = "<html><head><style>
 body { font-family:Times New Roman, Times, serif;
-        margin: -15px 45px; font-size: 0.9em; }
+        margin: -35px 45px; font-size: 0.9em; }
 #title{ text-align:center; font-weight:900; }
 .ddots{ padding-left:15px; padding-right: 8px; }
 
@@ -60,17 +63,17 @@ $html .= "<table>
 </tbody>
 </table><br/>";
 
-$html .= "<table>
+$html .= "<table width=80%>
 <tbody>
     <tr>
         <td>Uang Sejumlah</td>
         <td class='ddots'>:</td>
-        <td><div style='background-color:grey; text-align:center;'><b>DUA PULUH RIBU RUPIAH</b></div></td>
+        <td width='70%'><div style='background-color:grey; text-align:center; text-transform:uppercase;'><b>".terbilang($nominalBayar)."</b></div></td>
     </tr>
     <tr>
         <td>Pembayaran</td>
         <td class='ddots'>:</td>
-        <td><b>Biaya Pendaftaran Sambungan Baru</b></td>
+        <td width='70%'><b>Biaya Pendaftaran Sambungan Baru</b></td>
     </tr>
 </tbody>
 </table><br/><br/>";
@@ -97,8 +100,8 @@ $html .= "<table>
     <tr>
         <td>Nominal</td>
         <td>:</td>
-        <td style='padding:5px; width:150px; background-color:#b8b6b0;'>
-            <b>Rp. <span style='margin-left:82px; margin-right:0px;'>20,000</span></b>
+        <td align='right' style='padding:5px; width:100px; background-color:#b8b6b0;'>
+            <b>".rupiah($nominalBayar)."</b>
         </td>
     </tr>
 </tbody>
