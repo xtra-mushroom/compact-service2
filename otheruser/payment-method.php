@@ -14,7 +14,7 @@ include_once "../functions.php";
     <!-- Bootstrap CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <!-- style -->
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style1.css">
     <!-- icon tab -->
     <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
     <!-- sweetalert css -->

@@ -41,7 +41,7 @@ $activeReportLainnya = "active";
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body ml-3">
+                                <div class="card-body">
                                     <h5 align="center">Laporan Rincian Data Tunggakan Rekening Air Pelanggan</h5>
                                     <form method="get" action="report-rincian-tunggakan.php">
                                         <div class="row">
