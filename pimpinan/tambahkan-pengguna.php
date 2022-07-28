@@ -87,13 +87,13 @@ $activeTambahUser = "active";
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" autocomplete="off" autofocus>
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama" name="nama" autocomplete="off" autofocus required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="jenis_kel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel" name="jenis_kel">
+                                                <select class="form-control form-control-sm border-secondary" id="jenis_kel" name="jenis_kel" required>
                                                     <option class="text-secondary" value="" selected>---</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -103,19 +103,19 @@ $activeTambahUser = "active";
                                         <div class="form-group row">
                                             <label for="username" class="col-sm-2 col-form-label">Username</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="username" name="username" autocomplete="off">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="username" name="username" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="password" class="col-sm-2 col-form-label">Password</label>
                                             <div class="col-sm-4">
-                                                <input type="password" class="form-control form-control-sm border-secondary" id="password" name="password" autocomplete="off">
+                                                <input type="password" class="form-control form-control-sm border-secondary" id="password" name="password" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="peran" class="col-sm-2 col-form-label">Peran</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="peran" name="peran">
+                                                <select class="form-control form-control-sm border-secondary" id="peran" name="peran" required>
                                                     <option class="text-secondary" value="" selected>---</option>
                                                     <option value="PIMPINAN">Pimpinan</option>
                                                     <option value="TEKNISI">Teknisi (Trandis / Perencana)</option>

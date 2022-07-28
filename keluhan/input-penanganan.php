@@ -104,7 +104,7 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                                         <div class="form-group row mt-2">
                                             <label for="jenis" class="col-sm-4 col-form-label">Jenis Penanganan</label>
                                             <div class="col-sm-7">
-                                                <select class="form-control form-control-sm border-secondary" id="jenis" name="jenis">
+                                                <select class="form-control form-control-sm border-secondary" id="jenis" name="jenis" required>
                                                     <option class="text-secondary" selected>---</option>
                                                     <option value="Butuh observasi dan tindak lanjut">Butuh observasi dan tindak lanjut</option>
                                                     <option value="Penanganan instan">Penanganan instan</option>
@@ -114,19 +114,19 @@ $activeKeluhan = "active"; $activePenanganan = "active";
                                         <div class="form-group row">
                                             <label for="penanganan" class="col-sm-4 col-form-label">Penanganan</label>
                                             <div class="col-sm-7">
-                                                <textarea class="form-control form-control-sm border-secondary" id="penanganan" name="penanganan" rows="5"></textarea>
+                                                <textarea class="form-control form-control-sm border-secondary" id="penanganan" name="penanganan" rows="5" required></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="catatan" class="col-sm-4 col-form-label">Catatan</label>
                                             <div class="col-sm-7">
-                                                <textarea class="form-control form-control-sm border-secondary" id="catatan" name="catatan" rows="2"></textarea>
+                                                <textarea class="form-control form-control-sm border-secondary" id="catatan" name="catatan" rows="2" required></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="tgl_tangani" class="col-sm-4 col-form-label">Tanggal Penanganan</label>
                                             <div class="col-sm-7">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_tangani" name="tgl_tangani">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_tangani" name="tgl_tangani" required>
                                             </div>
                                         </div>
                                         <div class="card-footer col-12 text-right">

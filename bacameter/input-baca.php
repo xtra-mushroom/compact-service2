@@ -92,7 +92,7 @@ $activeBaca = "active";
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Bulan & Tahun</label>
                                             <div class="col-sm-2">
-                                                <select class="form-control form-control-sm border-secondary" id="bulan" name="bulan">
+                                                <select class="form-control form-control-sm border-secondary" id="bulan" name="bulan" required>
                                                     <option class="text-secondary" selected>Pilih Bulan</option>
                                                     <option value="Januari">Januari</option>
                                                     <option value="Februari">Februari</option>
@@ -109,19 +109,19 @@ $activeBaca = "active";
                                                 </select>
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="number" class="form-control form-control-sm border-secondary" id="tahun" name="tahun" placeholder="Isi Tahun">
+                                                <input type="number" class="form-control form-control-sm border-secondary" id="tahun" name="tahun" placeholder="Isi Tahun" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pakai" class="col-sm-2 col-form-label">Pemakaian (hanya angka)</label>
                                             <div class="col-sm-4">
-                                                <input type="number" class="form-control form-control-sm border-secondary" id="pakai" name="pakai">
+                                                <input type="number" class="form-control form-control-sm border-secondary" id="pakai" name="pakai" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="tgl_rilis" class="col-sm-2 col-form-label">Tanggal Rilis</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_rilis" name="tgl_rilis">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_rilis" name="tgl_rilis" required>
                                             </div>
                                         </div>
                                         <div class="col-7 float-right mt-3 mb-4 mr-3">

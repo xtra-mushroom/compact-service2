@@ -96,14 +96,14 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                         <div class="form-group row">
                                             <label for="tgl" class="col-sm-2 col-form-label">Tanggal</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl" name="tgl">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl" name="tgl" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-4">
                                                 <select class="form-control form-control-sm border-secondary" id="keterangan"
-                                                    name="keterangan">
+                                                    name="keterangan" required>
                                                     <option class="text-secondary" selected>---</option>
                                                     <option value="1">Permintaan Penutupan</option>
                                                     <option value="2">Permintaan Pembukaan</option>
@@ -164,8 +164,7 @@ $activeBukaTutup = "active"; $activeInputBukaTutup = "active";
                                                     position: 'center',
                                                     icon: 'success',
                                                     title: 'Pembukaan Berhasil!',
-                                                    showConfirmButton: false,
-                                                    timer: 1600
+                                                    showConfirmButton: true
                                                 });
                                                 </script>";
                                             }else{

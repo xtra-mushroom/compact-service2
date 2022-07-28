@@ -95,13 +95,13 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                         <div class="form-group row">
                                             <label for="nama_baru" class="col-sm-2 col-form-label">Nama Baru</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama_baru" name="nama_baru" autocomplete="off">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nama_baru" name="nama_baru" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nik_baru" class="col-sm-2 col-form-label">NIK Baru</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="nik_baru" name="nik_baru" autocomplete="off">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="nik_baru" name="nik_baru" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <!-- <div class="form-group row">
@@ -118,7 +118,7 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                             <label for="jenis_kel_baru" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-sm-4">
                                                 <select class="form-control form-control-sm border-secondary" id="jenis_kel_baru"
-                                                    name="jenis_kel_baru">
+                                                    name="jenis_kel_baru" required>
                                                     <option class="text-secondary" selected>---</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -128,13 +128,13 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                         <div class="form-group row">
                                             <label for="hp_baru" class="col-sm-2 col-form-label">Nomor HP Baru</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="hp_baru" name="hp_baru" autocomplete="off" autocomplete="off">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="hp_baru" name="hp_baru" autocomplete="off" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tanggal" name="tanggal">
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tanggal" name="tanggal" required>
                                             </div>
                                         </div>
                                         <div class="card-footer col-6 text-right">
@@ -193,8 +193,7 @@ $activeBaliknama = "active"; $activeInputBaliknama = "active";
                                                 position: 'center',
                                                 icon: 'success',
                                                 title: 'Balik Nama Berhasil!',
-                                                showConfirmButton: false,
-                                                timer : 1600
+                                                showConfirmButton: true
                                             })
                                             </script>";
                                         }else{

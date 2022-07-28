@@ -119,7 +119,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                         <div class="form-group row">
                                             <label for="wil" class="col-sm-2 col-form-label">Wilayah / Cabang</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control form-control-sm border-secondary" id="wil" name="wil">
+                                                <select class="form-control form-control-sm border-secondary" id="wil" name="wil" required>
                                                     <option class="text-secondary" value="">---</option>
                                                     <option value="01">01 Paringin</option>
                                                     <option value="02">02 Paringin Selatan</option>
@@ -135,7 +135,7 @@ $activeDaftar = "active"; $activeAntriMohon = "active";
                                         <div class="col-10 float-right">
                                             <div class="form-check">
                                                 <div class="col-sm-5">
-                                                    <input class="form-check-input" type="checkbox" value="diverifikasi" id="status" name="status">
+                                                    <input class="form-check-input" type="checkbox" value="diverifikasi" id="status" name="status" required>
                                                     <label class="form-check-label text-danger" for="status">
                                                         <b>Telah Diverifikasi</b>
                                                     </label>

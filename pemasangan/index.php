@@ -127,7 +127,7 @@ if(isset($_POST["submit"])){
                                         <div class="form-group row">
                                             <label for="tgl_pasang" class="col-sm-4 col-form-label">Tanggal</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_pasang" name="tgl_pasang" autofocus>
+                                                <input type="date" class="form-control form-control-sm border-secondary" id="tgl_pasang" name="tgl_pasang" autofocus required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -139,7 +139,7 @@ if(isset($_POST["submit"])){
                                         <div class="form-group row">
                                             <label for="status_kep_rumah" class="col-sm-4 col-form-label">Kepemilikan Rumah</label>
                                             <div class="col-sm-8">
-                                                <select class="form-control form-control-sm border-secondary" id="status_kep_rumah" name="status_kep_rumah">
+                                                <select class="form-control form-control-sm border-secondary" id="status_kep_rumah" name="status_kep_rumah" required>
                                                     <option class="text-secondary" selected>---</option>
                                                     <option value="Milik sendiri">Milik sendiri</option>
                                                     <option value="Sewa">Sewa</option>
@@ -151,13 +151,13 @@ if(isset($_POST["submit"])){
                                         <div class="form-group row">
                                             <label for="jumlah_jiwa" class="col-sm-4 col-form-label">Jumlah Jiwa</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="jumlah_jiwa" name="jumlah_jiwa" autocomplete="off">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="jumlah_jiwa" name="jumlah_jiwa" autocomplete="off" requied>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pln"  class="col-sm-4 col-form-label">Nomor Pelanggan PLN</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln" autocomplete="off">
+                                                <input type="text" class="form-control form-control-sm border-secondary" id="pln" name="pln" autocomplete="off" required>
                                             </div>
                                         </div>                                        
                                         <hr>
