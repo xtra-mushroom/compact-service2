@@ -48,7 +48,7 @@ if(isset($_POST["submit"])){
         $urutDS = 1;
     }
 
-    $pw_pelanggan = password_hash($generate_ds, PASSWORD_DEFAULT);
+    $pw_pelanggan = md5($generate_ds);
 
     $query = "INSERT INTO pemasangan
                 VALUES

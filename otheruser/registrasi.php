@@ -139,7 +139,7 @@ include "../functions.php";
                             $_SESSION['pesan'] = "Registrasi Berhasil";
                             // kirim SMS
                             $pesan = "Terima kasih kepada ".$panggilan." ".$nama." telah melakukan registrasi pemasangan sambungan baru. Nomor Registrasi Anda adalah ".$noreg.". Segera lakukan pembayaran sesuai instruksi pada halaman metode pembayaran. Terima Kasih";
-                            // sendSms($hp, $pesan);
+                            sendSms($hp, $pesan);
                             header("Location: payment-method.php?no_reg=$no_reg");
                         } else {
                             $_SESSION['hasil'] = false;

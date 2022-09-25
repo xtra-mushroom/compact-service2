@@ -1,6 +1,10 @@
 <?php
 $conn = mysqli_connect('localhost', 'lava', 'linolee', 'master_pelayanan');
-error_reporting(0);
+// if(mysqli_connect_error($conn)){
+//     echo "Koneksi gagal";
+// }else{
+//     echo "Koneksi berhasil";
+// }
 
 function query($query){
     global $conn;
@@ -19,7 +23,6 @@ function alertWindow($msg) {
 }
 
 function rupiah($angka){
-	
 	$hasil_rupiah = "Rp. " . number_format($angka,0,',','.');
 	return $hasil_rupiah;
  

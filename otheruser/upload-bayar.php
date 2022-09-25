@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -11,8 +14,40 @@
     <link rel="stylesheet" href="../assets/style1.css">
     <!-- icon tab -->
     <link rel="shortcut icon" href="../assets/images/pdam-logo.png">
+    <!-- sweetalert css -->
+    <link rel="stylesheet" href="../libraries/sweetalert2/dist/sweetalert2.min.css">
 </head>
 <body id="bg-uploadbayar">
+    <script src="../libraries/sweetalert2/dist/sweetalert2.min.js"></script>
+<?php 
+    if(isset($_SESSION['hasil'])){
+        if($_SESSION['hasil']){
+?>
+        <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '<?php echo $_SESSION["pesan"] ?>',
+            showConfirmButton: true
+            })
+        </script>
+<?php 
+        } else {
+?>
+        <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '<?php echo $_SESSION["pesan"] ?>',
+            showConfirmButton: true
+            })
+        </script>
+<?php
+        }
+        unset($_SESSION['pesan']);
+        unset($_SESSION['hasil']);
+    }
+?>
     <section id="registrasi">
         <div class="container">
             <div class="row text-center mb-3">

@@ -22,10 +22,12 @@ $html .= "<body><img src='../../assets/images/kop-surat.png' width='700px' style
 $tgl_awal = @$_GET['tgl_awal'];
 $tgl_akhir = @$_GET['tgl_akhir'];
 if(empty($tgl_awal) or empty($tgl_akhir)){
-    $query = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut' ORDER BY no_keluhan DESC LIMIT 10";
-    $label = "10 data keluhan terbaru yang diobservasi";
+    $queryTangani = "SELECT * FROM keluhan WHERE status_penanganan='Telah ditangani' ORDER BY no_keluhan ASC";
+    $queryBelum = "SELECT * FROM keluhan WHERE status_penanganan='Belum ditangani' ORDER BY no_keluhan ASC";
+    $label = "Semua data keluhan pelanggan";
 }else{
-    $query = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut' AND (tgl_keluhan BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') ORDER BY no_keluhan ASC";
+    $queryTangani = "SELECT * FROM keluhan WHERE status_penanganan='Telah ditangani' AND (tgl_keluhan BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') ORDER BY no_keluhan ASC";
+    $queryBelum = "SELECT * FROM keluhan WHERE status_penanganan='Belum ditangani' AND (tgl_keluhan BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') ORDER BY no_keluhan ASC";
     $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
     $label = 'Periode Tanggal <b>'.$tgl_awal.'</b> s/d <b>'.$tgl_akhir.'</b>';
@@ -44,7 +46,7 @@ $html .= '<table class="table table-sm" border="1">
 <th>Penanganan</th>
 </tr>';
 
-$result = $conn->query($query);	
+$result = $conn->query($queryTangani);	
 $row = mysqli_num_rows($result);
 
 if($row > 0){
@@ -64,6 +66,39 @@ if($row > 0){
 }else{ // Jika data tidak ada
     echo "<tr><td colspan='6'>Data tidak tersedia</td></tr>";
 }
+$html .= "</table><br/>";
+
+$html .= '<table class="table table-sm" border="1">
+<tr>
+<th>No.</th>
+<th>Nomor Sambungan</th>
+<th>Alamat / Lokasi</th>
+<th>Tanggal Keluhan</th>
+<th>Keluhan</th>
+<th>Penanganan</th>
+</tr>';
+
+$result = $conn->query($queryBelum);	
+$row = mysqli_num_rows($result);
+
+if($row > 0){
+    $no = 1;
+    while($data = $result->fetch_array())
+    {
+
+    $html .= '<tr>
+    <td align="center">'.$no++.'</td>
+    <td align="center">'.$data['no_ds'].'</td>
+    <td align="left">'.$data['alamat'].'</td>
+    <td align="center">'.$data['tgl_keluhan'].'</td>
+    <td align="left">'.$data['keluhan'].'</td>
+    <td align="left">'.$data['penanganan'].'</td>
+</tr>';
+    }
+}else{ // Jika data tidak ada
+    echo "<tr><td colspan='6'>Data tidak tersedia</td></tr>";
+}
+$html .= "</table><br/>";
 
 $html .= "<table style='padding-top:50px; padding-right:60px;'>
 <tbody>

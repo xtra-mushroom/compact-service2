@@ -128,11 +128,11 @@ $activeTambahUser = "active";
                                         </div>
                                     </form>
                                     <?php
-                                    if (isset($_POST['submit'])){
+                                    if(isset($_POST['submit'])){
                                         $nama = $_POST['nama'];
                                         $jenisKel = $_POST['jenis_kel'];
                                         $uname = $_POST['username'];
-                                        $passwd = password_hash($_POST['password'], PASSWORD_DEFAULT); 
+                                        $passwd = md5($_POST['password']); 
                                         $peran = $_POST['peran'];
 
                                         $sql = "INSERT INTO login VALUES (NULL, '$nama', '$jenisKel', '$uname', '$passwd', '$peran', NULL)";

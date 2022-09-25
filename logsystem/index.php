@@ -14,7 +14,7 @@ if(isset($_POST['signin'])){
     if(mysqli_num_rows($result1) > 0){
         $row =  mysqli_fetch_assoc($result1);
         
-        if(password_verify($pw, $row['password'])){
+        if(md5($pw) == $row['password']){
             $_SESSION['signin'] = true;
             $_SESSION['peran'] = $row['peran'];
             $_SESSION['username'] = $row['username'];
@@ -41,7 +41,7 @@ if(isset($_POST['signin'])){
     }elseif(mysqli_num_rows($result1) < 1){
         $row =  mysqli_fetch_assoc($result2);
 
-        if(password_verify($pw, $row['passwd_pelanggan'])){
+        if(md5($pw) == $row['passwd_pelanggan']){
             $_SESSION['signin'] = true;
             $_SESSION['username'] = $row['nama_pelanggan'];
             $_SESSION['noreg'] = $row['no_reg'];

@@ -33,7 +33,7 @@ if(empty($tgl_awal) or empty($tgl_akhir)){
     $label = 'Periode Tanggal <b>'.$tgl_awal.'</b> s/d <b>'.$tgl_akhir.'</b>';
 }
 
-$html .= "<body><h3>Laporan Jumlah Biaya Pemasangan Baru Per-cabang</h3>
+$html .= "<body><h3>Laporan Jumlah Biaya Pembukaan dan Penutupan Per-cabang</h3>
 <h5 align='right' style='margin-right:45px;'>".$label."</h5>";
 
 $html .= '<table border="1" width="90%" align="center">

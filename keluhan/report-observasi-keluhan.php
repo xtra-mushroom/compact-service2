@@ -44,7 +44,7 @@ $activeKeluhan = "active"; $activeReportKeluhan = "active";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body ml-3">
-                                    <h5 align="center">Laporan Observasi Keluhan Pelanggan</h5>
+                                    <h5 align="center">Laporan Semua Data Keluhan</h5>
                                     <form method="get" action="report-observasi-keluhan.php">
                                         <div class="row">
                                             <div class="col-6">
@@ -70,11 +70,14 @@ $activeKeluhan = "active"; $activeReportKeluhan = "active";
                                     $tgl_awal = @$_GET['tgl_awal'];
                                     $tgl_akhir = @$_GET['tgl_akhir'];
                                     if(empty($tgl_awal) or empty($tgl_akhir)){
-                                        $query = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut' ORDER BY no_keluhan DESC LIMIT 10";
+                                        $queryTangani = "SELECT * FROM keluhan WHERE status_penanganan='Telah ditangani' ORDER BY no_keluhan ASC";
+                                        $queryBelum = "SELECT * FROM keluhan WHERE status_penanganan='Belum ditangani' ORDER BY no_keluhan ASC";
                                         $url_cetak = "report/report-observasi-keluhan.php";
-                                        $label = "10 data keluhan terbaru yang diobservasi";
+                                        // $label = "10 data keluhan terbaru yang diobservasi";
+                                        $label = "Semua data keluhan pelanggan";
                                     }else{  
-                                        $query = "SELECT * FROM keluhan WHERE jenis_penanganan='Butuh observasi dan tindak lanjut' AND (tgl_keluhan BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') ORDER BY no_keluhan ASC";
+                                        $queryTangani = "SELECT * FROM keluhan WHERE status_penanganan='Telah ditangani' AND (tgl_keluhan BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') ORDER BY no_keluhan ASC";
+                                        $queryBelum = "SELECT * FROM keluhan WHERE status_penanganan='Belum ditangani' AND (tgl_keluhan BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."') ORDER BY no_keluhan ASC";
                                         $url_cetak = "report/report-observasi-keluhan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
                                         $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
                                         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
@@ -89,6 +92,45 @@ $activeKeluhan = "active"; $activeReportKeluhan = "active";
                                     <p class="font-italic"><?php echo $label ?></p>
 
                                     <div class="table-responsive">
+                                        <p>Laporan Keluhan Telah Ditangani</p>
+                                        <table class="table table-sm table-hover table-bordered">
+                                            <thead class="text-center">
+                                                <tr>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Nomor Sambungan</th>
+                                                    <th scope="col">Alamat / Lokasi</th>
+                                                    <th scope="col">Tanggal Keluhan</th>
+                                                    <th scope="col">Keluhan</th>
+                                                    <th scope="col">Penanganan</th>
+                                                    <th scope="col">Tanggal Ditangani</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php 
+                                            $result = $conn->query($queryTangani);	
+                                            $row = mysqli_num_rows($result);
+
+                                            if($row > 0){
+                                            $no = 1;
+                                            while($data = $result->fetch_assoc()){
+                                                // $tgl = date('d-m-Y', strtotime($data['tgl']));
+                                            ?>
+                                                <tr>
+                                                    <td align="center"><?= $no++; ?></td>
+                                                    <td align="center"><?= $data['no_ds']; ?></td>
+                                                    <td align="left"><?= $data['alamat']; ?></td>
+                                                    <td align="center"><?= $data['tgl_keluhan']; ?></td>
+                                                    <td align="left"><?= $data['keluhan']; ?></td>
+                                                    <td align="left"><?= $data['penanganan']; ?></td>
+                                                    <td align="left"><?= $data['tgl_tangani']; ?></td>
+                                                </tr>
+                                            <?php }
+                                            }else{
+                                                echo "<tr><td colspan='6'>Data tidak tersedia</td></tr>";
+                                            } ?>   
+                                            </tbody>
+                                        </table>
+                                        <p class="mt-5">Laporan Keluhan Belum Ditangani</p>
                                         <table class="table table-sm table-hover table-bordered">
                                             <thead class="text-center">
                                                 <tr>
@@ -102,7 +144,7 @@ $activeKeluhan = "active"; $activeReportKeluhan = "active";
                                             </thead>
                                             <tbody>
                                             <?php 
-                                            $result = $conn->query($query);	
+                                            $result = $conn->query($queryBelum);	
                                             $row = mysqli_num_rows($result);
 
                                             if($row > 0){
